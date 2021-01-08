@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/coa20_hw1/pom.xml" />
+        <option value="$PROJECT_DIR$/coa20_hw2/pom.xml" />
+        <option value="$PROJECT_DIR$/coa20_hw3/pom.xml" />
+        <option value="$PROJECT_DIR$/coa20_hw6/pom.xml" />
+        <option value="$PROJECT_DIR$/coa20_hw5/pom.xml" />
+        <option value="$PROJECT_DIR$/coa20_hw4/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

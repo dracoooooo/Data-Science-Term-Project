@@ -17,7 +17,8 @@ import matplotlib.pyplot as plt
 
 
 # 代码文件数量：
-# python: 5080
+
+# python: 3272
 # java: 1763
 # js: 2103
 java_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\java"
@@ -124,9 +125,9 @@ def plot_graphs(history, string):
 
 
 if __name__ == "__main__":
-    # count()
+    count()
 
-    prepare_data()
+    # prepare_data()
 
     print([[0,0,1]] * 2 + [[0,0,0]])
 
