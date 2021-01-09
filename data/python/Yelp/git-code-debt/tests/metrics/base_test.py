@@ -20,7 +20,7 @@ def test_simple_base_counter():
 
     input_stats = [
         FileDiffStat(
-            'test.py',
+            'code_language_classifier.py',
             ['a', 'b', 'c'],
             ['d'],
             'this_should_be_ignored'

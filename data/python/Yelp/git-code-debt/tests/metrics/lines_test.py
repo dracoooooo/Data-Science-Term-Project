@@ -8,7 +8,7 @@ from git_code_debt.metrics.lines import LinesOfCodeParser
 def test_lines_of_code_parser():
     parser = LinesOfCodeParser()
     input_stats = [
-        FileDiffStat(b'test.py', [b'a'], [], None),
+        FileDiffStat(b'code_language_classifier.py', [b'a'], [], None),
         FileDiffStat(b'womp.yaml', [b'a', b'b', b'c'], [b'hi'], None),
     ]
 

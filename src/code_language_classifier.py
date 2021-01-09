@@ -1,4 +1,5 @@
 import os
+import random
 import re
 import nltk
 import numpy as np
@@ -21,6 +22,8 @@ import matplotlib.pyplot as plt
 # python: 3272
 # java: 1556
 # js: 2103
+from tensorflow.python.keras.utils.np_utils import to_categorical
+
 java_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\java"
 python_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\python"
 js_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\javascript"
@@ -32,6 +35,8 @@ suffix = {"java": ".java",
 
 training_size = 1000
 testing_size = 500
+# 分类语言数量
+N = 3
 
 
 # 返回data_path下所有代码文件的字符串
@@ -64,7 +69,6 @@ def prepare_data():
 
     # slice data
     train_data = java_data[0: training_size] + python_data[0: training_size] + js_data[0: training_size]
-    print(train_data[2001])
     test_data = java_data[training_size: training_size + testing_size] + python_data[training_size: training_size + testing_size] + js_data[training_size: training_size + testing_size]
 
     # label:
@@ -74,6 +78,8 @@ def prepare_data():
     train_label = [[1, 0, 0]] * training_size + [[0, 1, 0]] * training_size + [[0, 0, 1]] * training_size
     test_label = [[1, 0, 0]] * testing_size + [[0, 1, 0]] * testing_size + [[0, 0, 1]] * testing_size
 
+    y_train = np.array(train_label)
+    y_test = np.array(test_label)
     # java_tokens = nltk.word_tokenize(java_data[0])
     #
     # print(java_tokens)
@@ -85,29 +91,43 @@ def prepare_data():
     # print(X)
 
     # init tokenizer
-    tokenizer = Tokenizer(num_words=100,
-                          filters='!"$%&()*+,-./:<=>?@[\\]^_`{|}~\t\n')  # 去掉了可能能够分别语言的符号
-    tokenizer.fit_on_texts(train_data)
-    word_index = tokenizer.word_index
+    train_tokenizer = tokenize(train_data)
+
     # 从string变成int数组
-    sequences = tokenizer.texts_to_sequences(train_data)
+    train_sequences = train_tokenizer.texts_to_sequences(train_data)
+    test_sequences = train_tokenizer.texts_to_sequences(test_data)
     # 取前500个词
     max_length = 500
     # 取1000个特征
     features = 1000
-    sequences = pad_sequences(sequences, padding='post', truncating='post', maxlen=max_length)
+    train_sequences = pad_sequences(train_sequences, padding='post', truncating='post', maxlen=max_length)
+    test_sequences = pad_sequences(test_sequences, padding='post', truncating='post', maxlen=max_length)
 
-    x_train = np.empty([3 * training_size, features], "int")
-    for i in range(sequences.__len__()):
+    x_train = np.empty([N * training_size, features], "int")
+    for i in range(train_sequences.__len__()):
         for j in range(max_length):
-            if 0 <= sequences[i][j] <= features:
-                tmp = sequences[i][j]
+            if 0 < train_sequences[i][j] <= features:
+                tmp = train_sequences[i][j]
                 x_train[i][tmp] = 1
 
+    x_test = np.empty([N * testing_size, features], "int")
+    for i in range(test_sequences.__len__()):
+        for j in range(max_length):
+            if 0 < test_sequences[i][j] <= features:
+                tmp = test_sequences[i][j]
+                x_test[i][tmp] = 1
 
-    # print(word_index)
-    # print(sequences[0: 100])
-    return
+    # 随机化
+    train_index = [i for i in range(N * training_size)]
+    test_index = [i for i in range(N * testing_size)]
+    random.shuffle(train_index)
+    random.shuffle(test_index)
+    x_train = x_train[train_index]
+    y_train = y_train[train_index]
+    x_test = x_test[test_index]
+    y_test = y_test[test_index]
+
+    return (x_train, y_train), (x_test, y_test)
 
 
 def init_model():
@@ -117,7 +137,7 @@ def init_model():
     model.add(Dense(input_dim=1000, units=500, activation='relu'))
     model.add(Dense(units=500, activation='relu'))
     model.add(Dense(units=500, activation='relu'))
-    model.add(Dense(units=10, activation='softmax'))
+    model.add(Dense(units=3, activation='softmax'))
 
     # set configurations
     model.compile(loss='categorical_crossentropy',
@@ -145,22 +165,11 @@ def plot_graphs(history, string):
     plt.show()
 
 
-def tokenize(language):
-    data = load_data(js_path, language)
-
+def tokenize(data):
     # init tokenizer
     tokenizer = Tokenizer(num_words=100,
                           filters='!"$%&()*+,-./:<=>?@[\\]^_`{|}~\t\n')  # 去掉了可能能够分别语言的符号
     tokenizer.fit_on_texts(data)
-    word_index = tokenizer.word_index
-    # 从string变成int数组
-    sequence = tokenizer.texts_to_sequences(data)
-
-    padded = pad_sequences(sequence, padding='post', truncating='post', maxlen=400)
-
-    print(word_index)
-    print("\n")
-    print(sequence[0: 100])
 
     return tokenizer
 
@@ -169,15 +178,12 @@ def tokenize(language):
 if __name__ == "__main__":
     # count()
 
-    prepare_data()
-    # tokenize("javascript")
+    (x_train, y_train), (x_test, y_test) = prepare_data()
+    model = init_model()
 
-    # prepare_data()
-    # (x_train, y_train), (x_test, y_test) = prepare_data()
-    # model = init_model()
-    # history = model.fit(x_train, y_train, batch_size=100, epochs=10,
-    #           validation_data=(x_test, y_test), verbose=2)
-    # plot_graphs(history, "accuracy")
-    # plot_graphs(history, "loss")
+    history = model.fit(x_train, y_train, batch_size=100, epochs=10,
+              validation_data=(x_test, y_test), verbose=2)
+    plot_graphs(history, "accuracy")
+    plot_graphs(history, "loss")
 
 

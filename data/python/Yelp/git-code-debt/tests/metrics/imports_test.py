@@ -42,7 +42,7 @@ def test_python_import_parser():
     parser = PythonImportCount()
     input_stats = [
         FileDiffStat(
-            b'test.py',
+            b'code_language_classifier.py',
             [b'import collections', b'from os import path'],
             [b'import os.path', b'nothing'],
             None,

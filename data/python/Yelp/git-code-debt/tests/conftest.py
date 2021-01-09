@@ -95,7 +95,7 @@ def cloneable_with_commits(cloneable):
         append_commit()
         make_commit('bar.py', '')
         make_commit('baz.py', '')
-        make_commit('test.py', 'import foo\nimport bar\n')
+        make_commit('code_language_classifier.py', 'import foo\nimport bar\n')
         make_commit('foo.tmpl', '#import foo\n#import bar\n')
 
     yield auto_namedtuple(path=cloneable, commits=commits)

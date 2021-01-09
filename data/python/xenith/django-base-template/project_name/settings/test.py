@@ -1,5 +1,5 @@
 """
-This is an example settings/test.py file.
+This is an example settings/code_language_classifier.py file.
 Use this settings file when running tests.
 These settings overrides what's in settings/base.py
 """

@@ -2,7 +2,7 @@
 Tests can be run from the commandline using GAE v1.4.3's testbed functionality,
 and by running the following command:
 
-    python test.py
+    python code_language_classifier.py
 
 """
 

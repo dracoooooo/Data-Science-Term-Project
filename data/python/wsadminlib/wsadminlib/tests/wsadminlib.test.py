@@ -8,7 +8,7 @@
     Please run these tests before delivering changes to github.
 
     Execution requires these files in the local directory:
-        wsadminlib.test.py  (this file)
+        wsadminlib.code_language_classifier.py  (this file)
         wsadminlib.py       (the file under test)
         hitcount0.ear       (a sample app)
 
@@ -17,7 +17,7 @@
 
         /opt/WAS70/profiles/v7default#  bin/wsadmin.sh -lang jython -host mywas.mycompany.com -port 8879
         wsadmin> execfile('wsadminlib.py')
-        wsadmin> execfile('wsadminlib.test.py')
+        wsadmin> execfile('wsadminlib.code_language_classifier.py')
         wsadmin> testBase() 
 """    
 import os
