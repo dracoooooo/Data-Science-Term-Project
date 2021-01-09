@@ -1,40 +1,45 @@
 import os
+import pickle
 import random
-import re
-import nltk
 import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
-from tensorflow.python.keras.layers import TextVectorization
 import matplotlib.pyplot as plt
 
-
-# 代码语言分类
-
+# 使用神经网络进行代码语言分类
 
 # 代码文件数量：
-
 # python: 3272
 # java: 1556
 # js: 2103
-from tensorflow.python.keras.utils.np_utils import to_categorical
+from tensorflow.python.keras.models import load_model
 
-java_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\java"
-python_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\python"
-js_path = "C:\\Users\\DRACO\\PycharmProjects\\Data-Science-Term-Project\\data\\javascript"
-test_path = "C:\\Users\\DRACO\PycharmProjects\\Data-Science-Term-Project\data\\test"
+java_path = "../data/java"
+python_path = "../data/python"
+js_path = "../data/javascript"
+test_path = "../data/test"
 
-suffix = {"java": ".java",
-          "python": ".py",
-          "javascript": ".js"}
 
+# 代码语言的后缀名
+suffix = {
+    "java": ".java",
+    "python": ".py",
+    "javascript": ".js"
+}
+
+# 代码语言的标签(one-hot)
+label = {
+    "java": [1, 0, 0],
+    "python": [0, 1, 0],
+    "js": [0, 0, 1]
+}
+
+# 每个语言的训练集大小和测试集大小
 training_size = 1000
 testing_size = 500
+
 # 分类语言数量
 N = 3
 
@@ -54,18 +59,20 @@ def load_data(data_path, language):
     return ret
 
 
-# 想法：用频率最高的1000个词作为1000维特征(是否可行？
+# 取前500个词
+max_length = 500
+# 取200个特征
+features = 200
+
+
+# 用来处理代码文件转成能使用的特征
+# 想法：用频率最高的200个词作为200维特征(是否可行？
 # 看起来可行！
-# todo: 打乱数据集
 def prepare_data():
     # load data
     java_data = load_data(java_path, "java")
     python_data = load_data(python_path, "python")
     js_data = load_data(js_path, "javascript")
-
-    # print(java_data[0: 2])
-    # print(python_data)
-    # print(js_data)
 
     # slice data
     train_data = java_data[0: training_size] + python_data[0: training_size] + js_data[0: training_size]
@@ -80,26 +87,24 @@ def prepare_data():
 
     y_train = np.array(train_label)
     y_test = np.array(test_label)
-    # java_tokens = nltk.word_tokenize(java_data[0])
-    #
-    # print(java_tokens)
-    #
-    # vectorizer = TfidfVectorizer()
-    # X = vectorizer.fit_transform(java_tokens)
-    # print(X)
-    # X.toarray()
-    # print(X)
 
     # init tokenizer
-    train_tokenizer = tokenize(train_data)
+    # train_tokenizer = tokenize(train_data)
+
+    # save tokenizer
+    # f = open('tokenizer.pkl', 'wb')
+    # pickle.dump(train_tokenizer, f)
+    # f.close()
+
+    # read tokenizer
+    f1 = open('tokenizer.pkl', 'rb')
+    train_tokenizer = pickle.load(f1)
+    f1.close()
 
     # 从string变成int数组
     train_sequences = train_tokenizer.texts_to_sequences(train_data)
     test_sequences = train_tokenizer.texts_to_sequences(test_data)
-    # 取前500个词
-    max_length = 500
-    # 取1000个特征
-    features = 1000
+
     train_sequences = pad_sequences(train_sequences, padding='post', truncating='post', maxlen=max_length)
     test_sequences = pad_sequences(test_sequences, padding='post', truncating='post', maxlen=max_length)
 
@@ -130,13 +135,13 @@ def prepare_data():
     return (x_train, y_train), (x_test, y_test)
 
 
+# 初始化神经网络
 def init_model():
     # define network structure
     model = Sequential()
 
-    model.add(Dense(input_dim=1000, units=500, activation='relu'))
-    model.add(Dense(units=500, activation='relu'))
-    model.add(Dense(units=500, activation='relu'))
+    model.add(Dense(input_dim=features, units=30, activation='relu'))
+    model.add(Dense(units=20, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
 
     # set configurations
@@ -147,6 +152,7 @@ def init_model():
     return model
 
 
+# 计算代码文件数量
 def count():
     py = load_data(python_path, "python")
     js = load_data(js_path, "javascript")
@@ -156,6 +162,7 @@ def count():
     print("js:", js.__len__())
 
 
+# 画画
 def plot_graphs(history, string):
     plt.plot(history.history[string])
     plt.plot(history.history['val_'+string])
@@ -170,20 +177,72 @@ def tokenize(data):
     tokenizer = Tokenizer(num_words=100,
                           filters='!"$%&()*+,-./:<=>?@[\\]^_`{|}~\t\n')  # 去掉了可能能够分别语言的符号
     tokenizer.fit_on_texts(data)
-
     return tokenizer
 
 
+# 用来将一个文本文件转换成上述特征向量
+def handle_user_data(path):
+    text = [open(path, encoding='UTF-8').read()]
+    # read tokenizer
+    f1 = open('tokenizer.pkl', 'rb')
+    tokenizer = pickle.load(f1)
+    f1.close()
 
-if __name__ == "__main__":
-    # count()
+    sequence = tokenizer.texts_to_sequences(text)
+    sequence = pad_sequences(sequence, padding='post', truncating='post', maxlen=max_length)
+    feature = np.zeros([1, features], "int")
+    for j in range(max_length):
+        tmp = sequence[0][j]
+        if 0 < sequence[0][j] <= features:
+            feature[0][tmp] = 1
+        else:
+            feature[0][tmp] = 0
+    return feature
 
+
+# 训练并保存模型
+def train():
     (x_train, y_train), (x_test, y_test) = prepare_data()
     model = init_model()
-
     history = model.fit(x_train, y_train, batch_size=100, epochs=10,
               validation_data=(x_test, y_test), verbose=2)
     plot_graphs(history, "accuracy")
     plot_graphs(history, "loss")
+
+    model.save('language_classifier.h5')
+
+
+def soft_max(arr):
+    max1 = max(arr)
+    ret = []
+    for i in arr:
+        if i == max1:
+            ret.append(1)
+        else:
+            ret.append(0)
+    return ret
+
+
+def predict(path):
+    model = load_model('language_classifier.h5')
+    # model.summary()
+    test = handle_user_data(path)
+    prediction = model.predict(test)
+    tmp = prediction[0]
+    tmp = soft_max(tmp)
+    lang = ""
+    if tmp == [1, 0, 0]:
+        lang = "java"
+    elif tmp == [0, 1, 0]:
+        lang = "python"
+    elif tmp == [0, 0, 1]:
+        lang = "javascript"
+    print(lang)
+
+
+if __name__ == "__main__":
+    # train()
+    predict('../data/test/376-coa20_hw3/src/main/java/cpu/alu/ALU.java')
+    predict('./code_language_classifier.py')
 
 
