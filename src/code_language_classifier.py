@@ -229,20 +229,27 @@ def predict(path):
     test = handle_user_data(path)
     prediction = model.predict(test)
     tmp = prediction[0]
-    tmp = soft_max(tmp)
+    int_tmp = soft_max(tmp)
     lang = ""
-    if tmp == [1, 0, 0]:
+    if int_tmp == [1, 0, 0]:
         lang = "java"
-    elif tmp == [0, 1, 0]:
+    elif int_tmp == [0, 1, 0]:
         lang = "python"
-    elif tmp == [0, 0, 1]:
+    elif int_tmp == [0, 0, 1]:
         lang = "javascript"
-    print(lang)
+    print("predict language:",lang)
+    print("prossibility: ", max(tmp))
 
 
 if __name__ == "__main__":
     # train()
-    predict('../data/test/376-coa20_hw3/src/main/java/cpu/alu/ALU.java')
     predict('./code_language_classifier.py')
+    predict('../data/test/java_file1.js')
+    predict('../data/test/java_file2.java')
+    predict('../data/test/js_file1.java')
+    predict('../data/test/js_file2.js')
+    predict('../data/test/python_file1.java')
+    predict('../data/test/python_file2.js')
+
 
 
