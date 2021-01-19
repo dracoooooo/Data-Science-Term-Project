@@ -242,14 +242,14 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    # train()
-    predict('./code_language_classifier.py')
-    predict('../data/test/java_file1.js')
-    predict('../data/test/java_file2.java')
-    predict('../data/test/js_file1.java')
-    predict('../data/test/js_file2.js')
-    predict('../data/test/python_file1.java')
-    predict('../data/test/python_file2.js')
+    train()
+    # predict('./code_language_classifier.py')
+    # predict('../data/test/java_file1.js')
+    # predict('../data/test/java_file2.java')
+    # predict('../data/test/js_file1.java')
+    # predict('../data/test/js_file2.js')
+    # predict('../data/test/python_file1.java')
+    # predict('../data/test/python_file2.js')
 
 
 
