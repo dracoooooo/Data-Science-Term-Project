@@ -15,6 +15,7 @@ public class Game {
      *				   isHideX、isHideY分别表示X,Y的状态，即是否隐身，隐身为true, 否则为false
      */
     public Game(String initInfo) {
+        // hhhhhhhhhh
         String[] infoArray = initInfo.split(";|,");
         int n = Integer.parseInt(infoArray[0]);
         int x1 = Integer.parseInt(infoArray[1]);

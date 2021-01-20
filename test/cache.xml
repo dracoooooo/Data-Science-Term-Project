@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename=".\Cache.java"><package>package <name>memory</name>;</package>
+
+<import>import <name><name>memory</name><operator>.</operator><name>cacheMappingStrategy</name><operator>.</operator><name>MappingStrategy</name></name>;</import>
+<import>import <name><name>memory</name><operator>.</operator><name>cacheMappingStrategy</name><operator>.</operator><name>SetAssociativeMapping</name></name>;</import>
+<import>import <name><name>memory</name><operator>.</operator><name>cacheReplacementStrategy</name><operator>.</operator><name>FIFOReplacement</name></name>;</import>
+<import>import <name><name>memory</name><operator>.</operator><name>cacheReplacementStrategy</name><operator>.</operator><name>ReplacementStrategy</name></name>;</import>
+<import>import <name><name>memory</name><operator>.</operator><name>cacheWriteStrategy</name><operator>.</operator><name>WriteBackStrategy</name></name>;</import>
+<import>import <name><name>memory</name><operator>.</operator><name>cacheWriteStrategy</name><operator>.</operator><name>WriteStrategy</name></name>;</import>
+<import>import <name><name>transformer</name><operator>.</operator><name>Transformer</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * é«éç¼å­æ½è±¡ç±»
+ * TODO: ç¼å­æºå¶å®ç°
+ */</comment>
+<class><specifier>public</specifier> class <name>Cache</name> <block>{	<comment type="line">//</comment>
+
+	<decl_stmt><decl><type><specifier>public</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>boolean</name></type> <name>isAvailable</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>			<comment type="line">// é»è®¤å¯ç¨Cache</comment>
+
+	<decl_stmt><decl><type><specifier>public</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>int</name></type> <name>CACHE_SIZE_B</name> <init>= <expr><literal type="number">1</literal> <operator>*</operator> <literal type="number">1024</literal> <operator>*</operator> <literal type="number">1024</literal></expr></init></decl>;</decl_stmt>      <comment type="line">// 1 MB æ»å¤§å°</comment>
+
+	<decl_stmt><decl><type><specifier>public</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>int</name></type> <name>LINE_SIZE_B</name> <init>= <expr><literal type="number">1</literal> <operator>*</operator> <literal type="number">1024</literal></expr></init></decl>;</decl_stmt> <comment type="line">// 1 KB</comment>
+
+	<decl_stmt><decl><type><specifier>public</specifier> <name>CacheLinePool</name></type> <name>cache</name> <init>= <expr><operator>new</operator> <call><name>CacheLinePool</name><argument_list>(<argument><expr><name>CACHE_SIZE_B</name><operator>/</operator><name>LINE_SIZE_B</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt> 	<comment type="line">// æ»å¤§å°1MB / è¡å¤§å°1KB = 1024ä¸ªè¡</comment>
+
+	<decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <name>Cache</name></type> <name>cacheInstance</name> <init>= <expr><operator>new</operator> <call><name>Cache</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	<constructor><specifier>private</specifier> <name>Cache</name><parameter_list>()</parameter_list> <block>{<block_content>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>mappingStrategy</name></name> <operator>=</operator> <operator>new</operator> <call><name>SetAssociativeMapping</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>mappingStrategy</name><operator>.</operator><name>setReplacementStrategy</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>FIFOReplacement</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	</block_content>}</block></constructor>
+
+	<function><type><specifier>public</specifier> <specifier>static</specifier> <name>Cache</name></type> <name>getCache</name><parameter_list>()</parameter_list> <block>{<block_content>
+		<return>return <expr><name>cacheInstance</name></expr>;</return>
+	</block_content>}</block></function>
+
+	<decl_stmt><decl><type><specifier>private</specifier> <name>MappingStrategy</name></type> <name>mappingStrategy</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><specifier>private</specifier> <name>WriteStrategy</name></type> <name>writeStrategy</name></decl>;</decl_stmt>
+
+	<comment type="block" format="javadoc">/**
+	 * æ¥è¯¢{@link Cache#cache}è¡¨ä»¥ç¡®è®¤åå«[sAddr, sAddr + len)çæ°æ®åæ¯å¦å¨cacheå
+	 * å¦æç®æ æ°æ®åä¸å¨Cacheåï¼åå°å¶ä»åå­å è½½å°Cache
+	 * @param sAddr æ°æ®èµ·å§ç¹(32ä½ç©çå°å = 22ä½åå· + 10ä½ååå°å)
+	 * @param len å¾è¯»æ°æ®çå­èæ°ï¼[sAddr, sAddr + len)åå«çæ°æ®å¿é¡»å¨åä¸ä¸ªæ°æ®åå
+	 * @return æ°æ®åå¨Cacheä¸­çå¯¹åºè¡å·
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>int</name></type> <name>fetch</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>sAddr</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>len</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<comment type="line">//TODO</comment>
+		<decl_stmt><decl><type><name>int</name></type> <name>blockNO</name> <init>= <expr><call><name>getBlockNO</name><argument_list>(<argument><expr><name>sAddr</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>map</name> <init>= <expr><call><name><name>mappingStrategy</name><operator>.</operator><name>map</name></name><argument_list>(<argument><expr><name>blockNO</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if_stmt><if>if<condition>(<expr><name>map</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block>{<block_content>
+			<expr_stmt><expr><name>map</name> <operator>=</operator> <call><name><name>mappingStrategy</name><operator>.</operator><name>writeCache</name></name><argument_list>(<argument><expr><name>blockNO</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		</block_content>}</block></if></if_stmt>
+		<return>return <expr><name>map</name></expr>;</return>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * è¯»å[eip, eip + len)èå´åçè¿ç»­æ°æ®ï¼å¯è½åå«å¤ä¸ªæ°æ®åçåå®¹
+	 * @param eip æ°æ®èµ·å§ç¹(32ä½ç©çå°å = 22ä½åå· + 10ä½ååå°å)
+	 * @param len å¾è¯»æ°æ®çå­èæ°
+	 * @return
+	 */</comment>
+	<function><type><specifier>public</specifier> <name><name>char</name><index>[]</index></name></type> <name>read</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>eip</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>len</name></decl></parameter>)</parameter_list><block>{<block_content>
+		<return>return <expr><call><name>helper</name><argument_list>(<argument><expr><name>eip</name></expr></argument>, <argument><expr><name>len</name></expr></argument>, <argument><expr><literal type="null">null</literal></expr></argument>)</argument_list></call></expr>;</return>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * å°è¿ç»­çæ°æ®åå¥[eip, eip + len]ï¼å¯è½åå«å¤ä¸ªæ°æ®åçåå®¹
+	 * @param eip æ°æ®èµ·å§ç¹(32ä½ç©çå°å = 22ä½åå· + 10ä½ååå°å)
+	 * @param len å¾è¯»æ°æ®çå­èæ°
+	 * @param data è¿ç»­æ°æ®
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>void</name></type> <name>write</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>eip</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>len</name></decl></parameter>, <parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>data</name></decl></parameter>)</parameter_list><block>{<block_content>
+		<expr_stmt><expr><call><name>helper</name><argument_list>(<argument><expr><name>eip</name></expr></argument>, <argument><expr><name>len</name></expr></argument>, <argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	</block_content>}</block></function>
+
+	<function><type><specifier>private</specifier> <name><name>char</name><index>[]</index></name></type> <name>helper</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>eip</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>len</name></decl></parameter>, <parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>writeData</name></decl></parameter>)</parameter_list><block>{<block_content>
+		<decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>data</name> <init>= <expr><operator>new</operator> <name><name>char</name><index>[<expr><name>len</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>Transformer</name></type> <name>t</name> <init>= <expr><operator>new</operator> <call><name>Transformer</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>addr</name> <init>=  <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>binaryToInt</name></name><argument_list>(<argument><expr><literal type="string">"0"</literal> <operator>+</operator> <name>eip</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>upperBound</name> <init>= <expr><name>addr</name> <operator>+</operator> <name>len</name></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>index</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<while>while <condition>(<expr><name>addr</name> <operator>&lt;</operator> <name>upperBound</name></expr>)</condition> <block>{<block_content>
+			<decl_stmt><decl><type><name>int</name></type> <name>nextSegLen</name> <init>= <expr><name>LINE_SIZE_B</name> <operator>-</operator> <operator>(</operator><name>addr</name> <operator>%</operator> <name>LINE_SIZE_B</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+			<if_stmt><if>if <condition>(<expr><name>addr</name> <operator>+</operator> <name>nextSegLen</name> <operator>&gt;=</operator> <name>upperBound</name></expr>)</condition> <block>{<block_content>
+				<expr_stmt><expr><name>nextSegLen</name> <operator>=</operator> <name>upperBound</name> <operator>-</operator> <name>addr</name></expr>;</expr_stmt>
+			</block_content>}</block></if></if_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+			<if_stmt><if>if<condition>(<expr><name>writeData</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block>{<block_content>
+				<decl_stmt><decl><type><name>int</name></type> <name>rowNO</name> <init>= <expr><call><name>fetch</name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>intToBinary</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name>addr</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>nextSegLen</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"read: "</literal> <operator>+</operator> <name>rowNO</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+				<decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>cache_data</name> <init>= <expr><call><name><name>cache</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>rowNO</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getData</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+				<while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>nextSegLen</name></expr>)</condition> <block>{<block_content>
+					<expr_stmt><expr><name><name>data</name><index>[<expr><name>index</name></expr>]</index></name> <operator>=</operator> <name><name>cache_data</name><index>[<expr><name>addr</name> <operator>%</operator> <name>LINE_SIZE_B</name> <operator>+</operator> <name>i</name></expr>]</index></name></expr>;</expr_stmt>
+					<expr_stmt><expr><name>index</name><operator>++</operator></expr>;</expr_stmt>
+					<expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+				</block_content>}</block></while>
+			</block_content>}</block></if>
+			<else>else<block>{<block_content>
+				<decl_stmt><decl><type><name>int</name></type> <name>rowNO</name> <init>= <expr><call><name>fetch</name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>intToBinary</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name>addr</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>nextSegLen</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+				<decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>input</name> <init>= <expr><call><name><name>cache</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>rowNO</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>getData</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+				<while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>nextSegLen</name></expr>)</condition> <block>{<block_content>
+					<expr_stmt><expr><name><name>input</name><index>[<expr><name>addr</name> <operator>%</operator> <name>LINE_SIZE_B</name> <operator>+</operator> <name>i</name></expr>]</index></name> <operator>=</operator> <name><name>writeData</name><index>[<expr><name>index</name></expr>]</index></name></expr>;</expr_stmt>
+					<expr_stmt><expr><name>index</name><operator>++</operator></expr>;</expr_stmt>
+					<expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+				</block_content>}</block></while>
+				<expr_stmt><expr><call><name><name>writeStrategy</name><operator>.</operator><name>write</name></name><argument_list>(<argument><expr><name>rowNO</name></expr></argument>, <argument><expr><name>input</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"write: "</literal> <operator>+</operator> <name>rowNO</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			</block_content>}</block></else></if_stmt>
+			<expr_stmt><expr><name>addr</name> <operator>+=</operator> <name>nextSegLen</name></expr>;</expr_stmt>
+		</block_content>}</block></while>
+		<return>return <expr><name>data</name></expr>;</return>
+	</block_content>}</block></function>
+
+
+	<function><type><specifier>public</specifier> <name>void</name></type> <name>setStrategy</name><parameter_list>(<parameter><decl><type><name>MappingStrategy</name></type> <name>mappingStrategy</name></decl></parameter>, <parameter><decl><type><name>ReplacementStrategy</name></type> <name>replacementStrategy</name></decl></parameter>, <parameter><decl><type><name>WriteStrategy</name></type> <name>writeStrategy</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<comment type="line">//TODO</comment>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>mappingStrategy</name></name> <operator>=</operator> <name>mappingStrategy</name></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>mappingStrategy</name><operator>.</operator><name>setReplacementStrategy</name></name><argument_list>(<argument><expr><name>replacementStrategy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>this</name><operator>.</operator><name>writeStrategy</name></name> <operator>=</operator> <name>writeStrategy</name></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>writeStrategy</name><operator>.</operator><name>setMappingStrategy</name></name><argument_list>(<argument><expr><name>mappingStrategy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * ä»32ä½ç©çå°å(22ä½åå· + 10ä½ååå°å)è·åç®æ æ°æ®å¨åå­ä¸­å¯¹åºçåå·
+	 * @param addr
+	 * @return
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>int</name></type> <name>getBlockNO</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>addr</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<decl_stmt><decl><type><name>Transformer</name></type> <name>t</name> <init>= <expr><operator>new</operator> <call><name>Transformer</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<return>return <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>binaryToInt</name></name><argument_list>(<argument><expr><literal type="string">"0"</literal> <operator>+</operator> <call><name><name>addr</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">22</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * åç¥Cacheæä¸ªè¿ç»­å°åèå´åçæ°æ®åçäºä¿®æ¹ï¼ç¼å­å¤±æ
+	 * @param sAddr åçååçæ°æ®æ®µçèµ·å§å°å
+	 * @param len æ°æ®æ®µé¿åº¦
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>void</name></type> <name>invalid</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>sAddr</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>len</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<decl_stmt><decl><type><name>int</name></type> <name>from</name> <init>= <expr><call><name>getBlockNO</name><argument_list>(<argument><expr><name>sAddr</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>Transformer</name></type> <name>t</name> <init>= <expr><operator>new</operator> <call><name>Transformer</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>to</name> <init>= <expr><call><name>getBlockNO</name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>intToBinary</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>binaryToInt</name></name><argument_list>(<argument><expr><literal type="string">"0"</literal> <operator>+</operator> <name>sAddr</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call> <operator>+</operator> <name>len</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>blockNO</name><init>=<expr><name>from</name></expr></init></decl>;</init> <condition><expr><name>blockNO</name><operator>&lt;=</operator><name>to</name></expr>;</condition> <incr><expr><name>blockNO</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+			<decl_stmt><decl><type><name>int</name></type> <name>rowNO</name> <init>= <expr><call><name><name>mappingStrategy</name><operator>.</operator><name>map</name></name><argument_list>(<argument><expr><name>blockNO</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+			<if_stmt><if>if <condition>(<expr><name>rowNO</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+				<expr_stmt><expr><call><name><name>cache</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>rowNO</name></expr></argument>)</argument_list></call><operator>.</operator><name>validBit</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><literal type="string">"invalid: "</literal> <operator>+</operator> <name>rowNO</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+<comment type="line">//				cache.get(rowNO).setTimeStamp(0L);</comment>
+			</block_content>}</block></if></if_stmt>
+		</block_content>}</block></for>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * æ¸é¤Cacheå¨é¨ç¼å­
+	 * è¿ä¸ªæ¹æ³åªä¼å¨æµè¯çæ¶åç¨å°
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>void</name></type> <name>clear</name><parameter_list>()</parameter_list> <block>{<block_content>
+		<for>for <control>(<init><decl><type><name>CacheLine</name></type> <name>line</name><range>:<expr><name><name>cache</name><operator>.</operator><name>clPool</name></name></expr></range></decl></init>)</control> <block>{<block_content>
+			<if_stmt><if>if <condition>(<expr><name>line</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+				<expr_stmt><expr><name><name>line</name><operator>.</operator><name>validBit</name></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+			</block_content>}</block></if></if_stmt>
+		</block_content>}</block></for>
+	</block_content>}</block></function>
+
+	<comment type="block" format="javadoc">/**
+	 * è¾å¥è¡å·åå¯¹åºçé¢æå¼ï¼å¤æ­Cacheå½åç¶ææ¯å¦ç¬¦åé¢æ
+	 * è¿ä¸ªæ¹æ³ä»ç¨äºæµè¯
+	 * @param lineNOs
+	 * @param validations
+	 * @param tags
+	 * @return
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>boolean</name></type> <name>checkStatus</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>lineNOs</name></decl></parameter>, <parameter><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>validations</name></decl></parameter>, <parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>tags</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<if_stmt><if>if <condition>(<expr><name><name>lineNOs</name><operator>.</operator><name>length</name></name> <operator>!=</operator> <name><name>validations</name><operator>.</operator><name>length</name></name> <operator>||</operator> <name><name>validations</name><operator>.</operator><name>length</name></name> <operator>!=</operator> <name><name>tags</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+			<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name><name>lineNOs</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+			<decl_stmt><decl><type><name>CacheLine</name></type> <name>line</name> <init>= <expr><call><name><name>cache</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>lineNOs</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<if_stmt><if>if <condition>(<expr><name><name>line</name><operator>.</operator><name>validBit</name></name> <operator>!=</operator> <name><name>validations</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name><name>line</name><operator>.</operator><name>validBit</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+				<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+			</block_content>}</block></if></if_stmt>
+			<if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>Arrays</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>getTag</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name><name>tags</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+
+				<expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>getTag</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+				<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+			</block_content>}</block></if></if_stmt>
+		</block_content>}</block></for>
+		<return>return <expr><literal type="boolean">true</literal></expr>;</return>
+	</block_content>}</block></function>
+
+
+	<comment type="block" format="javadoc">/**
+	 * è´è´£å¯¹CacheLineè¿è¡å¨æåå§å
+	 */</comment>
+	<class><specifier>public</specifier> class <name>CacheLinePool</name> <block>{
+		<comment type="block" format="javadoc">/**
+		 * @param lines Cacheçæ»è¡æ°
+		 */</comment>
+		<constructor><name>CacheLinePool</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>lines</name></decl></parameter>)</parameter_list> <block>{<block_content>
+			<expr_stmt><expr><name>clPool</name> <operator>=</operator> <operator>new</operator> <name><name>CacheLine</name><index>[<expr><name>lines</name></expr>]</index></name></expr>;</expr_stmt>
+		</block_content>}</block></constructor>
+		<decl_stmt><decl><type><specifier>public</specifier> <name><name>CacheLine</name><index>[]</index></name></type> <name>clPool</name></decl>;</decl_stmt>
+		<function><type><specifier>public</specifier> <name>CacheLine</name></type> <name>get</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>lineNO</name></decl></parameter>)</parameter_list> <block>{<block_content>
+			<if_stmt><if>if <condition>(<expr><name>lineNO</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>lineNO</name> <operator>&lt;</operator><name><name>clPool</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+				<decl_stmt><decl><type><name>CacheLine</name></type> <name>l</name> <init>= <expr><name><name>clPool</name><index>[<expr><name>lineNO</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+				<if_stmt><if>if <condition>(<expr><name>l</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+					<expr_stmt><expr><name><name>clPool</name><index>[<expr><name>lineNO</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>CacheLine</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+					<expr_stmt><expr><name>l</name> <operator>=</operator> <name><name>clPool</name><index>[<expr><name>lineNO</name></expr>]</index></name></expr>;</expr_stmt>
+				</block_content>}</block></if></if_stmt>
+				<return>return <expr><name>l</name></expr>;</return>
+			</block_content>}</block></if></if_stmt>
+			<return>return <expr><literal type="null">null</literal></expr>;</return>
+		</block_content>}</block></function>
+	}</block></class>
+
+	<comment type="block" format="javadoc">/**
+	 * Cacheè¡ï¼æ¯è¡é¿åº¦ä¸º(1+22+{@link Cache#LINE_SIZE_B})
+	 */</comment>
+	<class><specifier>public</specifier> class <name>CacheLine</name> <block>{
+		<comment type="line">// ææä½ï¼æ è®°è¯¥æ¡æ°æ®æ¯å¦ææ</comment>
+		<decl_stmt><decl><type><name>boolean</name></type> <name>validBit</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<comment type="line">// èä½ï¼æ è®°è¯¥æ¡æ°æ®æ¯å¦è¢«ä¿®æ¹</comment>
+		<decl_stmt><decl><type><name>boolean</name></type> <name>dirty</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<comment type="line">// ç¨äºLFUç®æ³ï¼è®°å½è¯¥æ¡cacheä½¿ç¨æ¬¡æ°</comment>
+		<decl_stmt><decl><type><name>int</name></type> <name>visited</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+		<comment type="line">// ç¨äºLRUåFIFOç®æ³ï¼è®°å½è¯¥æ¡æ°æ®æ¶é´æ³</comment>
+		<decl_stmt><decl><type><name>Long</name></type> <name>timeStamp</name> <init>= <expr><literal type="number">1L</literal></expr></init></decl>;</decl_stmt>
+
+		<comment type="line">// æ è®°ï¼å ä½é¿åº¦ä¸º()22ä½ï¼ææé¿åº¦åå³äºæ å°ç­ç¥ï¼</comment>
+		<comment type="line">// ç´æ¥æ å°: 12 ä½</comment>
+		<comment type="line">// å¨å³èæ å°: 22 ä½</comment>
+		<comment type="line">// (2^n)-è·¯ç»å³èæ å°: 22-(10-n) ä½</comment>
+		<comment type="line">// æ³¨æï¼tagå¨ç©çå°åä¸­ç¨é«ä½è¡¨ç¤ºï¼å¦ï¼ç´æ¥æ å°(32ä½)=tag(12ä½)+è¡å·(10ä½)+ååå°å(10ä½)ï¼</comment>
+		<comment type="line">// é£ä¹å¯¹äºå¼ä¸º0b1111çtagåºè¯¥è¡¨ç¤ºä¸º0000000011110000000000ï¼å¶ä¸­å12ä½ä¸ºææé¿åº¦ï¼</comment>
+		<comment type="line">// å ä¸ºæµè¯å¹³å°çåå ï¼æä»¬æ æ³ä½¿ç¨4GBçåå­ï¼ä½æ¯æä»¬è¿æ¯éæ©ç¨32ä½å°åçº¿æ¥å¯»å</comment>
+		<decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>tag</name> <init>= <expr><operator>new</operator> <name><name>char</name><index>[<expr><literal type="number">22</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+		<comment type="line">// æ°æ®</comment>
+		<decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>data</name> <init>= <expr><operator>new</operator> <name><name>char</name><index>[<expr><name>LINE_SIZE_B</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+		<function><type><specifier>public</specifier> <name>boolean</name></type> <name>getValidBit</name><parameter_list>()</parameter_list><block>{<block_content> <return>return <expr><name>validBit</name></expr>;</return></block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>void</name></type> <name>setValidBit</name><parameter_list>(<parameter><decl><type><name>boolean</name></type> <name>b</name></decl></parameter>)</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>this</name><operator>.</operator><name>validBit</name></name> <operator>=</operator> <name>b</name></expr>;</expr_stmt> </block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>boolean</name></type> <name>isDirty</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>this</name><operator>.</operator><name>dirty</name></name></expr>;</return> </block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>void</name></type> <name>setDirty</name><parameter_list>(<parameter><decl><type><name>boolean</name></type> <name>b</name></decl></parameter>)</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>this</name><operator>.</operator><name>dirty</name></name> <operator>=</operator> <name>b</name></expr>;</expr_stmt></block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>Long</name></type> <name>getTimeStamp</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name>timeStamp</name></expr>;</return></block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>void</name></type> <name>setTimeStamp</name><parameter_list>(<parameter><decl><type><name>Long</name></type> <name>timeStamp</name></decl></parameter>)</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>this</name><operator>.</operator><name>timeStamp</name></name> <operator>=</operator> <name>timeStamp</name></expr>;</expr_stmt></block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name><name>char</name><index>[]</index></name></type> <name>getData</name><parameter_list>()</parameter_list> <block>{<block_content>
+			<return>return <expr><name><name>this</name><operator>.</operator><name>data</name></name></expr>;</return>
+		</block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>void</name></type> <name>setDate</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>data</name></decl></parameter>)</parameter_list><block>{<block_content> <expr_stmt><expr><name><name>this</name><operator>.</operator><name>data</name></name> <operator>=</operator> <name>data</name></expr>;</expr_stmt></block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name><name>char</name><index>[]</index></name></type> <name>getTag</name><parameter_list>()</parameter_list> <block>{<block_content> <return>return <expr><name><name>this</name><operator>.</operator><name>tag</name></name></expr>;</return> </block_content>}</block></function>
+
+		<function><type><specifier>public</specifier> <name>void</name></type> <name>setTag</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>tag</name></decl></parameter>)</parameter_list> <block>{<block_content> <expr_stmt><expr><name><name>this</name><operator>.</operator><name>tag</name></name> <operator>=</operator> <name>tag</name></expr>;</expr_stmt></block_content>}</block></function>
+
+
+	}</block></class>
+}</block></class>
+</unit>

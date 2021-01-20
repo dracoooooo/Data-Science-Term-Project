@@ -7,7 +7,6 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 import matplotlib.pyplot as plt
-
 # 使用神经网络进行代码语言分类
 
 # 代码文件数量：
@@ -15,7 +14,6 @@ import matplotlib.pyplot as plt
 # java: 1556
 # js: 2103
 from tensorflow.python.keras.models import load_model
-
 java_path = "../data/java"
 python_path = "../data/python"
 js_path = "../data/javascript"
