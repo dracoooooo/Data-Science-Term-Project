@@ -22,20 +22,22 @@ def search__names(xml_path, file_name):
 
 def find_names(root):
     if (root.tag == prefix+'decl'):
-        for i in root:
-            if(i.tag == prefix + 'name'):
-                variable_names_list.append(i.text)
+        name = root.find('./'+prefix + 'name')
+        if(name.text != None):
+            variable_names_list.append(name.text)
     if(root.tag == prefix+'function'):
         name = root.find(prefix+'name')
-        function_names_list.append(name.text)
+        if(name.text!=None):
+            function_names_list.append(name.text)
     if(root.tag == prefix+'class'):
         name = root.find(prefix+'name')
-        class_names_list.append(name.text)
+        if(name.text!=None):
+            class_names_list.append(name.text)
     for child in root:
         find_names(child)
     return
 
 
 if __name__ =="__main__":
-    print(search__names('../test','ALU.xml'));
+    print(search__names('../test','Game.xml'));
 
