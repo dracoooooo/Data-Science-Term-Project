@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="Game.java"><comment type="block" format="javadoc">/**
+ * Created by lujxu on 2017/10/30.
+ */</comment>
+<class><specifier>public</specifier> class <name>Game</name> <block>{
+    <decl_stmt><decl><type><specifier>private</specifier> <name>Player</name></type> <name>player_X</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>Player</name></type> <name>player_Y</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>Map</name></type> <name>map</name></decl>;</decl_stmt>
+
+    <comment type="block" format="javadoc">/**
+     *æ­¤æ¹æ³è¯·å¿ä¿®æ¹ï¼
+     * @param initInfo ä¼ å¥åå§ååæ°,æ ¼å¼ä¸º: n;x1,y1,isHideX;x2,y2,isHideY åå«è¡¨ç¤º
+     * 				   nä¸ºå°å¾å¤§å°ï¼
+     * 				   x1ãy1ä¸ºXåå§ä½ç½®
+     *				   x2ãy2ä¸ºYåå§ä½ç½®
+     *				   isHideXãisHideYåå«è¡¨ç¤ºX,Yçç¶æï¼å³æ¯å¦éèº«ï¼éèº«ä¸ºtrue, å¦åä¸ºfalse
+     */</comment>
+    <constructor><specifier>public</specifier> <name>Game</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>initInfo</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <comment type="line">// hhhhhhhhhh</comment>
+        <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>infoArray</name> <init>= <expr><call><name><name>initInfo</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">";|,"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>x1</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>y1</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>x2</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>y2</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">5</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>boolean</name></type> <name>isHide1</name><init>=<expr><call><name><name>Boolean</name><operator>.</operator><name>parseBoolean</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>boolean</name></type> <name>isHide2</name><init>=<expr><call><name><name>Boolean</name><operator>.</operator><name>parseBoolean</name></name><argument_list>(<argument><expr><name><name>infoArray</name><index>[<expr><literal type="number">6</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>player_X</name> <operator>=</operator> <operator>new</operator> <call><name>Player</name><argument_list>(<argument><expr><literal type="string">"X"</literal></expr></argument>,<argument><expr><name>x1</name></expr></argument>,<argument><expr><name>y1</name></expr></argument>,<argument><expr><name>isHide1</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>player_Y</name> <operator>=</operator> <operator>new</operator> <call><name>Player</name><argument_list>(<argument><expr><literal type="string">"Y"</literal></expr></argument>,<argument><expr><name>x2</name></expr></argument>,<argument><expr><name>y2</name></expr></argument>,<argument><expr><name>isHide2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>map</name><operator>=</operator><operator>new</operator> <call><name>Map</name><argument_list>(<argument><expr><name>n</name></expr></argument>,<argument><expr><name>player_X</name></expr></argument>,<argument><expr><name>player_Y</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <comment type="block" format="javadoc">/**
+     *æ­¤æ¹æ³è¯·å¿ä¿®æ¹ï¼
+     * @param steps è¿å¨è½¨è¿¹ï¼X,Yäº¤æ¿è¿å¨ï¼è¾å¥æ ¼å¼ä¸ºmx1,my1,mx2,my2.....
+     * @return player_Xä¸player_Yä¹é´çè·ç¦»
+     */</comment>
+    <function><type><specifier>public</specifier>  <name>int</name></type> <name>playGame</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>steps</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <decl_stmt><decl><type><name>String</name></type> <name><name>list</name><index>[]</index></name><init>=<expr><call><name><name>steps</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">","</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name><name>list</name><operator>.</operator><name>length</name></name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>i</name><operator>%</operator><literal type="number">2</literal><operator>==</operator><literal type="number">0</literal></expr>)</condition><block>{<block_content> <comment type="line">//x</comment>
+                <expr_stmt><expr><call><name><name>player_X</name><operator>.</operator><name>move</name></name><argument_list>(<argument><expr><name><name>list</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>trim</name><argument_list>()</argument_list></call><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if><else>else<block>{<block_content>
+                <expr_stmt><expr><call><name><name>player_Y</name><operator>.</operator><name>move</name></name><argument_list>(<argument><expr><name><name>list</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>trim</name><argument_list>()</argument_list></call><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>print</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>map</name><operator>.</operator><name>resultEvaluation</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><call><name><name>player_X</name><operator>.</operator><name>calDistance</name></name><argument_list>(<argument><expr><name>player_Y</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <decl_stmt><decl><type><name>String</name></type> <name>initInfo</name> <init>= <expr><literal type="string">"4;1,1,false;2,2,true"</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>String</name></type> <name>steps</name> <init>= <expr><literal type="string">"R,L,D,L"</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Game</name></type> <name>g</name> <init>= <expr><operator>new</operator> <call><name>Game</name><argument_list>(<argument><expr><name>initInfo</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><call><name><name>g</name><operator>.</operator><name>playGame</name></name><argument_list>(<argument><expr><name>steps</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

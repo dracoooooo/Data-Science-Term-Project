@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="Player.java"><comment type="block" format="javadoc">/**
+ * Created by lujxu on 2017/10/24.
+ */</comment>
+<class><specifier>public</specifier> class <name>Player</name> <block>{
+
+    <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>x</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>y</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>String</name></type> <name>symbol</name></decl>;</decl_stmt><comment type="line">//ç¨æ¥è¡¨ç¤ºæ­¤playerçç¬¦å·ï¼å¦Xï¼Y</comment>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>boolean</name></type> <name>isHide</name></decl>;</decl_stmt> <comment type="line">// å½åç¶æï¼ trueè¡¨ç¤ºéèº«ï¼ æ­¤å¤ä¸ºäºæ¹ä¾¿ï¼ç¨å°åè¡¨ç¤ºéèº«ç¶æï¼å¦x</comment>
+
+    <constructor><specifier>public</specifier> <name>Player</name><parameter_list>( <parameter><decl><type><name>String</name></type> <name>symbol</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>, <parameter><decl><type><name>boolean</name></type> <name>isHide</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name><operator>=</operator><name>x</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name><operator>=</operator><name>y</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>symbol</name></name><operator>=</operator><name>symbol</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>isHide</name></name><operator>=</operator><name>isHide</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <comment type="block" format="javadoc">/**
+     *è¯·å¨è¿éç¼åä»£ç 
+     * è®¡ç®ä¸¤èä¹é´çè·ç¦»
+     * @param player
+     * @return äºèä¹é´çè·ç¦»ï¼æåç»æä¿çæ´æ°ï¼åä¸åæ´
+     */</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>calDistance</name><parameter_list>(<parameter><decl><type><name>Player</name></type> <name>player</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>dis</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>sqrt</name></name><argument_list>(<argument><expr><operator>(</operator><call><name><name>player</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>-</operator><call><name><name>this</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>)</operator><operator>*</operator><operator>(</operator><call><name><name>player</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>-</operator><call><name><name>this</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>)</operator> <operator>+</operator> <operator>(</operator><call><name><name>player</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call><operator>-</operator><call><name><name>this</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call><operator>)</operator><operator>*</operator><operator>(</operator><call><name><name>player</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call><operator>-</operator><call><name><name>this</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call><operator>)</operator></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <call><name><name>Math</name><operator>.</operator><name>floor</name></name><argument_list>(<argument><expr><name>dis</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    <comment type="block" format="javadoc">/**
+     * è¯·å¨è¿éç¼åä»£ç 
+     * æ ¹æ®è¾å¥çæä»¤è¿è¡ç§»å¨ï¼æä»¤æï¼'U', 'D', 'L', 'R'ï¼ åå«è¡¨ç¤ºä¸ï¼ä¸ï¼å·¦ï¼å³ï¼å¶ä¸­ï¼ä¸ä¸æ¹åxï¼å·¦å³æ¹åy
+     * @param move
+     */</comment>
+    <function><type><specifier>public</specifier>  <name>void</name></type>  <name>move</name><parameter_list>(<parameter><decl><type><name>char</name></type> <name>move</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <switch>switch <condition>(<expr><name>move</name></expr>)</condition><block>{<block_content>
+            <case>case <expr><literal type="char">'U'</literal></expr>:</case>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>--</operator></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">'D'</literal></expr>:</case>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name><operator>++</operator></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">'L'</literal></expr>:</case>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name><operator>--</operator></expr>;</expr_stmt>
+                <break>break;</break>
+            <case>case <expr><literal type="char">'R'</literal></expr>:</case>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name><operator>++</operator></expr>;</expr_stmt>
+                <break>break;</break>
+        </block_content>}</block></switch>
+    </block_content>}</block></function>
+
+    <comment type="block" format="javadoc">/**
+     * è¯·å¨æ­¤æ¹æ³ä¸­ç¼åä»£ç 
+     * @return å½åplayerçç¬¦å·ï¼è¥isHideä¸ºtrue,åç¨å°åå­æ¯è¡¨ç¤ºï¼ å¦åç¨å¤§åå­æ¯è¡¨ç¤º
+     */</comment>
+    <function><type><specifier>public</specifier> <name>String</name></type> <name>getSymbol</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name>isHide</name></expr>)</condition><block>{<block_content>
+            <return>return <expr><call><name><name>symbol</name><operator>.</operator><name>toLowerCase</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></if>
+        <else>else<block type="pseudo"><block_content> <return>return <expr><call><name><name>symbol</name><operator>.</operator><name>toUpperCase</name></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+    <comment type="block" format="javadoc">/**
+     * @return xè½´åæ 
+     */</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>getX</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><name>x</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="block" format="javadoc">/**
+     *
+     * @return yè½´åæ 
+     */</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>getY</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <return>return <expr><name>y</name></expr>;</return>
+    </block_content>}</block></function>
+
+
+}</block></class>
+</unit>

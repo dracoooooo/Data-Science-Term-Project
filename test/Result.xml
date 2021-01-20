@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="Result.java"><comment type="block" format="javadoc">/**
+ * Created by lujxu on 2017/11/6.
+ */</comment>
+<enum><specifier>public</specifier> enum <name>Result</name> <block>{
+    <comment type="block" format="javadoc">/**
+     * ENCOUNTERï¼ä»£è¡¨äºèç¸é
+     * DRAWï¼ä»£è¡¨äºèå§ç»æªç¸éï¼å¹³å±
+     */</comment>
+    <decl><name>ENCOUNTER</name></decl>,<decl><name>DRAW</name></decl>
+}</block></enum>
+</unit>

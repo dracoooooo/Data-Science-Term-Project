@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="Map.java"><comment type="block" format="javadoc">/**
+ * Created by lujxu on 2017/10/25.
+ */</comment>
+<class><specifier>public</specifier> class <name>Map</name> <block>{
+    <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name>String</name></type> <name>MAP_DEFAULT</name><init>=<expr><literal type="string">"-"</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier>  <name>int</name></type> <name>size</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>Player</name></type> <name>d1</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name>Player</name></type> <name>d2</name></decl>;</decl_stmt>
+
+    <constructor><specifier>public</specifier> <name>Map</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>size</name></decl></parameter>, <parameter><decl><type><name>Player</name></type> <name>d1</name></decl></parameter>, <parameter><decl><type><name>Player</name></type> <name>d2</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <expr_stmt><expr><call><name>setSize</name><argument_list>(<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>d1</name></name><operator>=</operator><name>d1</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>d2</name></name><operator>=</operator><name>d2</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <comment type="block" format="javadoc">/**
+     * è¯·å¨æ­¤æ¹æ³ä¸­ç¼è¾ä»£ç 
+     * è¿åå½åå°å¾ä¸­ä¸¤ä¸ªplayerçä½ç½®ä¿¡æ¯ï¼æäºèä½ç½®éåï¼åè¿åæä¸¾ç±»Resultä¸­çENCOUNTER; å¦åï¼è¿åDRAW
+     * @return
+     */</comment>
+    <function><type><specifier>public</specifier> <name>Result</name></type> <name>resultEvaluation</name><parameter_list>()</parameter_list><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><call><name><name>d1</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>==</operator><call><name><name>d2</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>&amp;&amp;</operator><call><name><name>d1</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call><operator>==</operator><call><name><name>d2</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{<block_content>
+            <return>return <expr><name><name>Result</name><operator>.</operator><name>ENCOUNTER</name></name></expr>;</return>
+        </block_content>}</block></if>
+        <else>else<block type="pseudo"><block_content> <return>return <expr><name><name>Result</name><operator>.</operator><name>DRAW</name></name></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+
+    <comment type="block" format="javadoc">/**
+     * è¯·å¨æ­¤æ¹æ³ä¸­ç¼è¾ä»£ç 
+     * æå°å°å¾ä¿¡æ¯
+     * playerçä½ç½®ç¨Player.getSymbol()è¡¨ç¤ºï¼å¶ä½ä½ç½®ç¨MAP_DEFAULTè¡¨ç¤ºï¼æ³¨ææ¯ä¸ªä½ç½®ä¹é´é½ç¨ç©ºæ ¼éå¼
+     * è¥x,yäºèéååä¼åè¾åºx
+     */</comment>
+    <function><type><specifier>public</specifier> <name>void</name></type>  <name>print</name><parameter_list>()</parameter_list><block>{<block_content>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name>size</name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+            <for>for<control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>j</name><operator>&lt;</operator><name>size</name></expr>;</condition><incr><expr><name>j</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+                <if_stmt><if>if<condition>(<expr><name>i</name><operator>==</operator><call><name><name>d1</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>&amp;&amp;</operator><name>j</name><operator>==</operator><call><name><name>d1</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{<block_content>
+                    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><call><name><name>d1</name><operator>.</operator><name>getSymbol</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <if_stmt><if>if<condition>(<expr><name>j</name><operator>!=</operator><name>size</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                    <else>else<block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                    <continue>continue;</continue>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if<condition>(<expr><name>i</name><operator>==</operator><call><name><name>d2</name><operator>.</operator><name>getX</name></name><argument_list>()</argument_list></call><operator>&amp;&amp;</operator><name>j</name><operator>==</operator><call><name><name>d2</name><operator>.</operator><name>getY</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{<block_content>
+                    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><call><name><name>d2</name><operator>.</operator><name>getSymbol</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <if_stmt><if>if<condition>(<expr><name>j</name><operator>!=</operator><name>size</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                    <else>else<block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                    <continue>continue;</continue>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><literal type="string">"-"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if<condition>(<expr><name>j</name><operator>!=</operator><name>size</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+
+    <function><type><specifier>public</specifier> <name>void</name></type> <name>setSize</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>size</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name><name>this</name><operator>.</operator><name>size</name></name> <operator>=</operator> <name>size</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+
+}</block></class>
+</unit>
