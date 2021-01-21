@@ -111,7 +111,7 @@ class SubFigStartDirective(Directive):
 
 def doctree_read(app, doctree):
     secnums = app.builder.env.toc_secnumbers
-    for node in doctree.traverse(subfigstart):
+    for node in doctree.traverse_and_parse(subfigstart):
         parentloc = node.parent.children.index(node)
         
         subfigendloc = parentloc

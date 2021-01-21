@@ -169,15 +169,15 @@ class XMLRPCHandlerTests(unittest.TestCase):
 class TraverseTests(unittest.TestCase):
     def test_underscore(self):
         from supervisor import xmlrpc
-        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse, None, '_', None)
+        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse_and_parse, None, '_', None)
 
     def test_notfound(self):
         from supervisor import xmlrpc
-        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse, None, 'foo', None)
+        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse_and_parse, None, 'foo', None)
 
     def test_badparams(self):
         from supervisor import xmlrpc
-        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse, self,
+        self.assertRaises(xmlrpc.RPCError, xmlrpc.traverse_and_parse, self,
                           'test_badparams', (1, 2, 3))
 
     def test_success(self):
@@ -187,7 +187,7 @@ class TraverseTests(unittest.TestCase):
             def foo(self, a):
                 L.append(a)
         dummy = Dummy()
-        xmlrpc.traverse(dummy, 'foo', [1])
+        xmlrpc.traverse_and_parse(dummy, 'foo', [1])
         self.assertEqual(L, [1])
 
 class SupervisorTransportTests(unittest.TestCase):

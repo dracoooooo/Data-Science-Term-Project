@@ -1078,7 +1078,7 @@ class RelationshipProperty(StrategizedProperty):
             if criterion is not None and target_adapter and not \
                     is_aliased_class:
                 # limit this adapter to annotated only?
-                criterion = target_adapter.traverse(criterion)
+                criterion = target_adapter.traverse_and_parse(criterion)
 
             # only have the "joined left side" of what we
             # return be subject to Query adaption.  The right
@@ -1392,7 +1392,7 @@ class RelationshipProperty(StrategizedProperty):
         if self.secondary is not None and alias_secondary:
             criterion = ClauseAdapter(
                 self.secondary.alias()).\
-                traverse(criterion)
+                traverse_and_parse(criterion)
 
         criterion = visitors.cloned_traverse(
             criterion, {}, {'bindparam': visit_bindparam})
@@ -2788,7 +2788,7 @@ class JoinCondition(object):
                             source_selectable,
                             equivalents=self.parent_equivalents))
                 secondaryjoin = \
-                    secondary_aliasizer.traverse(secondaryjoin)
+                    secondary_aliasizer.traverse_and_parse(secondaryjoin)
             else:
                 primary_aliasizer = ClauseAdapter(
                     dest_selectable,
@@ -2801,7 +2801,7 @@ class JoinCondition(object):
                                       equivalents=self.parent_equivalents))
                 secondary_aliasizer = None
 
-            primaryjoin = primary_aliasizer.traverse(primaryjoin)
+            primaryjoin = primary_aliasizer.traverse_and_parse(primaryjoin)
             target_adapter = secondary_aliasizer or primary_aliasizer
             target_adapter.exclude_fn = None
         else:

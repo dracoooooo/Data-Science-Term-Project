@@ -53,9 +53,9 @@ def doctree_read(app, doctree):
     docname_figs = getattr(env, 'docname_figs', {})
     docnames_by_figname = getattr(env, 'docnames_by_figname', {})
     
-    for figure_info in doctree.traverse(lambda n: isinstance(n, nodes.figure) or \
-                                                  isinstance(n, subfig.subfigend) or \
-                                                  isinstance(n, figtable.figtable)):
+    for figure_info in doctree.traverse_and_parse(lambda n: isinstance(n, nodes.figure) or \
+                                                            isinstance(n, subfig.subfigend) or \
+                                                            isinstance(n, figtable.figtable)):
         
         for id in figure_info['ids']:
             docnames_by_figname[id] = env.docname
@@ -113,15 +113,15 @@ def doctree_resolved(app, doctree, docname):
             
             env.figids = figids
         
-        for figure_info in doctree.traverse(lambda n: isinstance(n, nodes.figure) or \
-                                                      isinstance(n, subfig.subfigend) or \
-                                                      isinstance(n, figtable.figtable)):
+        for figure_info in doctree.traverse_and_parse(lambda n: isinstance(n, nodes.figure) or \
+                                                                isinstance(n, subfig.subfigend) or \
+                                                                isinstance(n, figtable.figtable)):
             try: 
                 id = figure_info['ids'][0]
                 fignum = figids[id]
             except (IndexError, KeyError):
                 continue
-            for cap in figure_info.traverse(nodes.caption):
+            for cap in figure_info.traverse_and_parse(nodes.caption):
                 cap.insert(1, nodes.Text(" %s" % cap[0]))
                 if fignum[-1] in map(str, range(10)):
                     boldcaption = "%s %s:" % (app.config.figure_caption_prefix, fignum)
@@ -129,7 +129,7 @@ def doctree_resolved(app, doctree, docname):
                     boldcaption = "(%s)" % fignum[-1]
                 cap[0] = nodes.strong('', boldcaption)
         
-        for ref_info in doctree.traverse(num_ref):
+        for ref_info in doctree.traverse_and_parse(num_ref):
             if '#' in ref_info['reftarget']:
                 label, target = ref_info['reftarget'].split('#')
                 labelfmt = label + " %s"
