@@ -26,6 +26,8 @@ def traverse_and_parse(root):
 def tree_distance_similarities(xml_path_1, xml_file_1,xml_path_2, xml_file_2):
     (zss_tree_1, num1) = parse_tree(initilize(xml_path_1, xml_file_1))
     (zss_tree_2, num2) = parse_tree(initilize(xml_path_2, xml_file_2))
+    print(num1)
+    print(num2)
     dis = simple_distance(zss_tree_1, zss_tree_2)
     return 1 - dis/max(num1,num2)
 
@@ -34,7 +36,7 @@ def tree_distance_similarities(xml_path_1, xml_file_1,xml_path_2, xml_file_2):
 def test():
     java_path = '../../test'
     xml_file_name1 = 'ALU.xml'
-    xml_file_name2= 'Game.xml'
+    xml_file_name2= 'Map.xml'
     path1 = path2 = java_path
     print(tree_distance_similarities(path1,xml_file_name1,path2,xml_file_name2))
 
