@@ -16,10 +16,10 @@ import matplotlib.pyplot as plt
 # java: 1556
 # js: 2103
 from tensorflow.python.keras.models import load_model
-java_path = "../data/java"
-python_path = "../data/python"
-js_path = "../data/javascript"
-test_path = "../data/test"
+java_path = "../../data/java"
+python_path = "../../data/python"
+js_path = "../../data/javascript"
+test_path = "../../data/test"
 
 
 # 代码语言的后缀名
@@ -54,7 +54,7 @@ def load_data(data_path, language):
                 # print(path)
                 text = open(path, encoding='UTF-8').read()
                 # 删除换行符和tab
-                # text = text.replace("\n", "").replace("\t", "")
+                # text = text.replace("\n", ""). replace("\t", "")
                 # 删除注释
                 text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', text)
                 ret.append(text)
@@ -246,12 +246,12 @@ def predict(path):
 if __name__ == "__main__":
     # train()
     predict('./code_language_classifier.py')
-    predict('../data/test/java_file1.js')
-    predict('../data/test/java_file2.java')
-    predict('../data/test/js_file1.java')
-    predict('../data/test/js_file2.js')
-    predict('../data/test/python_file1.java')
-    predict('../data/test/python_file2.js')
+    predict('../../data/test/java_file1.js')
+    predict('../../data/test/java_file2.java')
+    predict('../../data/test/js_file1.java')
+    predict('../../data/test/js_file2.js')
+    predict('../../data/test/python_file1.java')
+    predict('../../data/test/python_file2.js')
 
 
 

@@ -114,7 +114,7 @@ def average_score(code_path, file_name):
 def load_source_codes_del_comments(code_path, file_name):
     abs_path = os.path.abspath(os.path.join(code_path, file_name))
     f = open(abs_path, encoding='UTF-8')
-    source_text = f.read();
+    source_text = f.read()
     del_comments_text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', source_text)
     f.close()
     return del_comments_text
