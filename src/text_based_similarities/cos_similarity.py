@@ -1,11 +1,9 @@
 from src import code_smell_detector
 import src.text_based_similarities.text_preprocessor as processor
 import numpy as np
-#definition the cosθ of two vectors [-1, 1]
+#definition the cosθ of two vectors [0, 1]
 
 def cos_similarity(text_1, text_2):
-    text_1 = processor.process_text(text_1)
-    text_2 = processor.process_text(text_2)
     A = set(text_1)
     B = set(text_2)
     union = A.union(B)
