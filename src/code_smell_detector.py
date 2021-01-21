@@ -3,7 +3,7 @@ import os
 import re
 from functools import reduce
 java_path = "../test"
-file = "Game.java"
+file = "Node.java"
 
 def average_name_score(arg_list):
     total_num = 0
@@ -29,6 +29,8 @@ def get_name_score(var):
     if isRepeated(var) ==  0:
         total_score += 40
     return total_score
+
+
 def isRepeated(var):
     for i in range(1, len(var)):
         if len(var)%i == 0:
@@ -36,6 +38,7 @@ def isRepeated(var):
             if str == var:
                 return 1
     return 0
+
 
 def load_source_codes(code_path, file_name):
     abs_path = os.path.abspath(os.path.join(code_path, file_name))
@@ -107,8 +110,8 @@ def average_score(code_path, file_name):
     avg_method_score = average_method_score(del_comments_text, arg_list[1])
     avg_name_score = average_name_score(arg_list)
     return (avg_method_score +avg_name_score)/2
+
 def test():
     print(average_score(java_path, file))
 if __name__ == "__main__":
     test()
-    pass
