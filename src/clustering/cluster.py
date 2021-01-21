@@ -58,7 +58,8 @@ if __name__ == "__main__":
     files = file_paths(path, "java")
     sc = initSC('./similarity_matrix_Jaccard_cofficient.pkl')
     labels = sc.labels_
-    dic = {}
-    for i in range(files.__len__()):
-        dic[files[i]] = labels[i]
-    a = 1
+    # dic = {}
+    # for i in range(files.__len__()):
+    #     dic[files[i]] = labels[i]
+    score = silhouette_score(files, labels)
+    print(score)
