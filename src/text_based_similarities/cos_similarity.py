@@ -4,6 +4,8 @@ import numpy as np
 #definition the cosθ of two vectors [0, 1]
 
 def cos_similarity(text_1, text_2):
+    text_1 = processor.process_text(text_1)
+    text_2 = processor.process_text(text_2)
     A = set(text_1)
     B = set(text_2)
     union = A.union(B)

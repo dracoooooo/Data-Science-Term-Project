@@ -1,6 +1,7 @@
 import src.text_based_similarities.text_preprocessor as processor
 
 # definition : |A∩B|/|A∪B|
+
 from src import code_smell_detector
 
 
@@ -9,6 +10,8 @@ def Jaccard_cofficient(text_1, text_2):
         return 1.0
     if text_1 == None or text_2 == None:
         return 0.0
+    text_1 = processor.process_text(text_1)
+    text_2 = processor.process_text(text_2)
     A = set(text_1)
     B = set(text_2)
     intersaction = A.intersection(B)
