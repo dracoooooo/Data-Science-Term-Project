@@ -1,8 +1,12 @@
 import numpy as np
-
+import src.text_based_similarities.text_preprocessor as processor
 # definition: the least edit operations from text to text
+from src import code_smell_detector
+
 
 def Levenshtein_distance(text_1, text_2):
+    text_1 = processor.process_text(text_1)
+    text_2 = processor.process_text(text_2)
     dp = np.empty([len(text_1)+1, len(text_2)+1], dtype= int)
     len_1 = len(text_1)
     len_2 = len(text_2)
@@ -22,4 +26,9 @@ def Levenshtein_similarity(text_1, text_2):
     return Levenshtein_distance(text_1, text_2)/max(len(text_1), len(text_2))
 
 if __name__== "__main__":
-    print(Levenshtein_distance("sknakdsssssa", "sjfafajpasjsa"))
+    path = "../../test"
+    file1 = "Cache.java"
+    file2 = "ALU.java"
+    text1 = code_smell_detector.load_source_codes_del_comments(path, file1)
+    text2 = code_smell_detector.load_source_codes_del_comments(path, file2)
+    print(Levenshtein_similarity(text1, text2))
