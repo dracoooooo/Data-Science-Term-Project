@@ -1,7 +1,11 @@
+from src import code_smell_detector
+import src.text_based_similarities.text_preprocessor as processor
 import numpy as np
 #definition the cosθ of two vectors [-1, 1]
 
 def cos_similarity(text_1, text_2):
+    text_1 = processor.process_text(text_1)
+    text_2 = processor.process_text(text_2)
     A = set(text_1)
     B = set(text_2)
     union = A.union(B)
@@ -32,4 +36,9 @@ def cos_similarity(text_1, text_2):
 
 
 if __name__== "__main__":
-    print(cos_similarity("sknakdsssssa", "sjfafajpasjsa"))
+    path = "../../test"
+    file1 = "Cache.java"
+    file2 = "Map.java"
+    text1 = code_smell_detector.load_source_codes_del_comments(path, file1)
+    text2 = code_smell_detector.load_source_codes_del_comments(path, file2)
+    print(cos_similarity(text1, text2))

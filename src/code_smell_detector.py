@@ -111,6 +111,14 @@ def average_score(code_path, file_name):
     avg_name_score = average_name_score(arg_list)
     return (avg_method_score +avg_name_score)/2
 
+def load_source_codes_del_comments(code_path, file_name):
+    abs_path = os.path.abspath(os.path.join(code_path, file_name))
+    f = open(abs_path, encoding='UTF-8')
+    source_text = f.read();
+    del_comments_text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', source_text)
+    f.close()
+    return del_comments_text
+
 def test():
     print(average_score(java_path, file))
 if __name__ == "__main__":
