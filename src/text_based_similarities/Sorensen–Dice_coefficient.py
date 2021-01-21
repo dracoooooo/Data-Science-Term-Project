@@ -13,4 +13,4 @@ def Sorensen_Dice_coefficient(text_1, text_2):
     return 2*intersaction.__len__()/(X.__len__() + Y.__len__())
 
 if __name__=="__main__":
-    print(Sorensen_Dice_coefficient("xyz", "xvw"))
+    print(Sorensen_Dice_coefficient("xsdsadaz", "xvwsdasas"))
