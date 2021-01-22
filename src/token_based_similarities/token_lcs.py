@@ -1,5 +1,7 @@
 import os
 import pickle
+import re
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 from src.languange_classifier import code_language_classifier as clc
 from src.text_based_similarities import Levenshtein_distance
@@ -19,6 +21,7 @@ def init_tokenizer():
 
 def code2text(path):
     text = open(path, encoding='UTF-8').read()
+    text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', text)
     return text
 
 
