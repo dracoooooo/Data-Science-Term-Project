@@ -70,11 +70,6 @@ def postorder_index_A_wrapper(root):
 def postorder_index_B_wrapper(root):
     postorder_index_B(root,0)
 
-def print_test(node):
-    print(Node.get_label(node)+ " : "+str(node.index))
-    for i in Node.get_children(node):
-        print_test(i)
-
 def test():
     A = (
         Node("f")
