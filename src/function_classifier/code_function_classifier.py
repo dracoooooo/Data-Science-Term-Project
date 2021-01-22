@@ -147,6 +147,7 @@ def get_feature_ast_node_embedding(path):
     pre_order = []
 
 
+
 train_size = 50
 def prepare_data():
     array = file_paths(array_path, "java")

@@ -5,8 +5,8 @@ from src.ast_based_similarities.tree_node import Node
 import os
 prefix = '{http://www.srcML.org/srcML/src}'
 
-def initilize(xml_path, xml_file_name):
-    path = os.path.abspath(os.path.join(xml_path,xml_file_name))
+def xmlFile2xmlTree(xml_path):
+    path = os.path.abspath(xml_path)
     xml_file_tree= ET.parse(path)
     return xml_file_tree
 
@@ -25,9 +25,9 @@ def traverse_and_parse(root):
     return (new_node, node_num)
 
 
-def tree_distance_similarities(xml_path_1, xml_file_1,xml_path_2, xml_file_2):
-    (zss_tree_1, num1) = parse_tree(initilize(xml_path_1, xml_file_1))
-    (zss_tree_2, num2) = parse_tree(initilize(xml_path_2, xml_file_2))
+def tree_distance_similarities(xml_path_1,xml_path_2):
+    (zss_tree_1, num1) = parse_tree(xmlFile2xmlTree(xml_path_1))
+    (zss_tree_2, num2) = parse_tree(xmlFile2xmlTree(xml_path_2))
     print(num1)
     print(num2)
     dis = edit_distance(zss_tree_1, zss_tree_2)
