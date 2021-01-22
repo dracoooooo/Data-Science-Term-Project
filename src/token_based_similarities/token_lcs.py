@@ -39,7 +39,7 @@ def token_lcs(path1, path2):
 
     seq1 = tokenizer.texts_to_sequences([text1])[0]
     seq2 = tokenizer.texts_to_sequences([text2])[0]
-    return Levenshtein_distance.Levenshtein_similarity(seq1, seq2)
+    return Levenshtein_distance.Levenshtein_distance(seq1,seq2) / max(len(seq1), len(seq2))
 
 
 if __name__ == "__main__":
