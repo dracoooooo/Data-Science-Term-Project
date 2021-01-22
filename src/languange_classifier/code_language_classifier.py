@@ -26,7 +26,8 @@ test_path = "../../data/test"
 suffix = {
     "java": ".java",
     "python": ".py",
-    "javascript": ".js"
+    "javascript": ".js",
+    "xml": ".xml"
 }
 
 # 代码语言的标签(one-hot)
