@@ -1,12 +1,9 @@
-import numpy as np
 
 class Node(object):
-    def __init__(self, label, tree_num):
+    def __init__(self, label):
         self.children = list()
         self.label = label
         self.index = -1
-        self.T = np.empty(tree_num+1, dtype=str)
-        self.l = np.empty(tree_num+1, dtype=int)
     @staticmethod
     def get_children(node):
         return node.children

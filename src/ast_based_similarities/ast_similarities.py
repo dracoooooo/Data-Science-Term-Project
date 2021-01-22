@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
-from zss import simple_distance, Node
+from src.ast_based_similarities.tree_edit_distance import edit_distance
+from src.ast_based_similarities.tree_node import Node
+# from zss import simple_distance, Node
 import os
 prefix = '{http://www.srcML.org/srcML/src}'
 
@@ -28,17 +30,33 @@ def tree_distance_similarities(xml_path_1, xml_file_1,xml_path_2, xml_file_2):
     (zss_tree_2, num2) = parse_tree(initilize(xml_path_2, xml_file_2))
     print(num1)
     print(num2)
-    dis = simple_distance(zss_tree_1, zss_tree_2)
+    dis = edit_distance(zss_tree_1, zss_tree_2)
     return 1 - dis/max(num1,num2)
 
 
 
 def test():
-    java_path = '../../test'
-    xml_file_name1 = 'ALU.xml'
-    xml_file_name2= 'Map.xml'
-    path1 = path2 = java_path
-    print(tree_distance_similarities(path1,xml_file_name1,path2,xml_file_name2))
+    A = (
+        Node("f")
+            .addkid(Node("d")
+                    .addkid(Node("a"))
+                    .addkid(Node("c")
+                            .addkid(Node("b"))))
+            .addkid(Node("e"))
+    )
+    B = (
+        Node("f")
+            .addkid(Node("c")
+                    .addkid(Node("d")
+                            .addkid(Node("a")
+                                    .addkid(Node("b")))
+                            ))
+            .addkid(Node("e")))
+    # print(edit_distance(A,B))
+    path = '../../test'
+    file1 = 'Result.xml'
+    file2 = 'Game.xml'
+    print(tree_distance_similarities(path,file1,path,file2))
 
 
 if __name__ == '__main__':
