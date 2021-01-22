@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\MinimumMovesToEqualArray.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/02/2018. Given a non-empty integer array, find the minimum
+ * number of moves required to make all array elements equal, where a move is incrementing a
+ * selected element by 1 or decrementing a selected element by 1.
+ *
+ * &lt;p&gt;You may assume the array's length is at most 10,000.
+ *
+ * &lt;p&gt;Example:
+ *
+ * &lt;p&gt;Input: [1,2,3]
+ *
+ * &lt;p&gt;Output: 2
+ *
+ * &lt;p&gt;Explanation: Only two moves are needed (remember each move increments or decrements one
+ * element):
+ *
+ * &lt;p&gt;[1,2,3] =&gt; [2,2,3] =&gt; [2,2,2]
+ *
+ * &lt;p&gt;Solution: O(n log n): Sort the array and find the median of the array. Use the median of array
+ * to increment/decrement other value of array. Sum up the difference and return the answer.
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumMovesToEqualArray</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MinimumMovesToEqualArray</name><argument_list>()</argument_list></call><operator>.</operator><call><name>minMoves2</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>minMoves2</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if></if_stmt>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>median</name></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><operator>(</operator><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>median</name> <operator>=</operator> <operator>(</operator><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal><operator>)</operator></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>median</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <return>return <expr><name>sum</name></expr>;</return>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+      <expr_stmt><expr><name>median</name> <operator>=</operator> <operator>(</operator><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal><operator>)</operator> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>min</name></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>median</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name>min</name> <operator>=</operator> <name>sum</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name>sum</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><name>median</name> <operator>=</operator> <operator>(</operator><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal><operator>)</operator></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>median</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <return>return <expr><name>min</name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

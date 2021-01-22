@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\FindLargestValueInEachTreeRow.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 01/08/2019 You need to find the largest value in each row of a
+ * binary tree.
+ *
+ * &lt;p&gt;Example: Input:
+ *
+ * &lt;p&gt;1 / \ 3 2 / \ \ 5 3 9
+ *
+ * &lt;p&gt;Output: [1, 3, 9] Solution: O(N) do a bfs to check largest in each row.
+ */</comment>
+<class><specifier>public</specifier> class <name>FindLargestValueInEachTreeRow</name> <block>{
+  <class><specifier>public</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>maxRow</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+  <class>class <name>Node</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>row</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>val</name></decl>;</decl_stmt>
+
+    <constructor><name>Node</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>row</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>row</name></name> <operator>=</operator> <name>row</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>val</name></name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>largestValues</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>Node</name></type> <name>top</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>maxRow</name><operator>.</operator><name>putIfAbsent</name></name><argument_list>(<argument><expr><name><name>top</name><operator>.</operator><name>row</name></name></expr></argument>, <argument><expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>maxRow</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name><name>top</name><operator>.</operator><name>row</name></name></expr></argument>, <argument><expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><call><name><name>maxRow</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>top</name><operator>.</operator><name>row</name></name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>top</name><operator>.</operator><name>row</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>top</name><operator>.</operator><name>row</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>top</name><operator>.</operator><name>val</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>answer</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>keyList</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>maxRow</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>keyList</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>Integer</name><operator>::</operator><name>compareTo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <range>: <expr><name>keyList</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>answer</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>maxRow</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>answer</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <comment type="line">//</comment>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

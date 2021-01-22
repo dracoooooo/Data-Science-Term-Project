@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\TransformtoChessboard.java"><class><specifier>public</specifier> class <name>TransformtoChessboard</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>movesToChessboard</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>board</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>board</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal> <operator>||</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><name><name>board</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><operator>++</operator><name>j</name></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>(</operator><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>^</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>^</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>^</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name><operator>)</operator> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+        <decl_stmt><decl><type><name>int</name></type> <name>rowSum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>colSum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>rowSwap</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>colSwap</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>rowSum</name> <operator>+=</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>colSum</name> <operator>+=</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <name>i</name> <operator>%</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>++</operator><name>rowSwap</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>i</name> <operator>%</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><operator>++</operator><name>colSwap</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <if_stmt><if>if <condition>(<expr><name>N</name> <operator>/</operator> <literal type="number">2</literal> <operator>&gt;</operator> <name>rowSum</name> <operator>||</operator> <name>N</name> <operator>/</operator> <literal type="number">2</literal> <operator>&gt;</operator> <operator>(</operator><name>N</name> <operator>-</operator> <name>rowSum</name><operator>)</operator> <operator>||</operator> 
+            <name>N</name> <operator>/</operator> <literal type="number">2</literal> <operator>&gt;</operator> <name>colSum</name> <operator>||</operator> <name>N</name> <operator>/</operator> <literal type="number">2</literal> <operator>&gt;</operator> <operator>(</operator><name>N</name> <operator>-</operator> <name>colSum</name><operator>)</operator></expr>)</condition> <block>{<block_content>
+            <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>N</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>rowSwap</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>rowSwap</name></expr></argument>, <argument><expr><name>N</name> <operator>-</operator> <name>rowSwap</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>colSwap</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>colSwap</name></expr></argument>, <argument><expr><name>N</name> <operator>-</operator> <name>colSwap</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>colSwap</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>colSwap</name> <operator>=</operator> <name>N</name> <operator>-</operator> <name>colSwap</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>rowSwap</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>rowSwap</name> <operator>=</operator> <name>N</name> <operator>-</operator> <name>rowSwap</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></else></if_stmt>
+        <return>return <expr><operator>(</operator><name>rowSwap</name> <operator>+</operator> <name>colSwap</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

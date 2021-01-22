@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_392.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_392</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isSubsequence</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>boolean</name></type> <name>foundI</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>left</name></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <call><name><name>t</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>t</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>left</name> <operator>=</operator> <name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>foundI</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <break>break;</break>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <call><name><name>t</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><name>foundI</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

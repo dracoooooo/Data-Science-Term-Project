@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\ChampagneTower.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 28/03/2019 We stack glasses in a pyramid, where the first row
+ * has 1 glass, the second row has 2 glasses, and so on until the 100th row. Each glass holds one
+ * cup (250ml) of champagne.
+ *
+ * &lt;p&gt;Then, some champagne is poured in the first glass at the top. When the top most glass is full,
+ * any excess liquid poured will fall equally to the glass immediately to the left and right of it.
+ * When those glasses become full, any excess champagne will fall equally to the left and right of
+ * those glasses, and so on. (A glass at the bottom row has it's excess champagne fall on the
+ * floor.)
+ *
+ * &lt;p&gt;For example, after one cup of champagne is poured, the top most glass is full. After two cups
+ * of champagne are poured, the two glasses on the second row are half full. After three cups of
+ * champagne are poured, those two cups become full - there are 3 full glasses total now. After four
+ * cups of champagne are poured, the third row has the middle glass half full, and the two outside
+ * glasses are a quarter full, as pictured below.
+ *
+ * &lt;p&gt;Now after pouring some non-negative integer cups of champagne, return how full the j-th glass
+ * in the i-th row is (both i and j are 0 indexed.)
+ *
+ * &lt;p&gt;Example 1: Input: poured = 1, query_glass = 1, query_row = 1 Output: 0.0 Explanation: We
+ * poured 1 cup of champange to the top glass of the tower (which is indexed as (0, 0)). There will
+ * be no excess liquid so all the glasses under the top glass will remain empty.
+ *
+ * &lt;p&gt;Example 2: Input: poured = 2, query_glass = 1, query_row = 1 Output: 0.5 Explanation: We
+ * poured 2 cups of champange to the top glass of the tower (which is indexed as (0, 0)). There is
+ * one cup of excess liquid. The glass indexed as (1, 0) and the glass indexed as (1, 1) will share
+ * the excess liquid equally, and each will get half cup of champange.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;poured will be in the range of [0, 10 ^ 9]. query_glass and query_row will be in the range of
+ * [0, 99].
+ *
+ * &lt;p&gt;Solution: Calculate for every glass and for each row at a time. Use the value from the
+ * previous row to calculate the current value.
+ *
+ * @see PascalsTriangle
+ */</comment>
+<class><specifier>public</specifier> class <name>ChampagneTower</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ChampagneTower</name><argument_list>()</argument_list></call><operator>.</operator><call><name>champagneTower</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>double</name></type> <name>champagneTower</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>poured</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>query_row</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>query_glass</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>double</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><operator>new</operator> <name><name>double</name><index>[<expr><name>query_row</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>query_row</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>A</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name>poured</name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>query_row</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;=</operator> <name>query_row</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">1.0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>+=</operator> <operator>(</operator><name><name>A</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>-</operator> <literal type="number">1.0</literal><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&gt;</operator> <literal type="number">1.0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>+=</operator> <operator>(</operator><name><name>A</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>-</operator> <literal type="number">1.0</literal><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>query_row</name></expr>]</index><index>[<expr><name>query_glass</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">1.0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if>
+    <else>else<block type="pseudo"><block_content> <return>return <expr><name><name>A</name><index>[<expr><name>query_row</name></expr>]</index><index>[<expr><name>query_glass</name></expr>]</index></name></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

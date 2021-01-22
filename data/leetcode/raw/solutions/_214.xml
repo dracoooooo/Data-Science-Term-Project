@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_214.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_214</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**credit: https://discuss.leetcode.com/topic/27261/clean-kmp-solution-with-super-detailed-explanation*/</comment>
+        <comment type="block" format="javadoc">/**
+         * TODO: read it explanation and understand KMP completely.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>shortestPalindrome</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>String</name></type> <name>temp</name> <init>= <expr><name>s</name> <operator>+</operator> <literal type="string">"#"</literal> <operator>+</operator> <operator>new</operator> <call><name>StringBuilder</name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>reverse</name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>table</name> <init>= <expr><call><name>getTable</name><argument_list>(<argument><expr><name>temp</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <comment type="line">//get the maximum palin part in s starts from 0</comment>
+            <return>return <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name><name>table</name><index>[<expr><name><name>table</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>reverse</name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call> <operator>+</operator> <name>s</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>getTable</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">//get lookup table</comment>
+            <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>table</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">//pointer that points to matched char in prefix part</comment>
+            <decl_stmt><decl><type><name>int</name></type> <name>index</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <comment type="line">//skip index 0, we will not match a string with itself</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <comment type="line">//we can extend match in prefix and postfix</comment>
+                    <expr_stmt><expr><name><name>table</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>table</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>index</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <comment type="line">//match failed, we try to match a shorter substring</comment>
+
+                    <comment type="line">//by assigning index to table[i-1], we will shorten the match string length, and jump to the</comment>
+                    <comment type="line">//prefix part that we used to match postfix ended at i - 1</comment>
+                    <expr_stmt><expr><name>index</name> <operator>=</operator> <name><name>table</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+
+                    <while>while <condition>(<expr><name>index</name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call> <operator>!=</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <comment type="line">//we will try to shorten the match string length until we revert to the beginning of match (index 1)</comment>
+                        <expr_stmt><expr><name>index</name> <operator>=</operator> <name><name>table</name><index>[<expr><name>index</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+
+                    <comment type="line">//when we are here may either found a match char or we reach the boundary and still no luck</comment>
+                    <comment type="line">//so we need check char match</comment>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <comment type="line">//if match, then extend one char</comment>
+                        <expr_stmt><expr><name>index</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name><name>table</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>index</name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>table</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

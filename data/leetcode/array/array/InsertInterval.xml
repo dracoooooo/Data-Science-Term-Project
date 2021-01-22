@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\InsertInterval.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 15/12/2017. Given a set of non-overlapping intervals, insert a
+ * new interval into the intervals (merge if necessary).
+ *
+ * &lt;p&gt;You may assume that the intervals were initially sorted according to their start times.
+ *
+ * &lt;p&gt;Example 1: Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].
+ *
+ * &lt;p&gt;Example 2: Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as
+ * [1,2],[3,10],[12,16].
+ *
+ * &lt;p&gt;This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+ *
+ * &lt;p&gt;Solution: O(n): Iterate through each interval and check for each overlapping case
+ */</comment>
+<class><specifier>public</specifier> class <name>InsertInterval</name> <block>{
+
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>Interval</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>start</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>end</name></decl>;</decl_stmt>
+
+    <constructor><name>Interval</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>start</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><name>end</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <constructor><name>Interval</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>e</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>start</name> <operator>=</operator> <name>s</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name>end</name> <operator>=</operator> <name>e</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name>Interval</name></type> <name>i1</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Interval</name></type> <name>i2</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Interval</name></type> <name>i3</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>, <argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Interval</name></type> <name>i4</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">8</literal></expr></argument>, <argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Interval</name></type> <name>i5</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">12</literal></expr></argument>, <argument><expr><literal type="number">16</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>i1</name></expr></argument>, <argument><expr><name>i2</name></expr></argument>, <argument><expr><name>i3</name></expr></argument>, <argument><expr><name>i4</name></expr></argument>, <argument><expr><name>i5</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>InsertInterval</name><argument_list>()</argument_list></call><operator>.</operator><call><name>insert</name><argument_list>(<argument><expr><name>list</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>map</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>x</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>x</name><operator>.</operator><name>start</name></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>x</name><operator>.</operator><name>end</name></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call><operator>.</operator><call><name>forEach</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>out</name></name><operator>::</operator><name>println</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>insert</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>intervals</name></decl></parameter>, <parameter><decl><type><name>Interval</name></type> <name>newInterval</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>intervals</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>Interval</name></type> <name>curr</name> <init>= <expr><call><name><name>intervals</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>newInterval</name><operator>.</operator><name>start</name></name> <operator>&gt;=</operator> <name><name>curr</name><operator>.</operator><name>start</name></name> <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>end</name></name> <operator>&lt;=</operator> <name><name>curr</name><operator>.</operator><name>end</name></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name>insertRest</name><argument_list>(<argument><expr><name>intervals</name></expr></argument>, <argument><expr><name>result</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>result</name></expr>;</return> <comment type="line">// easy case</comment>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>newInterval</name><operator>.</operator><name><name>start</name> <argument_list type="generic">&lt; <argument><name><name>curr</name><operator>.</operator><name>start</name></name> <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>end</name></name></argument> &gt;</argument_list></name></name> <name><name>curr</name><operator>.</operator><name>end</name></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>newInterval</name> <operator>=</operator> <operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><name><name>newInterval</name><operator>.</operator><name>start</name></name></expr></argument>, <argument><expr><name><name>newInterval</name><operator>.</operator><name>end</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// merge and continue</comment>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>newInterval</name><operator>.</operator><name>start</name></name> <operator>&gt;=</operator> <name><name>curr</name><operator>.</operator><name>start</name></name>
+          <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>start</name></name> <operator>&lt;=</operator> <name><name>curr</name><operator>.</operator><name>end</name></name>
+          <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>end</name></name> <operator>&gt;</operator> <name><name>curr</name><operator>.</operator><name>end</name></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>newInterval</name> <operator>=</operator> <operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>start</name></name></expr></argument>, <argument><expr><name><name>newInterval</name><operator>.</operator><name>end</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <comment type="line">// merge and continue</comment>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>newInterval</name><operator>.</operator><name>start</name></name> <operator>&lt;</operator> <name><name>curr</name><operator>.</operator><name>start</name></name>
+          <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>end</name></name> <operator>&gt;=</operator> <name><name>curr</name><operator>.</operator><name>start</name></name>
+          <operator>&amp;&amp;</operator> <name><name>newInterval</name><operator>.</operator><name>end</name></name> <operator>&lt;=</operator> <name><name>curr</name><operator>.</operator><name>end</name></name></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>Interval</name></type> <name>newI</name> <init>= <expr><operator>new</operator> <call><name>Interval</name><argument_list>(<argument><expr><name><name>newInterval</name><operator>.</operator><name>start</name></name></expr></argument>, <argument><expr><name><name>curr</name><operator>.</operator><name>end</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newI</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>insertRest</name><argument_list>(<argument><expr><name>intervals</name></expr></argument>, <argument><expr><name>result</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>result</name></expr>;</return>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>newInterval</name><operator>.</operator><name>start</name></name> <operator>&gt;</operator> <name><name>curr</name><operator>.</operator><name>end</name></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>curr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newInterval</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>insertRest</name><argument_list>(<argument><expr><name>intervals</name></expr></argument>, <argument><expr><name>result</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>result</name></expr>;</return>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newInterval</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>insertRest</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>intervals</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Interval</name></argument>&gt;</argument_list></name></type> <name>result</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>l</name> <init>= <expr><call><name><name>intervals</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>intervals</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+    </block_content>}</block></while>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

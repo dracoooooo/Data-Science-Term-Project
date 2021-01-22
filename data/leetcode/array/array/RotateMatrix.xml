@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\RotateMatrix.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 21/03/2017. You are given an n x n 2D matrix representing an
+ * image.
+ *
+ * &lt;p&gt;Rotate the image by 90 degrees (clockwise).
+ *
+ * &lt;p&gt;Follow up: Could you do this in-place?
+ */</comment>
+<class><specifier>public</specifier> class <name>RotateMatrix</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">7</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">9</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><operator>new</operator> <call><name>RotateMatrix</name><argument_list>()</argument_list></call><operator>.</operator><call><name>rotate</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>A</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>A</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>void</name></type> <name>rotate</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>lc</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>tr</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>rc</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>br</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>tr</name> <operator>&lt;</operator> <name>br</name></expr>)</condition> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>lc</name></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><name>tr</name></expr></init></decl>, <decl><type ref="prev"/><name>k</name> <init>= <expr><name>rc</name></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><name>br</name></expr></init></decl>;</init>
+          <condition><expr><name><name>i</name> <argument_list type="generic">&lt; <argument><name>rc</name> <operator>&amp;&amp;</operator> <name><name>j</name> <argument_list type="generic">&lt; <argument><name>br</name> <operator>&amp;&amp;</operator> <name>k</name></argument> &gt;</argument_list></name> <name>lc</name> <operator>&amp;&amp;</operator> <name>l</name></argument> &gt;</argument_list></name> <name>tr</name></expr>;</condition>
+          <incr><expr><name>i</name><operator>++</operator></expr><operator>,</operator> <expr><name>j</name><operator>++</operator></expr><operator>,</operator> <expr><name>k</name><operator>--</operator></expr><operator>,</operator> <expr><name>l</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>temp1</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>rc</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>rc</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>tr</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>temp2</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>br</name></expr>]</index><index>[<expr><name>k</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>br</name></expr>]</index><index>[<expr><name>k</name></expr>]</index></name> <operator>=</operator> <name>temp1</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>temp1</name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>l</name></expr>]</index><index>[<expr><name>lc</name></expr>]</index></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>l</name></expr>]</index><index>[<expr><name>lc</name></expr>]</index></name> <operator>=</operator> <name>temp2</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>tr</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>temp1</name></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name>lc</name><operator>++</operator></expr>;</expr_stmt>
+      <expr_stmt><expr><name>tr</name><operator>++</operator></expr>;</expr_stmt>
+      <expr_stmt><expr><name>rc</name><operator>--</operator></expr>;</expr_stmt>
+      <expr_stmt><expr><name>br</name><operator>--</operator></expr>;</expr_stmt>
+    </block_content>}</block></while>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

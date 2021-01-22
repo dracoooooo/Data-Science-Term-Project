@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\depth_first_search\FloodFill.java"><package>package <name>depth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/** Created by gouthamvidyapradhan on 29/01/2020 */</comment>
+<class><specifier>public</specifier> class <name>FloodFill</name> <block>{
+  <decl_stmt><decl><type><specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <comment type="line">//</comment>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name>boolean</name></type> <name><name>done</name><index>[]</index><index>[]</index></name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>floodFill</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>image</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sr</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sc</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>newColor</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>done</name> <operator>=</operator> <operator>new</operator> <name><name>boolean</name><index>[<expr><name><name>image</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>image</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>copy</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>image</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>image</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>image</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>image</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>copy</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>image</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>copy</name></expr></argument>, <argument><expr><name>sr</name></expr></argument>, <argument><expr><name>sc</name></expr></argument>, <argument><expr><name><name>image</name><index>[<expr><name>sr</name></expr>]</index><index>[<expr><name>sc</name></expr>]</index></name></expr></argument>, <argument><expr><name>newColor</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>copy</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>image</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name><name>done</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>image</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index></name> <operator>=</operator> <name>c2</name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name>r</name> <operator>+</operator> <name><name>R</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name>c</name> <operator>+</operator> <name><name>C</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&gt;=</operator> <literal type="number">0</literal>
+          <operator>&amp;&amp;</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">0</literal>
+          <operator>&amp;&amp;</operator> <name>newR</name> <operator>&lt;</operator> <name><name>image</name><operator>.</operator><name>length</name></name>
+          <operator>&amp;&amp;</operator> <name>newC</name> <operator>&lt;</operator> <name><name>image</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name>
+          <operator>&amp;&amp;</operator> <name><name>image</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>==</operator> <name>c1</name>
+          <operator>&amp;&amp;</operator> <operator>!</operator><name><name>done</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>image</name></expr></argument>, <argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>, <argument><expr><name>c1</name></expr></argument>, <argument><expr><name>c2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

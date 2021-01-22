@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_408.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_408</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>validWordAbbreviation</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>word</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>abbr</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>abbr</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>abbrChars</name> <init>= <expr><call><name><name>abbr</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>wordChars</name> <init>= <expr><call><name><name>word</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>abbr</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>boolean</name></type> <name>prevDigit</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>j</name> <operator>&lt;</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr><operator>,</operator> <expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><call><name><name>Character</name><operator>.</operator><name>isDigit</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><name>prevDigit</name></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name>prevDigit</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                            <if_stmt><if>if <condition>(<expr><call><name><name>Character</name><operator>.</operator><name>getNumericValue</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call> <operator>!=</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                            </block_content>}</block></if></if_stmt>
+                        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>Character</name><operator>.</operator><name>isDigit</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <name>prevDigit</name></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <name><name>wordChars</name><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>prevDigit</name></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name>prevDigit</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></for>
+                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>stringBuilder</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>boolean</name></type> <name>firstDigit</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>j</name> <operator>&lt;</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <call><name><name>Character</name><operator>.</operator><name>isDigit</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                            <if_stmt><if>if <condition>(<expr><name>firstDigit</name> <operator>&amp;&amp;</operator> <call><name><name>Character</name><operator>.</operator><name>getNumericValue</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                            </block_content>}</block></if></if_stmt>
+                            <expr_stmt><expr><call><name><name>stringBuilder</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+                            <expr_stmt><expr><name>firstDigit</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                        </block_content>}</block></while>
+                        <expr_stmt><expr><name>firstDigit</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>stringBuilder</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>isEmpty</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                            <decl_stmt><decl><type><name>int</name></type> <name>number</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><call><name><name>stringBuilder</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                            <expr_stmt><expr><name>j</name> <operator>+=</operator> <name>number</name></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>stringBuilder</name><operator>.</operator><name>setLength</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>i</name> <operator>&gt;=</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>j</name> <operator>&lt;</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name><operator>)</operator> <operator>||</operator> <operator>(</operator><name>i</name> <operator>&lt;</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name>
+                                <operator>&amp;&amp;</operator> <name>j</name> <operator>&gt;=</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if></if_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name>
+                                <operator>&amp;&amp;</operator> <name>j</name> <operator>&lt;</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name>
+                                <operator>&amp;&amp;</operator> <name><name>abbrChars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <name><name>wordChars</name><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if></if_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>&gt;</operator> <name><name>wordChars</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>i</name> <operator>&lt;=</operator> <name><name>abbrChars</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if></if_stmt>
+                        <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

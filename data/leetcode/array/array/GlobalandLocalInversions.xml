@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\GlobalandLocalInversions.java"><class><specifier>public</specifier> class <name>GlobalandLocalInversions</name> <block>{
+    <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isIdealPermutation</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name><name>A</name><operator>.</operator><name>length</name></name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>i</name><operator>-</operator><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name><operator>&gt;</operator><literal type="number">1</literal> <operator>||</operator> <name>i</name><operator>-</operator><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name><operator>&lt;</operator><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> 
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

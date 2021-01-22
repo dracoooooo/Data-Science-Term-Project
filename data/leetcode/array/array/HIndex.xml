@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\HIndex.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 12/12/2017. Given an array of citations (each citation is a
+ * non-negative integer) of a researcher, write a function to compute the researcher's h-index.
+ *
+ * &lt;p&gt;According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her
+ * N papers have at least h citations each, and the other N â h papers have no more than h citations
+ * each."
+ *
+ * &lt;p&gt;For example, given citations = [3, 0, 6, 1, 5], which means the researcher has 5 papers in
+ * total and each of them had received 3, 0, 6, 1, 5 citations respectively. Since the researcher
+ * has 3 papers with at least 3 citations each and the remaining two with no more than 3 citations
+ * each, his h-index is 3.
+ *
+ * &lt;p&gt;Note: If there are several possible values for h, the maximum one is taken as the h-index.
+ *
+ * &lt;p&gt;Solution O(n) Replace all the citations which are greater than n with n, the result will not
+ * change with this operation. Maintain a count array with count of each citations. Sum up all the
+ * counts from n -&gt; 0 and store this in a array S. Value in array index Si is number of papers
+ * having citations at least i.
+ *
+ * &lt;p&gt;The first value at index i, from right to left in array S which has i &lt;= Si is the answer.
+ */</comment>
+<class><specifier>public</specifier> class <name>HIndex</name> <block>{
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>HIndex</name><argument_list>()</argument_list></call><operator>.</operator><call><name>hIndex</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>hIndex</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>citations</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>citations</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>count</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>S</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>citations</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>citations</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>citations</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>n</name></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>citation</name> <range>: <expr><name>citations</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>count</name><index>[<expr><name>citation</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name><name>S</name><index>[<expr><name>n</name></expr>]</index></name> <operator>=</operator> <name><name>count</name><index>[<expr><name>n</name></expr>]</index></name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>S</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>S</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>n</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;=</operator> <name><name>S</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+        <return>return <expr><name>i</name></expr>;</return>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

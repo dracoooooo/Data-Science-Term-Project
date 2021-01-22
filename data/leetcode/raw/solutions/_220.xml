@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_220.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>TreeSet</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_220</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * TreeSet: per Java doc, is a NavigableSet implementation based on a TreeMap. The elements are ordered
+         * using their natural ordering, or by a Comparator provided at set creation time, depending on
+         * which constructor is used. This implementation provides guaranteed log(n) time cost for the
+         * basic operations (add, remove and contains).
+         */</comment>
+
+        <comment type="block" format="javadoc">/**
+         * TreeSet turns out to be a super handy data structure for this problem. It implements Set
+         * interface and keeps elements in sorted order, plus it has two very handy APIs:
+         * https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html#ceiling(E): Returns the
+         * least element in this set greater than or equal to the given element, or null if there is no
+         * such element.
+         * https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html#floor(E): Returns the
+         * greatest element in this set less than or equal to the given element, or null if there is no
+         * such element.
+         *
+         * Idea: loop through this array, keep adding each element into the TreeSet, also keep an eye on
+         * the size of the TreeSet, if it's greater than the required distance of k, then we remove the
+         * left-most or oldest one from the set. For each element, we get the current floor and the
+         * current ceiling and see if it works, if it does, then we return true immediately, otherwise,
+         * we continue. Return false when we finished the loop.
+         */</comment>
+
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>containsNearbyAlmostDuplicate</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="block" format="javadoc">/**case to Long to avoid Integer overflow.*/</comment>
+            <decl_stmt><decl><type><name><name>TreeSet</name><argument_list type="generic">&lt;<argument><name>Long</name></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><operator>new</operator> <call><name><name>TreeSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>Long</name></type> <name>s</name> <init>= <expr><call><name><name>set</name><operator>.</operator><name>ceiling</name></name><argument_list>(<argument><expr><operator>(</operator><name>long</name><operator>)</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>s</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>s</name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;=</operator> <name>t</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <decl_stmt><decl><type><name>Long</name></type> <name>g</name> <init>= <expr><call><name><name>set</name><operator>.</operator><name>floor</name></name><argument_list>(<argument><expr><operator>(</operator><name>long</name><operator>)</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>g</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name>g</name> <operator>&lt;=</operator> <name>t</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>(</operator><name>long</name><operator>)</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>set</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><operator>(</operator><name>long</name><operator>)</operator> <name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <name>k</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

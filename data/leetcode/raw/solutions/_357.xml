@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_357.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_357</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * reference: https://discuss.leetcode.com/topic/47983/java-dp-o-1-solution Following the hint.
+         * Let f(n) = count of number with unique digits of length n. f(1) = 10. (0, 1, 2, 3, ...., 9)
+         * f(2) = 9 * 9. Because for each number i from 1, ..., 9, we can pick j to form a 2-digit
+         * number ij and there are 9 numbers that are different from i for j to choose from. f(3) = f(2)
+         * * 8 = 9 * 9 * 8. Because for each number with unique digits of length 2, say ij, we can pick
+         * k to form a 3 digit number ijk and there are 8 numbers that are different from i and j for k
+         * to choose from. Similarly f(4) = f(3) * 7 = 9 * 9 * 8 * 7.... ... f(10) = 9 * 9 * 8 * 7 * 6 *
+         * ... * 1 f(11) = 0 = f(12) = f(13).... any number with length &gt; 10 couldn't be unique digits
+         * number. The problem is asking for numbers from 0 to 10^n. Hence return f(1) + f(2) + .. +
+         * f(n) As @4acreg suggests, There are only 11 different ans. You can create a lookup table for
+         * it. This problem is O(1) in essence.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>countNumbersWithUniqueDigits</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>res</name> <init>= <expr><literal type="number">10</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>uniqueDigits</name> <init>= <expr><literal type="number">9</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>availableNumber</name> <init>= <expr><literal type="number">9</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>n</name><operator>--</operator> <operator>&gt;</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>availableNumber</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>uniqueDigits</name> <operator>=</operator> <name>uniqueDigits</name> <operator>*</operator> <name>availableNumber</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>res</name> <operator>+=</operator> <name>uniqueDigits</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>availableNumber</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>res</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

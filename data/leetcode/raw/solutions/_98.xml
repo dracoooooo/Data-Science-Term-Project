@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_98.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_98</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isValidBST</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>valid</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><literal type="null">null</literal></expr></argument>, <argument><expr><literal type="null">null</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>boolean</name></type> <name>valid</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>Integer</name></type> <name>min</name></decl></parameter>, <parameter><decl><type><name>Integer</name></type> <name>max</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><operator>(</operator><name>min</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>val</name></name> <operator>&lt;=</operator> <name>min</name><operator>)</operator> <operator>||</operator> <operator>(</operator><name>max</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>val</name></name> <operator>&gt;=</operator> <name>max</name><operator>)</operator></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name>valid</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>min</name></expr></argument>, <argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>valid</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><name>max</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

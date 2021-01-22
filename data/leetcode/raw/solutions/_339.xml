@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_339.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>NestedInteger</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_339</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>depthSum</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>NestedInteger</name></argument>&gt;</argument_list></name></type> <name>nestedList</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>dfs</name><argument_list>(<argument><expr><name>nestedList</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>NestedInteger</name></argument>&gt;</argument_list></name></type> <name>nestedList</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>depth</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>NestedInteger</name></type> <name>ni</name> <range>: <expr><name>nestedList</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>ni</name><operator>.</operator><name>isInteger</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name>depth</name> <operator>*</operator> <call><name><name>ni</name><operator>.</operator><name>getInteger</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><call><name><name>ni</name><operator>.</operator><name>getList</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>depth</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>sum</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>depthSum</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>NestedInteger</name></argument>&gt;</argument_list></name></type> <name>nestedList</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>dfs</name><argument_list>(<argument><expr><name>nestedList</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>NestedInteger</name></argument>&gt;</argument_list></name></type> <name>nestedList</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>depth</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>NestedInteger</name></type> <name>ni</name> <range>: <expr><name>nestedList</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>sum</name> <operator>+=</operator> <ternary><condition><expr><call><name><name>ni</name><operator>.</operator><name>isInteger</name></name><argument_list>()</argument_list></call></expr> ?</condition><then> <expr><name>depth</name> <operator>*</operator> <call><name><name>ni</name><operator>.</operator><name>getInteger</name></name><argument_list>()</argument_list></call></expr> </then><else>: <expr><call><name>dfs</name><argument_list>(<argument><expr><call><name><name>ni</name><operator>.</operator><name>getList</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>depth</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>sum</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

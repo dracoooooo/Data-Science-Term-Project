@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1570.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_1570</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**This is a brute force but accepted solution.
+         * More optimal solution:
+         *  use a map to store only non-zero values and use the smaller vector to do multiplication to reduce space and save time.*/</comment>
+        <class>class <name>SparseVector</name> <block>{
+            <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>vector</name></decl>;</decl_stmt>
+
+            <constructor><name>SparseVector</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>vector</name></name> <operator>=</operator> <name>nums</name></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <comment type="line">// Return the dotProduct of two sparse vectors</comment>
+            <function><type><specifier>public</specifier> <name>int</name></type> <name>dotProduct</name><parameter_list>(<parameter><decl><type><name>SparseVector</name></type> <name>vec</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>incoming</name> <init>= <expr><name><name>vec</name><operator>.</operator><name>vector</name></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>dotProduct</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>vector</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><name>dotProduct</name> <operator>+=</operator> <name><name>incoming</name><index>[<expr><name>i</name></expr>]</index></name> <operator>*</operator> <name><name>this</name><operator>.</operator><name>vector</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+                <return>return <expr><name>dotProduct</name></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class>
+</unit>

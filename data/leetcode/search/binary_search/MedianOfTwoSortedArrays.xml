@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\binary_search\MedianOfTwoSortedArrays.java"><package>package <name>binary_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 23/05/2017. There are two sorted arrays nums1 and nums2 of size
+ * m and n respectively.
+ *
+ * &lt;p&gt;Find the median of the two sorted arrays. The overall run time complexity should be O(log
+ * (m+n)).
+ *
+ * &lt;p&gt;Example 1: nums1 = [1, 3] nums2 = [2]
+ *
+ * &lt;p&gt;The median is 2.0 Example 2: nums1 = [1, 2] nums2 = [3, 4]
+ *
+ * &lt;p&gt;The median is (2 + 3)/2 = 2.5
+ *
+ * &lt;p&gt;Solution: Works in worst case time complexity of O(log min(m, n))
+ *
+ * &lt;p&gt;The basic idea is that if you are given two arrays A and B and know the length of each, you
+ * can check whether an element A[i] is the median in constant time. Suppose that the median is
+ * A[i]. Since the array is sorted, it is greater than exactly i â 1 values in array A. Then if it
+ * is the median, it is also greater than exactly j = [n / 2] â (i â 1) elements in B. It requires
+ * constant time to check if B[j] A[i] &lt;= B[j + 1]. If A[i] is not the median, then depending on
+ * whether A[i] is greater or less than B[j] and B[j + 1], you know that A[i] is either greater than
+ * or less than the median. Thus you can binary search for A[i] in O(log N) worst-case time
+ */</comment>
+<class><specifier>public</specifier> class <name>MedianOfTwoSortedArrays</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">44</literal></expr>, <expr><literal type="number">45</literal></expr>, <expr><literal type="number">45</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>B</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">7</literal></expr>, <expr><literal type="number">23</literal></expr>, <expr><literal type="number">23</literal></expr>, <expr><literal type="number">23</literal></expr>, <expr><literal type="number">33</literal></expr>, <expr><literal type="number">44</literal></expr>, <expr><literal type="number">45</literal></expr>, <expr><literal type="number">45</literal></expr>, <expr><literal type="number">56</literal></expr>, <expr><literal type="number">77</literal></expr>, <expr><literal type="number">5555</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MedianOfTwoSortedArrays</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findMedianSortedArrays</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>B</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Find median
+   *
+   * @param nums1 array one
+   * @param nums2 array two
+   * @return
+   */</comment>
+  <function><type><specifier>public</specifier> <name>double</name></type> <name>findMedianSortedArrays</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums1</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>nums1</name><operator>.</operator><name>length</name></name> <operator>&gt;</operator> <name><name>nums2</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content>
+      <return>return <expr><call><name>findMedianSortedArrays</name><argument_list>(<argument><expr><name>nums2</name></expr></argument>, <argument><expr><name>nums1</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if></if_stmt> <comment type="line">// ensure always nums1 is the shortest array</comment>
+    <decl_stmt><decl><type><name>int</name></type> <name>T</name> <init>= <expr><name><name>nums1</name><operator>.</operator><name>length</name></name> <operator>+</operator> <name><name>nums2</name><operator>.</operator><name>length</name></name></expr></init></decl>, <decl><type ref="prev"/><name>low</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>high</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>median</name> <init>= <expr><operator>(</operator><name>T</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>isOdd</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><operator>(</operator><name>T</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>isOdd</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>s</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>e</name> <init>= <expr><name><name>nums1</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>s</name> <operator>&lt;=</operator> <name>e</name></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name>s</name> <operator>+</operator> <operator>(</operator><name>e</name> <operator>-</operator> <name>s</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><name>median</name> <operator>-</operator> <name>m</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name><name>nums1</name><index>[<expr><name>m</name></expr>]</index></name> <operator>&gt;=</operator> <name><name>nums2</name><index>[<expr><name>median</name> <operator>-</operator> <name>m</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>e</name> <operator>=</operator> <name>m</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>low</name> <operator>=</operator> <name>m</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>high</name> <operator>=</operator> <name>median</name> <operator>-</operator> <name>m</name></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <expr_stmt><expr><name>s</name> <operator>=</operator> <name>m</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></while>
+
+    <if_stmt><if>if <condition>(<expr><name>low</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>isOdd</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>nums2</name><index>[<expr><name>median</name> <operator>-</operator> <name><name>nums1</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr>;</return></block_content></block></if>
+      <else>else<block type="pseudo"><block_content> <return>return <expr><operator>(</operator><name>double</name><operator>)</operator> <operator>(</operator><name><name>nums2</name><index>[<expr><name>median</name> <operator>-</operator> <name><name>nums1</name><operator>.</operator><name>length</name></name></expr>]</index></name> <operator>+</operator> <name><name>nums2</name><index>[<expr><name>median</name> <operator>-</operator> <name><name>nums1</name><operator>.</operator><name>length</name></name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>)</operator> <operator>/</operator> <literal type="number">2.0D</literal></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>isOdd</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><ternary><condition><expr><name><name>nums1</name><index>[<expr><name>low</name></expr>]</index></name> <operator>&lt;</operator> <name><name>nums2</name><index>[<expr><name>high</name></expr>]</index></name></expr> ?</condition><then> <expr><name><name>nums1</name><index>[<expr><name>low</name></expr>]</index></name></expr> </then><else>: <expr><name><name>nums2</name><index>[<expr><name>high</name></expr>]</index></name></expr></else></ternary></expr>;</return></block_content></block></if>
+      <else>else <block>{<block_content>
+        <comment type="line">// Always sorts maximum of 4 elements hence works in O(1)</comment>
+        <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>nums1</name><index>[<expr><name>low</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name>low</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name><name>nums1</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>nums1</name><index>[<expr><name>low</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>nums2</name><index>[<expr><name>high</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name>high</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name><name>nums2</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>nums2</name><index>[<expr><name>high</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>(</operator><name>double</name><operator>)</operator> <operator>(</operator><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>+</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>)</operator> <operator>/</operator> <literal type="number">2.0</literal></expr>;</return>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

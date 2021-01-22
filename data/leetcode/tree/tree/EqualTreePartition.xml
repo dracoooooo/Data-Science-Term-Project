@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\EqualTreePartition.java"><package>package <name>tree</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/02/2018. Given a binary tree with n nodes, your task is to
+ * check if it's possible to partition the tree to two trees which have the equal sum of values
+ * after removing exactly one edge on the original tree.
+ *
+ * &lt;p&gt;Example 1: Input: 5 / \ 10 10 / \ 2 3
+ *
+ * &lt;p&gt;Output: True Explanation: 5 / 10
+ *
+ * &lt;p&gt;Sum: 15
+ *
+ * &lt;p&gt;10 / \ 2 3
+ *
+ * &lt;p&gt;Sum: 15 Example 2: Input: 1 / \ 2 10 / \ 2 20
+ *
+ * &lt;p&gt;Output: False Explanation: You can't split the tree into two trees with equal sum after
+ * removing exactly one edge on the tree. Note: The range of tree node value is in the range of
+ * [-100000, 100000]. 1 &lt;= n &lt;= 10000
+ */</comment>
+<class><specifier>public</specifier> class <name>EqualTreePartition</name> <block>{
+  <class><specifier>public</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name>long</name></type> <name>sum</name></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name>boolean</name></type> <name>possible</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>boolean</name></type> <name>checkEqualTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>sum</name> <operator>=</operator> <literal type="number">0L</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>getSum</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>getDiff</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>possible</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>getSum</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>node</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name>getSum</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name>getSum</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>Long</name></type> <name>getDiff</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="null">null</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>Long</name></type> <name>left</name> <init>= <expr><call><name>getDiff</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Long</name></type> <name>right</name> <init>= <expr><call><name>getDiff</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>left</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><name>sum</name> <operator>-</operator> <name>left</name><operator>)</operator> <operator>==</operator> <name>left</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>possible</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>right</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><name>sum</name> <operator>-</operator> <name>right</name><operator>)</operator> <operator>==</operator> <name>right</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>possible</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></if></if_stmt>
+    <decl_stmt><decl><type><name>Long</name></type> <name>curr</name> <init>= <expr><operator>(</operator><name>long</name><operator>)</operator> <name><name>node</name><operator>.</operator><name>val</name></name></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>left</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>curr</name> <operator>+=</operator> <name>left</name></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>right</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>curr</name> <operator>+=</operator> <name>right</name></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><name>curr</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

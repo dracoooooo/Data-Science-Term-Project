@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\FirstMissingPositive.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 24/06/2017. Given an unsorted integer array, find the first
+ * missing positive integer.
+ *
+ * &lt;p&gt;For example, Given [1,2,0] return 3, and [3,4,-1,1] return 2.
+ *
+ * &lt;p&gt;Your algorithm should run in O(n) time and uses constant space.
+ */</comment>
+<class><specifier>public</specifier> class <name>FirstMissingPositive</name> <block>{
+  <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>L</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">9</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>FirstMissingPositive</name><argument_list>()</argument_list></call><operator>.</operator><call><name>firstMissingPositive</name><argument_list>(<argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>firstMissingPositive</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>L</name> <operator>=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>L</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;=</operator> <name>L</name> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>v</name> <init>= <expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>replace</name><argument_list>(<argument><expr><name>v</name></expr></argument>, <argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>L</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <return>return <expr><name>L</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>replace</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>i</name> <operator>&lt;=</operator> <name>L</name> <operator>&amp;&amp;</operator> <name>i</name> <operator>!=</operator> <name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>v</name> <init>= <expr><name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name>replace</name><argument_list>(<argument><expr><name>v</name></expr></argument>, <argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

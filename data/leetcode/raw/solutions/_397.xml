@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_397.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Iterator</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_397</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>integerReplacement</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>min</name> <init>= <expr><name><name>Long</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name><name>long</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><operator>new</operator> <call><name>HashSet</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name><name>long</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>q</name> <init>= <expr><operator>new</operator> <call><name>LinkedList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>pair</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[]</index></name><block>{<expr><name>n</name></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>pair</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>size</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>curr</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name><name>curr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>curr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if> <else>else <block>{<block_content>
+
+                        <if_stmt><if>if <condition>(<expr><name><name>curr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name><name>curr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>/=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><name><name>curr</name><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>curr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if> <else>else <block>{<block_content>
+                            <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>minus</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                            <expr_stmt><expr><name><name>minus</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name><name>curr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><name><name>minus</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>curr</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>minus</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+                            <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>plus</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                            <expr_stmt><expr><name><name>plus</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name><name>curr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><name><name>plus</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>curr</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>plus</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></else></if_stmt>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></while>
+
+            <decl_stmt><decl><type><name><name>Iterator</name><argument_list type="generic">&lt;<argument><name><name>long</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>it</name> <init>= <expr><call><name><name>set</name><operator>.</operator><name>iterator</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><call><name><name>it</name><operator>.</operator><name>hasNext</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><call><name><name>it</name><operator>.</operator><name>next</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <name>min</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

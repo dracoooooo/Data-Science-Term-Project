@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\strStr\TestStrStrKmp.java"><package>package <name>strStr</name>;</package>
+
+<import>import <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Assert</name></name>;</import>
+<import>import <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Test</name></name>;</import>
+<comment type="block" format="javadoc">/**
+ * Test for 28. Implement strStr() using KMP-Algorithm
+ */</comment>
+<class><specifier>public</specifier> class <name>TestStrStrKmp</name> <block>{
+	<function><annotation>@<name>Test</name></annotation>
+	<type><specifier>public</specifier> <name>void</name></type> <name>testKmp</name><parameter_list>()</parameter_list> <block>{<block_content>
+		<decl_stmt><decl><type><name>StrStrKmp</name></type> <name>solution</name> <init>= <expr><operator>new</operator> <call><name>StrStrKmp</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>hayStack1</name> <init>= <expr><literal type="string">"aabbccagdbbccdec"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>needle1</name> <init>= <expr><literal type="string">"bbccd"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>result1</name> <init>= <expr><call><name><name>solution</name><operator>.</operator><name>strStr</name></name><argument_list>(<argument><expr><name>hayStack1</name></expr></argument>, <argument><expr><name>needle1</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>Assert</name><operator>.</operator><name>assertTrue</name></name><argument_list>(<argument><expr><name>result1</name> <operator>==</operator> <literal type="number">9</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>hayStack2</name> <init>= <expr><literal type="string">"aabbccagdbbccdec"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>needle2</name> <init>= <expr><literal type="string">"bbccf"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>result2</name> <init>= <expr><call><name><name>solution</name><operator>.</operator><name>strStr</name></name><argument_list>(<argument><expr><name>hayStack2</name></expr></argument>, <argument><expr><name>needle2</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>Assert</name><operator>.</operator><name>assertTrue</name></name><argument_list>(<argument><expr><name>result2</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>hayStack3</name> <init>= <expr><literal type="string">"BBC ABCDAB ABCDABCDABDE"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>String</name></type> <name>needle3</name> <init>= <expr><literal type="string">"ABCDABD"</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>result3</name> <init>= <expr><call><name><name>solution</name><operator>.</operator><name>strStr</name></name><argument_list>(<argument><expr><name>hayStack3</name></expr></argument>, <argument><expr><name>needle3</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><call><name><name>Assert</name><operator>.</operator><name>assertTrue</name></name><argument_list>(<argument><expr><name>result3</name> <operator>==</operator> <literal type="number">15</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	</block_content>}</block></function>
+}</block></class>
+</unit>

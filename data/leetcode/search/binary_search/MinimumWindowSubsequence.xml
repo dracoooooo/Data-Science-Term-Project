@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\binary_search\MinimumWindowSubsequence.java"><package>package <name>binary_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 06/08/2019 Given strings S and T, find the minimum (contiguous)
+ * substring W of S, so that T is a subsequence of W.
+ *
+ * &lt;p&gt;If there is no such window in S that covers all characters in T, return the empty string "".
+ * If there are multiple such minimum-length windows, return the one with the left-most starting
+ * index.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: S = "abcdebdde", T = "bde" Output: "bcde" Explanation: "bcde" is the answer because it
+ * occurs before "bdde" which has the same length. "deb" is not a smaller window because the
+ * elements of T in the window must occur in order.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;All the strings in the input will only contain lowercase letters. The length of S will be in
+ * the range [1, 20000]. The length of T will be in the range [1, 100].
+ *
+ * &lt;p&gt;Solution O(S x T x log S) General idea is to first find the left-most left (l) and right (r)
+ * index where r - l is minimum and the minimum window contains the sub-sequence and iteratively
+ * check the next left-most indices and continue for the entire string S. A naive implementation
+ * would result in O(S ^ 2) therefore to speed up we have to maintain a hashtable of character as
+ * key and all its index of occurrence in a sorted list. Now, since this list is sorted we can
+ * easily find the next left-most by binarySearch or even better by using a TreeSet higher or ceil
+ * function.
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumWindowSubsequence</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MinimumWindowSubsequence</name><argument_list>()</argument_list></call><operator>.</operator><call><name>minWindow</name><argument_list>(<argument><expr><literal type="string">"abcdebdde"</literal></expr></argument>, <argument><expr><literal type="string">"x"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>minWindow</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>S</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>T</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><call><name><name>T</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>||</operator> <call><name><name>S</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name><name>TreeSet</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>charMap</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>S</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><call><name><name>S</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>charMap</name><operator>.</operator><name>putIfAbsent</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>TreeSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>charMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>start</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>end</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>ansStart</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>ansEnd</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>finished</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><literal type="boolean">true</literal></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>index</name> <init>= <expr><name>start</name></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><name>end</name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>T</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><call><name><name>T</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>charMap</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <return>return <expr><literal type="string">""</literal></expr>;</return>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <decl_stmt><decl><type><name><name>TreeSet</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>indicies</name> <init>= <expr><call><name><name>charMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <decl_stmt><decl><type><name>Integer</name></type> <name>found</name> <init>= <expr><call><name><name>indicies</name><operator>.</operator><name>higher</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <if_stmt><if>if <condition>(<expr><name>found</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>finished</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <break>break;</break>
+          </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>index</name> <operator>=</operator> <name>found</name></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name>start</name> <operator>=</operator> <name>index</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <name>l</name> <operator>-</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name>end</name> <operator>=</operator> <name>index</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+          </block_content>}</block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></for>
+      <if_stmt><if>if <condition>(<expr><name>start</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>end</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>end</name> <operator>-</operator> <name>start</name><operator>)</operator> <operator>&lt;</operator> <name>min</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>min</name> <operator>=</operator> <name>end</name> <operator>-</operator> <name>start</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name>ansStart</name> <operator>=</operator> <name>start</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name>ansEnd</name> <operator>=</operator> <name>end</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name>finished</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><ternary><condition><expr><name>ansStart</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr> ?</condition><then> <expr><literal type="string">""</literal></expr> </then><else>: <expr><call><name><name>S</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>ansStart</name></expr></argument>, <argument><expr><name>ansEnd</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></else></ternary></expr>;</return></block_content></block></if></if_stmt>
+    </block_content>}</block></while>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

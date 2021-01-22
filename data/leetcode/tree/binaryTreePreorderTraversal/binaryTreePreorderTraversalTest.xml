@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\binaryTreePreorderTraversal\binaryTreePreorderTraversalTest.java"><package>package <name>binaryTreePreorderTraversal</name>;</package>
+
+<import>import <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Test</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<import>import static <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Assert</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by leicao on 6/10/15.
+ */</comment>
+<class><specifier>public</specifier> class <name>binaryTreePreorderTraversalTest</name> <block>{
+
+    <comment type="block" format="javadoc">/**
+     *          0
+     *        /   \
+     *      1      2
+     *     / \      \
+     *   3    4      6
+     *      /
+     *      5
+     */</comment>
+    <function><annotation>@<name>Test</name></annotation>
+    <type><specifier>public</specifier> <name>void</name></type> <name>testPreorderTraversal</name><parameter_list>()</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>t0</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n0</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n1</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n2</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n3</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n4</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n5</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n6</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><name><name>n0</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n1</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n0</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>n2</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n1</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n3</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n1</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>n4</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n4</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n5</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n2</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>n6</name></expr>;</expr_stmt>
+
+
+        <decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>inputes</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>inputes</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>t0</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>inputes</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>n0</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>results</name> <init>= <expr><operator>new</operator> <class><super><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{<block>{<block_content>
+            <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <class><super><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{<block>{<block_content>
+                   <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>}</block></class></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <class><super><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></super><argument_list>()</argument_list><block>{<block>{<block_content>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block>}</block></class></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block>}</block></class></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>binaryTreePreorderTraversal</name></type> <name>b</name> <init>= <expr><operator>new</operator> <call><name>binaryTreePreorderTraversal</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>results</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>r</name> <init>= <expr><call><name><name>b</name><operator>.</operator><name>preorderTraversal</name></name><argument_list>(<argument><expr><call><name><name>inputes</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>assertEquals</name><argument_list>(<argument><expr><call><name><name>results</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>r</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+    </block_content>}</block></function>
+}</block></class></unit>

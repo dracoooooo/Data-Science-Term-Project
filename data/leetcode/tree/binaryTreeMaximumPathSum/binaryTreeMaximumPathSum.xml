@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\binaryTreeMaximumPathSum\binaryTreeMaximumPathSum.java"><comment type="line">// Source : https://oj.leetcode.com/problems/binary-tree-maximum-path-sum/</comment>
+<comment type="line">// Inspired by : http://www.jiuzhang.com/solutions/binary-tree-maximum-path-sum/</comment>
+<comment type="line">// Author : Lei Cao</comment>
+<comment type="line">// Date   : 2015-10-08</comment>
+
+<comment type="block" format="javadoc">/**********************************************************************************
+ *
+ * Given a binary tree, find the maximum path sum.
+ *
+ * For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections.
+ * The path does not need to go through the root.
+ *
+ *
+ *
+ * For example:
+ * Given the below binary tree,
+ *
+ *        1
+ *       / \
+ *      2   3
+ *
+ * Return 6.
+ *
+ *
+ **********************************************************************************/</comment>
+
+<package>package <name>binaryTreeMaximumPathSum</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */</comment>
+<class><specifier>public</specifier> class <name>binaryTreeMaximumPathSum</name> <block>{
+    <comment type="block" format="javadoc">/**
+     * @param root: The root of binary tree.
+     * @return: An integer.
+     */</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>maxPathSum</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>Result</name></type> <name>r</name> <init>= <expr><call><name>helper</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><name><name>r</name><operator>.</operator><name>sumToLeaf</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <class><specifier>private</specifier> class <name>Result</name> <block>{
+        <decl_stmt><decl><type><name>int</name></type> <name>sumToRoot</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sumToLeaf</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <constructor><name>Result</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>sumToRoot</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sumToLeaf</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>sumToRoot</name></name> <operator>=</operator> <name>sumToRoot</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>sumToLeaf</name></name> <operator>=</operator> <name>sumToLeaf</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    }</block></class>
+
+    <comment type="line">// [9,6,-3,null,null,-6,2,null,null,2,null,-6,-6,-6]</comment>
+    <function><type><specifier>private</specifier> <name>Result</name></type> <name>helper</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><operator>new</operator> <call><name>Result</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>right</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><operator>new</operator> <call><name>Result</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+
+        <decl_stmt><decl><type><name>Result</name></type> <name>left</name> <init>= <expr><call><name>helper</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Result</name></type> <name>right</name> <init>= <expr><call><name>helper</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <comment type="line">// @todo refactor the logic below</comment>
+        <decl_stmt><decl><type><name>int</name></type> <name>sumToRoot</name> <init>= <expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sumsOfSTR</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>left</name><operator>.</operator><name>sumToRoot</name></name></expr></argument>, <argument><expr><name><name>right</name><operator>.</operator><name>sumToRoot</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>sumsOfSTR</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>sumToRoot</name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>val</name></name> <operator>+</operator> <name>sumsOfSTR</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+
+
+        <decl_stmt><decl><type><name>int</name></type> <name>sumOfTree</name> <init>= <expr><name><name>root</name><operator>.</operator><name>val</name></name> <operator>+</operator> <name><name>left</name><operator>.</operator><name>sumToRoot</name></name> <operator>+</operator> <name><name>right</name><operator>.</operator><name>sumToRoot</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sumToLeft</name> <init>= <expr><name><name>root</name><operator>.</operator><name>val</name></name> <operator>+</operator> <name><name>left</name><operator>.</operator><name>sumToRoot</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sumToRight</name> <init>= <expr><name><name>root</name><operator>.</operator><name>val</name></name> <operator>+</operator> <name><name>right</name><operator>.</operator><name>sumToRoot</name></name></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>int</name></type> <name>max1</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><name>sumOfTree</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>max2</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>sumToLeft</name></expr></argument>, <argument><expr><name>sumToRight</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>max3</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>left</name><operator>.</operator><name>sumToLeaf</name></name></expr></argument>, <argument><expr><name><name>right</name><operator>.</operator><name>sumToLeaf</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>max4</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max1</name></expr></argument>, <argument><expr><name>max2</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max3</name></expr></argument>, <argument><expr><name>max4</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <return>return <expr><operator>new</operator> <call><name>Result</name><argument_list>(<argument><expr><name>sumToRoot</name></expr></argument>, <argument><expr><name>max</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

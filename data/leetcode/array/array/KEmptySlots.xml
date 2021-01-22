@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\KEmptySlots.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>TreeSet</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 01/01/2018. There is a garden with N slots. In each slot, there
+ * is a flower. The N flowers will bloom one by one in N days. In each day, there will be exactly
+ * one flower blooming and it will be in the status of blooming since then.
+ *
+ * &lt;p&gt;Given an array flowers consists of number from 1 to N. Each number in the array represents the
+ * place where the flower will open in that day.
+ *
+ * &lt;p&gt;For example, flowers[i] = x means that the unique flower that blooms at day i will be at
+ * position x, where i and x will be in the range from 1 to N.
+ *
+ * &lt;p&gt;Also given an integer k, you need to output in which day there exists two flowers in the
+ * status of blooming, and also the number of flowers between them is k and these flowers are not
+ * blooming.
+ *
+ * &lt;p&gt;If there isn't such day, output -1.
+ *
+ * &lt;p&gt;Example 1: Input: flowers: [1,3,2] k: 1 Output: 2 Explanation: In the second day, the first
+ * and the third flower have become blooming. Example 2: Input: flowers: [1,2,3] k: 1 Output: -1
+ * Note: The given array will be in the range [1, 20000].
+ *
+ * &lt;p&gt;Solution: O(n log n). Maintain a tree-set of bloomed flowers and for every element in the
+ * array find the upper and lower bound bloomed flowers and calculate their difference with the
+ * current. If the difference is k return the current day, if none found then return -1
+ */</comment>
+<class><specifier>public</specifier> class <name>KEmptySlots</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">2</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>KEmptySlots</name><argument_list>()</argument_list></call><operator>.</operator><call><name>kEmptySlots</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>kEmptySlots</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>flowers</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>TreeSet</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><operator>new</operator> <call><name><name>TreeSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>flowers</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>Integer</name></type> <name>lowerBound</name> <init>= <expr><call><name><name>set</name><operator>.</operator><name>floor</name></name><argument_list>(<argument><expr><name><name>flowers</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>Integer</name></type> <name>upperBound</name> <init>= <expr><call><name><name>set</name><operator>.</operator><name>ceiling</name></name><argument_list>(<argument><expr><name><name>flowers</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name>lowerBound</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>flowers</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name>lowerBound</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>==</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+          <return>return <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name>upperBound</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name><name>flowers</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name>upperBound</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>==</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+          <return>return <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+      <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>flowers</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

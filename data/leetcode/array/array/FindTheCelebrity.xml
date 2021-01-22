@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\FindTheCelebrity.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 25/11/2017.
+ *
+ * &lt;p&gt;Suppose you are at a party with n people (labeled from 0 to n - 1) and among them, there may
+ * exist one celebrity. The definition of a celebrity is that all the other n - 1 people know
+ * him/her but he/she does not know any of them.
+ *
+ * &lt;p&gt;Now you want to find out who the celebrity is or verify that there is not one. The only thing
+ * you are allowed to do is to ask questions like: "Hi, A. Do you know B?" to get information of
+ * whether A knows B. You need to find out the celebrity (or verify there is not one) by asking as
+ * few questions as possible (in the asymptotic sense).
+ *
+ * &lt;p&gt;You are given a helper function bool knows(a, b) which tells you whether A knows B. Implement
+ * a function int findCelebrity(n), your function should minimize the number of calls to knows.
+ *
+ * &lt;p&gt;Note: There will be exactly one celebrity if he/she is in the party. Return the celebrity's
+ * label if there is a celebrity in the party. If there is no celebrity, return -1.
+ */</comment>
+<class><specifier>public</specifier> class <name>FindTheCelebrity</name> <block>{
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <comment type="line">// initialize relationship</comment>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>FindTheCelebrity</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findCelebrity</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Find celebrity
+   *
+   * @param n
+   * @return
+   */</comment>
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>findCelebrity</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>candidate</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>next</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>next</name> <operator>&gt;=</operator> <name>n</name></expr>)</condition><block type="pseudo"><block_content> <break>break;</break></block_content></block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name>knows</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>next</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>knows</name><argument_list>(<argument><expr><name>next</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>i</name> <operator>=</operator> <name>next</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>next</name> <operator>=</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><operator>(</operator><operator>!</operator><call><name>knows</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>next</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name>knows</name><argument_list>(<argument><expr><name>next</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>)</operator> <operator>||</operator> <operator>(</operator><call><name>knows</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>next</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name>knows</name><argument_list>(<argument><expr><name>next</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>)</operator></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>i</name> <operator>=</operator> <name>next</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>next</name> <operator>=</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><name>next</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+      <expr_stmt><expr><name>candidate</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <if_stmt><if>if <condition>(<expr><name>candidate</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal> <operator>||</operator> <name>candidate</name> <operator>&gt;=</operator> <name>n</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>candidate</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>knows</name><argument_list>(<argument><expr><name>j</name></expr></argument>, <argument><expr><name>candidate</name></expr></argument>)</argument_list></call> <operator>||</operator> <call><name>knows</name><argument_list>(<argument><expr><name>candidate</name></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>candidate</name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+        <break>break;</break>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>candidate</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>boolean</name></type> <name>knows</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>contains</name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

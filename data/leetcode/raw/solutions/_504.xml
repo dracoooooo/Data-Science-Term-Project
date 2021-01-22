@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_504.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_504</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>convertToBase7</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>toString</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>, <argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

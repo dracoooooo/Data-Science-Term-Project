@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\AddBinary.java"><package>package <name>string</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 25/11/2017.
+ *
+ * &lt;p&gt;Given two binary strings, return their sum (also a binary string).
+ *
+ * &lt;p&gt;For example, a = "11" b = "1" Return "100".
+ */</comment>
+<class><specifier>public</specifier> class <name>AddBinary</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>AddBinary</name><argument_list>()</argument_list></call><operator>.</operator><call><name>addBinary</name><argument_list>(<argument><expr><literal type="string">"000001010000101001"</literal></expr></argument>, <argument><expr><literal type="string">"0"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>addBinary</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>b</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <return>return <expr><call><name>calculate</name><argument_list>(<argument><expr><name>a</name></expr></argument>, <argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <return>return <expr><call><name>calculate</name><argument_list>(<argument><expr><name>b</name></expr></argument>, <argument><expr><name>a</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Calculate sum
+   *
+   * @param a length of a should always be greater or equal to b
+   * @param b length of b should always be smaller of equal to a
+   * @return
+   */</comment>
+  <function><type><specifier>private</specifier> <name>String</name></type> <name>calculate</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>carry</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>d</name> <init>= <expr><call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>b</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>first</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>second</name> <init>= <expr><ternary><condition><expr><name>i</name> <operator>-</operator> <name>d</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><call><name><name>b</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name> <operator>-</operator> <name>d</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr> </then><else>: <expr><literal type="number">0</literal></expr></else></ternary></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><operator>(</operator><name>first</name> <operator>+</operator> <name>second</name> <operator>+</operator> <name>carry</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><name>carry</name> <operator>=</operator> <name>sum</name> <operator>/</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>sum</name> <operator>%</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><name>carry</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>carry</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    <return>return <expr><call><name><name>sb</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

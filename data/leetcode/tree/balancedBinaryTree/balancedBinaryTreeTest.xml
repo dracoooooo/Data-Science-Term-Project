@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\balancedBinaryTree\balancedBinaryTreeTest.java"><package>package <name>balancedBinaryTree</name>;</package>
+
+<import>import <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Test</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+
+<import>import static <name><name>org</name><operator>.</operator><name>junit</name><operator>.</operator><name>Assert</name><operator>.</operator><name>*</name></name>;</import>
+<comment type="block" format="javadoc">/**
+ * Created by leicao on 7/10/15.
+ */</comment>
+<class><specifier>public</specifier> class <name>balancedBinaryTreeTest</name> <block>{
+
+    <function><annotation>@<name>Test</name></annotation>
+    <type><specifier>public</specifier> <name>void</name></type> <name>testIsBalanced</name><parameter_list>()</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>inputes</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>results</name> <init>= <expr><block>{<expr><literal type="boolean">false</literal></expr>, <expr><literal type="boolean">false</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n0</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n1</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n2</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>n3</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <expr_stmt><expr><name><name>n0</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n1</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n1</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n2</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>n2</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>n3</name></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>nn0</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>nn1</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>nn2</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>nn3</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>nn0</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>nn1</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>nn1</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>nn2</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>nn2</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>nn3</name></expr>;</expr_stmt>
+
+        <expr_stmt><expr><call><name><name>inputes</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>n0</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>inputes</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>nn0</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>results</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <decl_stmt><decl><type><name>balancedBinaryTree</name></type> <name>b</name> <init>= <expr><operator>new</operator> <call><name>balancedBinaryTree</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>assertEquals</name><argument_list>(<argument><expr><name><name>results</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><call><name><name>b</name><operator>.</operator><name>isBalanced</name></name><argument_list>(<argument><expr><call><name><name>inputes</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+    </block_content>}</block></function>
+}</block></class></unit>

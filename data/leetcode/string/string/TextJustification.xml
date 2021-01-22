@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\TextJustification.java"><package>package <name>string</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 09/03/2017. Given an array of words and a length L, format the
+ * text such that each line has exactly L characters and is fully (left and right) justified.
+ *
+ * &lt;p&gt;You should pack your words in a greedy approach; that is, pack as many words as you can in
+ * each line. Pad extra spaces ' ' when necessary so that each line has exactly L characters.
+ *
+ * &lt;p&gt;Extra spaces between words should be distributed as evenly as possible. If the number of
+ * spaces on a line do not divide evenly between words, the empty slots on the left will be assigned
+ * more spaces than the slots on the right.
+ *
+ * &lt;p&gt;For the last line of text, it should be left justified and no extra space is inserted between
+ * words.
+ *
+ * &lt;p&gt;For example, words: ["This", "is", "an", "example", "of", "text", "justification."] L: 16.
+ *
+ * &lt;p&gt;Return the formatted lines as: [ "This is an", "example of text", "justification. " ] Note:
+ * Each word is guaranteed not to exceed L in length.
+ */</comment>
+<class><specifier>public</specifier> class <name>TextJustification</name> <block>{
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>fullJustify</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>L</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>wCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>charCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>line</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><name><name>words</name><operator>.</operator><name>length</name></name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>next</name> <init>= <expr><name><name>words</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><name>L</name> <operator>-</operator> <operator>(</operator><name>charCount</name> <operator>+</operator> <name>wCount</name><operator>)</operator><operator>)</operator> <operator>&gt;=</operator> <call><name><name>next</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>line</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>next</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>charCount</name> <operator>+=</operator> <call><name><name>next</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>wCount</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <comment type="line">// justify and add to list</comment>
+        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>StringBuilder</name></type> <name>space</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><call><name><name>line</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>spaceCount</name> <init>= <expr><operator>(</operator><name>L</name> <operator>-</operator> <name>charCount</name><operator>)</operator> <operator>/</operator> <operator>(</operator><name>wCount</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+          <decl_stmt><decl><type><name>int</name></type> <name>remaining</name> <init>= <expr><operator>(</operator><name>L</name> <operator>-</operator> <name>charCount</name><operator>)</operator> <operator>%</operator> <operator>(</operator><name>wCount</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>spaceCount</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>space</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>kl</name> <init>= <expr><call><name><name>line</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>kl</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>space</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>remaining</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+              <expr_stmt><expr><operator>--</operator><name>remaining</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></for>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>balance</name> <init>= <expr><name>L</name> <operator>-</operator> <operator>(</operator><name>charCount</name> <operator>+</operator> <operator>(</operator><name>wCount</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator><operator>)</operator></expr></init></decl>;</decl_stmt>
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>balance</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>sb</name> <operator>=</operator> <operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>line</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>line</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>next</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>charCount</name> <operator>=</operator> <call><name><name>next</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>wCount</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>line</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>line</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>line</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></if></if_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>balance</name> <init>= <expr><name>L</name> <operator>-</operator> <operator>(</operator><name>charCount</name> <operator>+</operator> <operator>(</operator><name>wCount</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator><operator>)</operator></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>balance</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

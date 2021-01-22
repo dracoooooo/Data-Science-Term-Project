@@ -15,7 +15,7 @@ from tensorflow.keras.preprocessing.sequence import skipgrams
 import xml.etree.ElementTree as ET
 from src.ast_based_similarities.ast_similarities import parse_tree, traverse_and_parse, prefix
 from src.ast_based_similarities.tree_node import Node
-
+from src.ast_based_similarities.create_ast import create_ast
 label = {
     "array":    [1, 0, 0, 0, 0],
     # "math":     [0, 1, 0, 0, 0, 0],
@@ -78,6 +78,10 @@ def init_tokenizer():
 
 
 def init_node_tokenizer():
+    paths = file_paths(data_path, "java")
+    for p in paths:
+        create_ast(p)
+        print("creating xml in " + p)
     return
 
 
@@ -145,6 +149,7 @@ def get_feature_ast_node_embedding(path):
     (root, _) = parse_tree(ast)
     pre_order_path = preorder(root)
     pre_order = []
+
 
 
 
@@ -226,11 +231,12 @@ def self_learning():
 
 
 if __name__ == "__main__":
-    get_feature_bag_of_word("../../data/test/java_file2.java")
-    count()
-    self_learning()
+    # get_feature_bag_of_word("../../data/test/java_file2.java")
+    # count()
+    # self_learning()
 
     # (x_train, y_train), (x_test, y_test) , raw = prepare_data()
     # model = init_model()
     # model.fit(x_train, y_train, batch_size=100, epochs=30,
     #       validation_data=(x_test, y_test), verbose=2)
+    init_node_tokenizer()

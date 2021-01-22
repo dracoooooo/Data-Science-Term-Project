@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\ImageSmoother.java"><package>package <name>array</name>;</package>
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/02/2018. * Given a 2D integer matrix M representing the gray
+ * scale of an image, you need to design a smoother to make the gray scale of each cell becomes the
+ * average gray scale (rounding down) of all the 8 surrounding cells and itself. If a cell has less
+ * than 8 surrounding cells, then use as many as you can.
+ *
+ * &lt;p&gt;Example 1: Input: [[1,1,1], [1,0,1], [1,1,1]] Output: [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+ * Explanation: For the point (0,0), (0,2), (2,0), (2,2): floor(3/4) = floor(0.75) = 0 For the point
+ * (0,1), (1,0), (1,2), (2,1): floor(5/6) = floor(0.83333333) = 0 For the point (1,1): floor(8/9) =
+ * floor(0.88888889) = 0 Note: The value in the given matrix is in the range of [0, 255]. The length
+ * and width of the given matrix are in the range of [1, 150].
+ */</comment>
+<class><specifier>public</specifier> class <name>ImageSmoother</name> <block>{
+
+  <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>imageSmoother</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>M</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>M</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>M</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>M</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>M</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>numCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>totalCount</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <literal type="number">8</literal></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name>i</name> <operator>+</operator> <name><name>R</name><index>[<expr><name>k</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+          <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name>j</name> <operator>+</operator> <name><name>C</name><index>[<expr><name>k</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+          <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newR</name> <operator>&lt;</operator> <name><name>M</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&lt;</operator> <name><name>M</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>)</condition> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>M</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name>numCount</name> <operator>+=</operator> <name><name>M</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>totalCount</name><operator>++</operator></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <if_stmt><if>if <condition>(<expr><name><name>M</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>numCount</name><operator>++</operator></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name><name>result</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name>numCount</name> <operator>/</operator> <name>totalCount</name></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

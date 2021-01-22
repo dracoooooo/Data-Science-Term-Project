@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\AverageSalaryExcludingtheMinimumandMaximumSalary.java"><class><specifier>public</specifier> class <name>AverageSalaryExcludingtheMinimumandMaximumSalary</name> <block>{
+    <function><type><specifier>public</specifier> <name>double</name></type> <name>average</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>salary</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>,<decl><type ref="prev"/><name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>, <decl><type ref="prev"/><name>max</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>sal</name> <range>: <expr><name>salary</name></expr></range></decl></init>)</control><block>{<block_content>
+            <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>sal</name></expr></argument>, <argument><expr><name>min</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>sal</name></expr></argument>, <argument><expr><name>max</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>sum</name><operator>+=</operator><name>sal</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+         
+        
+        
+        <return>return <expr><operator>(</operator><name>double</name><operator>)</operator><operator>(</operator><name>sum</name><operator>-</operator><name>max</name><operator>-</operator><name>min</name><operator>)</operator><operator>/</operator><operator>(</operator><name><name>salary</name><operator>.</operator><name>length</name></name><operator>-</operator><literal type="number">2</literal><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

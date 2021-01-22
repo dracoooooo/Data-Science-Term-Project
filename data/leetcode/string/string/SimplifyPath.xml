@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\SimplifyPath.java"><package>package <name>string</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayDeque</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Deque</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>StringTokenizer</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 28/07/2017.
+ *
+ * &lt;p&gt;Given an absolute path for a file (Unix-style), simplify it.
+ *
+ * &lt;p&gt;For example, path = "/home/", =&gt; "/home" path = "/a/./b/../../c/", =&gt; "/c"
+ *
+ * &lt;p&gt;Corner Cases: Did you consider the case where path = "/../"? In this case, you should return
+ * "/". Another corner case is the path might contain multiple slashes '/' together, such as
+ * "/home//foo/". In this case, you should ignore redundant slashes and return "/home/foo".
+ */</comment>
+<class><specifier>public</specifier> class <name>SimplifyPath</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>SimplifyPath</name><argument_list>()</argument_list></call><operator>.</operator><call><name>simplifyPath</name><argument_list>(<argument><expr><literal type="string">"/home/"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>simplifyPath</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>path</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name><name>path</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="string">"/"</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>StringTokenizer</name></type> <name>st</name> <init>= <expr><operator>new</operator> <call><name>StringTokenizer</name><argument_list>(<argument><expr><name>path</name></expr></argument>, <argument><expr><literal type="string">"/"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Deque</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>dQueue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><call><name><name>st</name><operator>.</operator><name>hasMoreTokens</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>token</name> <init>= <expr><call><name><name>st</name><operator>.</operator><name>nextToken</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>token</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">".."</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>dQueue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>dQueue</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>token</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"."</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <comment type="line">// ignore</comment>
+      </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>dQueue</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>token</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></while>
+    <if_stmt><if>if <condition>(<expr><call><name><name>dQueue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="string">"/"</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>finalStr</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>dQueue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>finalStr</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"/"</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>append</name><argument_list>(<argument><expr><call><name><name>dQueue</name><operator>.</operator><name>removeLast</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><call><name><name>finalStr</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\MatrixCellsinDistanceOrder.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 15/08/2019 We are given a matrix with R rows and C columns has
+ * cells with integer coordinates (r, c), where 0 &lt;= r &lt; R and 0 &lt;= c &lt; C.
+ *
+ * &lt;p&gt;Additionally, we are given a cell in that matrix with coordinates (r0, c0).
+ *
+ * &lt;p&gt;Return the coordinates of all cells in the matrix, sorted by their distance from (r0, c0) from
+ * smallest distance to largest distance. Here, the distance between two cells (r1, c1) and (r2, c2)
+ * is the Manhattan distance, |r1 - r2| + |c1 - c2|. (You may return the answer in any order that
+ * satisfies this condition.)
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: R = 1, C = 2, r0 = 0, c0 = 0 Output: [[0,0],[0,1]] Explanation: The distances from (r0,
+ * c0) to other cells are: [0,1] Example 2:
+ *
+ * &lt;p&gt;Input: R = 2, C = 2, r0 = 0, c0 = 1 Output: [[0,1],[0,0],[1,1],[1,0]] Explanation: The
+ * distances from (r0, c0) to other cells are: [0,1,1,2] The answer [[0,1],[1,1],[0,0],[1,0]] would
+ * also be accepted as correct. Example 3:
+ *
+ * &lt;p&gt;Input: R = 2, C = 3, r0 = 1, c0 = 2 Output: [[1,2],[0,2],[1,1],[0,1],[1,0],[0,0]] Explanation:
+ * The distances from (r0, c0) to other cells are: [0,1,1,2,2,3] There are other answers that would
+ * also be accepted as correct, such as [[1,2],[1,1],[0,2],[1,0],[0,1],[0,0]].
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= R &lt;= 100 1 &lt;= C &lt;= 100 0 &lt;= r0 &lt; R 0 &lt;= c0 &lt; C
+ *
+ * &lt;p&gt;Solution: O (log (R x C)) Straight forward solution, find the Manhattan distance from the
+ * given cell to all the cells in the grid and sort by min distance and return their coordinates.
+ */</comment>
+<class><specifier>public</specifier> class <name>MatrixCellsinDistanceOrder</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <comment type="line">//</comment>
+  </block_content>}</block></function>
+
+  <class>class <name>Cell</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>max</name></decl>, <decl><type ref="prev"/><name>i</name></decl>, <decl><type ref="prev"/><name>j</name></decl>;</decl_stmt>
+
+    <constructor><name>Cell</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>max</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>max</name></name> <operator>=</operator> <name>max</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>i</name></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>j</name></name> <operator>=</operator> <name>j</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>allCellsDistOrder</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>R</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>C</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>r0</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c0</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Cell</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>R</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>C</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>r0</name> <operator>-</operator> <name>i</name></expr></argument>)</argument_list></call> <operator>+</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>c0</name> <operator>-</operator> <name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Cell</name><argument_list>(<argument><expr><name>sum</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><call><name><name>Comparator</name><operator>.</operator><name>comparingInt</name></name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>o</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>o</name><operator>.</operator><name>max</name></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>A</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><name>i</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call><operator>.</operator><name>j</name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>A</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

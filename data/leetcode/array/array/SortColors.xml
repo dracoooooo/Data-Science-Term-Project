@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\SortColors.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 06/08/2017. Given an array with n objects colored red, white or
+ * blue, sort them so that objects of the same color are adjacent, with the colors in the order red,
+ * white and blue.
+ *
+ * &lt;p&gt;Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue
+ * respectively.
+ *
+ * &lt;p&gt;Note: You are not suppose to use the library's sort function for this problem.
+ *
+ * &lt;p&gt;Follow up: A rather straight forward solution is a two-pass algorithm using counting sort.
+ * First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total
+ * number of 0's, then 1's and followed by 2's.
+ *
+ * &lt;p&gt;Could you come up with an one-pass algorithm using only constant space?
+ *
+ * &lt;p&gt;Solution: The below solution works with one pass. The basic idea is to keep track of start and
+ * end index of contiguous 1s and push the 0s to left of 1s and 2 to right of 1s.
+ */</comment>
+<class><specifier>public</specifier> class <name>SortColors</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name> <init>= <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><operator>new</operator> <call><name>SortColors</name><argument_list>()</argument_list></call><operator>.</operator><call><name>sortColors</name><argument_list>(<argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><name>nums</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>void</name></type> <name>sortColors</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>s</name> <init>= <expr><name><name>nums</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt> <comment type="line">// save the first index value</comment>
+    <expr_stmt><expr><name><name>nums</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <comment type="line">// overwrite with 1</comment>
+    <decl_stmt><decl><type><name>int</name></type> <name>l</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>r</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt> <comment type="line">// left and right index indicating the start and end index of 1s</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <switch>switch <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+        <case>case <expr><literal type="number">0</literal></expr>:</case>
+          <expr_stmt><expr><name><name>nums</name><index>[<expr><name>l</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>nums</name><index>[<expr><name>r</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+          <if_stmt><if>if <condition>(<expr><name>r</name> <operator>+</operator> <literal type="number">1</literal> <operator>!=</operator> <name>i</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+          <expr_stmt><expr><name>l</name><operator>++</operator></expr>;</expr_stmt>
+          <expr_stmt><expr><name>r</name><operator>++</operator></expr>;</expr_stmt>
+          <break>break;</break>
+
+        <case>case <expr><literal type="number">1</literal></expr>:</case>
+          <expr_stmt><expr><name><name>nums</name><index>[<expr><name>r</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+          <if_stmt><if>if <condition>(<expr><name>r</name> <operator>+</operator> <literal type="number">1</literal> <operator>!=</operator> <name>i</name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+          <expr_stmt><expr><name>r</name><operator>++</operator></expr>;</expr_stmt>
+          <break>break;</break>
+      </block_content>}</block></switch>
+    </block_content>}</block></for>
+    <comment type="line">// replace the initial overwritten value with the original value</comment>
+    <if_stmt><if>if <condition>(<expr><name>s</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name><name>nums</name><index>[<expr><name>l</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>s</name> <operator>==</operator> <literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name><name>nums</name><index>[<expr><name>r</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt></block_content></block></if></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

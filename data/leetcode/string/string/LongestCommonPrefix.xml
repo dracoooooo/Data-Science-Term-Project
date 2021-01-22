@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\LongestCommonPrefix.java"><package>package <name>string</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 12/04/2018. Write a function to find the longest common prefix
+ * string amongst an array of strings.
+ *
+ * &lt;p&gt;Solution: O(N x M) where N is the length of the given array and M is the max_length of a
+ * string.
+ */</comment>
+<class><specifier>public</specifier> class <name>LongestCommonPrefix</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="string">"abc"</literal></expr>, <expr><literal type="string">"a"</literal></expr>, <expr><literal type="string">"adkd"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>LongestCommonPrefix</name><argument_list>()</argument_list></call><operator>.</operator><call><name>longestCommonPrefix</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>longestCommonPrefix</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>strs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>strs</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>String</name></type> <name>result</name> <init>= <expr><name><name>strs</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>strs</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><name><name>strs</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <call><name><name>result</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>&gt;=</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>||</operator> <call><name><name>result</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>!=</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>result</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <break>break;</break>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

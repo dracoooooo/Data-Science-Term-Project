@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_856.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_856</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="line">//TODO: implement it</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>scoreOfParentheses</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>S</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

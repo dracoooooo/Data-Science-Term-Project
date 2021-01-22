@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\ClosestLeafInABinaryTree.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 02/05/2018. Given a binary tree where every node has a unique
+ * value, and a target key k, find the value of the nearest leaf node to target k in the tree.
+ *
+ * &lt;p&gt;Here, nearest to a leaf means the least number of edges travelled on the binary tree to reach
+ * any leaf of the tree. Also, a node is called a leaf if it has no children.
+ *
+ * &lt;p&gt;In the following examples, the input tree is represented in flattened form row by row. The
+ * actual root tree given will be a TreeNode object.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: root = [1, 3, 2], k = 1 Diagram of binary tree: 1 / \ 3 2
+ *
+ * &lt;p&gt;Output: 2 (or 3)
+ *
+ * &lt;p&gt;Explanation: Either 2 or 3 is the nearest leaf node to the target of 1. Example 2:
+ *
+ * &lt;p&gt;Input: root = [1], k = 1 Output: 1
+ *
+ * &lt;p&gt;Explanation: The nearest leaf node is the root node itself. Example 3:
+ *
+ * &lt;p&gt;Input: root = [1,2,3,4,null,null,null,5,null,6], k = 2 Diagram of binary tree: 1 / \ 2 3 / 4 /
+ * 5 / 6
+ *
+ * &lt;p&gt;Output: 3 Explanation: The leaf node with value 3 (and not the leaf node with value 6) is
+ * nearest to the node with value 2. Note: root represents a binary tree with at least 1 node and at
+ * most 1000 nodes. Every node has a unique node.val in range [1, 1000]. There exists some node in
+ * the given binary tree for which node.val == k.
+ *
+ * &lt;p&gt;Solution: O(N): Maintain a hashmap of distances from each node in the first iteration. In the
+ * second iteration, find the key value node and then calculate distance from each node during
+ * backtrack.
+ */</comment>
+<class><specifier>public</specifier> class <name>ClosestLeafInABinaryTree</name> <block>{
+
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <class><specifier>private</specifier> <specifier>static</specifier> class <name>Pair</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>d</name></decl>;</decl_stmt>
+
+    <constructor><name>Pair</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>n</name></name> <operator>=</operator> <name>n</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>d</name></name> <operator>=</operator> <name>d</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Pair</name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name>Pair</name></type> <name>minNode</name></decl>;</decl_stmt>
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <comment type="line">// root.right = new TreeNode(3);</comment>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ClosestLeafInABinaryTree</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findClosestLeaf</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>findClosestLeaf</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>minNode</name> <operator>=</operator> <operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>findDistanceToLeaf</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>findMin</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name><name>minNode</name><operator>.</operator><name>n</name></name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>Pair</name></type> <name>findDistanceToLeaf</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>node</name><operator>.</operator><name>right</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <decl_stmt><decl><type><name>Pair</name></type> <name>left</name> <init>= <expr><call><name>findDistanceToLeaf</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Pair</name></type> <name>right</name> <init>= <expr><call><name>findDistanceToLeaf</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>left</name><operator>.</operator><name>d</name></name> <operator>&lt;</operator> <name><name>right</name><operator>.</operator><name>d</name></name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><name>left</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <return>return <expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><name><name>left</name><operator>.</operator><name>n</name></name></expr></argument>, <argument><expr><name><name>left</name><operator>.</operator><name>d</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>, <argument><expr><name>right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <return>return <expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><name><name>right</name><operator>.</operator><name>n</name></name></expr></argument>, <argument><expr><name><name>right</name><operator>.</operator><name>d</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>findMin</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>val</name></name> <operator>==</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>d</name> <operator>&lt;</operator> <name><name>minNode</name><operator>.</operator><name>d</name></name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>minNode</name> <operator>=</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><literal type="number">1</literal></expr>;</return>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><call><name>findMin</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><call><name>findMin</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>left</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><operator>(</operator><name>left</name> <operator>+</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>d</name><operator>)</operator> <operator>&lt;</operator> <name><name>minNode</name><operator>.</operator><name>d</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>minNode</name> <operator>=</operator> <operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>n</name></expr></argument>, <argument><expr><operator>(</operator><name>left</name> <operator>+</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>d</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+          <return>return <expr><name>left</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>right</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><operator>(</operator><name>right</name> <operator>+</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>d</name><operator>)</operator> <operator>&lt;</operator> <name><name>minNode</name><operator>.</operator><name>d</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>minNode</name> <operator>=</operator> <operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>n</name></expr></argument>, <argument><expr><operator>(</operator><name>right</name> <operator>+</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>.</operator><name>d</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+          <return>return <expr><name>right</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

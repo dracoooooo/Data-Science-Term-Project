@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\ReverseWordsInAString.java"><package>package <name>string</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>StringTokenizer</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 04/07/2017. Given an input string, reverse the string word by
+ * word.
+ *
+ * &lt;p&gt;For example, Given s = "the sky is blue", return "blue is sky the".
+ *
+ * &lt;p&gt;Clarification: What constitutes a word? A sequence of non-space characters constitutes a word.
+ * Could the input string contain leading or trailing spaces? Yes. However, your reversed string
+ * should not contain leading or trailing spaces. How about multiple spaces between two words?
+ * Reduce them to a single space in the reversed string.
+ */</comment>
+<class><specifier>public</specifier> class <name>ReverseWordsInAString</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ReverseWordsInAString</name><argument_list>()</argument_list></call><operator>.</operator><call><name>reverseWords</name><argument_list>(<argument><expr><literal type="string">"  the     sky is blue"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>reverseWords</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>s</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name><name>s</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>String</name></type> <name>reverse</name> <init>= <expr><call><name><name>sb</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>StringTokenizer</name></type> <name>st</name> <init>= <expr><operator>new</operator> <call><name>StringTokenizer</name><argument_list>(<argument><expr><name>reverse</name></expr></argument>, <argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><call><name><name>st</name><operator>.</operator><name>hasMoreTokens</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>st</name><operator>.</operator><name>nextToken</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>str</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>String</name></type> <name>newStr</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>(<argument><expr><name>str</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>reverse</name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>set</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>newStr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>String</name></type> <name>str</name> <range>: <expr><name>list</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>str</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>append</name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><call><name><name>result</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>trim</name><argument_list>()</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

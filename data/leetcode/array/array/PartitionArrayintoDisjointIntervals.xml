@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\PartitionArrayintoDisjointIntervals.java"><class><specifier>public</specifier> class <name>PartitionArrayintoDisjointIntervals</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>partitionDisjoint</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><name><name>A</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>maxleft</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>N</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>minright</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>N</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>A</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>m</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>m</name></expr></argument>, <argument><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>maxleft</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>m</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <expr_stmt><expr><name>m</name> <operator>=</operator> <name><name>A</name><index>[<expr><name>N</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>N</name><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><operator>--</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>m</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>m</name></expr></argument>, <argument><expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>minright</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>m</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block type="pseudo"><block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>maxleft</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name> <operator>&lt;=</operator> <name><name>minright</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><name>i</name></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+
+        <throw>throw <expr><literal type="null">null</literal></expr>;</throw>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

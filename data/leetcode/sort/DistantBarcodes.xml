@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\DistantBarcodes.java"><class><specifier>public</specifier> class <name>DistantBarcodes</name> <block>{
+    <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>rearrangeBarcodes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>barcodes</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>barcodes</name><operator>.</operator><name>length</name></name> <operator>&lt;</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content>
+            <return>return <expr><name>barcodes</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>pq</name> <init>= <expr><operator>new</operator> <call><name>PriorityQueue</name><argument_list>(<argument><expr><operator>new</operator> <class><super><name>Comparator</name></super><argument_list>()</argument_list><block>{
+            <function><type><specifier>public</specifier> <name>int</name></type> <name>compare</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>obj1</name></decl></parameter>, <parameter><decl><type><name>Object</name></type> <name>obj2</name></decl></parameter>)</parameter_list><block>{<block_content>
+                <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>a</name> <init>= <expr><operator>(</operator><name><name>int</name><index>[]</index></name><operator>)</operator><name>obj1</name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>b</name> <init>= <expr><operator>(</operator><name><name>int</name><index>[]</index></name><operator>)</operator><name>obj2</name></expr></init></decl>;</decl_stmt>
+                <return>return <expr><name><name>b</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>-</operator> <name><name>a</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <comment type="line">// sort array to get the same number together</comment>
+        <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>barcodes</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>tmp</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>tmp</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>barcodes</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>tmp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <comment type="line">// get all information store at queue</comment>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>barcodes</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>tmp</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <name><name>barcodes</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition><block>{<block_content>
+                <expr_stmt><expr><name><name>tmp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else<block>{<block_content>
+                <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>tmp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>tmp</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>tmp</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>barcodes</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>tmp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>tmp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>start</name> <init>= <expr><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>index</name></decl>;</decl_stmt>
+        <comment type="line">//find the index based on case</comment>
+        <if_stmt><if>if<condition>(<expr><name>start</name> <operator>&gt;</operator> <name><name>barcodes</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content>
+            <expr_stmt><expr><name>index</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else<block>{<block_content>
+            <expr_stmt><expr><name>index</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+        
+        <comment type="line">// iterate queue to get result</comment>
+        <while>while<condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{<block_content>
+            <expr_stmt><expr><name>tmp</name> <operator>=</operator> <call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>tmp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control><block>{<block_content>
+                <expr_stmt><expr><name><name>barcodes</name><index>[<expr><name>index</name></expr>]</index></name> <operator>=</operator> <name><name>tmp</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>index</name> <operator>+=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+                <if_stmt><if>if<condition>(<expr><name>index</name> <operator>&gt;=</operator> <name><name>barcodes</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>start</name> <operator>&gt;</operator> <name><name>barcodes</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content>
+                    <expr_stmt><expr><name>index</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></if>
+                <if type="elseif">else if<condition>(<expr><name>index</name> <operator>&gt;=</operator> <name><name>barcodes</name><operator>.</operator><name>length</name></name></expr>)</condition><block>{<block_content>
+                    <expr_stmt><expr><name>index</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></while>
+        
+        <return>return <expr><name>barcodes</name></expr>;</return>
+        
+    </block_content>}</block></function>
+}</block></class>
+</unit>

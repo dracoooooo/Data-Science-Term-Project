@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1286.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1286</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>CombinationIterator</name> <block>{
+
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>list</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>index</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>combinationLength</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>visited</name></decl>;</decl_stmt>
+
+            <constructor><specifier>public</specifier> <name>CombinationIterator</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>characters</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>combinationLength</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>index</name></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>list</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>combinationLength</name></name> <operator>=</operator> <name>combinationLength</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>visited</name></name> <operator>=</operator> <operator>new</operator> <name><name>boolean</name><index>[<expr><call><name><name>characters</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name>buildAllCombinations</name><argument_list>(<argument><expr><name>characters</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>visited</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <function><type><specifier>private</specifier> <name>void</name></type> <name>buildAllCombinations</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>characters</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>StringBuilder</name></type> <name>sb</name></decl></parameter>, <parameter><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>visited</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>combinationLength</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <return>return;</return>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>start</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>characters</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr/>)</control> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>visited</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>characters</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name>buildAllCombinations</name><argument_list>(<argument><expr><name>characters</name></expr></argument>, <argument><expr><name>i</name><operator>++</operator></expr></argument>, <argument><expr><name>sb</name></expr></argument>, <argument><expr><name>visited</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>setLength</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if> <else>else <block>{<block_content>
+                            <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+                        </block_content>}</block></else></if_stmt>
+                    </block_content>}</block></for>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>String</name></type> <name>next</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>index</name><operator>++</operator></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>boolean</name></type> <name>hasNext</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <return>return <expr><name>index</name> <operator>&lt;</operator> <call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\BoundaryOfBinaryTree.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 27/03/2017. Given a binary tree, return the values of its
+ * boundary in anti-clockwise direction starting from root. Boundary includes left boundary, leaves,
+ * and right boundary in order without duplicate nodes.
+ *
+ * &lt;p&gt;Left boundary is defined as the path from root to the left-most node. Right boundary is
+ * defined as the path from root to the right-most node. If the root doesn't have left subtree or
+ * right subtree, then the root itself is left boundary or right boundary. Note this definition only
+ * applies to the input binary tree, and not applies to any subtrees.
+ *
+ * &lt;p&gt;The left-most node is defined as a leaf node you could reach when you always firstly travel to
+ * the left subtree if exists. If not, travel to the right subtree. Repeat until you reach a leaf
+ * node.
+ *
+ * &lt;p&gt;The right-most node is also defined by the same way with left and right exchanged.
+ *
+ * &lt;p&gt;Example 1 Input: 1 \ 2 / \ 3 4
+ *
+ * &lt;p&gt;Ouput: [1, 3, 4, 2]
+ *
+ * &lt;p&gt;Explanation: The root doesn't have left subtree, so the root itself is left boundary. The
+ * leaves are node 3 and 4. The right boundary are node 1,2,4. Note the anti-clockwise direction
+ * means you should output reversed right boundary. So order them in anti-clockwise without
+ * duplicates and we have [1,3,4,2]. Example 2 Input: ____1_____ / \ 2 3 / \ / 4 5 6 / \ / \ 7 8 9
+ * 10
+ *
+ * &lt;p&gt;Ouput: [1,2,4,7,8,9,10,6,3]
+ *
+ * &lt;p&gt;Explanation: The left boundary are node 1,2,4. (4 is the left-most node according to
+ * definition) The leaves are node 4,7,8,9,10. The right boundary are node 1,3,6,10. (10 is the
+ * right-most node). So order them in anti-clockwise without duplicate nodes we have
+ * [1,2,4,7,8,9,10,6,3].
+ */</comment>
+<class><specifier>public</specifier> class <name>BoundaryOfBinaryTree</name> <block>{
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Set</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>done</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <comment type="block">/*root.right = new TreeNode(2);
+    root.right.right = new TreeNode(3);
+    root.right.right.right = new TreeNode(4);
+    root.right.right.right.left = new TreeNode(5);
+    root.right.right.right.left.right = new TreeNode(6);
+    /*root.left = new TreeNode(2);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.right.left = new TreeNode(7);
+    root.left.right.right = new TreeNode(8);
+    root.right = new TreeNode(3);
+    root.right.left = new TreeNode(6);
+    root.right.left.left = new TreeNode(9);
+    root.right.left.right = new TreeNode(10);*/</comment>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>BoundaryOfBinaryTree</name><argument_list>()</argument_list></call><operator>.</operator><call><name>boundaryOfBinaryTree</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>boundaryOfBinaryTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>antiClockwiseCollection</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>collection</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>leftShoulder</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+    <else>else <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>collection</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></else></if_stmt>
+
+    <expr_stmt><expr><call><name><name>antiClockwiseCollection</name><operator>.</operator><name>addAll</name></name><argument_list>(<argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>collection</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>leafNode</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>antiClockwiseCollection</name><operator>.</operator><name>addAll</name></name><argument_list>(<argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>collection</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+    <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>rightShoulder</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+    <else>else <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>collection</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></else></if_stmt>
+
+    <decl_stmt><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>stack</name> <init>= <expr><operator>new</operator> <call><name><name>Stack</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>addAll</name></name><argument_list>(<argument><expr><name>collection</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>antiClockwiseCollection</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></while>
+    <return>return <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><name>antiClockwiseCollection</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>leftShoulder</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+
+    <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>leftShoulder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>node</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>leftShoulder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>rightShoulder</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>rightShoulder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>rightShoulder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>leafNode</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>node</name><operator>.</operator><name>right</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt></block_content></block></if></if_stmt>
+    <expr_stmt><expr><call><name>leafNode</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>leafNode</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>list</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

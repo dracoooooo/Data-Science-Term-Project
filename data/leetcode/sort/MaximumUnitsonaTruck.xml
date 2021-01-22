@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\MaximumUnitsonaTruck.java"><class><specifier>public</specifier> class <name>MaximumUnitsonaTruck</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>maximumUnits</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>boxTypes</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>truckSize</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>boxTypes</name></expr></argument>, <argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><name><name>b</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>, <argument><expr><name><name>a</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>ans</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        
+        <while>while<condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>boxTypes</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>truckSize</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>truckSize</name> <operator>&gt;</operator> <name><name>boxTypes</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>)</condition><block>{<block_content>
+                <expr_stmt><expr><name>truckSize</name> <operator>-=</operator> <name><name>boxTypes</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>ans</name> <operator>+=</operator> <operator>(</operator><name><name>boxTypes</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>*</operator> <name><name>boxTypes</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>)</operator></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else<block>{<block_content>
+                <expr_stmt><expr><name>ans</name> <operator>+=</operator> <operator>(</operator><name>truckSize</name> <operator>*</operator> <name><name>boxTypes</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>)</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>truckSize</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>   
+            </block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>ans</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

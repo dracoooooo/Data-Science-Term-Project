@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\ClosestBinarySearchTreeValue.java"><package>package <name>tree</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 10/05/2017. Given a non-empty binary search tree and a target
+ * value, find the value in the BST that is closest to the target.
+ *
+ * &lt;p&gt;Note: Given target value is a floating point. You are guaranteed to have only one unique value
+ * in the BST that is closest to the target.
+ *
+ * &lt;p&gt;Solution: Simple dfs recursive algorithm to find the closest match. Worst case time complexity
+ * is O(h) where h is height of the tree
+ */</comment>
+<class><specifier>public</specifier> class <name>ClosestBinarySearchTreeValue</name> <block>{
+  <comment type="block" format="javadoc">/** TreeNode */</comment>
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name>double</name></type> <name>absDiff</name> <init>= <expr><name><name>Double</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>closest</name></decl>;</decl_stmt>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">10</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">9</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">8</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ClosestBinarySearchTreeValue</name><argument_list>()</argument_list></call><operator>.</operator><call><name>closestValue</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><literal type="number">7.63354D</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Find closest
+   *
+   * @param root Root node
+   * @param target double target
+   * @return closest value
+   */</comment>
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>closestValue</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>closest</name></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>target</name> <operator>-</operator> <name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <name>absDiff</name></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>absDiff</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>target</name> <operator>-</operator> <name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name>closest</name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>val</name></name> <operator>&gt;</operator> <name>target</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><call><name>closestValue</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>target</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if>
+    <else>else<block type="pseudo"><block_content> <return>return <expr><call><name>closestValue</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>target</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

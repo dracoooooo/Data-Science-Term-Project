@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_551.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_551</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>checkRecord</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>aCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'A'</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>aCount</name><operator>++</operator></expr>;</expr_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>aCount</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'L'</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>continuousLCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                    <while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'L'</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>continuousLCount</name><operator>++</operator></expr>;</expr_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>continuousLCount</name> <operator>&gt;</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></while>
+                    <expr_stmt><expr><name>i</name><operator>--</operator></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

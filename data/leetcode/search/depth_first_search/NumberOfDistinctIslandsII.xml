@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\depth_first_search\NumberOfDistinctIslandsII.java"><package>package <name>depth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>stream</name><operator>.</operator><name>Collectors</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 27/04/2018. Given a non-empty 2D array grid of 0's and 1's, an
+ * island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.)
+ * You may assume all four edges of the grid are surrounded by water.
+ *
+ * &lt;p&gt;Count the number of distinct islands. An island is considered to be the same as another if
+ * they have the same shape, or have the same shape after rotation (90, 180, or 270 degrees only) or
+ * reflection (left/right direction or up/down direction).
+ *
+ * &lt;p&gt;Example 1: 11000 10000 00001 00011 Given the above grid map, return 1.
+ *
+ * &lt;p&gt;Notice that: 11 1 and 1 11 are considered same island shapes. Because if we make a 180 degrees
+ * clockwise rotation on the first island, then two islands will have the same shapes. Example 2:
+ * 11100 10001 01001 01110 Given the above grid map, return 2.
+ *
+ * &lt;p&gt;Here are the two distinct islands: 111 1 and 1 1
+ *
+ * &lt;p&gt;Notice that: 111 1 and 1 111 are considered same island shapes. Because if we flip the first
+ * array in the up/down direction, then they have the same shapes. Note: The length of each
+ * dimension in the given grid does not exceed 50.
+ *
+ * &lt;p&gt;Solution: General idea is to get the co-ordinates of each shape using dfs and rotate/reflect
+ * each point in a shape to transform each shape to a new possible shape (there are 8 possible
+ * shapes after rotation and reflection). Sort the new coordinates of each transformed shape and
+ * reduce each shape to a canonical key. Use a hash-set to count total number of such keys.
+ *
+ * &lt;p&gt;Some background on rotation and reflection: ------------------------------------------- Rotate
+ * co-ordinates using formula [xâ²yâ²]=[[cosÎ¸ -sinÎ¸], [sinÎ¸ cosÎ¸]] [x y] where Î¸ = {0, 90, 180, 270}
+ * There are 4 possible rotation points and for each rotation point obtain the reflection on each x
+ * and y axis. Rotation and reflection results in total of 8 points such as (x, y), (-x, y), (x,
+ * -y), (-x, -y), (y, x), (-y, x), (y, -x) and (-y, -x).
+ */</comment>
+<class><specifier>public</specifier> class <name>NumberOfDistinctIslandsII</name> <block>{
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>done</name></decl>;</decl_stmt>
+
+  <class>class <name>Point</name> <super_list><implements>implements <super><name><name>Comparable</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></super></implements></super_list> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>x</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>y</name></decl>;</decl_stmt>
+
+    <constructor><name>Point</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>int</name></type> <name>compareTo</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>==</operator> <name><name>o</name><operator>.</operator><name>x</name></name></expr>)</condition> <block>{<block_content>
+        <return>return <expr><call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><name><name>this</name><operator>.</operator><name>y</name></name></expr></argument>, <argument><expr><name><name>o</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr>;</return>
+      </block_content>}</block></if></if_stmt>
+      <return>return <expr><call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><name><name>this</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>o</name><operator>.</operator><name>x</name></name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NumberOfDistinctIslandsII</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numDistinctIslands2</name><argument_list>(<argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numDistinctIslands2</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>shapes</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name>done</name> <operator>=</operator> <operator>new</operator> <name><name>boolean</name><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>islands</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>done</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name><name>grid</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>points</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+          <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>, <argument><expr><name>points</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <expr_stmt><expr><call><name><name>shapes</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>points</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>shape</name> <range>: <expr><name>shapes</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>eightShapes</name> <init>= <expr><call><name>rotateAndReflect</name><argument_list>(<argument><expr><name>shape</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>islands</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name>genKey</name><argument_list>(<argument><expr><name>eightShapes</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><call><name><name>islands</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Generate a canonical key
+   *
+   * @param eighShapes
+   * @return
+   */</comment>
+  <function><type><specifier>private</specifier> <name>String</name></type> <name>genKey</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>eighShapes</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>keys</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>shape</name> <range>: <expr><name>eighShapes</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>shape</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>Point</name></type> <name>first</name> <init>= <expr><call><name><name>shape</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>keys</name><operator>.</operator><name>add</name></name><argument_list>(
+          <argument><expr><call><name><name>shape</name>
+              <operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call>
+              <operator>.</operator><call><name>map</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>s</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name><name>s</name><operator>.</operator><name>x</name></name> <operator>-</operator> <name><name>first</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>s</name><operator>.</operator><name>y</name></name> <operator>-</operator> <name><name>first</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call>
+              <operator>.</operator><call><name>map</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>p</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>p</name><operator>.</operator><name>x</name></name> <operator>+</operator> <literal type="string">":"</literal> <operator>+</operator> <name><name>p</name><operator>.</operator><name>y</name></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call>
+              <operator>.</operator><call><name>collect</name><argument_list>(<argument><expr><call><name><name>Collectors</name><operator>.</operator><name>joining</name></name><argument_list>(<argument><expr><literal type="string">","</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>keys</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><call><name><name>keys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Rotate and reflect a given shape to 8 possible shapes
+   *
+   * @param shape
+   * @return
+   */</comment>
+  <function><type><specifier>private</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>rotateAndReflect</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>shape</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">8</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>Point</name></type> <name>point</name> <range>: <expr><name>shape</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>, <argument><expr><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>, <argument><expr><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>, <argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">7</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>y</name></name></expr></argument>, <argument><expr><operator>-</operator><name><name>point</name><operator>.</operator><name>x</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>map</name><operator>.</operator><name>values</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>points</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name><name>done</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>points</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Point</name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><name>r</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name>r</name> <operator>+</operator> <name><name>R</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name>c</name> <operator>+</operator> <name><name>C</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&gt;=</operator> <literal type="number">0</literal>
+          <operator>&amp;&amp;</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">0</literal>
+          <operator>&amp;&amp;</operator> <name>newR</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name>
+          <operator>&amp;&amp;</operator> <name>newC</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name>
+          <operator>&amp;&amp;</operator> <name><name>grid</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal>
+          <operator>&amp;&amp;</operator> <operator>!</operator><name><name>done</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>, <argument><expr><name>points</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

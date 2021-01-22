@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_953.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_953</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isAlienSorted</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>order</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>words</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>order</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><call><name><name>order</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>words</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>String</name></type> <name>firstWord</name> <init>= <expr><name><name>words</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>String</name></type> <name>secondWord</name> <init>= <expr><name><name>words</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>sorted</name><argument_list>(<argument><expr><name>firstWord</name></expr></argument>, <argument><expr><name>secondWord</name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>sorted</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>firstWord</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>secondWord</name></decl></parameter>, <parameter><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><call><name><name>firstWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>secondWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>firstWord</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>secondWord</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <continue>continue;</continue>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name><name>firstWord</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call> <operator>&gt;</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name><name>secondWord</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if> <else>else <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><call><name><name>firstWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&lt;=</operator> <call><name><name>secondWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

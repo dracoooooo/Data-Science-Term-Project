@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\depth_first_search\CourseScheduleII.java"><package>package <name>depth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 23/06/2017. There are a total of n courses you have to take,
+ * labeled from 0 to n - 1.
+ *
+ * &lt;p&gt;Some courses may have prerequisites, for example to take course 0 you have to first take
+ * course 1, which is expressed as a pair: [0,1]
+ *
+ * &lt;p&gt;Given the total number of courses and a list of prerequisite pairs, return the ordering of
+ * courses you should take to finish all courses.
+ *
+ * &lt;p&gt;There may be multiple correct orders, you just need to return one of them. If it is impossible
+ * to finish all courses, return an empty array.
+ *
+ * &lt;p&gt;For example:
+ *
+ * &lt;p&gt;2, [[1,0]] There are a total of 2 courses to take. To take course 1 you should have finished
+ * course 0. So the correct course order is [0,1]
+ *
+ * &lt;p&gt;4, [[1,0],[2,0],[3,1],[3,2]] There are a total of 4 courses to take. To take course 3 you
+ * should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you
+ * finished course 0. So one correct course order is [0,1,2,3]. Another correct ordering
+ * is[0,2,1,3].
+ *
+ * &lt;p&gt;Note: The input prerequisites is a graph represented by a list of edges, not adjacency
+ * matrices. Read more about how a graph is represented. You may assume that there are no duplicate
+ * edges in the input prerequisites.
+ */</comment>
+<class><specifier>public</specifier> class <name>CourseScheduleII</name> <block>{
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>graph</name></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name>BitSet</name></type> <name>visited</name></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>toposorted</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>pre</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>CourseScheduleII</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findOrder</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><name>pre</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><name>result</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>findOrder</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>numCourses</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>prerequisites</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>courses</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>numCourses</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>numCourses</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>numCourses</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><name><name>courses</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>j</name><operator>++</operator></expr>;</expr_stmt></block_content></block></for>
+    <expr_stmt><expr><name>graph</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>visited</name> <operator>=</operator> <operator>new</operator> <call><name>BitSet</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>toposorted</name> <operator>=</operator> <operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <comment type="line">// build graph</comment>
+    <for>for <control>(<init><decl><type><name><name>int</name><index>[]</index></name></type> <name>children</name> <range>: <expr><name>prerequisites</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>putIfAbsent</name></name><argument_list>(<argument><expr><name><name>children</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>children</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><name><name>children</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>stream</name><argument_list>()</argument_list></call><operator>.</operator><call><name>filter</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>v</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><operator>!</operator><call><name><name>visited</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call><operator>.</operator><call><name>forEach</name><argument_list>(<argument><expr><name>this</name><operator>::</operator><name>dfs</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>toposorted</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>v</name> <init>= <expr><call><name><name>toposorted</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>visited</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+      <expr_stmt><expr><call><name>relax</name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>result</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <name>v</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>courses</name><index>[<expr><name>v</name></expr>]</index></name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <comment type="line">// add the remaining courses</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>c</name> <range>: <expr><name>courses</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <if_stmt><if>if <condition>(<expr><name>c</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name><name>result</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt></block_content></block></if></if_stmt></block_content></block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Mark a vetex and its connected vertices as visited.
+   *
+   * @param v vertex
+   */</comment>
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>relax</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>set</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>children</name> <init>= <expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>children</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>c</name> <range>: <expr><name>children</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>set</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    </block_content>}</block></if></if_stmt>
+  </block_content>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * Toposort
+   *
+   * @param v vertex
+   */</comment>
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>set</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>children</name> <init>= <expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>children</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>c</name> <range>: <expr><name>children</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>visited</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt></block_content></block></for>
+    </block_content>}</block></if></if_stmt>
+    <expr_stmt><expr><call><name><name>toposorted</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

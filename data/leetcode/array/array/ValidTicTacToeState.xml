@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\ValidTicTacToeState.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 29/03/2019 A Tic-Tac-Toe board is given as a string array
+ * board. Return True if and only if it is possible to reach this board position during the course
+ * of a valid tic-tac-toe game.
+ *
+ * &lt;p&gt;The board is a 3 x 3 array, and consists of characters " ", "X", and "O". The " " character
+ * represents an empty square.
+ *
+ * &lt;p&gt;Here are the rules of Tic-Tac-Toe:
+ *
+ * &lt;p&gt;Players take turns placing characters into empty squares (" "). The first player always places
+ * "X" characters, while the second player always places "O" characters. "X" and "O" characters are
+ * always placed into empty squares, never filled ones. The game ends when there are 3 of the same
+ * (non-empty) character filling any row, column, or diagonal. The game also ends if all squares are
+ * non-empty. No more moves can be played if the game is over. Example 1: Input: board = ["O ", " ",
+ * " "] Output: false Explanation: The first player always plays "X".
+ *
+ * &lt;p&gt;Example 2: Input: board = ["XOX", " X ", " "] Output: false Explanation: Players take turns
+ * making moves.
+ *
+ * &lt;p&gt;Example 3: Input: board = ["XXX", " ", "OOO"] Output: false
+ *
+ * &lt;p&gt;Example 4: Input: board = ["XOX", "O O", "XOX"] Output: true Note:
+ *
+ * &lt;p&gt;board is a length-3 array of strings, where each string board[i] has length 3. Each
+ * board[i][j] is a character in the set {" ", "X", "O"}.
+ *
+ * &lt;p&gt;Solution: Do a brute-force check for each row, column and diagonals and keep track of count of
+ * 'X' and 'O'
+ */</comment>
+<class><specifier>public</specifier> class <name>ValidTicTacToeState</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>board</name> <init>= <expr><block>{<expr><literal type="string">"XXX"</literal></expr>, <expr><literal type="string">"XOO"</literal></expr>, <expr><literal type="string">"OO "</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ValidTicTacToeState</name><argument_list>()</argument_list></call><operator>.</operator><call><name>validTicTacToe</name><argument_list>(<argument><expr><name>board</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>boolean</name></type> <name>validTicTacToe</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>xWon</name> <init>= <expr><call><name>hasWon</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><literal type="char">'X'</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>oWon</name> <init>= <expr><call><name>hasWon</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><literal type="char">'O'</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>xcount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>ocount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'X'</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>xcount</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'O'</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>ocount</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><name>xWon</name> <operator>&amp;&amp;</operator> <name>oWon</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>xWon</name></expr>)</condition> <block>{<block_content>
+      <return>return <expr><operator>(</operator><operator>(</operator><name>xcount</name> <operator>-</operator> <literal type="number">1</literal> <operator>==</operator> <name>ocount</name><operator>)</operator><operator>)</operator></expr>;</return>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>oWon</name></expr>)</condition> <block>{<block_content>
+      <return>return <expr><operator>(</operator><operator>(</operator><name>xcount</name> <operator>==</operator> <name>ocount</name><operator>)</operator><operator>)</operator></expr>;</return>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+      <return>return <expr><operator>(</operator><name>xcount</name> <operator>==</operator> <name>ocount</name> <operator>||</operator> <name>xcount</name> <operator>-</operator> <literal type="number">1</literal> <operator>==</operator> <name>ocount</name><operator>)</operator></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>boolean</name></type> <name>hasWon</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>board</name></decl></parameter>, <parameter><decl><type><name>char</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>diagnol</name> <init>=
+        <expr><operator>(</operator><operator>(</operator><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">2</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name><operator>)</operator>
+            <operator>||</operator> <operator>(</operator><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">2</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name><operator>)</operator><operator>)</operator></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>diagnol</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name></expr>)</condition><block type="pseudo"><block_content>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">2</literal></expr>]</index></name><operator>.</operator><call><name>charAt</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name></expr>)</condition><block type="pseudo"><block_content>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

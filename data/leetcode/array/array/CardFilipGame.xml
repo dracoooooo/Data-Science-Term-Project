@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\CardFilipGame.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 04/05/2018.
+ *
+ * &lt;p&gt;On a table are N cards, with a positive integer printed on the front and back of each card
+ * (possibly different).
+ *
+ * &lt;p&gt;We flip any number of cards, and after we choose one card.
+ *
+ * &lt;p&gt;If the number X on the back of the chosen card is not on the front of any card, then this
+ * number X is good.
+ *
+ * &lt;p&gt;What is the smallest number that is good? If no number is good, output 0.
+ *
+ * &lt;p&gt;Here, fronts[i] and backs[i] represent the number on the front and back of card i.
+ *
+ * &lt;p&gt;A flip swaps the front and back numbers, so the value on the front is now on the back and vice
+ * versa.
+ *
+ * &lt;p&gt;Example:
+ *
+ * &lt;p&gt;Input: fronts = [1,2,4,4,7], backs = [1,3,4,1,3] Output: 2 Explanation: If we flip the second
+ * card, the fronts are [1,3,4,4,7] and the backs are [1,2,4,1,3]. We choose the second card, which
+ * has number 2 on the back, and it isn't on the front of any card, so 2 is good.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= fronts.length == backs.length &lt;= 1000. 1 &lt;= fronts[i] &lt;= 2000. 1 &lt;= backs[i] &lt;= 2000.
+ */</comment>
+<class><specifier>public</specifier> class <name>CardFilipGame</name> <block>{
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>flipgame</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>fronts</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>backs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>numbers</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>fronts</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>numbers</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>fronts</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>numbers</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>backs</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>numbers</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>n</name> <range>: <expr><name>numbers</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>boolean</name></type> <name>success</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>fronts</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <name><name>fronts</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name>n</name> <operator>==</operator> <name><name>backs</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>success</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+          <break>break;</break>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <if_stmt><if>if <condition>(<expr><name>success</name></expr>)</condition> <block>{<block_content>
+        <return>return <expr><name>n</name></expr>;</return>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

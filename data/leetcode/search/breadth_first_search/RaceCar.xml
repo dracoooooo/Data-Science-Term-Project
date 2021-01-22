@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\breadth_first_search\RaceCar.java"><package>package <name>breadth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 19/08/2018 Your car starts at position 0 and speed +1 on an
+ * infinite number line. (Your car can go into negative positions.)
+ *
+ * &lt;p&gt;Your car drives automatically according to a sequence of instructions A (accelerate) and R
+ * (reverse).
+ *
+ * &lt;p&gt;When you get an instruction "A", your car does the following: position += speed, speed *= 2.
+ *
+ * &lt;p&gt;When you get an instruction "R", your car does the following: if your speed is positive then
+ * speed = -1 , otherwise speed = 1. (Your position stays the same.)
+ *
+ * &lt;p&gt;For example, after commands "AAR", your car goes to positions 0-&gt;1-&gt;3-&gt;3, and your speed goes
+ * to 1-&gt;2-&gt;4-&gt;-1.
+ *
+ * &lt;p&gt;Now for some target position, say the length of the shortest sequence of instructions to get
+ * there.
+ *
+ * &lt;p&gt;Example 1: Input: target = 3 Output: 2 Explanation: The shortest instruction sequence is "AA".
+ * Your position goes from 0-&gt;1-&gt;3. Example 2: Input: target = 6 Output: 5 Explanation: The shortest
+ * instruction sequence is "AAARA". Your position goes from 0-&gt;1-&gt;3-&gt;7-&gt;7-&gt;6.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= target &lt;= 10000.
+ *
+ * &lt;p&gt;Solution: O(n log n) Do a BFS and visit every possible state. Prune the search space by
+ * avoiding negative vertices and keep a boundary target of approximately (target * 2) - beyond this
+ * boundary target the race car should not progress in the forward direction.
+ */</comment>
+<class><specifier>public</specifier> class <name>RaceCar</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>RaceCar</name><argument_list>()</argument_list></call><operator>.</operator><call><name>racecar</name><argument_list>(<argument><expr><literal type="number">1000</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <class><specifier>private</specifier> class <name>Node</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>v</name></decl>, <decl><type ref="prev"/><name>s</name></decl>, <decl><type ref="prev"/><name>d</name></decl>;</decl_stmt>
+
+    <constructor><name>Node</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>v</name></name> <operator>=</operator> <name>v</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>s</name></name> <operator>=</operator> <name>s</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>d</name></name> <operator>=</operator> <name>d</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>boolean</name></type> <name>equals</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>this</name> <operator>==</operator> <name>o</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><operator>(</operator><name>o</name> <operator>instanceof</operator> <name>Node</name><operator>)</operator></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+      <decl_stmt><decl><type><name>Node</name></type> <name>node</name> <init>= <expr><operator>(</operator><name>Node</name><operator>)</operator> <name>o</name></expr></init></decl>;</decl_stmt>
+      <return>return <expr><name>v</name> <operator>==</operator> <name><name>node</name><operator>.</operator><name>v</name></name> <operator>&amp;&amp;</operator> <name>s</name> <operator>==</operator> <name><name>node</name><operator>.</operator><name>s</name></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>int</name></type> <name>hashCode</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><call><name><name>Objects</name><operator>.</operator><name>hash</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>, <argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>racecar</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>target</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>done</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>start</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>Node</name></type> <name>curr</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>curr</name><operator>.</operator><name>v</name></name> <operator>&lt;</operator> <operator>(</operator><name>target</name> <operator>*</operator> <literal type="number">2</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>Node</name></type> <name>c1</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>v</name></name> <operator>+</operator> <name><name>curr</name><operator>.</operator><name>s</name></name></expr></argument>, <argument><expr><name><name>curr</name><operator>.</operator><name>s</name></name> <operator>*</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name><name>curr</name><operator>.</operator><name>d</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>c1</name><operator>.</operator><name>v</name></name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>c1</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>c1</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>c1</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>target</name> <operator>==</operator> <name><name>c1</name><operator>.</operator><name>v</name></name></expr>)</condition> <block>{<block_content>
+              <return>return <expr><name><name>c1</name><operator>.</operator><name>d</name></name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+      <decl_stmt><decl><type><name>Node</name></type> <name>c2</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>v</name></name></expr></argument>, <argument><expr><ternary><condition><expr><name><name>curr</name><operator>.</operator><name>s</name></name> <operator>&lt;</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><operator>-</operator><literal type="number">1</literal></expr></else></ternary></expr></argument>, <argument><expr><name><name>curr</name><operator>.</operator><name>d</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>c2</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>c2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>c2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

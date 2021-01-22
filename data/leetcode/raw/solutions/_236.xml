@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_236.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_236</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <function><type><specifier>public</specifier> <name>TreeNode</name></type> <name>lowestCommonAncestor</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name></type> <name>p</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name></type> <name>q</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name>root</name> <operator>==</operator> <name>p</name> <operator>||</operator> <name>root</name> <operator>==</operator> <name>q</name></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>root</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name> <init>= <expr><call><name>lowestCommonAncestor</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>q</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name> <init>= <expr><call><name>lowestCommonAncestor</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>q</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>left</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>right</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>root</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><ternary><condition><expr><name>left</name> <operator>!=</operator> <literal type="null">null</literal></expr> ?</condition><then> <expr><name>left</name></expr> </then><else>: <expr><name>right</name></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

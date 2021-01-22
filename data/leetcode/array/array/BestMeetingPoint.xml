@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\BestMeetingPoint.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 10/03/2019 A group of two or more people wants to meet and
+ * minimize the total travel distance. You are given a 2D grid of values 0 or 1, where each 1 marks
+ * the home of someone in the group. The distance is calculated using Manhattan Distance, where
+ * distance(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
+ *
+ * &lt;p&gt;Example:
+ *
+ * &lt;p&gt;Input:
+ *
+ * &lt;p&gt;1 - 0 - 0 - 0 - 1 | | | | | 0 - 0 - 0 - 0 - 0 | | | | | 0 - 0 - 1 - 0 - 0
+ *
+ * &lt;p&gt;Output: 6
+ *
+ * &lt;p&gt;Explanation: Given three people living at (0,0), (0,4), and (2,2): The point (0,2) is an ideal
+ * meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
+ *
+ * &lt;p&gt;Solution: O(N ^ 2 + M ^ 2) + O(N x M): Calculate the total number of persons in each row and
+ * each column and then take a minimum of cartesian product of each row and each column.
+ */</comment>
+<class><specifier>public</specifier> class <name>BestMeetingPoint</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>BestMeetingPoint</name><argument_list>()</argument_list></call><operator>.</operator><call><name>minTotalDistance</name><argument_list>(<argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>minTotalDistance</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>countR</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>countC</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>distR</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>distC</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>grid</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>countR</name><index>[<expr><name>i</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>countC</name><index>[<expr><name>j</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>distR</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>distR</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>countR</name><index>[<expr><name>j</name></expr>]</index></name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>distR</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>j</name> <operator>-</operator> <name>i</name></expr></argument>)</argument_list></call> <operator>*</operator> <name><name>countR</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>distC</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>distC</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>countC</name><index>[<expr><name>j</name></expr>]</index></name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>distC</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>j</name> <operator>-</operator> <name>i</name></expr></argument>)</argument_list></call> <operator>*</operator> <name><name>countC</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>distR</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>distC</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name><name>distR</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>distC</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <return>return <expr><name>min</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

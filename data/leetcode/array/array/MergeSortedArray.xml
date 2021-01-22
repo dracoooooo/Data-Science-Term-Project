@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\MergeSortedArray.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 29/07/2017. Given two sorted integer arrays nums1 and nums2,
+ * merge nums2 into nums1 as one sorted array.
+ *
+ * &lt;p&gt;Note: You may assume that nums1 has enough space (size that is greater or equal to m + n) to
+ * hold additional elements from nums2. The number of elements initialized in nums1 and nums2 are m
+ * and n respectively.
+ */</comment>
+<class><specifier>public</specifier> class <name>MergeSortedArray</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>B</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><operator>new</operator> <call><name>MergeSortedArray</name><argument_list>()</argument_list></call><operator>.</operator><call><name>merge</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>B</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><name>A</name></expr></range></decl></init>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>void</name></type> <name>merge</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums2</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>m</name> <operator>+</operator> <name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><name>m</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>k</name> <init>= <expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>j</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>k</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name><name>nums1</name><index>[<expr><name>i</name><operator>--</operator></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name><name>nums1</name><index>[<expr><name>j</name></expr>]</index></name> <operator>&gt;</operator> <name><name>nums2</name><index>[<expr><name>k</name></expr>]</index></name><operator>)</operator></expr> ?</condition><then> <expr><name><name>nums1</name><index>[<expr><name>j</name><operator>--</operator></expr>]</index></name></expr> </then><else>: <expr><name><name>nums2</name><index>[<expr><name>k</name><operator>--</operator></expr>]</index></name></expr></else></ternary></expr>;</expr_stmt></block_content></block></while>
+    <while>while <condition>(<expr><name>k</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name><name>nums1</name><index>[<expr><name>i</name><operator>--</operator></expr>]</index></name> <operator>=</operator> <name><name>nums2</name><index>[<expr><name>k</name><operator>--</operator></expr>]</index></name></expr>;</expr_stmt></block_content></block></while>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

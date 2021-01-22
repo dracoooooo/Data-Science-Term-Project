@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\strStr\strStr.java"><comment type="line">// Source : https://oj.leetcode.com/problems/implement-strstr/</comment>
+<comment type="line">// Inspired by : http://www.jiuzhang.com/solutions/implement-strstr/</comment>
+<comment type="line">// Author : Lei Cao</comment>
+<comment type="line">// Date   : 2015-10-02</comment>
+
+<comment type="block" format="javadoc">/**********************************************************************************
+ *
+ * Implement strStr().
+ *
+ * Returns a pointer to the first occurrence of needle in haystack, or null if needle is not part of haystack.
+ *
+ *
+ **********************************************************************************/</comment>
+
+<package>package <name>strStr</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by leicao on 2/10/15.
+ */</comment>
+<class><specifier>public</specifier> class <name>strStr</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>strStr</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>haystack</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>needle</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>haystack</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name>needle</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><expr><name>i</name> <operator>=</operator> <literal type="number">0</literal></expr>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>haystack</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>needle</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <for>for <control>(<init><expr><name>j</name> <operator>=</operator> <literal type="number">0</literal></expr>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <call><name><name>needle</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>haystack</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <name>j</name></expr></argument>)</argument_list></call> <operator>!=</operator> <call><name><name>needle</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <break>break;</break>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <call><name><name>needle</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>i</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

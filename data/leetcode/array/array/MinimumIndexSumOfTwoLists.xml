@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\MinimumIndexSumOfTwoLists.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 11/04/2018. Suppose Andy and Doris want to choose a restaurant
+ * for dinner, and they both have a list of favorite restaurants represented by strings.
+ *
+ * &lt;p&gt;You need to help them find out their common interest with the least list index sum. If there
+ * is a choice tie between answers, output all of them with no order requirement. You could assume
+ * there always exists an answer.
+ *
+ * &lt;p&gt;Example 1: Input: ["Shogun", "Tapioca Express", "Burger King", "KFC"] ["Piatti", "The Grill at
+ * Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"] Output: ["Shogun"] Explanation: The only
+ * restaurant they both like is "Shogun". Example 2: Input: ["Shogun", "Tapioca Express", "Burger
+ * King", "KFC"] ["KFC", "Shogun", "Burger King"] Output: ["Shogun"] Explanation: The restaurant
+ * they both like and have the least index sum is "Shogun" with index sum 1 (0+1). Note: The length
+ * of both lists will be in the range of [1, 1000]. The length of strings in both lists will be in
+ * the range of [1, 30]. The index is starting from 0 to the list length minus 1. No duplicates in
+ * both lists.
+ *
+ * &lt;p&gt;Solution:O(N) maintain index of each restaurant in a list using a HashMap, find the min sum of
+ * indices and list all the restaurants which match the min sum of indices
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumIndexSumOfTwoLists</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>A1</name> <init>= <expr><block>{<expr><literal type="string">"Shogun"</literal></expr>, <expr><literal type="string">"Tapioca Express"</literal></expr>, <expr><literal type="string">"Burger King"</literal></expr>, <expr><literal type="string">"KFC"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>A2</name> <init>= <expr><block>{<expr><literal type="string">"Tapioca Express"</literal></expr>, <expr><literal type="string">"Shogun"</literal></expr>, <expr><literal type="string">"Burger King"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>ans</name> <init>= <expr><operator>new</operator> <call><name>MinimumIndexSumOfTwoLists</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findRestaurant</name><argument_list>(<argument><expr><name>A1</name></expr></argument>, <argument><expr><name>A2</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>String</name></type> <name>s</name> <range>: <expr><name>ans</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>String</name><index>[]</index></name></type> <name>findRestaurant</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>list1</name></decl></parameter>, <parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>list2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>list2</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>new</operator> <name><name>String</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>String</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>index</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>list2</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>index</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name><name>list2</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>list1</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><name><name>list1</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>index</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><name>i</name> <operator>+</operator> <call><name><name>index</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>list1</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>s</name> <init>= <expr><name><name>list1</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>index</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><name>i</name> <operator>+</operator> <call><name><name>index</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>sum</name> <operator>==</operator> <name>min</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>resArr</name> <init>= <expr><operator>new</operator> <name><name>String</name><index>[<expr><call><name><name>result</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>toArray</name></name><argument_list>(<argument><expr><name>resArr</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>resArr</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

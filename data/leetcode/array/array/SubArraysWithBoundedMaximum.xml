@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\SubArraysWithBoundedMaximum.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 29/03/2019 We are given an array A of positive integers, and
+ * two positive integers L and R (L &lt;= R).
+ *
+ * &lt;p&gt;Return the number of (contiguous, non-empty) subarrays such that the value of the maximum
+ * array element in that subarray is at least L and at most R.
+ *
+ * &lt;p&gt;Example : Input: A = [2, 1, 4, 3] L = 2 R = 3 Output: 3 Explanation: There are three subarrays
+ * that meet the requirements: [2], [2, 1], [3]. Note:
+ *
+ * &lt;p&gt;L, R and A[i] will be an integer in the range [0, 10^9]. The length of A will be in the range
+ * of [1, 50000].
+ */</comment>
+<class><specifier>public</specifier> class <name>SubArraysWithBoundedMaximum</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>SubArraysWithBoundedMaximum</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numSubarrayBoundedMax</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numSubarrayBoundedMax</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>L</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>R</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>DP</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>A</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>v</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>A</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;=</operator> <name>L</name> <operator>&amp;&amp;</operator> <name><name>A</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;=</operator> <name>R</name></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>v</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>v</name> <operator>-</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+          <expr_stmt><expr><name>v</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>A</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;</operator> <name>L</name></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>v</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>v</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name><name>A</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&lt;</operator> <name>L</name> <operator>||</operator> <operator>(</operator><name><name>A</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&gt;=</operator> <name>L</name> <operator>&amp;&amp;</operator> <name><name>A</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&lt;=</operator> <name>R</name><operator>)</operator></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>DP</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+          </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+          </block_content>}</block></else></if_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><name>v</name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>DP</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>sum</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\MaxProductOfThreeNumbers.java"><package>package <name>array</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 27/06/2017. Given an integer array, find three numbers whose
+ * product is maximum and output the maximum product.
+ *
+ * &lt;p&gt;Example 1: Input: [1,2,3] Output: 6 Example 2: Input: [1,2,3,4] Output: 24 Note: The length of
+ * the given array will be in range [3,104] and all elements are in the range [-1000, 1000].
+ * Multiplication of any three numbers in the input won't exceed the range of 32-bit signed integer.
+ */</comment>
+<class><specifier>public</specifier> class <name>MaxProductOfThreeNumbers</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MaxProductOfThreeNumbers</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maximumProduct</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>maximumProduct</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>prod1</name> <init>= <expr><name><name>nums</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>*</operator> <name><name>nums</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">2</literal></expr>]</index></name> <operator>*</operator> <name><name>nums</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">3</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>prod2</name> <init>= <expr><name><name>nums</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>*</operator> <name><name>nums</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>*</operator> <name><name>nums</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <return>return <expr><ternary><condition><expr><name>prod1</name> <operator>&gt;</operator> <name>prod2</name></expr> ?</condition><then> <expr><name>prod1</name></expr> </then><else>: <expr><name>prod2</name></expr></else></ternary></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

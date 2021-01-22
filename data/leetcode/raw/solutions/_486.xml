@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_486.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_486</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/76312/java-1-line-recursion-solution
+         * Explanation
+         * So assuming the sum of the array it SUM, so eventually player1 and player2 will split the SUM between themselves.
+         * For player1 to win, he/she has to get more than what player2 gets.
+         * If we think from the prospective of one player, then what he/she gains each time is a plus,
+         * while, what the other player gains each time is a minus. Eventually if player1 can have a &gt;0 total, player1 can win.
+         * &lt;p&gt;
+         * Helper function simulate this process. In each round:
+         * if e==s, there is no choice but have to select nums[s]
+         * otherwise, this current player has 2 options:
+         * --&gt; nums[s]-helper(nums,s+1,e): this player select the front item, leaving the other player a choice from s+1 to e
+         * --&gt; nums[e]-helper(nums,s,e-1): this player select the tail item, leaving the other player a choice from s to e-1
+         * Then take the max of these two options as this player's selection, return it.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>predictTheWinner</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>helper</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><operator>new</operator> <name><name>Integer</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></argument>)</argument_list></call> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>helper</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>end</name></decl></parameter>, <parameter><decl><type><name><name>Integer</name><index>[]</index><index>[]</index></name></type> <name>mem</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>mem</name><index>[<expr><name>start</name></expr>]</index><index>[<expr><name>end</name></expr>]</index></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>mem</name><index>[<expr><name>start</name></expr>]</index><index>[<expr><name>end</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name>start</name> <operator>==</operator> <name>end</name></expr> ?</condition><then> <expr><name><name>nums</name><index>[<expr><name>end</name></expr>]</index></name></expr> </then><else>:
+                        <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>end</name></expr>]</index></name> <operator>-</operator> <call><name>helper</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>start</name></expr></argument>, <argument><expr><name>end</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>mem</name></expr></argument>)</argument_list></call></expr></argument>,
+                                <argument><expr><name><name>nums</name><index>[<expr><name>start</name></expr>]</index></name> <operator>-</operator> <call><name>helper</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>start</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>end</name></expr></argument>, <argument><expr><name>mem</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><name><name>mem</name><index>[<expr><name>start</name></expr>]</index><index>[<expr><name>end</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

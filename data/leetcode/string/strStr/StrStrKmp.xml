@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\strStr\StrStrKmp.java"><comment type="line">// Source : https://leetcode.com/problems/implement-strstr/description/</comment>
+<comment type="line">// Inspired by : http://wiki.jikexueyuan.com/project/kmp-algorithm/define.html</comment>
+<comment type="line">// Author : Tianming Cao</comment>
+<comment type="line">// Date   : 2018-02-11</comment>
+
+<comment type="block" format="javadoc">/**********************************************************************************
+ * 
+ * Implement strStr().
+ * 
+ * Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+ * 
+ * Example 1:
+ * 
+ *  Input: haystack = "hello", needle = "ll"
+ *  Output: 2
+ *  
+ * Example 2:
+ * 
+ *  Input: haystack = "aaaaa", needle = "bba"
+ *  Output: -1
+ * 
+ **********************************************************************************/</comment>
+<package>package <name>strStr</name>;</package>
+
+<class><specifier>public</specifier> class <name>StrStrKmp</name> <block>{
+	
+	<comment type="block" format="javadoc">/**
+	 * KMP-Algorithm
+	 */</comment>
+	<function><type><specifier>public</specifier> <name>int</name></type> <name>strStr</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>haystack</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>needle</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<if_stmt><if>if <condition>(<expr><name>haystack</name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>needle</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+			<return>return <expr><literal type="number">0</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<if_stmt><if>if <condition>(<expr><name>haystack</name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>needle</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+			<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<if_stmt><if>if <condition>(<expr><name>haystack</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>needle</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+			<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><call><name><name>haystack</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>needle</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<if_stmt><if>if <condition>(<expr><name>m</name> <operator>&lt;</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+			<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+			<return>return <expr><literal type="number">0</literal></expr>;</return>
+		</block_content>}</block></if></if_stmt>
+		<decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>nextArray</name> <init>= <expr><call><name>getNext</name><argument_list>(<argument><expr><name>needle</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>)</condition> <block>{<block_content>
+			<if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+				<comment type="line">// If pointer j is in boundary, move i to the right and reset j</comment>
+				<expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+				<expr_stmt><expr><name>j</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+			</block_content>}</block></if> <else>else <block>{<block_content>
+				<if_stmt><if>if <condition>(<expr><call><name><name>haystack</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>needle</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+					<comment type="line">// While matching succeess, move both pointer i and pointer j to the right</comment>
+					<expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+					<expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+					<if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+						<return>return <expr><name>i</name> <operator>-</operator> <name>n</name></expr>;</return>
+					</block_content>}</block></if></if_stmt>
+				</block_content>}</block></if> <else>else <block>{<block_content>
+					<comment type="block" format="javadoc">/***
+					 * For example:
+					 * 
+					 * next: [-1,0,0,0,0,1,2]
+					 * 
+					 *                    i
+					 *                    â 
+					 * haystack:BBC ABCDAB ABCDABCDABDE
+					 *                    j
+					 *                    â
+					 * needle:      ABCDABD
+					 * 
+					 * 
+					 * So the next step is:
+					 * 
+					 *                    i
+					 *                    â 
+					 * haystack:BBC ABCDAB ABCDABCDABDE
+					 *                    j
+					 *                    â
+					 * needle:          ABCDABD
+					 */</comment>
+					<expr_stmt><expr><name>j</name> <operator>=</operator> <name><name>nextArray</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+				</block_content>}</block></else></if_stmt>
+			</block_content>}</block></else></if_stmt>
+		</block_content>}</block></while>
+		<return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+	</block_content>}</block></function>
+	<comment type="block" format="javadoc">/**
+	 * Generate the next-array of needle string
+	 * 
+	 * For example:
+	 * 
+	 * next-array of "ABCDABD" is: [-1,0,0,0,0,1,2]
+	 * 
+	 * For letter "D", the longest prefix "AB" is equal to the longest suffix "AB", 
+	 * the string "AB"'s length is 2, so letter "D"'s next value is 2.
+	 */</comment>
+	<function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>getNext</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str</name></decl></parameter>)</parameter_list> <block>{<block_content>
+		<decl_stmt><decl><type><name>int</name></type> <name>len</name> <init>= <expr><call><name><name>str</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>next</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>len</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+		<expr_stmt><expr><name><name>next</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>k</name> <init>= <expr><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<while>while <condition>(<expr><name>j</name> <operator>&lt;</operator> <name>len</name> <operator>-</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+			<if_stmt><if>if <condition>(<expr><name>k</name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+				<expr_stmt><expr><name>k</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+				<expr_stmt><expr><name><name>next</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+				<expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+			</block_content>}</block></if> <else>else <block>{<block_content>
+				<if_stmt><if>if <condition>(<expr><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>k</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+					<expr_stmt><expr><name><name>next</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name>k</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+					<expr_stmt><expr><name>k</name><operator>++</operator></expr>;</expr_stmt>
+					<expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+				</block_content>}</block></if> <else>else <block>{<block_content>
+					<expr_stmt><expr><name>k</name> <operator>=</operator> <name><name>next</name><index>[<expr><name>k</name></expr>]</index></name></expr>;</expr_stmt>
+				</block_content>}</block></else></if_stmt>
+			</block_content>}</block></else></if_stmt>
+		</block_content>}</block></while>
+		<return>return <expr><name>next</name></expr>;</return>
+	</block_content>}</block></function>
+}</block></class>
+</unit>

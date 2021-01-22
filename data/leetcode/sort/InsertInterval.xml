@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\InsertInterval.java"><class><specifier>public</specifier> class <name>InsertInterval</name> <block>{
+    <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>insert</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>intervals</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>newInterval</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        
+        <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <comment type="line">// Iterate through all slots</comment>
+        <for>for<control>(<init><decl><type><name><name>int</name><index>[]</index></name></type> <name>slot</name> <range>: <expr><name>intervals</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            
+            <comment type="line">// if newInterval before slot insert newInterval &amp; update slot as new interval</comment>
+            <if_stmt><if>if<condition>(<expr><name><name>newInterval</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>slot</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newInterval</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>newInterval</name> <operator>=</operator> <name>slot</name></expr>;</expr_stmt>
+            </block_content>}</block></if> 
+            
+            <comment type="line">// if slot is lesser than new Interval insert slot</comment>
+            <if type="elseif">else if<condition>(<expr><name><name>slot</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>newInterval</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>slot</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if> 
+            
+            <comment type="line">// if above conditions fail its an overlap since possibility of new interval existing in left &amp; right of slot is checked</comment>
+            <comment type="line">// update lowest of start &amp; highest of end &amp; not insert</comment>
+            <else>else <block>{<block_content>
+                <expr_stmt><expr><name><name>newInterval</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name><name>newInterval</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>,<argument><expr><name><name>slot</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>newInterval</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>newInterval</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>,<argument><expr><name><name>slot</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></for>
+        
+        <comment type="line">// insert the last newInterval</comment>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newInterval</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <comment type="line">// convert to int[][] array</comment>
+        <return>return <expr><call><name><name>result</name><operator>.</operator><name>toArray</name></name><argument_list>(<argument><expr><operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>result</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>]</index><index>[]</index></name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

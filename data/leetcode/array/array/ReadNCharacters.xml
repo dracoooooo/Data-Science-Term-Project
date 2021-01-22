@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\array\array\ReadNCharacters.java"><package>package <name>array</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 09/12/2017. The API: int read4(char *buf) reads 4 characters at
+ * a time from a file.
+ *
+ * &lt;p&gt;The return value is the actual number of characters read. For example, it returns 3 if there
+ * is only 3 characters left in the file.
+ *
+ * &lt;p&gt;By using the read4 API, implement the function int read(char *buf, int n) that reads n
+ * characters from the file.
+ *
+ * &lt;p&gt;Note: The read function will only be called once for each test case.
+ */</comment>
+<class><specifier>public</specifier> class <name>ReadNCharacters</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+  <comment type="block" format="javadoc">/**
+   * @param buf
+   * @param n
+   * @return
+   */</comment>
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>read</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>buf</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>toRead</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>n</name></expr></argument>, <argument><expr><name><name>buf</name><operator>.</operator><name>length</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>toRead</name></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>temp</name> <init>= <expr><operator>new</operator> <name><name>char</name><index>[<expr><literal type="number">4</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>r</name> <init>= <expr><call><name>read4</name><argument_list>(<argument><expr><name>temp</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>r</name> <operator>&amp;&amp;</operator> <name>i</name> <operator>&lt;</operator> <name>toRead</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>buf</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>temp</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <if_stmt><if>if <condition>(<expr><name>r</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>)</condition><block type="pseudo"><block_content> <break>break;</break></block_content></block></if></if_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>toRead</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>read4</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>buf</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <return>return <expr><literal type="number">1</literal></expr>;</return> <comment type="line">// return fake value just to resolve compilation error</comment>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_272.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Stack</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_272</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>closestKValues</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>res</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>s1</name> <init>= <expr><operator>new</operator> <call><name>Stack</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt> <comment type="line">// predecessors</comment>
+            <decl_stmt><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>s2</name> <init>= <expr><operator>new</operator> <call><name>Stack</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt> <comment type="line">// successors</comment>
+
+            <expr_stmt><expr><call><name>inorder</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><name>s1</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>inorder</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><name>s2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <while>while <condition>(<expr><name>k</name><operator>--</operator> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>s1</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>s2</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s2</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>s1</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>s1</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>target</name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>s2</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>target</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>s1</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>s2</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+
+            <return>return <expr><name>res</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="line">// inorder traversal</comment>
+        <function><type><name>void</name></type> <name>inorder</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>boolean</name></type> <name>reverse</name></decl></parameter>, <parameter><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>stack</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <expr_stmt><expr><call><name>inorder</name><argument_list>(<argument><expr><ternary><condition><expr><name>reverse</name></expr> ?</condition><then> <expr><name><name>root</name><operator>.</operator><name>right</name></name></expr> </then><else>: <expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></else></ternary></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>reverse</name></expr></argument>, <argument><expr><name>stack</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <comment type="line">// early terminate, no need to traverse the whole tree</comment>
+            <if_stmt><if>if <condition>(<expr><operator>(</operator><name>reverse</name> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>val</name></name> <operator>&lt;=</operator> <name>target</name><operator>)</operator> <operator>||</operator> <operator>(</operator><operator>!</operator><name>reverse</name> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>val</name></name> <operator>&gt;</operator> <name>target</name><operator>)</operator></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <comment type="line">// track the value of current node</comment>
+            <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>inorder</name><argument_list>(<argument><expr><ternary><condition><expr><name>reverse</name></expr> ?</condition><then> <expr><name><name>root</name><operator>.</operator><name>left</name></name></expr> </then><else>: <expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></else></ternary></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>reverse</name></expr></argument>, <argument><expr><name>stack</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

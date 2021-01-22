@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\StringToInteger.java"><package>package <name>string</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 21/03/2017. Implement atoi to convert a string to an integer.
+ *
+ * &lt;p&gt;Hint: Carefully consider all possible input cases. If you want a challenge, please do not see
+ * below and ask yourself what are the possible input cases.
+ *
+ * &lt;p&gt;Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You
+ * are responsible to gather all the input requirements up front.
+ */</comment>
+<class><specifier>public</specifier> class <name>StringToInteger</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>StringToInteger</name><argument_list>()</argument_list></call><operator>.</operator><call><name>myAtoi</name><argument_list>(<argument><expr><literal type="string">"    2147483649a sdfasdf"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>myAtoi</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>isPositive</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>str</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name><name>str</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>isEmpty</name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <expr_stmt><expr><name>str</name> <operator>=</operator> <call><name><name>str</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <if_stmt><if>if <condition>(<expr><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'+'</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>isPositive</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><name>str</name> <operator>=</operator> <call><name><name>str</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>str</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'-'</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>isPositive</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><name>str</name> <operator>=</operator> <call><name><name>str</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>str</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>&gt;</operator> <literal type="char">'9'</literal> <operator>||</operator> <call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>&lt;</operator> <literal type="char">'0'</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>l</name> <init>= <expr><call><name><name>str</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&gt;</operator> <literal type="char">'9'</literal> <operator>||</operator> <call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <literal type="char">'0'</literal></expr>)</condition><block type="pseudo"><block_content> <break>break;</break></block_content></block></if></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name>str</name> <operator>=</operator> <call><name><name>str</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>num</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>str</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><operator>(</operator><call><name><name>str</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><name>num</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+      <expr_stmt><expr><name>num</name> <operator>+=</operator> <name>n</name></expr>;</expr_stmt>
+      <if_stmt><if>if <condition>(<expr><name>isPositive</name></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>num</name> <operator>&gt;</operator> <name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>;</return></block_content></block></if></if_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>num</name> <operator>*</operator> <operator>-</operator><literal type="number">1</literal><operator>)</operator> <operator>&lt;</operator> <name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr>;</return></block_content></block></if></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><name>isPositive</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <name>num</name></expr>;</return></block_content></block></if>
+    <else>else<block type="pseudo"><block_content> <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><name>num</name> <operator>*</operator> <operator>-</operator><literal type="number">1</literal><operator>)</operator></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

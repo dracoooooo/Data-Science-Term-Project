@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\depth_first_search\RobotRoomCleaner.java"><package>package <name>depth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Objects</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 08/03/2019 Given a robot cleaner in a room modeled as a grid.
+ *
+ * &lt;p&gt;Each cell in the grid can be empty or blocked.
+ *
+ * &lt;p&gt;The robot cleaner with 4 given APIs can move forward, turn left or turn right. Each turn it
+ * made is 90 degrees.
+ *
+ * &lt;p&gt;When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays
+ * on the current cell.
+ *
+ * &lt;p&gt;Design an algorithm to clean the entire room using only the 4 given APIs shown below.
+ *
+ * &lt;p&gt;interface Robot { // returns true if next cell is open and robot moves into the cell. //
+ * returns false if next cell is obstacle and robot stays on the current cell. boolean move();
+ *
+ * &lt;p&gt;// Robot will stay on the same cell after calling turnLeft/turnRight. // Each turn will be 90
+ * degrees. void turnLeft(); void turnRight();
+ *
+ * &lt;p&gt;// Clean the current cell. void clean(); } Example:
+ *
+ * &lt;p&gt;Input: room = [ [1,1,1,1,1,0,1,1], [1,1,1,1,1,0,1,1], [1,0,1,1,1,1,1,1], [0,0,0,1,0,0,0,0],
+ * [1,1,1,1,1,1,1,1] ], row = 1, col = 3
+ *
+ * &lt;p&gt;Explanation: All grids in the room are marked by either 0 or 1. 0 means the cell is blocked,
+ * while 1 means the cell is accessible. The robot initially starts at the position of row=1, col=3.
+ * From the top left corner, its position is one row below and three columns right. Notes:
+ *
+ * &lt;p&gt;The input is only given to initialize the room and the robot's position internally. You must
+ * solve this problem "blindfolded". In other words, you must control the robot using only the
+ * mentioned 4 APIs, without knowing the room layout and the initial robot's position. The robot's
+ * initial position will always be in an accessible cell. The initial direction of the robot will be
+ * facing up. All accessible cells are connected, which means the all cells marked as 1 will be
+ * accessible by the robot. Assume all four edges of the grid are all surrounded by wall.
+ *
+ * &lt;p&gt;Solution: O(N x M) Maintain a direction and position of robot in each cell and perform a dfs
+ * to clean all rooms. Important to note here is that during call back in the dfs recursion the
+ * robot has to return back to its original cell and orientation
+ */</comment>
+<class><specifier>public</specifier> class <name>RobotRoomCleaner</name> <block>{
+
+  <comment type="line">// direction</comment>
+  <comment type="line">// UP 0, LEFT = 1, DOWN = 2, RIGHT = 3</comment>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+  <interface>interface <name>Robot</name> <block>{
+    <comment type="line">// Returns true if the cell in front is open and robot moves into the cell.</comment>
+    <comment type="line">// Returns false if the cell in front is blocked and robot stays in the current cell.</comment>
+    <function_decl><type><specifier>public</specifier> <name>boolean</name></type> <name>move</name><parameter_list>()</parameter_list>;</function_decl>
+
+    <comment type="line">// Robot will stay in the same cell after calling turnLeft/turnRight.</comment>
+    <comment type="line">// Each turn will be 90 degrees.</comment>
+    <function_decl><type><specifier>public</specifier> <name>void</name></type> <name>turnLeft</name><parameter_list>()</parameter_list>;</function_decl>
+
+    <function_decl><type><specifier>public</specifier> <name>void</name></type> <name>turnRight</name><parameter_list>()</parameter_list>;</function_decl>
+
+    <comment type="line">// Clean the current cell.</comment>
+    <function_decl><type><specifier>public</specifier> <name>void</name></type> <name>clean</name><parameter_list>()</parameter_list>;</function_decl>
+  }</block></interface>
+
+  <class><specifier>static</specifier> class <name>Position</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>r</name></decl>, <decl><type ref="prev"/><name>c</name></decl>;</decl_stmt>
+
+    <constructor><name>Position</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>r</name></name> <operator>=</operator> <name>r</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>c</name></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>boolean</name></type> <name>equals</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>obj</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>r</name> <init>= <expr><operator>(</operator><operator>(</operator><name>Position</name><operator>)</operator> <name>obj</name><operator>)</operator><operator>.</operator><name>r</name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><operator>(</operator><operator>(</operator><name>Position</name><operator>)</operator> <name>obj</name><operator>)</operator><operator>.</operator><name>c</name></expr></init></decl>;</decl_stmt>
+      <return>return <expr><operator>(</operator><name><name>this</name><operator>.</operator><name>r</name></name> <operator>==</operator> <name>r</name> <operator>&amp;&amp;</operator> <name><name>this</name><operator>.</operator><name>c</name></name> <operator>==</operator> <name>c</name><operator>)</operator></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>int</name></type> <name>hashCode</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><call><name><name>Objects</name><operator>.</operator><name>hash</name></name><argument_list>(<argument><expr><name>r</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <name><name>Set</name><argument_list type="generic">&lt;<argument><name>Position</name></argument>&gt;</argument_list></name></type> <name>done</name></decl>;</decl_stmt>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>void</name></type> <name>cleanRoom</name><parameter_list>(<parameter><decl><type><name>Robot</name></type> <name>robot</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>done</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><name>done</name></expr></argument>, <argument><expr><name>robot</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>, <parameter><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Position</name></argument>&gt;</argument_list></name></type> <name>done</name></decl></parameter>, <parameter><decl><type><name>Robot</name></type> <name>robot</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>direction</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Position</name><argument_list>(<argument><expr><name>r</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>clean</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name>r</name> <operator>+</operator> <name><name>R</name><index>[<expr><name>direction</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name>c</name> <operator>+</operator> <name><name>C</name><index>[<expr><name>direction</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Position</name><argument_list>(<argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>boolean</name></type> <name>possible</name> <init>= <expr><call><name><name>robot</name><operator>.</operator><name>move</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>possible</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>, <argument><expr><name>done</name></expr></argument>, <argument><expr><name>robot</name></expr></argument>, <argument><expr><name>direction</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+      <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>turnLeft</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name>direction</name> <operator>=</operator> <operator>(</operator><name>direction</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">4</literal></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>turnLeft</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>turnLeft</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>move</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>turnLeft</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>robot</name><operator>.</operator><name>turnLeft</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

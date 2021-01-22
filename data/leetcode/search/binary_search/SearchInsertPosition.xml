@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\binary_search\SearchInsertPosition.java"><package>package <name>binary_search</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 22/05/2017. Given a sorted array and a target value, return the
+ * index if the target is found. If not, return the index where it would be if it were inserted in
+ * order.
+ *
+ * &lt;p&gt;You may assume no duplicates in the array.
+ *
+ * &lt;p&gt;Here are few examples. [1,3,5,6], 5 â 2 [1,3,5,6], 2 â 1 [1,3,5,6], 7 â 4 [1,3,5,6], 0 â 0
+ */</comment>
+<class><specifier>public</specifier> class <name>SearchInsertPosition</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><operator>new</operator> <call><name>SearchInsertPosition</name><argument_list>()</argument_list></call><operator>.</operator><call><name>searchInsert</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>searchInsert</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>pos</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>s</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>e</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><name>s</name> <operator>&lt;=</operator> <name>e</name></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name>s</name> <operator>+</operator> <operator>(</operator><name>e</name> <operator>-</operator> <name>s</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>nums</name><index>[<expr><name>m</name></expr>]</index></name> <operator>&gt;=</operator> <name>target</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>pos</name> <operator>=</operator> <name>m</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>e</name> <operator>=</operator> <name>m</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <expr_stmt><expr><name>s</name> <operator>=</operator> <name>m</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><name>pos</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

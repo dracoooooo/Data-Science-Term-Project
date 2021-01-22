@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\ReverseStringII.java"><package>package <name>string</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 30/07/2019 Given a string and an integer k, you need to reverse
+ * the first k characters for every 2k characters counting from the start of the string. If there
+ * are less than k characters left, reverse all of them. If there are less than 2k but greater than
+ * or equal to k characters, then reverse the first k characters and left the other as original.
+ * Example: Input: s = "abcdefg", k = 2 Output: "bacdfeg" Restrictions: The string consists of lower
+ * English letters only. Length of the given string and k will in the range [1, 10000]
+ *
+ * &lt;p&gt;Solution O(N)
+ */</comment>
+<class><specifier>public</specifier> class <name>ReverseStringII</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>ReverseStringII</name><argument_list>()</argument_list></call><operator>.</operator><call><name>reverseStr</name><argument_list>(<argument><expr><literal type="string">"abcdefg"</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>reverseStr</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>%</operator> <operator>(</operator><literal type="number">2</literal> <operator>*</operator> <name>k</name><operator>)</operator> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>StringBuilder</name></type> <name>temp</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>count</name> <operator>&lt;</operator> <name>k</name> <operator>&amp;&amp;</operator> <name>i</name> <operator>&lt;</operator> <name>l</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>temp</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+          <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>temp</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

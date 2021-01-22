@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\string\string\NumberOfMatchingSubsequences.java"><package>package <name>string</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 04/04/2019 Given string S and a dictionary of words words, find
+ * the number of words[i] that is a subsequence of S.
+ *
+ * &lt;p&gt;Example : Input: S = "abcde" words = ["a", "bb", "acd", "ace"] Output: 3 Explanation: There
+ * are three words in words that are a subsequence of S: "a", "acd", "ace". Note:
+ *
+ * &lt;p&gt;All words in words and S will only consists of lowercase letters. The length of S will be in
+ * the range of [1, 50000]. The length of words will be in the range of [1, 5000]. The length of
+ * words[i] will be in the range of [1, 50].
+ */</comment>
+<class><specifier>public</specifier> class <name>NumberOfMatchingSubsequences</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="string">"a"</literal></expr>, <expr><literal type="string">"bb"</literal></expr>, <expr><literal type="string">"acd"</literal></expr>, <expr><literal type="string">"ace"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NumberOfMatchingSubsequences</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numMatchingSubseq</name><argument_list>(<argument><expr><literal type="string">"abcde"</literal></expr></argument>, <argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numMatchingSubseq</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>S</name></decl></parameter>, <parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>words</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>w</name> <init>= <expr><name><name>words</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name>isSubsequence</name><argument_list>(<argument><expr><name>S</name></expr></argument>, <argument><expr><name>w</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>count</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>boolean</name></type> <name>isSubsequence</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>S</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>P</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><call><name><name>P</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>S</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+    <for>for <control>(<init>;</init> <condition>;</condition> <incr/>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>j</name> <operator>&gt;=</operator> <call><name><name>P</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if>
+      <if type="elseif">else if <condition>(<expr><name>i</name> <operator>&gt;=</operator> <call><name><name>S</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if>
+      <else>else <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>S</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>P</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+          <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+}</block></class>
+</unit>
