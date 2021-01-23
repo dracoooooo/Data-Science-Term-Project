@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\binary_search\SingleElementInASortedArray.java"><package>package <name>binary_search</name>;</package>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\SingleElementInASortedArray.java"><package>package <name>binary_search</name>;</package>
 
 <comment type="block" format="javadoc">/**
  * Created by gouthamvidyapradhan on 30/01/2020 You are given a sorted array consisting of only

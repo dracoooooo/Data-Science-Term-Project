@@ -23,8 +23,9 @@ label = {
     # "sort":   [0, 0, 1, 0, 0],
     # "string":   [0, 0, 0, 1, 0],
     # "tree":     [0, 0, 0, 0, 1]
-    "sort" : [1,0],
-    "tree" :[0,1]
+    "sort" : [1, 0, 0],
+    "tree" : [0, 1, 0],
+    "dp" :   [0, 0, 1]
 }
 
 
@@ -35,6 +36,7 @@ label = {
 sort_path = "../../data/leetcode/sort"
 # string_path = "../../data/leetcode/string"
 tree_path = "../../data/leetcode/tree"
+dp_path = "../../data/leetcode/dp"
 raw_path = "../../data/leetcode/raw"
 
 features = 1000
@@ -58,6 +60,7 @@ def count():
     sort = load_data(sort_path, "java")
     # string = load_data(string_path, "java")
     tree = load_data(tree_path, "java")
+    dp = load_data(dp_path, "java")
     raw = load_data(raw_path, "java")
 
     # print(array.__len__())
@@ -66,6 +69,7 @@ def count():
     print(sort.__len__())
     # print(string.__len__())
     print(tree.__len__())
+    print(dp.__len__())
     print(raw.__len__())
 
 
@@ -103,7 +107,8 @@ def init_node_tokenizer():
     f.close()
     return
 
-def creat_ast_xml(path_list):
+def creat_ast_xml():
+    path_list = file_paths(data_path, "java")
     for p in path_list:
         create_ast(p)
         print("creating xml in " + p)
@@ -205,19 +210,21 @@ def prepare_data():
     sort = file_paths(sort_path, "java")
     # string = file_paths(string_path, "java")
     tree = file_paths(tree_path, "java")
+    dp = file_paths(dp_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = ast_node_embedding(sort[0: train_size] +  tree[0: train_size])
-    Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size
-    X_test = ast_node_embedding( sort[train_size:] +  tree[train_size:])
+    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size] + dp[0:train_size])
+    Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size + [label["dp"]] * train_size
+    X_test = bag_of_word( sort[train_size:] +  tree[train_size:])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
-             [label["tree"]] * (tree.__len__() - train_size)
+             [label["tree"]] * (tree.__len__() - train_size) + \
+             [label["dp"]] * (dp.__len__() - train_size)
 
     x_train = np.array(X_train)
     x_test = np.array(X_test)
     y_train = np.array(Y_train)
     y_test = np.array(Y_test)
-    raw_ = ast_node_embedding(raw)
+    raw_ = bag_of_word(raw)
 
     train_index = [i for i in range(x_train.__len__())]
     test_index = [i for i in range(x_test.__len__())]
@@ -237,7 +244,7 @@ def init_model():
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
-    model.add(Dense(units=2, activation='softmax'))
+    model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
@@ -273,6 +280,8 @@ def self_learning():
 
 if __name__ == "__main__":
     # get_feature_bag_of_word("../../data/test/java_file2.java")
+    # creat_ast_xml()
+    # init_tokenizer()
     count()
     self_learning()
 
