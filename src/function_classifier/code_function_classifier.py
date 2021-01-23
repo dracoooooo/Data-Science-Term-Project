@@ -207,9 +207,9 @@ def prepare_data():
     tree = file_paths(tree_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size])
+    X_train = ast_node_embedding(sort[0: train_size] +  tree[0: train_size])
     Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size
-    X_test = bag_of_word( sort[train_size:] +  tree[train_size:])
+    X_test = ast_node_embedding( sort[train_size:] +  tree[train_size:])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
              [label["tree"]] * (tree.__len__() - train_size)
 
@@ -217,7 +217,7 @@ def prepare_data():
     x_test = np.array(X_test)
     y_train = np.array(Y_train)
     y_test = np.array(Y_test)
-    raw_ = bag_of_word(raw)
+    raw_ = ast_node_embedding(raw)
 
     train_index = [i for i in range(x_train.__len__())]
     test_index = [i for i in range(x_test.__len__())]
@@ -273,7 +273,6 @@ def self_learning():
 
 if __name__ == "__main__":
     # get_feature_bag_of_word("../../data/test/java_file2.java")
-    model = init_model()
     count()
     self_learning()
 
