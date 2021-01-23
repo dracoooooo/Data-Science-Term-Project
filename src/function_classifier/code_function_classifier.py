@@ -78,13 +78,31 @@ def init_tokenizer():
 
 
 def init_node_tokenizer():
+    # get preorder feature
     paths = file_paths(data_path, "java")
-    for p in paths:
-        create_ast(p)
-        print("creating xml in " + p)
+    label_preorder_text = []
+    pre_order_list = []
+    for path in paths:
+        path = code_path2xml_path(path)
+        tree,_ = parse_tree(path)
+        pre_order_list.clear()
+        preorder(tree,pre_order_list)
+        pre_order_str = preorder_list2str(pre_order_list)
+        label_preorder_text.append(pre_order_str)
+
+    # creat
+    tokenizer = Tokenizer()
+    tokenizer.fit_on_texts(label_preorder_text)
+    # save
+    f = open('tokenizer_ast.pkl', 'wb')
+    pickle.dump(tokenizer,f)
+    f.close()
     return
 
-
+def creat_ast_xml(path_list):
+    for p in path_list:
+        create_ast(p)
+        print("creating xml in " + p)
 
 
 # 提取特征————词袋模型
@@ -102,13 +120,18 @@ def get_feature_bag_of_word(path):
     return feature
 
 
+
 # 多个文件
 def bag_of_word(path_list):
     ret = []
     for path in path_list:
         ret.append(get_feature_bag_of_word(path))
     return ret
-
+def ast_node_embedding(path_list):
+    ret = []
+    for path in path_list:
+        ret.append(get_feature_ast_node_embedding(path))
+    return ret
 
 # 提取特征————word embedding
 def get_feature_word_embedding(path):
@@ -130,25 +153,42 @@ def get_feature_word_embedding(path):
 
 
 
-def xml2tree(path):
-    xml_file_tree = ET.parse(path)
-    return xml_file_tree
+# def xml2tree(path):
+#     xml_file_tree = ET.parse(path)
+#     return xml_file_tree
 
+def code_path2xml_path(code_path):
+    return code_path[0:code_path.rfind('.')] + '.xml'
+def preorder_list2str(list):
+    pre_order_str = ''
+    for i in list:
+        pre_order_str += i + ' '
+    pre_order_str = pre_order_str.strip()
+    return pre_order_str
 
-pre_order = []
-def preorder(root):
+def preorder(root, pre_order_list):
     # visiting
-    pre_order.append(root.label)
+    pre_order_list.append(root.label)
     for child in root.children:
-        preorder(child)
-    return pre_order
+        preorder(child, pre_order_list)
+    return
 
 
 def get_feature_ast_node_embedding(path):
-    ast = xml2tree(path)
-    (root, _) = parse_tree(ast)
-    pre_order_path = preorder(root)
-    pre_order = []
+    # get pre_order_string
+    xml_path = code_path2xml_path(path)
+    pre_order_list = []
+    (root, _) = parse_tree(xml_path)
+    preorder(root,pre_order_list)
+    pre_order_str = preorder_list2str(pre_order_list)
+    # load tokenizer
+    f1 = open('tokenizer_ast.pkl', 'rb')
+    tokenizer = pickle.load(f1)
+    f1.close()
+    # get sequence
+    seq = tokenizer.texts_to_sequences([pre_order_str])[0]
+    feature = pad_sequences([seq], maxlen=features, padding='post', truncating='post')[0]
+    return feature
 
 
 
@@ -163,9 +203,9 @@ def prepare_data():
     tree = file_paths(tree_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = bag_of_word(array[0: train_size] + search[0: train_size] + sort[0: train_size] + string[0: train_size] + tree[0: train_size])
+    X_train = ast_node_embedding(array[0: train_size] + search[0: train_size] + sort[0: train_size] + string[0: train_size] + tree[0: train_size])
     Y_train = [label["array"]] * train_size + [label["search"]] * train_size + [label["sort"]] * train_size + [label["string"]] * train_size + [label["tree"]] * train_size
-    X_test = bag_of_word(array[train_size:] + search[train_size:] + sort[train_size:] + string[train_size:] + tree[train_size:])
+    X_test = ast_node_embedding(array[train_size:] + search[train_size:] + sort[train_size:] + string[train_size:] + tree[train_size:])
     Y_test = [label["array"]] * (array.__len__() - train_size) + \
              [label["search"]] * (search.__len__() - train_size) + \
              [label["sort"]] * (sort.__len__() - train_size) + \
@@ -176,7 +216,7 @@ def prepare_data():
     x_test = np.array(X_test)
     y_train = np.array(Y_train)
     y_test = np.array(Y_test)
-    raw_ = bag_of_word(raw)
+    raw_ = ast_node_embedding(raw)
 
     train_index = [i for i in range(x_train.__len__())]
     test_index = [i for i in range(x_test.__len__())]
@@ -232,11 +272,14 @@ def self_learning():
 
 if __name__ == "__main__":
     # get_feature_bag_of_word("../../data/test/java_file2.java")
-    # count()
-    # self_learning()
+    model = init_model()
+    count()
+    self_learning()
 
     # (x_train, y_train), (x_test, y_test) , raw = prepare_data()
-    # model = init_model()
     # model.fit(x_train, y_train, batch_size=100, epochs=30,
     #       validation_data=(x_test, y_test), verbose=2)
-    init_node_tokenizer()
+
+
+    # init_node_tokenizer()
+    # get_feature_ast_node_embedding("../../data/test/java_file2.java")
