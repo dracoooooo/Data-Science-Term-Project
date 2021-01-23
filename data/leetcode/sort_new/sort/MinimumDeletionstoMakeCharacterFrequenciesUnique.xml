@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\MinimumDeletionstoMakeCharacterFrequenciesUnique.java"><class><specifier>public</specifier> class <name>MinimumDeletionstoMakeCharacterFrequenciesUnique</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>minDeletions</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name><name>freq</name><index>[]</index></name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">26</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>char</name></type> <name>ch</name><range>: <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+            <expr_stmt><expr><name><name>freq</name><index>[<expr><name>ch</name> <operator>-</operator> <literal type="char">'a'</literal></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>q</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><operator>new</operator> <class><super><name><name>Comparator</name><argument_list type="generic">&lt;&gt;</argument_list></name></super><argument_list>()</argument_list><block>{
+            <function><type><specifier>public</specifier> <name>int</name></type> <name>compare</name><parameter_list>(<parameter><decl><type><name>Integer</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>Integer</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>y</name><operator>.</operator><name>compareTo</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">26</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>freq</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>freq</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <decl_stmt><decl><type><name>int</name></type> <name>ans</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <while>while<condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>now</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if<condition>(<expr><call><name><name>q</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <call><name><name>q</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>==</operator> <name>now</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>ans</name><operator>++</operator></expr>;</expr_stmt>
+                <if_stmt><if>if<condition>(<expr><name>now</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>now</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>ans</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\InsertionSortList.java"><class><specifier>public</specifier> class <name>InsertionSortList</name> <block>{
+    <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>insertionSortList</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name>head</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>head</name></expr>;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name>ListNode</name></type> <name>current</name> <init>= <expr><name><name>head</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>ListNode</name></type> <name>pre</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+        <while>while<condition>(<expr><name>current</name> <operator>!=</operator><literal type="null">null</literal></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>current</name><operator>.</operator><name>val</name></name><operator>&gt;=</operator><name><name>pre</name><operator>.</operator><name>val</name></name></expr>)</condition><block>{<block_content>
+                <expr_stmt><expr><name>current</name> <operator>=</operator> <name><name>current</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>pre</name> <operator>=</operator> <name><name>pre</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else<block>{<block_content>
+                <expr_stmt><expr><name><name>pre</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>current</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <if_stmt><if>if<condition>(<expr><name><name>current</name><operator>.</operator><name>val</name></name><operator>&lt;=</operator><name><name>head</name><operator>.</operator><name>val</name></name></expr>)</condition><block>{<block_content> 
+                    <expr_stmt><expr><name><name>current</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>head</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>head</name> <operator>=</operator> <name>current</name></expr>;</expr_stmt>
+                </block_content>}</block></if>
+                <else>else<block>{<block_content>
+                    <decl_stmt><decl><type><name>ListNode</name></type> <name>search</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+                    <while>while<condition>(<expr><name><name>search</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>search</name><operator>.</operator><name>next</name><operator>.</operator><name>val</name></name><operator>&lt;</operator><name><name>current</name><operator>.</operator><name>val</name></name></expr>)</condition><block>{<block_content>
+                        <expr_stmt><expr><name>search</name> <operator>=</operator> <name><name>search</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+                    <decl_stmt><decl><type><name>ListNode</name></type> <name>tmp</name> <init>= <expr><name><name>search</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>search</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>current</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>current</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+                <expr_stmt><expr><name>current</name> <operator>=</operator> <name><name>pre</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>head</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

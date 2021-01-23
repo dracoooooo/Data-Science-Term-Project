@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\SymmetricTree.java"><package>package <name>tree</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 14/08/2017. Given a binary tree, check whether it is a mirror
+ * of itself (ie, symmetric around its center).
+ *
+ * &lt;p&gt;For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+ *
+ * &lt;p&gt;1 / \ 2 2 / \ / \ 3 4 4 3
+ *
+ * &lt;p&gt;But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3
+ */</comment>
+<class><specifier>public</specifier> class <name>SymmetricTree</name> <block>{
+
+  <class><specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>node</name><operator>.</operator><name>right</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>SymmetricTree</name><argument_list>()</argument_list></call><operator>.</operator><call><name>isSymmetric</name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isSymmetric</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+    <return>return <expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>boolean</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>left</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name></type> <name>right</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>left</name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name>right</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>left</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name>right</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+    <return>return <expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>left</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name><name>right</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <name><name>left</name><operator>.</operator><name>val</name></name> <operator>==</operator> <name><name>right</name><operator>.</operator><name>val</name></name> <operator>&amp;&amp;</operator> <call><name>dfs</name><argument_list>(<argument><expr><name><name>left</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name><name>right</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

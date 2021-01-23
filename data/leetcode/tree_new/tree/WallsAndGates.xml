@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\breadth_first_search\WallsAndGates.java"><package>package <name>breadth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayDeque</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 26/12/2017. You are given a m x n 2D grid initialized with
+ * these three possible values.
+ *
+ * &lt;p&gt;-1 - A wall or an obstacle. 0 - A gate. INF - Infinity means an empty room. We use the value
+ * 231 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than
+ * 2147483647. Fill each empty room with the distance to its nearest gate. If it is impossible to
+ * reach a gate, it should be filled with INF.
+ *
+ * &lt;p&gt;For example, given the 2D grid: INF -1 0 INF INF INF INF -1 INF -1 INF -1 0 -1 INF INF After
+ * running your function, the 2D grid should be: 3 -1 0 1 2 2 1 -1 1 -1 2 -1 0 -1 3 4
+ *
+ * &lt;p&gt;Solution: O(n x m): Treat each coordinate of grid with 0 as a source and destination as the
+ * coordinate of 2147483647 and perform a multi-sources BFS from each source.
+ */</comment>
+<class><specifier>public</specifier> class <name>WallsAndGates</name> <block>{
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+  <class><specifier>private</specifier> class <name>Cell</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>r</name></decl>, <decl><type ref="prev"/><name>c</name></decl>;</decl_stmt>
+
+    <constructor><name>Cell</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>r</name></name> <operator>=</operator> <name>r</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>c</name></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{
+      <expr><block>{<expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>}</block></expr>,
+      <expr><block>{<expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr>,
+      <expr><block>{<expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr>,
+      <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>, <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>}</block></expr>
+    }</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><operator>new</operator> <call><name>WallsAndGates</name><argument_list>()</argument_list></call><operator>.</operator><call><name>wallsAndGates</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>void</name></type> <name>wallsAndGates</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>rooms</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Cell</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>rooms</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>rooms</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>rooms</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content> <comment type="line">// treat each co-ordinates of gate as a source</comment>
+          <decl_stmt><decl><type><name>Cell</name></type> <name>cell</name> <init>= <expr><operator>new</operator> <call><name>Cell</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>cell</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>Cell</name></type> <name>top</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name><name>top</name><operator>.</operator><name>r</name></name> <operator>+</operator> <name><name>R</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name><name>top</name><operator>.</operator><name>c</name></name> <operator>+</operator> <name><name>C</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newR</name> <operator>&lt;</operator> <name><name>rooms</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&lt;</operator> <name><name>rooms</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name><name>rooms</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>==</operator> <name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>rooms</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>=</operator> <name><name>rooms</name><index>[<expr><name><name>top</name><operator>.</operator><name>r</name></name></expr>]</index><index>[<expr><name><name>top</name><operator>.</operator><name>c</name></name></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Cell</name><argument_list>(<argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></while>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

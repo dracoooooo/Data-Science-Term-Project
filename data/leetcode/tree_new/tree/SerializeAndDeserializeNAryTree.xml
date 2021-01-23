@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\SerializeAndDeserializeNAryTree.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>stream</name><operator>.</operator><name>Collectors</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 16/03/2019 Serialization is the process of converting a data
+ * structure or object into a sequence of bits so that it can be stored in a file or memory buffer,
+ * or transmitted across a network connection link to be reconstructed later in the same or another
+ * computer environment.
+ *
+ * &lt;p&gt;Design an algorithm to serialize and deserialize an N-ary tree. An N-ary tree is a rooted tree
+ * in which each node has no more than N children. There is no restriction on how your
+ * serialization/deserialization algorithm should work. You just need to ensure that an N-ary tree
+ * can be serialized to a string and this string can be deserialized to the original tree structure.
+ *
+ * &lt;p&gt;For example, you may serialize the following 3-ary tree
+ *
+ * &lt;p&gt;1 /|\ 3 2 4 /\ 5 6
+ *
+ * &lt;p&gt;as [1 [3[5 6] 2 4]]. You do not necessarily need to follow this format, so please be creative
+ * and come up with different approaches yourself.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;N is in the range of [1, 1000] Do not use class member/global/static variables to store
+ * states. Your serialize and deserialize algorithms should be stateless.
+ *
+ * &lt;p&gt;Solution: To encode recursively iterate through each node and build a root and its children as
+ * 3[5,6] where 3 is the root and 5, 6 are its children. To decode, build the root node first and
+ * then recursively build its children.
+ */</comment>
+<class><specifier>public</specifier> class <name>SerializeAndDeserializeNAryTree</name> <block>{
+
+  <class><specifier>static</specifier> class <name>Node</name> <block>{
+    <decl_stmt><decl><type><specifier>public</specifier> <name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>children</name></decl>;</decl_stmt>
+
+    <constructor><specifier>public</specifier> <name>Node</name><parameter_list>()</parameter_list> <block>{<block_content/>}</block></constructor>
+
+    <constructor><specifier>public</specifier> <name>Node</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>_val</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>_children</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>_val</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name>children</name> <operator>=</operator> <name>_children</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>Node</name></type> <name>n1</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>n2</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">6</literal></expr></argument>, <argument><expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>n1</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>n3</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>n2</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>n4</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>, <argument><expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>n3</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>n5</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>n4</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name>n5</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>SerializeAndDeserializeNAryTree</name></type> <name>serializer</name> <init>= <expr><operator>new</operator> <call><name>SerializeAndDeserializeNAryTree</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>String</name></type> <name>result</name> <init>= <expr><call><name><name>serializer</name><operator>.</operator><name>serialize</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>Node</name></type> <name>rootNode</name> <init>= <expr><call><name><name>serializer</name><operator>.</operator><name>deserialize</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name>rootNode</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <comment type="line">// Encodes a tree to a single string.</comment>
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>serialize</name><parameter_list>(<parameter><decl><type><name>Node</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>curr</name> <init>= <expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>children</name> <init>= <expr><name><name>root</name><operator>.</operator><name>children</name></name></expr></init></decl>;</decl_stmt>
+      <return>return <expr><ternary><condition><expr><name>children</name> <operator>!=</operator> <literal type="null">null</literal></expr>
+          ?</condition><then> <expr><name>curr</name>
+              <operator>+</operator> <literal type="string">"["</literal>
+              <operator>+</operator> <call><name><name>children</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>map</name><argument_list>(<argument><expr><name>this</name><operator>::</operator><name>serialize</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>collect</name><argument_list>(<argument><expr><call><name><name>Collectors</name><operator>.</operator><name>joining</name></name><argument_list>(<argument><expr><literal type="string">","</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call>
+              <operator>+</operator> <literal type="string">"]"</literal></expr>
+          </then><else>: <expr><name>curr</name> <operator>+</operator> <literal type="string">"[]"</literal></expr></else></ternary></expr>;</return>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+      <return>return <expr><literal type="string">""</literal></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+
+  <comment type="line">// Decodes your encoded data to tree.</comment>
+  <function><type><specifier>public</specifier> <name>Node</name></type> <name>deserialize</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>data</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>arr</name> <init>= <expr><call><name><name>data</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>num</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><name>arr</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>c</name> <operator>&gt;=</operator> <literal type="char">'0'</literal> <operator>&amp;&amp;</operator> <name>c</name> <operator>&lt;=</operator> <literal type="char">'9'</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>num</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'['</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>num</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><call><name><name>num</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <expr_stmt><expr><name>num</name> <operator>=</operator> <operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><literal type="string">"["</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><call><name><name>String</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="null">null</literal></expr>;</return></block_content></block></if></if_stmt>
+    <return>return <expr><call><name>decode</name><argument_list>(<argument><expr><name>queue</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>get</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>decode</name><parameter_list>(<parameter><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>elements</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>children</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>elements</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>String</name></type> <name>curr</name> <init>= <expr><call><name><name>elements</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>curr</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><literal type="string">"["</literal></expr></argument>)</argument_list></call> <operator>||</operator> <call><name><name>curr</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><literal type="string">","</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+      </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>curr</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><literal type="string">"]"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+        <return>return <expr><name>children</name></expr>;</return>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>num</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name>curr</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Node</name></type> <name>currNode</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name>num</name></expr></argument>, <argument><expr><call><name>decode</name><argument_list>(<argument><expr><name>elements</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>children</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>currNode</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><name>children</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

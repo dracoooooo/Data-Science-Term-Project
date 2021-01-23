@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\search\breadth_first_search\SlidingPuzzle.java"><package>package <name>breadth_first_search</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/03/2019 On a 2x3 board, there are 5 tiles represented by the
+ * integers 1 through 5, and an empty square represented by 0.
+ *
+ * &lt;p&gt;A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.
+ *
+ * &lt;p&gt;The state of the board is solved if and only if the board is [[1,2,3],[4,5,0]].
+ *
+ * &lt;p&gt;Given a puzzle board, return the least number of moves required so that the state of the board
+ * is solved. If it is impossible for the state of the board to be solved, return -1.
+ *
+ * &lt;p&gt;Examples:
+ *
+ * &lt;p&gt;Input: board = [[1,2,3],[4,0,5]] Output: 1 Explanation: Swap the 0 and the 5 in one move.
+ * Input: board = [[1,2,3],[5,4,0]] Output: -1 Explanation: No number of moves will make the board
+ * solved. Input: board = [[4,1,2],[5,0,3]] Output: 5 Explanation: 5 is the smallest number of moves
+ * that solves the board. An example path: After move 0: [[4,1,2],[5,0,3]] After move 1:
+ * [[4,1,2],[0,5,3]] After move 2: [[0,1,2],[4,5,3]] After move 3: [[1,0,2],[4,5,3]] After move 4:
+ * [[1,2,0],[4,5,3]] After move 5: [[1,2,3],[4,5,0]] Input: board = [[3,2,4],[1,5,0]] Output: 14
+ * Note:
+ *
+ * &lt;p&gt;board will be a 2 x 3 array as described above. board[i][j] will be a permutation of [0, 1, 2,
+ * 3, 4, 5].
+ *
+ * &lt;p&gt;Solution: Do a bfs of each state of the board to find the least possible moves.
+ */</comment>
+<class><specifier>public</specifier> class <name>SlidingPuzzle</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>board</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>SlidingPuzzle</name><argument_list>()</argument_list></call><operator>.</operator><call><name>slidingPuzzle</name><argument_list>(<argument><expr><name>board</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <class>class <name>Node</name> <block>{
+    <constructor><name>Node</name><parameter_list>(<parameter><decl><type><name>Board</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>b</name></name> <operator>=</operator> <name>b</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <decl_stmt><decl><type><name>Board</name></type> <name>b</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>dist</name></decl>;</decl_stmt>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>String</name></type> <name>result</name> <init>= <expr><literal type="string">"123450"</literal></expr></init></decl>;</decl_stmt>
+
+  <class>class <name>Board</name> <block>{
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>r</name></decl>, <decl><type ref="prev"/><name>c</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>final</specifier> <name>String</name></type> <name>state</name></decl>;</decl_stmt>
+
+    <constructor><name>Board</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>board</name></name> <operator>=</operator> <name>board</name></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name>state</name> <operator>=</operator> <call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>boolean</name></type> <name>equals</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>this</name> <operator>==</operator> <name>o</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><operator>!</operator><operator>(</operator><name>o</name> <operator>instanceof</operator> <name>Board</name><operator>)</operator></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+      <decl_stmt><decl><type><name>Board</name></type> <name>board</name> <init>= <expr><operator>(</operator><name>Board</name><operator>)</operator> <name>o</name></expr></init></decl>;</decl_stmt>
+      <return>return <expr><call><name><name>Objects</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name>state</name></expr></argument>, <argument><expr><name><name>board</name><operator>.</operator><name>state</name></name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><annotation>@<name>Override</name></annotation>
+    <type><specifier>public</specifier> <name>int</name></type> <name>hashCode</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><call><name><name>Objects</name><operator>.</operator><name>hash</name></name><argument_list>(<argument><expr><name>state</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Set</name><argument_list type="generic">&lt;<argument><name>Board</name></argument>&gt;</argument_list></name></type> <name>done</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>slidingPuzzle</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>done</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>Board</name></type> <name>b</name> <init>= <expr><operator>new</operator> <call><name>Board</name><argument_list>(<argument><expr><name>board</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>board</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>b</name><operator>.</operator><name>r</name></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>b</name><operator>.</operator><name>c</name></name> <operator>=</operator> <name>j</name></expr>;</expr_stmt>
+          <break>break;</break>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <if_stmt><if>if <condition>(<expr><call><name><name>b</name><operator>.</operator><name>state</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>Node</name></type> <name>child</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>Board</name></type> <name>br</name> <init>= <expr><name><name>child</name><operator>.</operator><name>b</name></name></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>done</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>br</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name><name>br</name><operator>.</operator><name>r</name></name> <operator>+</operator> <name><name>R</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name><name>br</name><operator>.</operator><name>c</name></name> <operator>+</operator> <name><name>C</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name>newR</name> <operator>&gt;=</operator> <literal type="number">2</literal> <operator>||</operator> <name>newC</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">3</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>num</name> <init>= <expr><name><name>br</name><operator>.</operator><name>board</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>tempB</name> <init>= <expr><call><name>clone</name><argument_list>(<argument><expr><name><name>br</name><operator>.</operator><name>board</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>tempB</name><index>[<expr><name>newR</name></expr>]</index><index>[<expr><name>newC</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>tempB</name><index>[<expr><name><name>br</name><operator>.</operator><name>r</name></name></expr>]</index><index>[<expr><name><name>br</name><operator>.</operator><name>c</name></name></expr>]</index></name> <operator>=</operator> <name>num</name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>Board</name></type> <name>tempBoard</name> <init>= <expr><operator>new</operator> <call><name>Board</name><argument_list>(<argument><expr><name>tempB</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>tempBoard</name><operator>.</operator><name>r</name></name> <operator>=</operator> <name>newR</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>tempBoard</name><operator>.</operator><name>c</name></name> <operator>=</operator> <name>newC</name></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>done</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>tempBoard</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><call><name><name>tempBoard</name><operator>.</operator><name>state</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <return>return <expr><name><name>child</name><operator>.</operator><name>dist</name></name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+          </block_content>}</block></if></if_stmt>
+          <decl_stmt><decl><type><name>Node</name></type> <name>newChild</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name>tempBoard</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <expr_stmt><expr><name><name>newChild</name><operator>.</operator><name>dist</name></name> <operator>=</operator> <name><name>child</name><operator>.</operator><name>dist</name></name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+          <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>newChild</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></while>
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>clone</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>original</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>cloned</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>cloned</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>original</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name>cloned</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\binarySearchTreeIterator\binarySearchTreeIterator.java"><comment type="line">// Source : https://oj.leetcode.com/problems/balanced-binary-tree/</comment>
+<comment type="line">// Inspired by : http://www.jiuzhang.com/solutions/binary-search-tree-iterator/</comment>
+<comment type="line">// Author : Lei Cao</comment>
+<comment type="line">// Date   : 2015-10-07</comment>
+
+<comment type="block" format="javadoc">/********************************************************************************** 
+ * 
+ * Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+ * 
+ * Calling next() will return the next smallest number in the BST.
+ * 
+ * Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree. 
+ * 
+ * Credits:Special thanks to @ts for adding this problem and creating all test cases.
+ *               
+ **********************************************************************************/</comment>
+
+<package>package <name>binarySearchTreeIterator</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Stack</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ * Example of iterate a tree:
+ * Solution iterator = new Solution(root);
+ * while (iterator.hasNext()) {
+ *    TreeNode node = iterator.next();
+ *    do something for node
+ * }
+ */</comment>
+<class><specifier>public</specifier> class <name>binarySearchTreeIterator</name> <block>{
+    <decl_stmt><decl><type><specifier>private</specifier> <name>TreeNode</name></type> <name>currentNode</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>private</specifier> <name><name>Stack</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>stack</name> <init>= <expr><operator>new</operator> <call><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <comment type="line">//@param root: The root of binary tree.</comment>
+    <constructor><specifier>public</specifier> <name>binarySearchTreeIterator</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>currentNode</name> <operator>=</operator> <name>root</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></constructor>
+
+    <comment type="line">//@return: True if there has next node, or false</comment>
+    <function><type><specifier>public</specifier> <name>boolean</name></type> <name>hasNext</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <comment type="line">// write your code here</comment>
+        <return>return <expr><name>currentNode</name> <operator>!=</operator> <literal type="null">null</literal> <operator>||</operator> <operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="line">//@return: return next node</comment>
+    <function><type><specifier>public</specifier> <name>TreeNode</name></type> <name>next</name><parameter_list>()</parameter_list> <block>{<block_content>
+        <comment type="line">// write your code here</comment>
+        <while>while <condition>(<expr><name>currentNode</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>currentNode</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>currentNode</name> <operator>=</operator> <name><name>currentNode</name><operator>.</operator><name>left</name></name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+
+        <expr_stmt><expr><name>currentNode</name> <operator>=</operator> <call><name><name>stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name></type> <name>node</name> <init>= <expr><name>currentNode</name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>currentNode</name> <operator>=</operator> <name><name>currentNode</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+
+        <return>return <expr><name>node</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+
+</unit>

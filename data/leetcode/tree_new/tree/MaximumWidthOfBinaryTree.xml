@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\MaximumWidthOfBinaryTree.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 03/05/2018. Given a binary tree, write a function to get the
+ * maximum width of the given tree. The width of a tree is the maximum width among all levels. The
+ * binary tree has the same structure as a full binary tree, but some nodes are null.
+ *
+ * &lt;p&gt;The width of one level is defined as the length between the end-nodes (the leftmost and right
+ * most non-null nodes in the level, where the null nodes between the end-nodes are also counted
+ * into the length calculation.
+ *
+ * &lt;p&gt;Example 1: Input:
+ *
+ * &lt;p&gt;1 / \ 3 2 / \ \ 5 3 9
+ *
+ * &lt;p&gt;Output: 4 Explanation: The maximum width existing in the third level with the length 4
+ * (5,3,null,9). Example 2: Input:
+ *
+ * &lt;p&gt;1 / 3 / \ 5 3
+ *
+ * &lt;p&gt;Output: 2 Explanation: The maximum width existing in the third level with the length 2 (5,3).
+ * Example 3: Input:
+ *
+ * &lt;p&gt;1 / \ 3 2 / 5
+ *
+ * &lt;p&gt;Output: 2 Explanation: The maximum width existing in the second level with the length 2 (3,2).
+ * Example 4: Input:
+ *
+ * &lt;p&gt;1 / \ 3 2 / \ 5 9 / \ 6 7 Output: 8 Explanation:The maximum width existing in the fourth level
+ * with the length 8 (6,null,null,null,null,null,null,7).
+ *
+ * &lt;p&gt;Solution: O(N): General idea is to give a position value to each node. On every left traversal
+ * give the value curr_pos * 2 and on every right traversal give the value curr_pos * 2 + 1
+ * Calculate maximum width for each level using right - left + 1
+ */</comment>
+<class><specifier>public</specifier> class <name>MaximumWidthOfBinaryTree</name> <block>{
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>widthOfBinaryTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>preorder</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <range>: <expr><call><name><name>map</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>-</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>max</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>preorder</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>level</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>pos</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name>preorder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>level</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>pos</name> <operator>*</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>putIfAbsent</name></name><argument_list>(<argument><expr><name>level</name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>level</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><name>pos</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name>preorder</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>level</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>pos</name> <operator>*</operator> <literal type="number">2</literal> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></if></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

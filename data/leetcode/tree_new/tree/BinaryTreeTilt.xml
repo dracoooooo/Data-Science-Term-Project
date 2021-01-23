@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\BinaryTreeTilt.java"><package>package <name>tree</name>;</package>
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 14/08/2019 Given a binary tree, return the tilt of the whole
+ * tree.
+ *
+ * &lt;p&gt;The tilt of a tree node is defined as the absolute difference between the sum of all left
+ * subtree node values and the sum of all right subtree node values. Null node has tilt 0.
+ *
+ * &lt;p&gt;The tilt of the whole tree is defined as the sum of all nodes' tilt.
+ *
+ * &lt;p&gt;Example: Input: 1 / \ 2 3 Output: 1 Explanation: Tilt of node 2 : 0 Tilt of node 3 : 0 Tilt of
+ * node 1 : |2-3| = 1 Tilt of binary tree : 0 + 0 + 1 = 1 Note:
+ *
+ * &lt;p&gt;The sum of node values in any subtree won't exceed the range of 32-bit integer. All the tilt
+ * values won't exceed the range of 32-bit integer.
+ *
+ * &lt;p&gt;Solution: Find tilt of left node and find tilt of right node and return left + right + curr to
+ * its parent.
+ */</comment>
+<class><specifier>public</specifier> class <name>BinaryTreeTilt</name> <block>{
+
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>node</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>node</name><operator>.</operator><name>right</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>BinaryTreeTilt</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findTilt</name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>findTilt</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <expr_stmt><expr><call><name>tilt</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>sum</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>tilt</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>node</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><call><name>tilt</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><call><name>tilt</name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name>sum</name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>left</name> <operator>-</operator> <name>right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>left</name> <operator>+</operator> <name>right</name> <operator>+</operator> <name><name>node</name><operator>.</operator><name>val</name></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

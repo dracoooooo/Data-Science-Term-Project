@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\AverageOfLevelsInBinaryTree.java"><package>package <name>tree</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayDeque</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 16/12/2017. Given a non-empty binary tree, return the average
+ * value of the nodes on each level in the form of an array. Example 1: Input: 3 / \ 9 20 / \ 15 7
+ * Output: [3, 14.5, 11] Explanation: The average value of nodes on level 0 is 3, on level 1 is
+ * 14.5, and on level 2 is 11. Hence return [3, 14.5, 11]. Note: The range of node's value is in the
+ * range of 32-bit signed integer.
+ *
+ * &lt;p&gt;Solution O(n) : Perform a BFS and calculate average for each level.
+ */</comment>
+<class><specifier>public</specifier> class <name>AverageOfLevelsInBinaryTree</name> <block>{
+
+  <class>class <name>LevelNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>level</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>node</name></decl>;</decl_stmt>
+
+    <constructor><name>LevelNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>level</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name></type> <name>node</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>level</name></name> <operator>=</operator> <name>level</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>node</name></name> <operator>=</operator> <name>node</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <class><specifier>public</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Double</name></argument>&gt;</argument_list></name></type> <name>averageOfLevels</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>LevelNode</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>LevelNode</name></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>LevelNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>curLevel</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>sum</name> <init>= <expr><literal type="number">0L</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Double</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>LevelNode</name></type> <name>first</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>first</name><operator>.</operator><name>level</name></name> <operator>==</operator> <name>curLevel</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>(</operator><name>double</name><operator>)</operator> <name>sum</name> <operator>/</operator> <name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>sum</name> <operator>=</operator> <name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>count</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name>curLevel</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>LevelNode</name><argument_list>(<argument><expr><name>curLevel</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>LevelNode</name><argument_list>(<argument><expr><name>curLevel</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>first</name><operator>.</operator><name>node</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>(</operator><name>double</name><operator>)</operator> <name>sum</name> <operator>/</operator> <name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\tree\tree\MaximumBinaryTree.java"><package>package <name>tree</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 19/08/2017. Given an integer array with no duplicates. A
+ * maximum tree building on this array is defined as follow:
+ *
+ * &lt;p&gt;The root is the maximum number in the array. The left subtree is the maximum tree constructed
+ * from left part subarray divided by the maximum number. The right subtree is the maximum tree
+ * constructed from right part subarray divided by the maximum number. Construct the maximum tree by
+ * the given array and output the root node of this tree.
+ *
+ * &lt;p&gt;Example 1: Input: [3,2,1,6,0,5] Output: return the tree root node representing the following
+ * tree:
+ *
+ * &lt;p&gt;6 / \ 3 5 \ / 2 0 \ 1
+ *
+ * &lt;p&gt;Note: The size of the given array will be in the range [1,1000].
+ */</comment>
+<class><specifier>public</specifier> class <name>MaximumBinaryTree</name> <block>{
+
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>TreeNode</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>left</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>right</name></decl>;</decl_stmt>
+
+    <constructor><name>TreeNode</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name>val</name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>max</name></decl>;</decl_stmt>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name> <init>= <expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>MaximumBinaryTree</name><argument_list>()</argument_list></call><operator>.</operator><call><name>constructMaximumBinaryTree</name><argument_list>(<argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// print root</comment>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>TreeNode</name></type> <name>constructMaximumBinaryTree</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+
+    <expr_stmt><expr><name>max</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr>;</expr_stmt>
+
+    <comment type="line">// pre-fill with initial values</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <comment type="line">// pre-calculate max for range index</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name><name>nums</name><index>[<expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>]</index></name> <operator>&gt;</operator> <name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr> ?</condition><then> <expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr> </then><else>: <expr><name>j</name></expr></else></ternary></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <return>return <expr><call><name>build</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>TreeNode</name></type> <name>build</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>e</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>s</name> <operator>&lt;=</operator> <name>e</name></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>val</name> <init>= <expr><name><name>nums</name><index>[<expr><name><name>max</name><index>[<expr><name>s</name></expr>]</index><index>[<expr><name>e</name></expr>]</index></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>TreeNode</name></type> <name>n</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><name><name>n</name><operator>.</operator><name>left</name></name> <operator>=</operator> <call><name>build</name><argument_list>(<argument><expr><name>s</name></expr></argument>, <argument><expr><name><name>max</name><index>[<expr><name>s</name></expr>]</index><index>[<expr><name>e</name></expr>]</index></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>n</name><operator>.</operator><name>right</name></name> <operator>=</operator> <call><name>build</name><argument_list>(<argument><expr><name><name>max</name><index>[<expr><name>s</name></expr>]</index><index>[<expr><name>e</name></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>e</name></expr></argument>, <argument><expr><name>nums</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <return>return <expr><name>n</name></expr>;</return>
+    </block_content>}</block></if></if_stmt>
+    <return>return <expr><literal type="null">null</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

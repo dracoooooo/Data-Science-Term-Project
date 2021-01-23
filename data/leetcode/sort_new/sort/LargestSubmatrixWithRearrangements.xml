@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\LargestSubmatrixWithRearrangements.java"><class><specifier>public</specifier> class <name>LargestSubmatrixWithRearrangements</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>largestSubmatrix</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <comment type="line">//Store matrix[i][j]= total number of consecutive 1s along column j ending at index (i,j).</comment>
+       <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name><name>matrix</name><operator>.</operator><name>length</name></name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>  <comment type="line">//Start from row 1 because row 0 will be unaffected as no row above it.</comment>
+       <block>{<block_content>
+           <for>for<control>(<init><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>j</name><operator>&lt;</operator><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition><incr><expr><name>j</name><operator>++</operator></expr></incr>)</control>
+           <block>{<block_content>
+               <if_stmt><if>if<condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if>
+               <else>else<block type="pseudo"><block_content>  <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name><operator>=</operator><name><name>matrix</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+           </block_content>}</block></for>
+       </block_content>}</block></for>
+       
+       <decl_stmt><decl><type><name>int</name></type> <name>maxSize</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+       <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name><name>matrix</name><operator>.</operator><name>length</name></name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+       <block>{<block_content>
+          
+           <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>pq</name>  <init>=  <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt><comment type="line">// minheap</comment>
+           <for>for<control>(<init><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init><condition><expr><name>j</name><operator>&lt;</operator><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition><incr><expr><name>j</name><operator>++</operator></expr></incr>)</control>
+           <block>{<block_content>
+               <if_stmt><if>if<condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name><operator>&gt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content>  <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt> <comment type="line">// Add all the entries from row i in minheap</comment>
+           </block_content>}</block></for>
+           <decl_stmt><decl><type><name>int</name></type> <name>size</name><init>=<expr><literal type="number">0</literal></expr></init></decl>,<decl><type ref="prev"/><name>curr</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+           <comment type="block">/*
+               In current row, total entries with value k or greater than k will contribute the squares of
+               size=k*(number of squares of size k or greater than k).Largest square ending at current
+               row= k * (all entries greater than or equal to k in current row) for all ks in current row
+           */</comment>
+           <while>while<condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition>  
+           <block>{<block_content>
+               <expr_stmt><expr><name>curr</name><operator>=</operator><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> 
+               
+               <expr_stmt><expr><name>size</name><operator>=</operator><name>curr</name><operator>*</operator><call><name><name>pq</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+               <expr_stmt><expr><name>maxSize</name><operator>=</operator><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>maxSize</name></expr></argument>,<argument><expr><name>size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+               
+               <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+           </block_content>}</block></while>
+       </block_content>}</block></for>
+       <return>return <expr><name>maxSize</name></expr>;</return>
+   </block_content>}</block></function>
+}</block></class>
+</unit>
