@@ -17,20 +17,24 @@ from src.ast_based_similarities.ast_similarities import parse_tree, traverse_and
 from src.ast_based_similarities.tree_node import Node
 from src.ast_based_similarities.create_ast import create_ast
 label = {
-    "array":    [1, 0, 0, 0, 0],
+    # "array":    [1, 0, 0, 0, 0],
     # "math":     [0, 1, 0, 0, 0, 0],
-    "search":   [0, 1, 0, 0, 0],
-    "sort":     [0, 0, 1, 0, 0],
-    "string":   [0, 0, 0, 1, 0],
-    "tree":     [0, 0, 0, 0, 1]
+    # "search":   [0, 1, 0, 0, 0],
+    # "sort":   [0, 0, 1, 0, 0],
+    # "string":   [0, 0, 0, 1, 0],
+    # "tree":     [0, 0, 0, 0, 1]
+    "sort" : [1,0],
+    "tree" :[0,1]
 }
 
-array_path = "../../data/leetcode/array"
+
+
+# array_path = "../../data/leetcode/array"
 # math_path = "../../data/leetcode/math"
-search_path = "../../data/leetcode/search"
-sort_path = "../../data/leetcode/array"
-string_path = "../../data/leetcode/array"
-tree_path = "../../data/leetcode/array"
+# search_path = "../../data/leetcode/search"
+sort_path = "../../data/leetcode/sort"
+# string_path = "../../data/leetcode/string"
+tree_path = "../../data/leetcode/tree"
 raw_path = "../../data/leetcode/raw"
 
 features = 1000
@@ -48,19 +52,19 @@ def file_paths(data_path, language):
     return ret
 
 def count():
-    array = load_data(array_path, "java")
+    # array = load_data(array_path, "java")
     # math = load_data(math_path, "java")
-    search = load_data(search_path, "java")
+    # search = load_data(search_path, "java")
     sort = load_data(sort_path, "java")
-    string = load_data(string_path, "java")
+    # string = load_data(string_path, "java")
     tree = load_data(tree_path, "java")
     raw = load_data(raw_path, "java")
 
-    print(array.__len__())
+    # print(array.__len__())
     # print(math.__len__())
-    print(search.__len__())
+    # print(search.__len__())
     print(sort.__len__())
-    print(string.__len__())
+    # print(string.__len__())
     print(tree.__len__())
     print(raw.__len__())
 
@@ -195,28 +199,25 @@ def get_feature_ast_node_embedding(path):
 
 train_size = 50
 def prepare_data():
-    array = file_paths(array_path, "java")
+    # array = file_paths(array_path, "java")
     # math = file_paths(math_path, "java")
-    search = file_paths(search_path, "java")
+    # search = file_paths(search_path, "java")
     sort = file_paths(sort_path, "java")
-    string = file_paths(string_path, "java")
+    # string = file_paths(string_path, "java")
     tree = file_paths(tree_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = ast_node_embedding(array[0: train_size] + search[0: train_size] + sort[0: train_size] + string[0: train_size] + tree[0: train_size])
-    Y_train = [label["array"]] * train_size + [label["search"]] * train_size + [label["sort"]] * train_size + [label["string"]] * train_size + [label["tree"]] * train_size
-    X_test = ast_node_embedding(array[train_size:] + search[train_size:] + sort[train_size:] + string[train_size:] + tree[train_size:])
-    Y_test = [label["array"]] * (array.__len__() - train_size) + \
-             [label["search"]] * (search.__len__() - train_size) + \
-             [label["sort"]] * (sort.__len__() - train_size) + \
-             [label["string"]] * (string.__len__() - train_size) + \
+    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size])
+    Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size
+    X_test = bag_of_word( sort[train_size:] +  tree[train_size:])
+    Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
              [label["tree"]] * (tree.__len__() - train_size)
 
     x_train = np.array(X_train)
     x_test = np.array(X_test)
     y_train = np.array(Y_train)
     y_test = np.array(Y_test)
-    raw_ = ast_node_embedding(raw)
+    raw_ = bag_of_word(raw)
 
     train_index = [i for i in range(x_train.__len__())]
     test_index = [i for i in range(x_test.__len__())]
@@ -236,7 +237,7 @@ def init_model():
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
-    model.add(Dense(units=5, activation='softmax'))
+    model.add(Dense(units=2, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
