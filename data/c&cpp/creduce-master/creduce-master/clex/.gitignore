@@ -1,0 +1,7 @@
+# Additions to the patterns specified in the root `.gitignore' file.
+
+# Files made by compilation.
+clex
+clex.c
+strlex
+strlex.c

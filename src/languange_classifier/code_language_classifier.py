@@ -14,11 +14,14 @@ import matplotlib.pyplot as plt
 # 代码文件数量：
 # python: 3272
 # java: 1556
-# js: 2103
+# js: 2099
+# c&cpp: 1570
+# 每种语言取1000份代码作为训练集，500份代码作为验证集
 from tensorflow.python.keras.models import load_model
 java_path = "../../data/java"
 python_path = "../../data/python"
 js_path = "../../data/javascript"
+ccpp_path = "../../data/c&cpp"
 test_path = "../../data/test"
 
 
@@ -27,14 +30,17 @@ suffix = {
     "java": ".java",
     "python": ".py",
     "javascript": ".js",
-    "xml": ".xml"
+    "xml": ".xml",
+    "c": ".c",
+    "cpp": ".cpp"
 }
 
 # 代码语言的标签(one-hot)
 label = {
-    "java": [1, 0, 0],
-    "python": [0, 1, 0],
-    "js": [0, 0, 1]
+    "java": [1, 0, 0, 0],
+    "python": [0, 1, 0, 0],
+    "js": [0, 0, 1, 0],
+    "ccpp": [0, 0, 0, 1]
 }
 
 # 每个语言的训练集大小和测试集大小
@@ -42,7 +48,7 @@ training_size = 1000
 testing_size = 500
 
 # 分类语言数量
-N = 3
+N = 4
 
 
 # 返回data_path下所有代码文件的字符串
@@ -57,36 +63,49 @@ def load_data(data_path, language):
                 # 删除换行符和tab
                 # text = text.replace("\n", ""). replace("\t", "")
                 # 删除注释
-                text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', text)
+                # text = re.sub("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", '', text)
+
+                text = add_blank(text)
                 ret.append(text)
     return ret
 
 
-# 取前500个词
-max_length = 500
-# 取200个特征
-features = 200
+# 在特殊字符前后加空格
+def add_blank(text):
+    text = re.sub(";", " ; ", text)
+    text = re.sub("#", " # ", text)
+    text = re.sub("//", " // ", text)
+    text = re.sub("{", " { ", text)
+    text = re.sub("}", " } ", text)
+    return text
+
+
+# 取前1000个词
+max_length = 1000
+# 取1000个特征
+features = 1000
 
 
 # 用来处理代码文件转成能使用的特征
-# 想法：用频率最高的200个词作为200维特征(是否可行？
+# 想法：用频率最高的1000个词作为1000维特征(是否可行？
 # 看起来可行！
 def prepare_data():
     # load data
     java_data = load_data(java_path, "java")
     python_data = load_data(python_path, "python")
     js_data = load_data(js_path, "javascript")
+    ccpp_data = load_data(ccpp_path, "c") + load_data(ccpp_path, "cpp")
 
     # slice data
-    train_data = java_data[0: training_size] + python_data[0: training_size] + js_data[0: training_size]
-    test_data = java_data[training_size: training_size + testing_size] + python_data[training_size: training_size + testing_size] + js_data[training_size: training_size + testing_size]
+    train_data = java_data[0: training_size] + python_data[0: training_size] + js_data[0: training_size] + ccpp_data[0: training_size]
+    test_data = java_data[training_size: training_size + testing_size] + \
+                python_data[training_size: training_size + testing_size] + \
+                js_data[training_size: training_size + testing_size] + \
+                ccpp_data[training_size: training_size + testing_size]
 
     # label:
-    # java: [1, 0, 0]
-    # python: [0, 1, 0]
-    # js: [0, 0, 1]
-    train_label = [[1, 0, 0]] * training_size + [[0, 1, 0]] * training_size + [[0, 0, 1]] * training_size
-    test_label = [[1, 0, 0]] * testing_size + [[0, 1, 0]] * testing_size + [[0, 0, 1]] * testing_size
+    train_label = [label["java"]] * training_size + [label["python"]] * training_size + [label["js"]] * training_size + [label["ccpp"]] * training_size
+    test_label = [label["java"]] * testing_size + [label["python"]] * testing_size + [label["js"]] * testing_size + [label["ccpp"]] * testing_size
 
     y_train = np.array(train_label)
     y_test = np.array(test_label)
@@ -143,9 +162,9 @@ def init_model():
     # define network structure
     model = Sequential()
 
-    model.add(Dense(input_dim=features, units=30, activation='relu'))
-    model.add(Dense(units=20, activation='relu'))
-    model.add(Dense(units=3, activation='softmax'))
+    model.add(Dense(input_dim=features, units=1000, activation='relu'))
+    model.add(Dense(units=200, activation='relu'))
+    model.add(Dense(units=4, activation='softmax'))
 
     # set configurations
     model.compile(loss='categorical_crossentropy',
@@ -160,9 +179,11 @@ def count():
     py = load_data(python_path, "python")
     js = load_data(js_path, "javascript")
     java = load_data(java_path, "java")
+    ccpp = load_data(ccpp_path, "c") + load_data(ccpp_path, "cpp")
     print("python:", py.__len__())
     print("java:", java.__len__())
     print("js:", js.__len__())
+    print("ccpp:", ccpp.__len__())
 
 
 # 画画
@@ -177,7 +198,7 @@ def plot_graphs(history, string):
 
 def tokenize(data):
     # init tokenizer
-    tokenizer = Tokenizer(num_words=100,
+    tokenizer = Tokenizer(num_words=1000,
                           filters='!"$%&()*+,-./:<=>?@[\\]^_`{|}~\t\n')  # 去掉了可能能够分别语言的符号
     tokenizer.fit_on_texts(data)
     return tokenizer
@@ -186,6 +207,7 @@ def tokenize(data):
 # 用来将一个文本文件转换成上述特征向量
 def handle_user_data(path):
     text = [open(path, encoding='UTF-8').read()]
+    text[0] = add_blank(text[0])
     # read tokenizer
     f1 = open('tokenizer.pkl', 'rb')
     tokenizer = pickle.load(f1)
@@ -207,7 +229,7 @@ def handle_user_data(path):
 def train():
     (x_train, y_train), (x_test, y_test) = prepare_data()
     model = init_model()
-    history = model.fit(x_train, y_train, batch_size=100, epochs=10,
+    history = model.fit(x_train, y_train, batch_size=100, epochs=40,
               validation_data=(x_test, y_test), verbose=2)
     plot_graphs(history, "accuracy")
     plot_graphs(history, "loss")
@@ -234,18 +256,21 @@ def predict(path):
     tmp = prediction[0]
     int_tmp = soft_max(tmp)
     lang = ""
-    if int_tmp == [1, 0, 0]:
+    if int_tmp == label["java"]:
         lang = "java"
-    elif int_tmp == [0, 1, 0]:
+    elif int_tmp == label["python"]:
         lang = "python"
-    elif int_tmp == [0, 0, 1]:
+    elif int_tmp == label["js"]:
         lang = "javascript"
-    print("predict language:",lang)
+    elif int_tmp == label["ccpp"]:
+        lang = "c&cpp"
+    print("predict language:", lang)
     print("prossibility: ", max(tmp))
 
 
 if __name__ == "__main__":
-    # train()
+    train()
+    # count()
     predict('./code_language_classifier.py')
     predict('../../data/test/java_file1.js')
     predict('../../data/test/java_file2.java')
@@ -253,6 +278,7 @@ if __name__ == "__main__":
     predict('../../data/test/js_file2.js')
     predict('../../data/test/python_file1.java')
     predict('../../data/test/python_file2.js')
+    predict('../../data/test/ccpp_file1.cpp')
 
 
 
