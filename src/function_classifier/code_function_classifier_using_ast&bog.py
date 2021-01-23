@@ -215,7 +215,7 @@ def prepare_data():
 
     X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size] + dp[0:train_size])
     Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size + [label["dp"]] * train_size
-    X_test = bag_of_word( sort[train_size:] +  tree[train_size:])
+    X_test = bag_of_word( sort[train_size:] +  tree[train_size:] + dp[train_size:])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
              [label["tree"]] * (tree.__len__() - train_size) + \
              [label["dp"]] * (dp.__len__() - train_size)
@@ -281,7 +281,7 @@ def self_learning():
 if __name__ == "__main__":
     # get_feature_bag_of_word("../../data/test/java_file2.java")
     # creat_ast_xml()
-    # init_tokenizer()
+    init_tokenizer()
     count()
     self_learning()
 

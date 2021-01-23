@@ -24,7 +24,6 @@ js_path = "../../data/javascript"
 ccpp_path = "../../data/c&cpp"
 test_path = "../../data/test"
 
-
 # 代码语言的后缀名
 suffix = {
     "java": ".java",
