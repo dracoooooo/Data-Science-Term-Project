@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_588.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_588</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Credit: https://github.com/lydxlx1/LeetCode/blob/master/src/_588.java
+         */</comment>
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>FileSystem</name> <block>{
+
+            <class>class <name>TrieNode</name> <block>{
+                <decl_stmt><decl><type><name>boolean</name></type> <name>isFile</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>String</name></argument>, <argument><name>TrieNode</name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>String</name></type> <name>name</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>StringBuilder</name></type> <name>stringBuilder</name></decl>;</decl_stmt>
+
+                <constructor><name>TrieNode</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>name</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>name</name></name> <operator>=</operator> <name>name</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>stringBuilder</name> <operator>=</operator> <operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+            }</block></class>
+
+            <decl_stmt><decl><type><name>TrieNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TrieNode</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <function><type><name>TrieNode</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>TrieNode</name></type> <name>node</name> <init>= <expr><name>root</name></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>String</name></type> <name>eachPath</name> <range>: <expr><call><name><name>path</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">"/"</literal></expr></argument>)</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>eachPath</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <continue>continue;</continue>
+                    </block_content>}</block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>node</name><operator>.</operator><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>eachPath</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>node</name><operator>.</operator><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>eachPath</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>TrieNode</name><argument_list>(<argument><expr><name>eachPath</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>node</name> <operator>=</operator> <call><name><name>node</name><operator>.</operator><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>eachPath</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+                <return>return <expr><name>node</name></expr>;</return>
+            </block_content>}</block></function>
+
+            <constructor><specifier>public</specifier> <name>FileSystem</name><parameter_list>()</parameter_list> <block>{<block_content>
+            </block_content>}</block></constructor>
+
+            <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>ls</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>TrieNode</name></type> <name>node</name> <init>= <expr><call><name>dfs</name><argument_list>(<argument><expr><name>path</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>.</operator><name>isFile</name></name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><name><name>node</name><operator>.</operator><name>name</name></name></expr></argument>)</argument_list></call></expr>;</return>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>files</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>(<argument><expr><call><name><name>node</name><operator>.</operator><name>map</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>files</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <return>return <expr><name>files</name></expr>;</return>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>mkdir</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>path</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>addContentToFile</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>filePath</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>content</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>TrieNode</name></type> <name>node</name> <init>= <expr><call><name>dfs</name><argument_list>(<argument><expr><name>filePath</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>node</name><operator>.</operator><name>isFile</name></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>node</name><operator>.</operator><name>stringBuilder</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>content</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>String</name></type> <name>readContentFromFile</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>filePath</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name>dfs</name><argument_list>(<argument><expr><name>filePath</name></expr></argument>)</argument_list></call><operator>.</operator><call><name><name>stringBuilder</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+
+<comment type="block" format="javadoc">/**
+ * Your FileSystem object will be instantiated and called as such:
+ * FileSystem obj = new FileSystem();
+ * List&lt;String&gt; param_1 = obj.ls(path);
+ * obj.mkdir(path);
+ * obj.addContentToFile(filePath,content);
+ * String param_4 = obj.readContentFromFile(filePath);
+ */</comment>
+}</block></class>
+</unit>

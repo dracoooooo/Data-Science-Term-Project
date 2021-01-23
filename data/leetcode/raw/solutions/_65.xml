@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_65.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_65</name> <block>{
+    <comment type="block" format="javadoc">/**
+     * credit: https://discuss.leetcode.com/topic/9490/clear-java-solution-with-ifs
+     */</comment>
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isNumber</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>s</name> <operator>=</operator> <call><name><name>s</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>boolean</name></type> <name>pointSeen</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>eSeen</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>numberSeen</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>numberAfterE</name> <init>= <expr><literal type="boolean">true</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><literal type="char">'0'</literal> <operator>&lt;=</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&lt;=</operator> <literal type="char">'9'</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>numberSeen</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>numberAfterE</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'.'</literal></expr>)</condition> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>eSeen</name> <operator>||</operator> <name>pointSeen</name></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>pointSeen</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'e'</literal></expr>)</condition> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>eSeen</name> <operator>||</operator> <operator>!</operator><name>numberSeen</name></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>numberAfterE</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>eSeen</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'-'</literal> <operator>||</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'+'</literal></expr>)</condition> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>!=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>!=</operator> <literal type="char">'e'</literal></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+
+            <return>return <expr><name>numberSeen</name> <operator>&amp;&amp;</operator> <name>numberAfterE</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/2973/java-solution-with-one-line
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isNumber</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>s</name><operator>.</operator><name>matches</name></name><argument_list>(<argument><expr><literal type="string">"(\\s*)[+-]?((\\.[0-9]+)|([0-9]+(\\.[0-9]*)?))(e[+-]?[0-9]+)?(\\s*)"</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

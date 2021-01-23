@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_355.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>PriorityQueue</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_355</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * reference: https://discuss.leetcode.com/topic/48100/java-oo-design-with-most-efficient-function-getnewsfeed
+         */</comment>
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>Twitter</name> <block>{
+
+            <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <name>int</name></type> <name>timestamp</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>User</name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+
+            <class>class <name>Tweet</name> <block>{
+                <decl_stmt><decl><type><specifier>public</specifier> <name>int</name></type> <name>time</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>public</specifier> <name>int</name></type> <name>id</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>public</specifier> <name>Tweet</name></type> <name>next</name></decl>;</decl_stmt>
+
+                <comment type="block" format="javadoc">/**
+                 * have a pointer,
+                 * so we could be more memory efficient when retrieving tweets,
+                 * think about merging k sorted lists
+                 */</comment>
+
+                <constructor><specifier>public</specifier> <name>Tweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>id</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>id</name></name> <operator>=</operator> <name>id</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>time</name> <operator>=</operator> <name>timestamp</name><operator>++</operator></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>next</name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+            }</block></class>
+
+            <comment type="block" format="javadoc">/**
+             * the meat part of this OO design problem,
+             * have a User object itself,
+             * have follow() and unfollow() method embedded inside it
+             */</comment>
+            <class>class <name>User</name> <block>{
+                <decl_stmt><decl><type><specifier>public</specifier> <name>int</name></type> <name>id</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>public</specifier> <name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>followed</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>public</specifier> <name>Tweet</name></type> <name>tweetHead</name></decl>;</decl_stmt>
+
+                <constructor><specifier>public</specifier> <name>User</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>id</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>id</name></name> <operator>=</operator> <name>id</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>followed</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>followed</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>id</name></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="line">//follow oneself first</comment>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>tweetHead</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>follow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>followed</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></function>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>unfollow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>followed</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></function>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>postTweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>tweetId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <comment type="line">//every time we post, we prepend it to the head of the tweet</comment>
+                    <decl_stmt><decl><type><name>Tweet</name></type> <name>head</name> <init>= <expr><operator>new</operator> <call><name>Tweet</name><argument_list>(<argument><expr><name>tweetId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>head</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>tweetHead</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>tweetHead</name> <operator>=</operator> <name>head</name></expr>;</expr_stmt><comment type="line">//don't forget to overwrite tweetHead with the new head</comment>
+                </block_content>}</block></function>
+            }</block></class>
+
+            <comment type="block" format="javadoc">/**
+             * Initialize your data structure here.
+             */</comment>
+            <constructor><specifier>public</specifier> <name>Twitter</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name>HashMap</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <comment type="block" format="javadoc">/**
+             * Compose a new tweet.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>postTweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>userId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>tweetId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <comment type="block" format="javadoc">/**update oneself newsFeed first and also all of his followers' newsFeed*/</comment>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>User</name></type> <name>user</name> <init>= <expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>, <argument><expr><name>user</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>postTweet</name><argument_list>(<argument><expr><name>tweetId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+             */</comment>
+            <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>getNewsFeed</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>userId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>newsFeed</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>newsFeed</name></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>users</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call><operator>.</operator><name>followed</name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Tweet</name></argument>&gt;</argument_list></name></type> <name>heap</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>users</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>b</name><operator>.</operator><name>time</name></name> <operator>-</operator> <name><name>a</name><operator>.</operator><name>time</name></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>user</name> <range>: <expr><name>users</name></expr></range></decl></init>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Tweet</name></type> <name>tweet</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>user</name></expr></argument>)</argument_list></call><operator>.</operator><name>tweetHead</name></expr></init></decl>;</decl_stmt>
+                    <comment type="line">//it's super important to check null before putting into the heap</comment>
+                    <if_stmt><if>if <condition>(<expr><name>tweet</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>heap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>tweet</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+
+                <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <while>while <condition>(<expr><operator>!</operator><call><name><name>heap</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name>count</name> <operator>&lt;</operator> <literal type="number">10</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Tweet</name></type> <name>tweet</name> <init>= <expr><call><name><name>heap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>newsFeed</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>tweet</name><operator>.</operator><name>id</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+                    <if_stmt><if>if <condition>(<expr><name><name>tweet</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>heap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>tweet</name><operator>.</operator><name>next</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></while>
+
+                <return>return <expr><name>newsFeed</name></expr>;</return>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Follower follows a followee. If the operation is invalid, it should be a no-op.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>follow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followerId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>User</name></type> <name>user</name> <init>= <expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>, <argument><expr><name>user</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>User</name></type> <name>user</name> <init>= <expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>, <argument><expr><name>user</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>follow</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Follower unfollows a followee. If the operation is invalid, it should be a no-op.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>unfollow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followerId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call> <operator>||</operator> <name>followeeId</name> <operator>==</operator> <name>followerId</name></expr>)</condition> <block>{<block_content>
+                    <return>return;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>unfollow</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+            <comment type="block" format="javadoc">/**
+             * Your Twitter object will be instantiated and called as such:
+             * Twitter obj = new Twitter();
+             * obj.postTweet(userId,tweetId);
+             * List&lt;Integer&gt; param_2 = obj.getNewsFeed(userId);
+             * obj.follow(followerId,followeeId);
+             * obj.unfollow(followerId,followeeId);
+             */</comment>
+        }</block></class>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>Twitter</name> <block>{
+
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>User</name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>timestamp</name></decl>;</decl_stmt>
+
+            <class><specifier>private</specifier> class <name>User</name> <block>{
+                <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>userId</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>private</specifier> <name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>followed</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><specifier>private</specifier> <name>Tweet</name></type> <name>tweetHead</name></decl>;</decl_stmt>
+
+                <constructor><specifier>public</specifier> <name>User</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>userId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>userId</name></name> <operator>=</operator> <name>userId</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>followed</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>followed</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>tweetHead</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>postTweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>tweetId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Tweet</name></type> <name>tweet</name> <init>= <expr><operator>new</operator> <call><name>Tweet</name><argument_list>(<argument><expr><name>tweetId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>tweet</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>tweetHead</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>tweetHead</name> <operator>=</operator> <name>tweet</name></expr>;</expr_stmt>
+                </block_content>}</block></function>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>follow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>followed</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></function>
+
+                <function><type><specifier>public</specifier> <name>void</name></type> <name>unfollow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>followed</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></function>
+
+            }</block></class>
+
+            <class><specifier>private</specifier> class <name>Tweet</name> <block>{
+                <decl_stmt><decl><type><name>int</name></type> <name>time</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>id</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>Tweet</name></type> <name>next</name></decl>;</decl_stmt>
+
+                <constructor><specifier>public</specifier> <name>Tweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>id</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>id</name></name> <operator>=</operator> <name>id</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>time</name> <operator>=</operator> <name>timestamp</name><operator>++</operator></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>next</name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+            }</block></class>
+
+            <comment type="block" format="javadoc">/**
+             * Initialize your data structure here.
+             */</comment>
+            <constructor><specifier>public</specifier> <name>Twitter</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>timestamp</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <comment type="block" format="javadoc">/**
+             * Compose a new tweet.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>postTweet</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>userId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>tweetId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>User</name></type> <name>user</name> <init>= <expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>, <argument><expr><name>user</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>postTweet</name><argument_list>(<argument><expr><name>tweetId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+             */</comment>
+            <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>getNewsFeed</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>userId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>result</name></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>followeeSet</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>userId</name></expr></argument>)</argument_list></call><operator>.</operator><name>followed</name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Tweet</name></argument>&gt;</argument_list></name></type> <name>maxHeap</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>b</name><operator>.</operator><name>time</name></name> <operator>-</operator> <name><name>a</name><operator>.</operator><name>time</name></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>followeeId</name> <range>: <expr><name>followeeSet</name></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <decl_stmt><decl><type><name>Tweet</name></type> <name>tweet</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call><operator>.</operator><name>tweetHead</name></expr></init></decl>;</decl_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>tweet</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>tweet</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+
+                <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <while>while <condition>(<expr><operator>!</operator><call><name><name>maxHeap</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name>count</name><operator>++</operator> <operator>&lt;</operator> <literal type="number">10</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Tweet</name></type> <name>tweet</name> <init>= <expr><call><name><name>maxHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>tweet</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>tweet</name><operator>.</operator><name>id</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <if_stmt><if>if <condition>(<expr><name><name>tweet</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>tweet</name><operator>.</operator><name>next</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></while>
+                <return>return <expr><name>result</name></expr>;</return>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Follower follows a followee. If the operation is invalid, it should be a no-op.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>follow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followerId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>User</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>follow</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Follower unfollows a followee. If the operation is invalid, it should be a no-op.
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>unfollow</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>followerId</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>followeeId</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call> <operator>||</operator> <name>followeeId</name> <operator>==</operator> <name>followerId</name></expr>)</condition> <block>{<block_content>
+                    <return>return;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>followerId</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>unfollow</name><argument_list>(<argument><expr><name>followeeId</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class>
+</unit>

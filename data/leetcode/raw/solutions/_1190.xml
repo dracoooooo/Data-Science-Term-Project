@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1190.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Stack</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1190</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>reverseParentheses</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>stack</name> <init>= <expr><operator>new</operator> <call><name><name>Stack</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>!=</operator> <literal type="char">')'</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <while>while <condition>(<expr><operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>stack</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>!=</operator> <literal type="char">'('</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><call><name><name>stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+                    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt><comment type="line">//pop off the open paren</comment>
+                    </block_content>}</block></if></if_stmt>
+                    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>sb</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

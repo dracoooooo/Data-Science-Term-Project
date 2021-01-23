@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_68.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_68</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>fullJustify</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>L</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>ArrayList</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>words</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>words</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>result</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>last</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>words</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>count</name> <operator>+</operator> <name><name>words</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>length</name><argument_list>()</argument_list></call> <operator>+</operator> <operator>(</operator><name>i</name> <operator>-</operator> <name>last</name><operator>)</operator> <operator>&gt;</operator> <name>L</name></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>spaceNum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>int</name></type> <name>extraNum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>-</operator> <name>last</name> <operator>-</operator> <literal type="number">1</literal> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>spaceNum</name> <operator>=</operator> <operator>(</operator><name>L</name> <operator>-</operator> <name>count</name><operator>)</operator> <operator>/</operator> <operator>(</operator><name>i</name> <operator>-</operator> <name>last</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>extraNum</name> <operator>=</operator> <operator>(</operator><name>L</name> <operator>-</operator> <name>count</name><operator>)</operator> <operator>%</operator> <operator>(</operator><name>i</name> <operator>-</operator> <name>last</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>last</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name><name>words</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>&lt;</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                            <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>spaceNum</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            </block_content>}</block></for>
+                            <if_stmt><if>if <condition>(<expr><name>extraNum</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            </block_content>}</block></if></if_stmt>
+                            <expr_stmt><expr><name>extraNum</name><operator>--</operator></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></for>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>L</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>count</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>last</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>count</name> <operator>+=</operator> <name><name>words</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>length</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>last</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>words</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name><name>words</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <name>L</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>L</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

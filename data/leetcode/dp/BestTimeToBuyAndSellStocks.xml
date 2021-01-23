@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\BestTimeToBuyAndSellStocks.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/03/2017. Say you have an array for which the ith element is
+ * the price of a given stock on day i.
+ *
+ * &lt;p&gt;If you were only permitted to complete at most one transaction (ie, buy one and sell one share
+ * of the stock), design an algorithm to find the maximum profit.
+ *
+ * &lt;p&gt;Example 1: Input: [7, 1, 5, 3, 6, 4] Output: 5
+ *
+ * &lt;p&gt;max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)
+ * Example 2: Input: [7, 6, 4, 3, 1] Output: 0
+ *
+ * &lt;p&gt;In this case, no transaction is done, i.e. max profit = 0.
+ */</comment>
+<class><specifier>public</specifier> class <name>BestTimeToBuyAndSellStocks</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>BestTimeToBuyAndSellStocks</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maxProfit</name><argument_list>(<argument><expr><name>prices</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>maxProfit</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>prices</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>max</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>prices</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>max</name><index>[<expr><name><name>prices</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>prices</name><index>[<expr><name><name>prices</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>prices</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>max</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><name><name>max</name><operator>.</operator><name>length</name></name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>, <argument><expr><name><name>max</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

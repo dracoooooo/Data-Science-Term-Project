@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\StrangePrinter.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 11/02/2020 There is a strange printer with the following two
+ * special requirements:
+ *
+ * &lt;p&gt;The printer can only print a sequence of the same character each time. At each turn, the
+ * printer can print new characters starting from and ending at any places, and will cover the
+ * original existing characters. Given a string consists of lower English letters only, your job is
+ * to count the minimum number of turns the printer needed in order to print it.
+ *
+ * &lt;p&gt;Example 1: Input: "aaabbb" Output: 2 Explanation: Print "aaa" first and then print "bbb".
+ * Example 2: Input: "aba" Output: 2 Explanation: Print "aaa" first and then print "b" from the
+ * second place of the string, which will cover the existing character 'a'. Hint: Length of the
+ * given string will not exceed 100.
+ */</comment>
+<class><specifier>public</specifier> class <name>StrangePrinter</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>String</name></type> <name>A</name> <init>= <expr><literal type="string">"aaaaaaa"</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>StrangePrinter</name><argument_list>()</argument_list></call><operator>.</operator><call><name>strangePrinter</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name>int</name></type> <name><name>DP</name><index>[]</index><index>[]</index></name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>strangePrinter</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <return>return <expr><call><name>calculate</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>calculate</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;</operator> <name>j</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>;</return></block_content></block></if>
+    <else>else <block>{<block_content>
+      <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <call><name>calculate</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>s</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>m</name> <operator>&lt;</operator> <name>j</name></expr>;</condition> <incr><expr><name>m</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>m</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><call><name>calculate</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>m</name></expr></argument>, <argument><expr><name>s</name></expr></argument>)</argument_list></call> <operator>+</operator> <call><name>calculate</name><argument_list>(<argument><expr><name>m</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>s</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name>min</name></expr>;</expr_stmt>
+      <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

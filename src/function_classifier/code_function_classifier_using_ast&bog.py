@@ -23,8 +23,9 @@ label = {
     # "sort":   [0, 0, 1, 0, 0],
     # "string":   [0, 0, 0, 1, 0],
     # "tree":     [0, 0, 0, 0, 1]
-    "sort" : [1,0],
-    "tree" :[0,1]
+    "sort" : [1, 0, 0],
+    "tree" : [0, 1, 0],
+    "dp" :   [0, 0, 1]
 }
 
 
@@ -35,6 +36,7 @@ label = {
 sort_path = "../../data/leetcode/sort"
 # string_path = "../../data/leetcode/string"
 tree_path = "../../data/leetcode/tree"
+dp_path = "../../data/leetcode/dp"
 raw_path = "../../data/leetcode/raw"
 
 features = 1000
@@ -58,6 +60,7 @@ def count():
     sort = load_data(sort_path, "java")
     # string = load_data(string_path, "java")
     tree = load_data(tree_path, "java")
+    dp = load_data(dp_path, "java")
     raw = load_data(raw_path, "java")
 
     # print(array.__len__())
@@ -66,6 +69,7 @@ def count():
     print(sort.__len__())
     # print(string.__len__())
     print(tree.__len__())
+    print(dp.__len__())
     print(raw.__len__())
 
 
@@ -103,7 +107,8 @@ def init_node_tokenizer():
     f.close()
     return
 
-def creat_ast_xml(path_list):
+def creat_ast_xml():
+    path_list = file_paths(data_path, "java")
     for p in path_list:
         create_ast(p)
         print("creating xml in " + p)
@@ -124,6 +129,7 @@ def get_feature_bag_of_word(path):
     return feature
 
 
+
 # 多个文件
 def bag_of_word(path_list):
     ret = []
@@ -136,8 +142,7 @@ def ast_node_embedding(path_list):
         ret.append(get_feature_ast_node_embedding(path))
     return ret
 
-
-# 提取特征————word embedding（未完成）
+# 提取特征————word embedding
 def get_feature_word_embedding(path):
     # 使用bow的tokenizer
     f1 = open('tokenizer_bow.pkl', 'rb')
@@ -156,22 +161,19 @@ def get_feature_word_embedding(path):
     return
 
 
+
 # def xml2tree(path):
 #     xml_file_tree = ET.parse(path)
 #     return xml_file_tree
 
-
 def code_path2xml_path(code_path):
     return code_path[0:code_path.rfind('.')] + '.xml'
-
-
 def preorder_list2str(list):
     pre_order_str = ''
     for i in list:
         pre_order_str += i + ' '
     pre_order_str = pre_order_str.strip()
     return pre_order_str
-
 
 def preorder(root, pre_order_list):
     # visiting
@@ -198,9 +200,9 @@ def get_feature_ast_node_embedding(path):
     return feature
 
 
+
+
 train_size = 50
-
-
 def prepare_data():
     # array = file_paths(array_path, "java")
     # math = file_paths(math_path, "java")
@@ -208,13 +210,15 @@ def prepare_data():
     sort = file_paths(sort_path, "java")
     # string = file_paths(string_path, "java")
     tree = file_paths(tree_path, "java")
+    dp = file_paths(dp_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size])
-    Y_train = [label["sort"]] * train_size  + [label["tree"]] * train_size
+    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size] + dp[0:train_size])
+    Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size + [label["dp"]] * train_size
     X_test = bag_of_word( sort[train_size:] +  tree[train_size:])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
-             [label["tree"]] * (tree.__len__() - train_size)
+             [label["tree"]] * (tree.__len__() - train_size) + \
+             [label["dp"]] * (dp.__len__() - train_size)
 
     x_train = np.array(X_train)
     x_test = np.array(X_test)
@@ -240,7 +244,7 @@ def init_model():
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
     model.add(Dense(units=1000, activation='relu'))
-    model.add(Dense(units=2, activation='softmax'))
+    model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
@@ -274,13 +278,10 @@ def self_learning():
     return model
 
 
-def train():
-    return
-
-
 if __name__ == "__main__":
     # get_feature_bag_of_word("../../data/test/java_file2.java")
-    model = init_model()
+    # creat_ast_xml()
+    # init_tokenizer()
     count()
     self_learning()
 

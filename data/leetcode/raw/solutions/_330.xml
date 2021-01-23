@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_330.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_330</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://leetcode.com/articles/patching-array/ and https://discuss.leetcode.com/topic/35494/solution-explanation/2
+         * &lt;p&gt;
+         * Let miss be the smallest sum in [0,n] that we might be missing. Meaning we already know we
+         * can build all sums in [0,miss). Then if we have a number num &lt;= miss in the given array, we
+         * can add it to those smaller sums to build all sums in [0,miss+num). If we don't, then we must
+         * add such a number to the array, and it's best to add miss itself, to maximize the reach.
+         * &lt;p&gt;
+         * Example: Let's say the input is nums = [1, 2, 4, 13, 43] and n = 100. We need to ensure that
+         * all sums in the range [1,100] are possible. Using the given numbers 1, 2 and 4, we can
+         * already build all sums from 0 to 7, i.e., the range [0,8). But we can't build the sum 8, and
+         * the next given number (13) is too large. So we insert 8 into the array. Then we can build all
+         * sums in [0,16). Do we need to insert 16 into the array? No! We can already build the sum 3,
+         * and adding the given 13 gives us sum 16. We can also add the 13 to the other sums, extending
+         * our range to [0,29). And so on. The given 43 is too large to help with sum 29, so we must
+         * insert 29 into our array. This extends our range to [0,58). But then the 43 becomes useful
+         * and expands our range to [0,101). At which point we're done.
+         */</comment>
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>minPatches</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>misses</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt><comment type="line">//use long to avoid integer addition overflow</comment>
+            <decl_stmt><decl><type><name>int</name></type> <name>patches</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>misses</name> <operator>&lt;=</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;=</operator> <name>misses</name></expr>)</condition> <block>{<block_content> <comment type="line">//miss is covered</comment>
+                    <expr_stmt><expr><name>misses</name> <operator>+=</operator> <name><name>nums</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content> <comment type="line">//patch miss to the array</comment>
+                    <expr_stmt><expr><name>misses</name> <operator>+=</operator> <name>misses</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>patches</name><operator>++</operator></expr>;</expr_stmt><comment type="line">//increase the answer</comment>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>patches</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>findPatches</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>misses</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt><comment type="line">//use long to avoid integer addition overflow</comment>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>patches</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>misses</name> <operator>&lt;=</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;=</operator> <name>misses</name></expr>)</condition> <block>{<block_content> <comment type="line">//miss is covered</comment>
+                    <expr_stmt><expr><name>misses</name> <operator>+=</operator> <name><name>nums</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content> <comment type="line">//patch miss to the array</comment>
+                    <expr_stmt><expr><call><name><name>patches</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>(</operator><name>int</name><operator>)</operator> <name>misses</name></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="line">//increase the answer</comment>
+                    <expr_stmt><expr><name>misses</name> <operator>+=</operator> <name>misses</name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>patches</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

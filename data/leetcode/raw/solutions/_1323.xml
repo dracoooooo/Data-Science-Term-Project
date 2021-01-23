@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1323.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>stream</name><operator>.</operator><name>IntStream</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * 1323. Maximum 69 Number
+ *
+ * Given a positive integer num consisting only of digits 6 and 9.
+ * Return the maximum number you can get by changing at most one digit (6 becomes 9, and 9 becomes 6).
+ *
+ * Example 1:
+ * Input: num = 9669
+ * Output: 9969
+ * Explanation:
+ * Changing the first digit results in 6669.
+ * Changing the second digit results in 9969.
+ * Changing the third digit results in 9699.
+ * Changing the fourth digit results in 9666.
+ * The maximum number is 9969.
+ *
+ * Example 2:
+ * Input: num = 9996
+ * Output: 9999
+ * Explanation: Changing the last digit 6 to 9 results in the maximum number.
+ *
+ * Example 3:
+ * Input: num = 9999
+ * Output: 9999
+ * Explanation: It is better not to apply any change.
+ *
+ * Constraints:
+ * 1 &lt;= num &lt;= 10^4
+ * num's digits are 6 or 9.
+ * */</comment>
+<class><specifier>public</specifier> class <name>_1323</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>maximum69Number</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>chars</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>toString</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>toCharArray</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>IntStream</name><operator>.</operator><name>range</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>chars</name><operator>.</operator><name>length</name></name></expr></argument>)</argument_list></call><operator>.</operator><call><name>filter</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>i</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="char">'6'</literal></expr></block_content></block></lambda></expr></argument>)</argument_list></call><operator>.</operator><call><name>findFirst</name><argument_list>()</argument_list></call><operator>.</operator><call><name>ifPresent</name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>i</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="char">'9'</literal></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>String</name><argument_list>(<argument><expr><name>chars</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

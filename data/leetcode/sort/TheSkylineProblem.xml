@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\TheSkylineProblem.java"><package>package <name>heap</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 13/09/2017.
+ *
+ * &lt;p&gt;A city's skyline is the outer contour of the silhouette formed by all the buildings in that
+ * city when viewed from a distance. Now suppose you are given the locations and height of all the
+ * buildings as shown on a cityscape photo (Figure A), write a program to output the skyline formed
+ * by these buildings collectively (Figure B).
+ *
+ * &lt;p&gt;
+ *
+ * &lt;p&gt;See below link for image. https://leetcode.com/problems/the-skyline-problem/description/
+ *
+ * &lt;p&gt;
+ *
+ * &lt;p&gt;Buildings Skyline Contour The geometric information of each building is represented by a
+ * triplet of integers [Li, Ri, Hi], where Li and Ri are the x coordinates of the left and right
+ * edge of the ith building, respectively, and Hi is its height. It is guaranteed that 0 â¤ Li, Ri â¤
+ * INT_MAX, 0 &lt; Hi â¤ INT_MAX, and Ri - Li &gt; 0. You may assume all buildings are perfect rectangles
+ * grounded on an absolutely flat surface at height 0.
+ *
+ * &lt;p&gt;For instance, the dimensions of all buildings in Figure A are recorded as: [ [2 9 10], [3 7
+ * 15], [5 12 12], [15 20 10], [19 24 8] ] .
+ *
+ * &lt;p&gt;The output is a list of "key points" (red dots in Figure B) in the format of [ [x1,y1], [x2,
+ * y2], [x3, y3], ... ] that uniquely defines a skyline. A key point is the left endpoint of a
+ * horizontal line segment. Note that the last key point, where the rightmost building ends, is
+ * merely used to mark the termination of the skyline, and always has zero height. Also, the ground
+ * in between any two adjacent buildings should be considered part of the skyline contour.
+ *
+ * &lt;p&gt;For instance, the skyline in Figure B should be represented as:[ [2 10], [3 15], [7 12], [12
+ * 0], [15 10], [20 8], [24, 0] ].
+ *
+ * &lt;p&gt;Notes:
+ *
+ * &lt;p&gt;The number of buildings in any input list is guaranteed to be in the range [0, 10000]. The
+ * input list is already sorted in ascending order by the left x position Li. The output list must
+ * be sorted by the x position. There must be no consecutive horizontal lines of equal height in the
+ * output skyline. For instance, [...[2 3], [4 5], [7 5], [11 5], [12 7]...] is not acceptable; the
+ * three lines of height 5 should be merged into one in the final output as such: [...[2 3], [4 5],
+ * [12 7], ...]
+ *
+ * &lt;p&gt;Solution: 1. Sort array of points. Each point here is either a start of a rectangle or end of
+ * a rectangle. 2. Maintain a priority queue of rectangles ordered by increasing order of height, if
+ * height of two rectangle is same then, order by left most start index. 3. For each point starting
+ * from left-most point: 3.a. Add all the rectangles which starts at this point. 3.b. Remove all the
+ * rectangles which ends at this point. Keep a max of height for each rectangle removed. 3.c. If the
+ * current priority queue is empty then, include current point (x, 0) to the result set. This
+ * indicates this was the last rectangle and after this there is a gap of at least 1 unit.
+ *
+ * &lt;p&gt;If the max calculated in step b is greater than current max then, include current x and max
+ * height from priority queue to the result set. This indicates one of the larger rectangle's right
+ * edge intersects with a smaller one.
+ *
+ * &lt;p&gt;If the max calculated in stop b is smaller then check if the peek element in priority queue
+ * has the left edge value equal to current point. If so, then this indicates that a new larger
+ * rectangle starts from this point therefore add this point to the result set. 4. Return the result
+ * set
+ */</comment>
+<class><specifier>public</specifier> class <name>TheSkylineProblem</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{
+      <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">30</literal></expr>, <expr><literal type="number">30</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">9</literal></expr>, <expr><literal type="number">10</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">7</literal></expr>, <expr><literal type="number">15</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">10</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">5</literal></expr>, <expr><literal type="number">12</literal></expr>, <expr><literal type="number">12</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">15</literal></expr>, <expr><literal type="number">20</literal></expr>, <expr><literal type="number">10</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">19</literal></expr>, <expr><literal type="number">24</literal></expr>, <expr><literal type="number">8</literal></expr>}</block></expr>
+    }</block></expr></init></decl>;</decl_stmt>
+    <comment type="line">// int[][] A = {{2,9,10}, {3,9,11}, {4,9,12}, {5,9,13}};</comment>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>TheSkylineProblem</name><argument_list>()</argument_list></call><operator>.</operator><call><name>getSkyline</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>forEach</name></name><argument_list>(
+        <argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>x</name></decl></parameter></parameter_list> -&gt; <block>{<block_content>
+          <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><name><name>x</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+</operator> <literal type="string">" "</literal> <operator>+</operator> <name><name>x</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>getSkyline</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>buildings</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Rectangle</name></argument>&gt;</argument_list></name></type> <name>pq</name> <init>=
+        <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(
+            <argument><expr><call><name><name>Comparator</name><operator>.</operator><name>comparing</name></name><argument_list>(<argument><expr><name>Rectangle</name><operator>::</operator><name>getH</name></expr></argument>)</argument_list></call>
+                <operator>.</operator><call><name>reversed</name><argument_list>()</argument_list></call>
+                <operator>.</operator><call><name>thenComparing</name><argument_list>(
+                    <argument><expr><name>Rectangle</name>
+                        <operator>::</operator><name>getX1</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt> <comment type="line">// order by height, if height is same then, order by left most</comment>
+                                   <comment type="line">// starting edge.</comment>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>set</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name><name>int</name><index>[]</index></name></type> <name>p</name> <range>: <expr><name>buildings</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>p</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><call><name><name>set</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>p</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>points</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>points</name><operator>.</operator><name>addAll</name></name><argument_list>(<argument><expr><name>set</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>points</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>Integer</name><operator>::</operator><name>compare</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>points</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>curr</name> <init>= <expr><call><name><name>points</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><name>j</name></expr></init></decl>;</init>
+          <condition><expr><name>k</name> <operator>&lt;</operator> <name><name>buildings</name><operator>.</operator><name>length</name></name></expr>;</condition>
+          <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content> <comment type="line">// add all the rectangles that begin at this point</comment>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>rectangle</name> <init>= <expr><name><name>buildings</name><index>[<expr><name>k</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>rectangle</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <name>curr</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Rectangle</name><argument_list>(<argument><expr><name><name>rectangle</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>, <argument><expr><name><name>rectangle</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>, <argument><expr><name><name>rectangle</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>rectangle</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>&gt;</operator> <name>curr</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>j</name> <operator>=</operator> <name>k</name></expr>;</expr_stmt>
+          <break>break;</break>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+      <while>while <condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content> <comment type="line">// remove all the rectangles that end at this point</comment>
+        <if_stmt><if>if <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getX2</name><argument_list>()</argument_list></call> <operator>==</operator> <name>curr</name></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name>Rectangle</name></type> <name>top</name> <init>= <expr><call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+          <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><call><name><name>top</name><operator>.</operator><name>getH</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getX2</name><argument_list>()</argument_list></call> <operator>&lt;</operator> <name>curr</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <break>break;</break>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></while>
+      <if_stmt><if>if <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(
+            <argument><expr><call><name>makeNewPoint</name><argument_list>(
+                <argument><expr><name>curr</name></expr></argument>,
+                <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// This is the last rectangle after this there is a gap of at least one unit</comment>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>max</name> <operator>&gt;</operator> <call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getH</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(
+              <argument><expr><call><name>makeNewPoint</name><argument_list>(
+                  <argument><expr><name>curr</name></expr></argument>,
+                  <argument><expr><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call>
+                      <operator>.</operator><call><name>getH</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// one of the larger rectangle's right edge intersects with a</comment>
+                                 <comment type="line">// smaller one</comment>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>max</name> <operator>&lt;</operator> <call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getH</name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getX1</name><argument_list>()</argument_list></call> <operator>==</operator> <name>curr</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(
+              <argument><expr><call><name>makeNewPoint</name><argument_list>(<argument><expr><name>curr</name></expr></argument>, <argument><expr><call><name><name>pq</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getH</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// new larger rectangle begins at this point</comment>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name><name>int</name><index>[]</index></name></type> <name>makeNewPoint</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>point</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>point</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+    <expr_stmt><expr><name><name>point</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
+    <return>return <expr><name>point</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <class>class <name>Rectangle</name> <block>{
+    <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>x1</name></decl>, <decl><type ref="prev"/><name>x2</name></decl>, <decl><type ref="prev"/><name>h</name></decl>;</decl_stmt>
+
+    <constructor><name>Rectangle</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>x2</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>h</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x1</name></name> <operator>=</operator> <name>x1</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x2</name></name> <operator>=</operator> <name>x2</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>h</name></name> <operator>=</operator> <name>h</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>getH</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><name>h</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>getX2</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><name>x2</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>getX1</name><parameter_list>()</parameter_list> <block>{<block_content>
+      <return>return <expr><name>x1</name></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+}</block></class>
+</unit>

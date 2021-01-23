@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_223.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_223</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>computeArea</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>A</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>B</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>C</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>D</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>E</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>F</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>G</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>H</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>areaA</name> <init>= <expr><operator>(</operator><name>C</name> <operator>-</operator> <name>A</name><operator>)</operator> <operator>*</operator> <operator>(</operator><name>D</name> <operator>-</operator> <name>B</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>areaB</name> <init>= <expr><operator>(</operator><name>G</name> <operator>-</operator> <name>E</name><operator>)</operator> <operator>*</operator> <operator>(</operator><name>H</name> <operator>-</operator> <name>F</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>top</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>D</name></expr></argument>, <argument><expr><name>H</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>bottom</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>B</name></expr></argument>, <argument><expr><name>F</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>E</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>C</name></expr></argument>, <argument><expr><name>G</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>overlap</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>top</name> <operator>&gt;</operator> <name>bottom</name> <operator>&amp;&amp;</operator> <name>right</name> <operator>&gt;</operator> <name>left</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>overlap</name> <operator>=</operator> <operator>(</operator><name>top</name> <operator>-</operator> <name>bottom</name><operator>)</operator> <operator>*</operator> <operator>(</operator><name>right</name> <operator>-</operator> <name>left</name><operator>)</operator></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><name>areaA</name> <operator>+</operator> <name>areaB</name> <operator>-</operator> <name>overlap</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\DecodeWaysII.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 11/12/2017. A message containing letters from A-Z is being
+ * encoded to numbers using the following mapping way:
+ *
+ * &lt;p&gt;'A' -&gt; 1 'B' -&gt; 2 ... 'Z' -&gt; 26 Beyond that, now the encoded string can also contain the
+ * character '*', which can be treated as one of the numbers from 1 to 9.
+ *
+ * &lt;p&gt;Given the encoded message containing digits and the character '*', return the total number of
+ * ways to decode it.
+ *
+ * &lt;p&gt;Also, since the answer may be very large, you should return the output mod 109 + 7.
+ *
+ * &lt;p&gt;Example 1: Input: "*" Output: 9 Explanation: The encoded message can be decoded to the string:
+ * "A", "B", "C", "D", "E", "F", "G", "H", "I". Example 2: Input: "1*" Output: 9 + 9 = 18 Note: The
+ * length of the input string will fit in range [1, 105]. The input string will only contain the
+ * character '*' and digits '0' - '9'.
+ *
+ * &lt;p&gt;Solution: O(n) consider each digit and a pair of digits and perform a cartesian product to
+ * calculate the total number of ways. A pair of digits are to be considered only if their combined
+ * value does not exceed 26. Corner cases with combination of * and 0s can be tricky
+ */</comment>
+<class><specifier>public</specifier> class <name>DecodeWaysII</name> <block>{
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name>int</name></type> <name>CONST</name> <init>= <expr><literal type="number">1000000007</literal></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>int</name><index>[]</index></name></type> <name>dp</name></decl>;</decl_stmt>
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>DecodeWaysII</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numDecodings</name><argument_list>(<argument><expr><literal type="string">"10"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numDecodings</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>dp</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'*'</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name><name>dp</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">9</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'0'</literal></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name><name>dp</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+    </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <expr_stmt><expr><name><name>dp</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+    <expr_stmt><expr><name><name>dp</name><index>[<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>char</name></type> <name>curr</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>char</name></type> <name>next</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <switch>switch <condition>(<expr><name>curr</name></expr>)</condition> <block>{<block_content>
+        <case>case <expr><literal type="char">'0'</literal></expr>:</case>
+          <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+          <break>break;</break>
+          <comment type="line">// number begins with a '*'</comment>
+        <case>case <expr><literal type="char">'*'</literal></expr>:</case>
+          <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><operator>(</operator><literal type="number">9</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+          <switch>switch <condition>(<expr><name>next</name></expr>)</condition> <block>{<block_content>
+              <comment type="line">// The next char is a '*'</comment>
+            <case>case <expr><literal type="char">'*'</literal></expr>:</case>
+              <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator>
+                  <operator>(</operator><name>int</name><operator>)</operator>
+                      <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><operator>(</operator><literal type="number">15</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator><operator>)</operator>
+                          <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt> <comment type="line">// multiplication can be</comment>
+              <comment type="line">// very large hence type casting to long is necessary</comment>
+              <break>break;</break>
+
+            <case>case <expr><literal type="char">'0'</literal></expr>:</case>
+              <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><operator>(</operator><literal type="number">2</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              <break>break;</break>
+
+            <default>default:</default>
+              <if_stmt><if>if <condition>(<expr><operator>(</operator><name>next</name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator> <operator>&gt;</operator> <literal type="number">6</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><operator>(</operator><literal type="number">2</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></else></if_stmt>
+              <break>break;</break>
+          </block_content>}</block></switch>
+          <break>break;</break>
+
+        <default>default:</default>
+          <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+          <switch>switch <condition>(<expr><name>next</name></expr>)</condition> <block>{<block_content>
+            <case>case <expr><literal type="char">'*'</literal></expr>:</case>
+              <if_stmt><if>if <condition>(<expr><operator>(</operator><name>curr</name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><operator>(</operator><literal type="number">9</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><operator>(</operator><name>curr</name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator> <operator>==</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><operator>(</operator><literal type="number">6</literal> <operator>*</operator> <operator>(</operator><name>long</name><operator>)</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></if></if_stmt>
+              <break>break;</break>
+
+            <default>default:</default>
+              <if_stmt><if>if <condition>(<expr><operator>(</operator><name>curr</name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><operator>(</operator><name>curr</name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator> <operator>==</operator> <literal type="number">2</literal> <operator>&amp;&amp;</operator> <operator>(</operator><name>next</name> <operator>-</operator> <literal type="char">'0'</literal> <operator>&lt;=</operator> <literal type="number">6</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><operator>(</operator><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>CONST</name><operator>)</operator></expr>;</expr_stmt>
+              </block_content>}</block></if></if_stmt>
+              <break>break;</break>
+          </block_content>}</block></switch>
+      </block_content>}</block></switch>
+    </block_content>}</block></for>
+    <return>return <expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

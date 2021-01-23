@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_836.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_836</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://leetcode.com/problems/rectangle-overlap/discuss/132340/C%2B%2BJavaPython-1-line-Solution-1D-to-2D
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isRectangleOverlap</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>rec1</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>rec2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><name><name>rec1</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>rec2</name><index>[<expr><literal type="number">2</literal></expr>]</index></name> <operator>&amp;&amp;</operator> <name><name>rec2</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>rec1</name><index>[<expr><literal type="number">2</literal></expr>]</index></name> <operator>&amp;&amp;</operator> <name><name>rec1</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>rec2</name><index>[<expr><literal type="number">3</literal></expr>]</index></name> <operator>&amp;&amp;</operator> <name><name>rec2</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>&lt;</operator> <name><name>rec1</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\LongestPalindromicSubstring.java"><class><specifier>public</specifier> class <name>LongestPalindromicSubstring</name> <block>{
+    <function><type><specifier>public</specifier> <name>String</name></type> <name>longestPalindrome</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+
+        <if_stmt><if>if <condition>(<expr><name>s</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <literal type="string">""</literal><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <return>return <expr><name>s</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>len</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name>String</name></type> <name>ans</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+
+        <decl_stmt><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>len</name></expr>]</index><index>[<expr><name>len</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>len</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>j</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                
+                <decl_stmt><decl><type><name>boolean</name></type> <name>judge</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name>j</name> <operator>-</operator> <name>i</name> <operator>&gt;</operator> <literal type="number">2</literal></expr> ?</condition><then> <expr><name><name>dp</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&amp;&amp;</operator> <name>judge</name></expr> </then><else>: <expr><name>judge</name></expr></else></ternary></expr>;</expr_stmt>
+
+                <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name>j</name> <operator>-</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal> <operator>&gt;</operator> <name>max</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>max</name> <operator>=</operator> <name>j</name> <operator>-</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>ans</name> <operator>=</operator> <call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+        <return>return <expr><name>ans</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

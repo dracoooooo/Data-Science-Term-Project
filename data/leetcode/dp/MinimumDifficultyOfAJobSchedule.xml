@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\MinimumDifficultyOfAJobSchedule.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 19/02/2020 You want to schedule a list of jobs in d days. Jobs
+ * are dependent (i.e To work on the i-th job, you have to finish all the jobs j where 0 &lt;= j &lt; i).
+ *
+ * &lt;p&gt;You have to finish at least one task every day. The difficulty of a job schedule is the sum of
+ * difficulties of each day of the d days. The difficulty of a day is the maximum difficulty of a
+ * job done in that day.
+ *
+ * &lt;p&gt;Given an array of integers jobDifficulty and an integer d. The difficulty of the i-th job is
+ * jobDifficulty[i].
+ *
+ * &lt;p&gt;Return the minimum difficulty of a job schedule. If you cannot find a schedule for the jobs
+ * return -1.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: jobDifficulty = [6,5,4,3,2,1], d = 2 Output: 7 Explanation: First day you can finish
+ * the first 5 jobs, total difficulty = 6. Second day you can finish the last job, total difficulty
+ * = 1. The difficulty of the schedule = 6 + 1 = 7 Example 2:
+ *
+ * &lt;p&gt;Input: jobDifficulty = [9,9,9], d = 4 Output: -1 Explanation: If you finish a job per day you
+ * will still have a free day. you cannot find a schedule for the given jobs. Example 3:
+ *
+ * &lt;p&gt;Input: jobDifficulty = [1,1,1], d = 3 Output: 3 Explanation: The schedule is one job per day.
+ * total difficulty will be 3. Example 4:
+ *
+ * &lt;p&gt;Input: jobDifficulty = [7,1,7,1,7,1], d = 3 Output: 15 Example 5:
+ *
+ * &lt;p&gt;Input: jobDifficulty = [11,111,22,222,33,333,44,444], d = 6 Output: 843
+ *
+ * &lt;p&gt;Constraints:
+ *
+ * &lt;p&gt;1 &lt;= jobDifficulty.length &lt;= 300 0 &lt;= jobDifficulty[i] &lt;= 1000 1 &lt;= d &lt;= 10
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumDifficultyOfAJobSchedule</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">11</literal></expr>, <expr><literal type="number">111</literal></expr>, <expr><literal type="number">22</literal></expr>, <expr><literal type="number">222</literal></expr>, <expr><literal type="number">33</literal></expr>, <expr><literal type="number">333</literal></expr>, <expr><literal type="number">44</literal></expr>, <expr><literal type="number">444</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MinimumDifficultyOfAJobSchedule</name><argument_list>()</argument_list></call><operator>.</operator><call><name>minDifficulty</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>minDifficulty</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>jobDifficulty</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><name><name>jobDifficulty</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name>d</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>d</name></expr></argument>, <argument><expr><name>jobDifficulty</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>result</name> <operator>==</operator> <literal type="number">50000</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if>
+    <else>else<block type="pseudo"><block_content> <return>return <expr><name>result</name></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>d</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>J</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;=</operator> <name><name>J</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>d</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>J</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>i</name> <operator>&lt;</operator> <name>d</name> <operator>||</operator> <name>d</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">50000</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>d</name></expr>]</index></name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>d</name></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><name><name>J</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;=</operator> <name><name>J</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><name><name>J</name><index>[<expr><name>k</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name>max</name> <operator>+</operator> <call><name>dp</name><argument_list>(<argument><expr><name>k</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>d</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>J</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>d</name></expr>]</index></name> <operator>=</operator> <name>min</name></expr>;</expr_stmt>
+    <return>return <expr><name>min</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

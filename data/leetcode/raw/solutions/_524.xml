@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_524.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_524</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>findLongestWord</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>d</name></expr></argument>, <argument><expr><ternary><condition><expr><operator>(</operator><name>a</name><operator>,</operator> <name>b</name><operator>)</operator> <operator>-&gt;</operator> <call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>b</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr> ?</condition><then> <expr><call><name><name>a</name><operator>.</operator><name>compareTo</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr> </then><else>: <expr><call><name><name>b</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></else></ternary></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>dictWord</name> <range>: <expr><name>d</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <call><name><name>dictWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>dictWord</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <name>c</name></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <call><name><name>dictWord</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>dictWord</name></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="string">""</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

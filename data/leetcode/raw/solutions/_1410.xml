@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1410.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * 1410. HTML Entity Parser
+ *
+ * HTML entity parser is the parser that takes HTML code as input and replace all the entities of the special characters by the characters itself.
+ * The special characters and their entities for HTML are:
+ * Quotation Mark: the entity is &amp;quot; and symbol character is ".
+ * Single Quote Mark: the entity is &amp;apos; and symbol character is '.
+ * Ampersand: the entity is &amp;amp; and symbol character is &amp;.
+ * Greater Than Sign: the entity is &amp;gt; and symbol character is &gt;.
+ * Less Than Sign: the entity is &amp;lt; and symbol character is &lt;.
+ * Slash: the entity is &amp;frasl; and symbol character is /.
+ * Given the input text string to the HTML parser, you have to implement the entity parser.
+ *
+ * Return the text after replacing the entities by the special characters.
+ *
+ * Example 1:
+ * Input: text = "&amp;amp; is an HTML entity but &amp;ambassador; is not."
+ * Output: "&amp; is an HTML entity but &amp;ambassador; is not."
+ * Explanation: The parser will replace the &amp;amp; entity by &amp;
+ *
+ * Example 2:
+ * Input: text = "and I quote: &amp;quot;...&amp;quot;"
+ * Output: "and I quote: \"...\""
+ *
+ * Example 3:
+ * Input: text = "Stay home! Practice on Leetcode :)"
+ * Output: "Stay home! Practice on Leetcode :)"
+ *
+ * Example 4:
+ * Input: text = "x &amp;gt; y &amp;amp;&amp;amp; x &amp;lt; y is always false"
+ * Output: "x &gt; y &amp;&amp; x &lt; y is always false"
+ *
+ * Example 5:
+ * Input: text = "leetcode.com&amp;frasl;problemset&amp;frasl;all"
+ * Output: "leetcode.com/problemset/all"
+ *
+ * Constraints:
+ * 1 &lt;= text.length &lt;= 10^5
+ * The string may contain any possible characters out of all the 256 ASCII characters.
+ * */</comment>
+<class><specifier>public</specifier> class <name>_1410</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>entityParser</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>text</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>text</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>!=</operator> <literal type="char">'&amp;'</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>text</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">7</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">7</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;frasl;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"/"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">6</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">6</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;quot;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"\""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">5</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">6</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">6</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;apos;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"'"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">5</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">5</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">5</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;amp;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"&amp;"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">4</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">4</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;gt;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"&gt;"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">3</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">4</literal> <operator>&lt;=</operator> <call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">4</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"&amp;lt;"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"&lt;"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>i</name> <operator>+=</operator> <literal type="number">3</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if> <else>else <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>text</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

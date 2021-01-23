@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_937.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>TreeMap</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_937</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>String</name><index>[]</index></name></type> <name>reorderLogFiles</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>logs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>TreeMap</name><argument_list type="generic">&lt;<argument><name>String</name></argument>, <argument><name>String</name></argument>&gt;</argument_list></name></type> <name>letterLogMap</name> <init>= <expr><operator>new</operator> <call><name><name>TreeMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>digitLogList</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>log</name> <range>: <expr><name>logs</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>firstSpaceIndex</name> <init>= <expr><call><name><name>log</name><operator>.</operator><name>indexOf</name></name><argument_list>(<argument><expr><literal type="char">' '</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>String</name></type> <name>id</name> <init>= <expr><call><name><name>log</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>firstSpaceIndex</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>Character</name><operator>.</operator><name>isAlphabetic</name></name><argument_list>(<argument><expr><call><name><name>log</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>firstSpaceIndex</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>String</name></type> <name>key</name> <init>= <expr><call><name><name>log</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>firstSpaceIndex</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>+</operator> <name>id</name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>letterLogMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>, <argument><expr><name>log</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>digitLogList</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>log</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>reorderedLogs</name> <init>= <expr><operator>new</operator> <name><name>String</name><index>[<expr><name><name>logs</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>key</name> <range>: <expr><call><name><name>letterLogMap</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name><name>reorderedLogs</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <call><name><name>letterLogMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>log</name> <range>: <expr><name>digitLogList</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name><name>reorderedLogs</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <name>log</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>reorderedLogs</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

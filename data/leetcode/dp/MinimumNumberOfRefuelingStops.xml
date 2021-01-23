@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\MinimumNumberOfRefuelingStops.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 24/07/2018. A car travels from a starting position to a
+ * destination which is target miles east of the starting position.
+ *
+ * &lt;p&gt;Along the way, there are gas stations. Each station[i] represents a gas station that is
+ * station[i][0] miles east of the starting position, and has station[i][1] liters of gas.
+ *
+ * &lt;p&gt;The car starts with an infinite tank of gas, which initially has startFuel liters of fuel in
+ * it. It uses 1 liter of gas per 1 mile that it drives.
+ *
+ * &lt;p&gt;When the car reaches a gas station, it may stop and refuel, transferring all the gas from the
+ * station into the car.
+ *
+ * &lt;p&gt;What is the least number of refueling stops the car must make in order to reach its
+ * destination? If it cannot reach the destination, return -1.
+ *
+ * &lt;p&gt;Note that if the car reaches a gas station with 0 fuel left, the car can still refuel there.
+ * If the car reaches the destination with 0 fuel left, it is still considered to have arrived.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: target = 1, startFuel = 1, stations = [] Output: 0 Explanation: We can reach the target
+ * without refueling. Example 2:
+ *
+ * &lt;p&gt;Input: target = 100, startFuel = 1, stations = [[10,100]] Output: -1 Explanation: We can't
+ * reach the target (or even the first gas station). Example 3:
+ *
+ * &lt;p&gt;Input: target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]] Output: 2
+ * Explanation: We start with 10 liters of fuel. We drive to position 10, expending 10 liters of
+ * fuel. We refuel from 0 liters to 60 liters of gas. Then, we drive from position 10 to position 60
+ * (expending 50 liters of fuel), and refuel from 10 liters to 50 liters of gas. We then drive to
+ * and reach the target. We made 2 refueling stops along the way, so we return 2.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= target, startFuel, stations[i][1] &lt;= 10^9 0 &lt;= stations.length &lt;= 500 0 &lt; stations[0][0]
+ * &lt; stations[1][0] &lt; ... &lt; stations[stations.length-1][0] &lt; target
+ *
+ * &lt;p&gt;Solution O(N ^ 2): Maintain a DP array with maximum distance that can be travelled with i
+ * stops. DP[i] is the max distance that can be travelled with exactly i stops. The minimum i where
+ * the target can be achieved (dp[i] &gt;= target) will be the answer.
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumNumberOfRefuelingStops</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>target</name> <init>= <expr><literal type="number">100</literal></expr></init></decl>, <decl><type ref="prev"/><name>startFuel</name> <init>= <expr><literal type="number">10</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>stations</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">10</literal></expr>, <expr><literal type="number">60</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">20</literal></expr>, <expr><literal type="number">30</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">30</literal></expr>, <expr><literal type="number">30</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">60</literal></expr>, <expr><literal type="number">40</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(
+        <argument><expr><operator>new</operator> <call><name>MinimumNumberOfRefuelingStops</name><argument_list>()</argument_list></call><operator>.</operator><call><name>minRefuelStops</name><argument_list>(<argument><expr><name>target</name></expr></argument>, <argument><expr><name>startFuel</name></expr></argument>, <argument><expr><name>stations</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>minRefuelStops</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>startFuel</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>stations</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[<expr><name><name>stations</name><operator>.</operator><name>length</name></name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name>startFuel</name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>stations</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>d</name> <init>= <expr><name><name>stations</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>f</name> <init>= <expr><name><name>stations</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>j</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index></name> <operator>&gt;=</operator> <name>d</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>dp</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>dp</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>, <argument><expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <name>f</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>dp</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;=</operator> <name>target</name></expr>)</condition> <block>{<block_content>
+        <return>return <expr><name>i</name></expr>;</return>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

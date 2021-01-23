@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1362.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_1362</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>closestDivisors</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>sqrt</name> <init>= <expr><operator>(</operator><name>int</name><operator>)</operator> <call><name><name>Math</name><operator>.</operator><name>sqrt</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><name>sqrt</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><name>sqrt</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>long</name></type> <name>product</name> <init>= <expr><name>left</name> <operator>*</operator> <name>right</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>product</name> <operator>!=</operator> <operator>(</operator><name>long</name><operator>)</operator> <operator>(</operator><name>num</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>&amp;&amp;</operator> <name>product</name> <operator>!=</operator> <operator>(</operator><name>long</name><operator>)</operator> <operator>(</operator><name>num</name> <operator>+</operator> <literal type="number">2</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>product</name> <operator>&lt;</operator> <operator>(</operator><name>num</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>left</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>product</name> <operator>&gt;</operator> <operator>(</operator><name>num</name> <operator>+</operator> <literal type="number">2</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>right</name><operator>--</operator></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>product</name> <operator>=</operator> <name>left</name> <operator>*</operator> <name>right</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><operator>new</operator> <name><name>int</name><index>[]</index></name><block>{<expr><name>left</name></expr>, <expr><name>right</name></expr>}</block></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

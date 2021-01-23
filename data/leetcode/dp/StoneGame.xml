@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\StoneGame.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 22/03/2019 Alex and Lee play a game with piles of stones. There
+ * are an even number of piles arranged in a row, and each pile has a positive integer number of
+ * stones piles[i].
+ *
+ * &lt;p&gt;The objective of the game is to end with the most stones. The total number of stones is odd,
+ * so there are no ties.
+ *
+ * &lt;p&gt;Alex and Lee take turns, with Alex starting first. Each turn, a player takes the entire pile
+ * of stones from either the beginning or the end of the row. This continues until there are no more
+ * piles left, at which point the person with the most stones wins.
+ *
+ * &lt;p&gt;Assuming Alex and Lee play optimally, return True if and only if Alex wins the game.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: [5,3,4,5] Output: true Explanation: Alex starts first, and can only take the first 5 or
+ * the last 5. Say he takes the first 5, so that the row becomes [3, 4, 5]. If Lee takes 3, then the
+ * board is [4, 5], and Alex takes 5 to win with 10 points. If Lee takes the last 5, then the board
+ * is [3, 4], and Alex takes 4 to win with 9 points. This demonstrated that taking the first 5 was a
+ * winning move for Alex, so we return true.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;2 &lt;= piles.length &lt;= 500 piles.length is even. 1 &lt;= piles[i] &lt;= 500 sum(piles) is odd.
+ *
+ * &lt;p&gt;Solution: O(N ^ 2) Each state can be considered as State = (total stones left, player's turn).
+ * Do a dfs on each state and memoize the result in order not to recalculate. When all the stones
+ * are exhausted - Alex wins if the total collected stones by her is greater than total collected by
+ * Lee
+ */</comment>
+<class><specifier>public</specifier> class <name>StoneGame</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">5</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>StoneGame</name><argument_list>()</argument_list></call><operator>.</operator><call><name>stoneGame</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>boolean</name></type> <name>stoneGame</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>piles</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>piles</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>piles</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><name>sum</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name><name>A</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name><name>A</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>piles</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name><name>piles</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>sum</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <return>return <expr><name>result</name> <operator>==</operator> <literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>piles</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>p</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sumA</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sumB</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name></expr>;</return></block_content></block></if>
+    <else>else <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>p</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;=</operator> <name>j</name></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>piles</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>sum</name> <operator>-</operator> <name><name>piles</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>(</operator><name>p</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name>sumA</name> <operator>+</operator> <name><name>piles</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>sumB</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <if_stmt><if>if <condition>(<expr><name>result</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            <return>return <expr><literal type="number">1</literal></expr>;</return>
+          </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name>dp</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>piles</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>sum</name> <operator>-</operator> <name><name>piles</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>, <argument><expr><operator>(</operator><name>p</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name>sumA</name> <operator>+</operator> <name><name>piles</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>, <argument><expr><name>sumB</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+            <return>return <expr><name>result</name></expr>;</return>
+          </block_content>}</block></else></if_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name>sumA</name> <operator>&gt;</operator> <name>sumB</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if>
+          <else>else<block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;=</operator> <name>j</name></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>piles</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>sum</name> <operator>-</operator> <name><name>piles</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>(</operator><name>p</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name>sumA</name></expr></argument>, <argument><expr><name>sumB</name> <operator>+</operator> <name><name>piles</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+          <if_stmt><if>if <condition>(<expr><name>result</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            <return>return <expr><literal type="number">1</literal></expr>;</return>
+          </block_content>}</block></if> <else>else <block>{<block_content>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name>dp</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><name>piles</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>sum</name> <operator>-</operator> <name><name>piles</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>, <argument><expr><operator>(</operator><name>p</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name>sumA</name></expr></argument>, <argument><expr><name>sumB</name> <operator>+</operator> <name><name>piles</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>A</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>sum</name></expr>]</index></name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+            <return>return <expr><name>result</name></expr>;</return>
+          </block_content>}</block></else></if_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name>sumB</name> <operator>&gt;</operator> <name>sumA</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if>
+          <else>else<block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

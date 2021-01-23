@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_306.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_306</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Credit: https://discuss.leetcode.com/topic/29856/java-recursive-and-iterative-solutions/2
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isAdditiveNumber</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>num</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>n</name> <operator>/</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&lt;=</operator> <name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <name>j</name></expr>;</condition> <incr><expr><operator>++</operator><name>j</name></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name>isValid</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>isValid</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>num</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'0'</literal> <operator>&amp;&amp;</operator> <name>i</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>num</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="char">'0'</literal> <operator>&amp;&amp;</operator> <name>j</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>String</name></type> <name>sum</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>Long</name></type> <name>x1</name> <init>= <expr><call><name><name>Long</name><operator>.</operator><name>parseLong</name></name><argument_list>(<argument><expr><call><name><name>num</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>Long</name></type> <name>x2</name> <init>= <expr><call><name><name>Long</name><operator>.</operator><name>parseLong</name></name><argument_list>(<argument><expr><call><name><name>num</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <name>j</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>start</name> <init>= <expr><name>i</name> <operator>+</operator> <name>j</name></expr></init></decl>;</init> <condition><expr><name>start</name> <operator>!=</operator> <call><name><name>num</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>start</name> <operator>+=</operator> <call><name><name>sum</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>x2</name> <operator>=</operator> <name>x2</name> <operator>+</operator> <name>x1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>x1</name> <operator>=</operator> <name>x2</name> <operator>-</operator> <name>x1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>sum</name> <operator>=</operator> <call><name><name>x2</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>num</name><operator>.</operator><name>startsWith</name></name><argument_list>(<argument><expr><name>sum</name></expr></argument>, <argument><expr><name>start</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

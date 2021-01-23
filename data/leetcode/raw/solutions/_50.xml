@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_50.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_50</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Time: O(logn)
+         * Space: O(logn)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>double</name></type> <name>myPow</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>N</name> <init>= <expr><name>n</name></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>N</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>x</name> <operator>=</operator> <literal type="number">1</literal> <operator>/</operator> <name>x</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>N</name> <operator>=</operator> <operator>-</operator><name>N</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name>fastPow</name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>N</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>double</name></type> <name>fastPow</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">1.0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>half</name> <init>= <expr><call><name>fastPow</name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>n</name> <operator>/</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>n</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>half</name> <operator>*</operator> <name>half</name></expr>;</return>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <return>return <expr><name>half</name> <operator>*</operator> <name>half</name> <operator>*</operator> <name>x</name></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Time: O(logn)
+         * Space: O(1)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>double</name></type> <name>myPow</name><parameter_list>(<parameter><decl><type><name>double</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>N</name> <init>= <expr><name>n</name></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>N</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>x</name> <operator>=</operator> <literal type="number">1</literal> <operator>/</operator> <name>x</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>N</name> <operator>=</operator> <operator>-</operator><name>N</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>answer</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>currentProduct</name> <init>= <expr><name>x</name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>long</name></type> <name>i</name> <init>= <expr><name>N</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name> <operator>/=</operator> <literal type="number">2</literal></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>answer</name> <operator>=</operator> <name>answer</name> <operator>*</operator> <name>currentProduct</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>currentProduct</name> <operator>*=</operator> <name>currentProduct</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>answer</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

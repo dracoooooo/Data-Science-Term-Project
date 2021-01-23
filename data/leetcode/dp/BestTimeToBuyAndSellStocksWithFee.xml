@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\BestTimeToBuyAndSellStocksWithFee.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 14/12/2017. Your are given an array of integers prices, for
+ * which the i-th element is the price of a given stock on day i; and a non-negative integer fee
+ * representing a transaction fee.
+ *
+ * &lt;p&gt;You may complete as many transactions as you like, but you need to pay the transaction fee for
+ * each transaction. You may not buy more than 1 share of a stock at a time (ie. you must sell the
+ * stock share before you buy again.)
+ *
+ * &lt;p&gt;Return the maximum profit you can make.
+ *
+ * &lt;p&gt;Example 1: Input: prices = [1, 3, 2, 8, 4, 9], fee = 2 Output: 8 Explanation: The maximum
+ * profit can be achieved by: Buying at prices[0] = 1 Selling at prices[3] = 8 Buying at prices[4] =
+ * 4 Selling at prices[5] = 9 The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8. Note:
+ *
+ * &lt;p&gt;0 &lt; prices.length &lt;= 50000. 0 &lt; prices[i] &lt; 50000. 0 &lt;= fee &lt; 50000.
+ *
+ * &lt;p&gt;Solution: O(n) for every step either you can buy stock or sell. Maintain two variables 'cash'
+ * to save max value if you had sold the stock at current price and 'stock' to save max value if you
+ * had purchased the stock at current price. Return max cash
+ */</comment>
+<class><specifier>public</specifier> class <name>BestTimeToBuyAndSellStocksWithFee</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">9</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>BestTimeToBuyAndSellStocksWithFee</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maxProfit</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>maxProfit</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>fee</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>cash</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>stock</name> <init>= <expr><operator>-</operator><name><name>prices</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>prices</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>cash</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>cash</name></expr></argument>, <argument><expr><name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name>stock</name> <operator>-</operator> <name>fee</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name>stock</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>stock</name></expr></argument>, <argument><expr><name>cash</name> <operator>-</operator> <name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>cash</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

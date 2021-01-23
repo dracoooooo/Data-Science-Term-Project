@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\NumberOfLIS.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 13/12/2017. Given an unsorted array of integers, find the
+ * number of longest increasing subsequence.
+ *
+ * &lt;p&gt;Example 1: Input: [1,3,5,4,7] Output: 2 Explanation: The two longest increasing subsequence
+ * are [1, 3, 4, 7] and [1, 3, 5, 7]. Example 2: Input: [2,2,2,2,2] Output: 5 Explanation: The
+ * length of longest continuous increasing subsequence is 1, and there are 5 subsequences' length is
+ * 1, so output 5. Note: Length of the given array will be not exceed 2000 and the answer is
+ * guaranteed to be fit in 32-bit signed int.
+ *
+ * &lt;p&gt;Solution O(n ^ 2) compute the LIS and save the results in length also save the max length of
+ * LIS in maxVal. Calculate the count as below
+ *
+ * &lt;p&gt;For every pair of (i, j) count[i] = count[i] + count[j] where length[i] == length[j] + 1 and
+ * nums[j] &lt; nums[i]
+ *
+ * &lt;p&gt;sum-up the count for every length where length[i] == maxVal
+ */</comment>
+<class><specifier>public</specifier> class <name>NumberOfLIS</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">12</literal></expr>, <expr><literal type="number">11</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">12</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NumberOfLIS</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findNumberOfLIS</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>findNumberOfLIS</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>length</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>length</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>maxVal</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><name><name>length</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          <expr_stmt><expr><name>maxVal</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>maxVal</name></expr></argument>, <argument><expr><name>max</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name><name>length</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>max</name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>count</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>count</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>length</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name><name>length</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal> <operator>==</operator> <name><name>length</name><index>[<expr><name>i</name></expr>]</index></name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name> <operator>&lt;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+=</operator> <name><name>count</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <if_stmt><if>if <condition>(<expr><name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <comment type="line">// default is just 1</comment>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>ans</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>length</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>length</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>maxVal</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>ans</name> <operator>+=</operator> <name><name>count</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>ans</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

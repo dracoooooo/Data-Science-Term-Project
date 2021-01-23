@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1669.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1669</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>mergeInBetween</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>list1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>, <parameter><decl><type><name>ListNode</name></type> <name>list2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>pre</name> <init>= <expr><operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>list1Temp</name> <init>= <expr><name>list1</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>pre</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>list1Temp</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>b</name> <operator>-=</operator> <name>a</name></expr>;</expr_stmt>
+            <while>while <condition>(<expr><name>a</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>list1Temp</name> <operator>=</operator> <name><name>list1Temp</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>a</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>tail</name> <init>= <expr><name><name>list1Temp</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>list1Temp</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>list2</name></expr>;</expr_stmt>
+            <while>while <condition>(<expr><name>b</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>tail</name> <operator>=</operator> <name><name>tail</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>b</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <decl_stmt><decl><type><name>int</name></type> <name>length</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>temp2</name> <init>= <expr><name>list2</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>temp2</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>temp2</name> <operator>=</operator> <name><name>temp2</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>length</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <while>while <condition>(<expr><name>length</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>list1Temp</name> <operator>=</operator> <name><name>list1Temp</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>length</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><name><name>list1Temp</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>tail</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            <return>return <expr><name><name>pre</name><operator>.</operator><name>next</name></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

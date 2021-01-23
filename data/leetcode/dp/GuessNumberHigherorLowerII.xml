@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\GuessNumberHigherorLowerII.java"><class><specifier>public</specifier> class <name>GuessNumberHigherorLowerII</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>xxxgetMoneyAmount</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>f</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>Deque</name><argument_list type="generic">&lt;<argument><name><name>Integer</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>q</name></decl>;</decl_stmt> <comment type="line">// item[]{index, value}</comment>
+    
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>, <decl><type ref="prev"/><name>k0</name></decl>, <decl><type ref="prev"/><name>v</name></decl>, <decl><type ref="prev"/><name>f1</name></decl>, <decl><type ref="prev"/><name>f2</name></decl>;</decl_stmt>
+    
+        <for>for <control>(<init><expr><name>b</name> <operator>=</operator> <literal type="number">2</literal></expr>;</init> <condition><expr><name>b</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>b</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <expr_stmt><expr><name>k0</name> <operator>=</operator> <name>b</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>q</name> <operator>=</operator> <operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;<argument><name><name>Integer</name><index>[]</index></name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    
+            <for>for <control>(<init><expr><name>a</name> <operator>=</operator> <name>b</name> <operator>-</operator> <literal type="number">1</literal></expr>;</init> <condition><expr><name>a</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>a</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+                <comment type="line">// find k0[a][b] by definition in O(1) time.</comment>
+                <while>while <condition>(<expr><name><name>f</name><index>[<expr><name>a</name></expr>]</index><index>[<expr><name>k0</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&gt;</operator> <name><name>f</name><index>[<expr><name>k0</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>b</name></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name>k0</name><operator>--</operator></expr>;</expr_stmt></block_content></block></while>
+    
+                <comment type="line">// find f1[a][b] in O(1) time.</comment>
+                <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>q</name><operator>.</operator><name>peekFirst</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index> <operator>&gt;</operator> <name>k0</name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pollFirst</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></while>
+    
+                <expr_stmt><expr><name>v</name> <operator>=</operator> <name><name>f</name><index>[<expr><name>a</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>b</name></expr>]</index></name> <operator>+</operator> <name>a</name></expr>;</expr_stmt>
+    
+                <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name>v</name> <operator>&lt;</operator> <call><name><name>q</name><operator>.</operator><name>peekLast</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pollLast</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></while>
+    
+                <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>offerLast</name></name><argument_list>(<argument><expr><operator>new</operator> <name><name>Integer</name><index>[]</index></name> <block>{ <expr><name>a</name></expr>, <expr><name>v</name></expr> }</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    
+                <expr_stmt><expr><name>f1</name> <operator>=</operator> <call><name><name>q</name><operator>.</operator><name>peekFirst</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr>;</expr_stmt>
+                <expr_stmt><expr><name>f2</name> <operator>=</operator> <name><name>f</name><index>[<expr><name>a</name></expr>]</index><index>[<expr><name>k0</name></expr>]</index></name> <operator>+</operator> <name>k0</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>f</name><index>[<expr><name>a</name></expr>]</index><index>[<expr><name>b</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>f1</name></expr></argument>, <argument><expr><name>f2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+    
+        <return>return <expr><name><name>f</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

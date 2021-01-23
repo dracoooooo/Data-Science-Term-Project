@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_935.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_935</name> <block>{
+    <comment type="block">/*
+     * The intuition is to calculate the number of ways
+     * we can reach a key k after i hops, based on the number of ways we can reach keys x after i-1 hops
+     * s.t. the knight can move from x to k in one move
+     * For example,
+     * We can reach 6 in 3 ways after 1 hop (1 -&gt; 6, 7 -&gt; 6 or 0 -&gt; 6)
+     * We can reach 8 in 2 ways after 1 hop (1 -&gt; 8 or 3 -&gt; 8)
+     * Thus, we can reach 1 in 5 ways after 2 hops:
+     * . 1. 1 -&gt; 6 -&gt; 1
+     * . 2. 7 -&gt; 6 -&gt; 1
+     * . 3. 0 -&gt; 6 -&gt; 1
+     *   4. 1 -&gt; 8 -&gt; 1
+     *   5. 3 -&gt; 8 -&gt; 1
+     */</comment>
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>int</name></type> <name>MOD</name> <init>= <expr><literal type="number">1000_000_007</literal></expr></init></decl>;</decl_stmt>
+
+        <comment type="line">// whereFromHere[i] is an array of keys that can be reached from the ith digit</comment>
+        <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name><name>int</name><index>[]</index><index>[]</index></name></type> <name>whereFromHere</name> <init>= <expr><block>{
+                <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">6</literal></expr>, <expr><literal type="number">8</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">7</literal></expr>, <expr><literal type="number">9</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">8</literal></expr>}</block></expr>,  <comment type="line">// 0, 1, 2, 3</comment>
+                <expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">9</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">7</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>,          <comment type="line">// 4, 5, 6</comment>
+                <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>              <comment type="line">// 7, 8, 9</comment>
+        }</block></expr></init></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>knightDialer</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>N</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// a[i] is the number of ways we can end up on the ith digit</comment>
+            <comment type="line">// The initial array is for N = 1, i.e. for 0 hops.</comment>
+            <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>a</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[]</index></name><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">// Simulate N - 1 hops</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>N</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><operator>++</operator><name>i</name></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>long</name><index>[]</index></name></type> <name>tmp</name> <init>= <expr><operator>new</operator> <name><name>long</name><index>[<expr><literal type="number">10</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+                <comment type="line">// For each digit</comment>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">10</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <comment type="line">// Which other digits can we reach?</comment>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <range>: <expr><name><name>whereFromHere</name><index>[<expr><name>j</name></expr>]</index></name></expr></range></decl></init>)</control> <block>{<block_content>
+                        <expr_stmt><expr><name><name>tmp</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><name><name>tmp</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <name><name>a</name><index>[<expr><name>k</name></expr>]</index></name><operator>)</operator> <operator>%</operator> <name>MOD</name></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                </block_content>}</block></for>
+
+                <comment type="line">// Sanity checks based on symmetry of the keypad</comment>
+                <assert>assert <expr><name><name>tmp</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <name><name>tmp</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr>;</assert>
+                <assert>assert <expr><name><name>tmp</name><index>[<expr><literal type="number">4</literal></expr>]</index></name> <operator>==</operator> <name><name>tmp</name><index>[<expr><literal type="number">6</literal></expr>]</index></name></expr>;</assert>
+                <assert>assert <expr><name><name>tmp</name><index>[<expr><literal type="number">7</literal></expr>]</index></name> <operator>==</operator> <name><name>tmp</name><index>[<expr><literal type="number">9</literal></expr>]</index></name></expr>;</assert>
+
+                <expr_stmt><expr><name>a</name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name>long</name></type> <name>ans</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>long</name></type> <name>k</name> <range>: <expr><name>a</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>ans</name> <operator>=</operator> <operator>(</operator><name>ans</name> <operator>+</operator> <name>k</name><operator>)</operator> <operator>%</operator> <name>MOD</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <name>ans</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

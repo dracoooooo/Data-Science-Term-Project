@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_267.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_267</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>generatePalindromes</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>odd</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>String</name></type> <name>mid</name> <init>= <expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>res</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name>HashMap</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">// step 1. build character count map and count odds</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><ternary><condition><expr><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr> ?</condition><then> <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr> </then><else>: <expr><literal type="number">1</literal></expr></else></ternary></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>odd</name> <operator>+=</operator> <ternary><condition><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call> <operator>%</operator> <literal type="number">2</literal> <operator>!=</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><operator>-</operator><literal type="number">1</literal></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <comment type="line">// cannot form any palindromic string</comment>
+            <if_stmt><if>if <condition>(<expr><name>odd</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>res</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <comment type="line">// step 2. add half count of each character to list</comment>
+            <for>for <control>(<init><decl><type><name><name>Map</name><operator>.</operator><name><name>Entry</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></name></type> <name>entry</name> <range>: <expr><call><name><name>map</name><operator>.</operator><name>entrySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>char</name></type> <name>key</name> <init>= <expr><call><name><name>entry</name><operator>.</operator><name>getKey</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>val</name> <init>= <expr><call><name><name>entry</name><operator>.</operator><name>getValue</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+                <if_stmt><if>if <condition>(<expr><name>val</name> <operator>%</operator> <literal type="number">2</literal> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>mid</name> <operator>+=</operator> <name>key</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>val</name> <operator>/</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <comment type="line">// step 3. generate all the permutations</comment>
+            <expr_stmt><expr><call><name>getPerm</name><argument_list>(<argument><expr><name>list</name></expr></argument>, <argument><expr><name>mid</name></expr></argument>, <argument><expr><operator>new</operator> <name><name>boolean</name><index>[<expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>]</index></name></expr></argument>, <argument><expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>res</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <return>return <expr><name>res</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="line">// generate all unique permutation from list</comment>
+        <function><type><name>void</name></type> <name>getPerm</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>list</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>mid</name></decl></parameter>, <parameter><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>used</name></decl></parameter>, <parameter><decl><type><name>StringBuilder</name></type> <name>sb</name></decl></parameter>,
+                     <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>res</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <comment type="line">// form the palindromic string</comment>
+                <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call> <operator>+</operator> <name>mid</name> <operator>+</operator> <call><name><name>sb</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toString</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>reverse</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <comment type="line">// avoid duplication</comment>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><name><name>used</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <continue>continue;</continue>
+                </block_content>}</block></if></if_stmt>
+
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>used</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>used</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <comment type="line">// recursion</comment>
+                    <expr_stmt><expr><call><name>getPerm</name><argument_list>(<argument><expr><name>list</name></expr></argument>, <argument><expr><name>mid</name></expr></argument>, <argument><expr><name>used</name></expr></argument>, <argument><expr><name>sb</name></expr></argument>, <argument><expr><name>res</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <comment type="line">// backtracking</comment>
+                    <expr_stmt><expr><name><name>used</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>deleteCharAt</name></name><argument_list>(<argument><expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

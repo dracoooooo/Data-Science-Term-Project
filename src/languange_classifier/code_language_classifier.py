@@ -168,7 +168,7 @@ def init_model():
 
     # set configurations
     model.compile(loss='categorical_crossentropy',
-                  optimizer='adagrad',
+                  optimizer='adam',
                   metrics=['accuracy'])
 
     return model
