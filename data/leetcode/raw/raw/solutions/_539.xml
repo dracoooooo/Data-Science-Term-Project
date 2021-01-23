@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_539.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_539</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Soluiton1</name> <block>{
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findMinDifference</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>timePoints</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="block" format="javadoc">/**there are in total 24*60 = 1440 possible time points*/</comment>
+            <decl_stmt><decl><type><specifier>final</specifier> <name>int</name></type> <name>ALL_POSSIBLE_TIMEPOINTS</name> <init>= <expr><literal type="number">1440</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>allTimePoints</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>ALL_POSSIBLE_TIMEPOINTS</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>eachTime</name> <range>: <expr><name>timePoints</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>timeParts</name> <init>= <expr><call><name><name>eachTime</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">":"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>hour</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>timeParts</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>minute</name> <init>= <expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>timeParts</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>value</name> <init>= <expr><name>hour</name> <operator>*</operator> <literal type="number">60</literal> <operator>+</operator> <name>minute</name></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>allTimePoints</name><index>[<expr><name>value</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="number">0</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name><name>allTimePoints</name><index>[<expr><name>value</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>prev</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>first</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>last</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>ALL_POSSIBLE_TIMEPOINTS</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>allTimePoints</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>first</name> <operator>!=</operator> <name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name>i</name> <operator>-</operator> <name>prev</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>first</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>first</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>last</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>last</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>prev</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><operator>(</operator><name>ALL_POSSIBLE_TIMEPOINTS</name> <operator>-</operator> <name>last</name> <operator>+</operator> <name>first</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>min</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1662.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_1662</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>arrayStringsAreEqual</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>word1</name></decl></parameter>, <parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>word2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb1</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>word</name> <range>: <expr><name>word1</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb1</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>word</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb2</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>word</name> <range>: <expr><name>word2</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb2</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>word</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><call><name><name>sb1</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><call><name><name>sb2</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

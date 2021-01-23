@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_127.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_127</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>ladderLength</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>beginWord</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>endWord</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>wordList</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>beginSet</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>endSet</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>visited</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>dict</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><name>wordList</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>len</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+
+            <expr_stmt><expr><call><name><name>beginSet</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>beginWord</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <if_stmt><if>if <condition>(<expr><call><name><name>dict</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>endWord</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>endSet</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>endWord</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>beginSet</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>!</operator><call><name><name>endSet</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>nextBeginSet</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>String</name></type> <name>word</name> <range>: <expr><name>beginSet</name></expr></range></decl></init>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>chars</name> <init>= <expr><call><name><name>word</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>chars</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <init>= <expr><literal type="char">'a'</literal></expr></init></decl>;</init> <condition><expr><name>c</name> <operator>&lt;=</operator> <literal type="char">'z'</literal></expr>;</condition> <incr><expr><name>c</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <decl_stmt><decl><type><name>char</name></type> <name>old</name> <init>= <expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                            <expr_stmt><expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt>
+                            <decl_stmt><decl><type><name>String</name></type> <name>newWord</name> <init>= <expr><operator>new</operator> <call><name>String</name><argument_list>(<argument><expr><name>chars</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                            <if_stmt><if>if <condition>(<expr><call><name><name>endSet</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>newWord</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                                <return>return <expr><name>len</name> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+                            </block_content>}</block></if></if_stmt>
+
+                            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>visited</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>newWord</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>dict</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>newWord</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                                <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newWord</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                                <expr_stmt><expr><call><name><name>nextBeginSet</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newWord</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                            </block_content>}</block></if></if_stmt>
+                            <expr_stmt><expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>old</name></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                    </block_content>}</block></for>
+                </block_content>}</block></for>
+
+                <expr_stmt><expr><name>beginSet</name> <operator>=</operator> <name>nextBeginSet</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>len</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_58.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_58</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>lengthOfLastWord</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>s</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>s</name> <operator>=</operator> <call><name><name>s</name><operator>.</operator><name>trim</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>n</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>n</name></expr></argument>)</argument_list></call> <operator>!=</operator> <literal type="char">' '</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>n</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>n</name> <operator>-</operator> <literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

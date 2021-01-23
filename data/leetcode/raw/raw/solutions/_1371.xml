@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1371.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1371</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findTheLongestSubstring</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><call><name>setupMap</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>i</name> <operator>&lt;</operator> <name>max</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>max</name></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Character</name></type> <name>b</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>map</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>, <argument><expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name>allEven</name><argument_list>(<argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><name>max</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>setupMap</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'o'</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'u'</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>map</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>allEven</name><parameter_list>(<parameter><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>map</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call> <operator>%</operator> <literal type="number">2</literal> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

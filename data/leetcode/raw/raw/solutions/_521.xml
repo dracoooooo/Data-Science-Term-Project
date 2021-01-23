@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_521.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_521</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * The gotcha point of this question is:
+         * 1. if a and b are identical, then there will be no common subsequence, return -1
+         * 2. else if a and b are of equal length, then any one of them will be a subsequence of the other string
+         * 3. else if a and b are of different length, then the longer one is a required subsequence because the longer string cannot be a subsequence of the shorter one
+         * Or in other words, when a.length() != b.length(), no subsequence of b will be equal to a, so return Math.max(a.length(), b.length())
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findLUSlength</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>a</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><call><name><name>a</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>b</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

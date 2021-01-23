@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_161.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * 161. One Edit Distance
+ *
+ * Given two strings s and t, determine if they are both one edit distance apart.
+ *
+ * Note:
+ * There are 3 possiblities to satisify one edit distance apart:
+ * Insert a character into s to get t
+ * Delete a character from s to get t
+ * Replace a character of s to get t
+ *
+ * Example 1:
+ * Input: s = "ab", t = "acb"
+ * Output: true
+ * Explanation: We can insert 'c' into s to get t.
+ *
+ * Example 2:
+ * Input: s = "cab", t = "ad"
+ * Output: false
+ * Explanation: We cannot get t from s by only one step.
+ *
+ * Example 3:
+ * Input: s = "1203", t = "1213"
+ * Output: true
+ * Explanation: We can replace '0' with '1' to get t.
+ */</comment>
+<class><specifier>public</specifier> class <name>_161</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isOneEditDistance</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>schar</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>tchar</name> <init>= <expr><call><name><name>t</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <if_stmt><if>if <condition>(<expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>t</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>longer</name> <init>= <expr><ternary><condition><expr><operator>(</operator><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>t</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call><operator>)</operator></expr> ?</condition><then> <expr><name>schar</name></expr> </then><else>: <expr><name>tchar</name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>shorter</name> <init>= <expr><ternary><condition><expr><operator>(</operator><name>longer</name> <operator>==</operator> <name>schar</name><operator>)</operator></expr> ?</condition><then> <expr><name>tchar</name></expr> </then><else>: <expr><name>schar</name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+
+                <decl_stmt><decl><type><name>int</name></type> <name>diffCnt</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>shorter</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>j</name> <operator>&lt;</operator> <name><name>longer</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr/>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>longer</name><index>[<expr><name>j</name></expr>]</index></name> <operator>!=</operator> <name><name>shorter</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>diffCnt</name><operator>++</operator></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if> <else>else <block>{<block_content>
+                        <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></for>
+                <return>return <expr><name>diffCnt</name> <operator>==</operator> <literal type="number">1</literal>
+                        <operator>||</operator> <name>diffCnt</name>
+                        <operator>==</operator> <literal type="number">0</literal></expr>;</return><comment type="line">//it could be the last char of the longer is the different one, in that case, diffCnt remains to be zero</comment>
+            </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>t</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>diffCnt</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>schar</name><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <name><name>tchar</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>diffCnt</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>diffCnt</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <return>return <expr><name>diffCnt</name> <operator>==</operator> <literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

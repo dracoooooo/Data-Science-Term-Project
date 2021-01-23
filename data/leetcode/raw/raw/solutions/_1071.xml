@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1071.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_1071</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>gcdOfStrings</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str1</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>str2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>str1</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>||</operator> <call><name><name>str2</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="string">""</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>String</name></type> <name>commomDivisor</name> <init>= <expr><name>str2</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>commomDivisor</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <operator>!</operator><call><name><name>commomDivisor</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name>isDivisor</name><argument_list>(<argument><expr><name>str1</name></expr></argument>, <argument><expr><name>commomDivisor</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>commomDivisor</name></expr>;</return>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>commomDivisor</name> <operator>=</operator> <call><name>findNextShorterCommonDivisor</name><argument_list>(<argument><expr><name>str2</name></expr></argument>, <argument><expr><name>commomDivisor</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><literal type="string">""</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>String</name></type> <name>findNextShorterCommonDivisor</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str2</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>commomDivisor</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>length</name> <init>= <expr><call><name>nextPossibleLength</name><argument_list>(<argument><expr><name>str2</name></expr></argument>, <argument><expr><call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>length</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name>isDivisor</name><argument_list>(<argument><expr><name>str2</name></expr></argument>, <argument><expr><name>length</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><call><name><name>str2</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>length</name></expr></argument>)</argument_list></call></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>length</name> <operator>=</operator> <call><name>nextPossibleLength</name><argument_list>(<argument><expr><name>str2</name></expr></argument>, <argument><expr><name>length</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><literal type="null">null</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>isDivisor</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str2</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>length</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>String</name></type> <name>commonDivisorCandidate</name> <init>= <expr><call><name><name>str2</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>length</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>str2</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <name>length</name></expr>;</condition> <incr><expr><name>i</name> <operator>+=</operator> <name>length</name></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>str2</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <name>length</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>commonDivisorCandidate</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>isDivisor</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str1</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>commomDivisor</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>str1</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><call><name><name>str1</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name>commomDivisor</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>str1</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name> <operator>+=</operator> <call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>str1</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>commomDivisor</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>i</name> <operator>==</operator> <operator>(</operator><call><name><name>str1</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>commomDivisor</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call><operator>)</operator></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>nextPossibleLength</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>str2</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>bound</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>bound</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>len</name> <init>= <expr><name>bound</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><call><name><name>str2</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>%</operator> <name>len</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>len</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>len</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

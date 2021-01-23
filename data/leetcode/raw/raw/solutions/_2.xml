@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_2.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_2</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>addTwoNumbers</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>l1</name></decl></parameter>, <parameter><decl><type><name>ListNode</name></type> <name>l2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>tmp</name> <init>= <expr><name>result</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>l1</name> <operator>!=</operator> <literal type="null">null</literal> <operator>||</operator> <name>l2</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>sum</name> <operator>/=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>l1</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>l1</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>l1</name> <operator>=</operator> <name><name>l1</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name>l2</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>l2</name><operator>.</operator><name>val</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>l2</name> <operator>=</operator> <name><name>l2</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name><name>tmp</name><operator>.</operator><name>next</name></name> <operator>=</operator> <operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><name>sum</name> <operator>%</operator> <literal type="number">10</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>tmp</name> <operator>=</operator> <name><name>tmp</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <if_stmt><if>if <condition>(<expr><name>sum</name> <operator>/</operator> <literal type="number">10</literal> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>tmp</name><operator>.</operator><name>next</name></name> <operator>=</operator> <operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="line">//this means there's a carry, so we add additional 1, e.g. [5] + [5] = [0, 1]</comment>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><ternary><condition><expr><name><name>result</name><operator>.</operator><name>val</name></name> <operator>==</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><name><name>result</name><operator>.</operator><name>next</name></name></expr> </then><else>: <expr><name>result</name></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

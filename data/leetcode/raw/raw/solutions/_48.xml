@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_48.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>utils</name><operator>.</operator><name>CommonUtils</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_48</name> <block>{
+
+    <comment type="block" format="javadoc">/**Note: this is an n*n matrix, in other words, it's a square, this makes it easier as well.*/</comment>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="line">//Time: O(n^2)</comment>
+        <comment type="line">//Space: O(1)</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>rotate</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="block" format="javadoc">/**First swap the elements on the diagonal, then reverse each row:
+             * 1, 2, 3                    1, 4, 7                      7, 4, 1
+             * 4, 5, 6         becomes    2, 5, 8           becomes    8, 5, 2
+             * 7, 8, 9                    3, 6, 9                      9, 6, 3
+             **/</comment>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <comment type="block" format="javadoc">/**ATTN: j starts from i, so that the diagonal changes with itself, results in no change.*/</comment>
+                    <decl_stmt><decl><type><name>int</name></type> <name>tmp</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>CommonUtils</name><operator>.</operator><name>print2DIntArray</name></name><argument_list>(<argument><expr><name>matrix</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <comment type="block" format="javadoc">/**then reverse*/</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><name>m</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+                <while>while <condition>(<expr><name>left</name> <operator>&lt;</operator> <name>right</name></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>tmp</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>left</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>left</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>right</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>right</name></expr>]</index></name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>left</name><operator>++</operator></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>right</name><operator>--</operator></expr>;</expr_stmt>
+                </block_content>}</block></while>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**First swap the rows bottom up, then swap the element on the diagonal:
+         *
+         * 1, 2, 3                         7, 8, 9                           7, 4, 1
+         * 4, 5, 6           becomes       4, 5, 6           becomes         8, 5, 2
+         * 7, 8, 9                         1, 2, 3                           9, 6, 3
+         *
+         * Time: O(n^2)
+         * Space: O(1)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>rotate</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>top</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>bottom</name> <init>= <expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>top</name> <operator>&lt;</operator> <name>bottom</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>tmp</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>top</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>top</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>bottom</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>bottom</name></expr>]</index></name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>top</name><operator>++</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>bottom</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>tmp</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>tmp</name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution3</name> <block>{
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>rotate</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>n</name> <operator>/</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <comment type="line">//save the top</comment>
+                    <decl_stmt><decl><type><name>int</name></type> <name>top</name> <init>= <expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+                    <comment type="line">//move left to top</comment>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>n</name> <operator>-</operator> <literal type="number">1</literal> <operator>-</operator> <name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+
+                    <comment type="line">//move bottom to left</comment>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>n</name> <operator>-</operator> <literal type="number">1</literal> <operator>-</operator> <name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>n</name> <operator>-</operator> <literal type="number">1</literal> <operator>-</operator> <name>j</name></expr>]</index></name></expr>;</expr_stmt>
+
+                    <comment type="line">//move right to bottom</comment>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>n</name> <operator>-</operator> <literal type="number">1</literal> <operator>-</operator> <name>j</name></expr>]</index></name> <operator>=</operator> <name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+
+                    <comment type="line">//move top to right</comment>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>n</name> <operator>-</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name>top</name></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

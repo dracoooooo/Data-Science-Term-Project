@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_73.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_73</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Space: O(m*n)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>setZeroes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>matrix</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>matrix</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>height</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>width</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>zero</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>height</name></expr>]</index><index>[<expr><name>width</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>height</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>width</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>zero</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>height</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>width</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>zero</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>height</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>k</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>width</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>k</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Space: O(m+n)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>setZeroes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>matrix</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>matrix</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>row</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>m</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>col</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>row</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <expr_stmt><expr><name><name>col</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>row</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name><name>col</name><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>k</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>k</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution3</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Space: O(1)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>setZeroes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>matrix</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>matrix</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>firstRow</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>firstCol</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name>firstRow</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name>firstCol</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal> <operator>||</operator> <name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <if_stmt><if>if <condition>(<expr><name>firstRow</name></expr>)</condition> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></if></if_stmt>
+
+            <if_stmt><if>if <condition>(<expr><name>firstCol</name></expr>)</condition> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution4</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Space: O(1)
+         * credit: https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>setZeroes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>matrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>col0</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>matrix</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <comment type="block" format="javadoc">/**the first iteration (first nested for loop) is to check from top row to bottom row:
+             * keep the first column state into variable col0;
+             * then starting from the second column, check all the rest of the columns and mark its top cell and its most-left cell if it
+             * s a zero.*/</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>col0</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <comment type="block" format="javadoc">/**the second iteration (second nested for loop) is to check from bottom row to the top row
+             * from the right-most column to the second left-most column: as long as its left-most column cell or its top row cell is zero, then set that cell to be zero
+             * at last, check col0 variable, if it's zero, mark that row cell as zero*/</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>m</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&gt;=</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>j</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal> <operator>||</operator> <name><name>matrix</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <if_stmt><if>if <condition>(<expr><name>col0</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>matrix</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_297.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_297</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * The idea is very straightforward:
+         * use "#" as the terminator, do BFS, level order traversal to store all nodes values into a StringBuilder.
+         * When deserializing, also use a queue: pop the root into the queue first, then use a for loop to construct each node,
+         * then eventually just return the root.
+         */</comment>
+
+        <comment type="line">// Encodes a tree to a single string.</comment>
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>serialize</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="string">""</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name>LinkedList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>size</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name>TreeNode</name></type> <name>curr</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>curr</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">"# "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <continue>continue;</continue>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="line">// Decodes your encoded data to tree.</comment>
+        <function><type><specifier>public</specifier> <name>TreeNode</name></type> <name>deserialize</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>data</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>data</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name><name>data</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="null">null</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>nodes</name> <init>= <expr><call><name><name>data</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>TreeNode</name></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>nodes</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>TreeNode</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name>LinkedList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nodes</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>TreeNode</name></type> <name>curr</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>nodes</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"#"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>curr</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>nodes</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>nodes</name><index>[<expr><operator>++</operator><name>i</name></expr>]</index></name><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"#"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>curr</name><operator>.</operator><name>right</name></name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>valueOf</name></name><argument_list>(<argument><expr><name><name>nodes</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name><name>curr</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>root</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

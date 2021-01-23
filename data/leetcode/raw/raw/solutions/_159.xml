@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_159.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_159</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>lengthOfLongestSubstringTwoDistinct</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>index</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>lo</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>hi</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>maxLength</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>hi</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>index</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;=</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>hi</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>index</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><name>hi</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>hi</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>index</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>leftMost</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><call><name><name>index</name><operator>.</operator><name>values</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                        <expr_stmt><expr><name>leftMost</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>leftMost</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></for>
+                    <decl_stmt><decl><type><name>char</name></type> <name>c</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>leftMost</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>index</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>lo</name> <operator>=</operator> <name>leftMost</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>maxLength</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>maxLength</name></expr></argument>, <argument><expr><name>hi</name> <operator>-</operator> <name>lo</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>maxLength</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

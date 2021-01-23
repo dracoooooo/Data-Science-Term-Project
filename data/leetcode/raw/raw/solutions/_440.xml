@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_440.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_440</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/64624/concise-easy-to-understand-java-5ms-solution-with-explaination/2
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findKthNumber</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>curr</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>k</name> <operator>=</operator> <name>k</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            <while>while <condition>(<expr><name>k</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>steps</name> <init>= <expr><call><name>calSteps</name><argument_list>(<argument><expr><name>n</name></expr></argument>, <argument><expr><name>curr</name></expr></argument>, <argument><expr><name>curr</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>steps</name> <operator>&lt;=</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>curr</name> <operator>+=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>k</name> <operator>-=</operator> <name>steps</name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>curr</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>k</name> <operator>-=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>curr</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="line">//use long in case of overflow</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>calSteps</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>n1</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>n2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>steps</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>n1</name> <operator>&lt;=</operator> <name>n</name></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>steps</name> <operator>+=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>n2</name></expr></argument>)</argument_list></call> <operator>-</operator> <name>n1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>n1</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>n2</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>steps</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

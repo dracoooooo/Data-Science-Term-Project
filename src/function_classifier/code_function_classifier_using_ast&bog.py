@@ -1,21 +1,19 @@
 import os
 import pickle
 import random
-import re
 import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
-import matplotlib.pyplot as plt
-from src.languange_classifier.code_language_classifier import load_data, plot_graphs, soft_max, suffix
+from src.languange_classifier.code_language_classifier import load_data, plot_graphs, one_hot, suffix
 import src.languange_classifier.code_language_classifier as clc
 from src.token_based_similarities.token_lcs import code2text
 from tensorflow.keras.preprocessing.sequence import skipgrams
-import xml.etree.ElementTree as ET
 from src.ast_based_similarities.ast_similarities import parse_tree, traverse_and_parse, prefix
-from src.ast_based_similarities.tree_node import Node
 from src.ast_based_similarities.create_ast import create_ast
+from tensorflow.python.keras.models import load_model
+
 label = {
     # "array":    [1, 0, 0, 0, 0],
     # "math":     [0, 1, 0, 0, 0, 0],
@@ -23,11 +21,10 @@ label = {
     # "sort":   [0, 0, 1, 0, 0],
     # "string":   [0, 0, 0, 1, 0],
     # "tree":     [0, 0, 0, 0, 1]
-    "sort" : [1, 0, 0],
-    "tree" : [0, 1, 0],
-    "dp" :   [0, 0, 1]
+    "sort": [1, 0, 0],
+    "tree": [0, 1, 0],
+    "dp":   [0, 0, 1]
 }
-
 
 
 # array_path = "../../data/leetcode/array"
@@ -53,6 +50,7 @@ def file_paths(data_path, language):
                 ret.append(path)
     return ret
 
+
 def count():
     # array = load_data(array_path, "java")
     # math = load_data(math_path, "java")
@@ -71,8 +69,6 @@ def count():
     print(tree.__len__())
     print(dp.__len__())
     print(raw.__len__())
-
-
 
 
 def init_tokenizer():
@@ -107,6 +103,7 @@ def init_node_tokenizer():
     f.close()
     return
 
+
 def creat_ast_xml():
     path_list = file_paths(data_path, "java")
     for p in path_list:
@@ -129,20 +126,22 @@ def get_feature_bag_of_word(path):
     return feature
 
 
-
 # 多个文件
 def bag_of_word(path_list):
     ret = []
     for path in path_list:
         ret.append(get_feature_bag_of_word(path))
     return ret
+
+
 def ast_node_embedding(path_list):
     ret = []
     for path in path_list:
         ret.append(get_feature_ast_node_embedding(path))
     return ret
 
-# 提取特征————word embedding
+
+# 提取特征————word embedding(未完成）
 def get_feature_word_embedding(path):
     # 使用bow的tokenizer
     f1 = open('tokenizer_bow.pkl', 'rb')
@@ -157,23 +156,25 @@ def get_feature_word_embedding(path):
         vocabulary_size=vocab_size,
         window_size=window_size,
         negative_samples=0)
-
     return
-
 
 
 # def xml2tree(path):
 #     xml_file_tree = ET.parse(path)
 #     return xml_file_tree
 
+
 def code_path2xml_path(code_path):
     return code_path[0:code_path.rfind('.')] + '.xml'
+
+
 def preorder_list2str(list):
     pre_order_str = ''
     for i in list:
         pre_order_str += i + ' '
     pre_order_str = pre_order_str.strip()
     return pre_order_str
+
 
 def preorder(root, pre_order_list):
     # visiting
@@ -200,9 +201,10 @@ def get_feature_ast_node_embedding(path):
     return feature
 
 
-
-
 train_size = 50
+dp_train_size = 80
+
+
 def prepare_data():
     # array = file_paths(array_path, "java")
     # math = file_paths(math_path, "java")
@@ -213,12 +215,12 @@ def prepare_data():
     dp = file_paths(dp_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = bag_of_word(sort[0: train_size] +  tree[0: train_size] + dp[0:train_size])
-    Y_train =  [label["sort"]] * train_size  + [label["tree"]] * train_size + [label["dp"]] * train_size
-    X_test = bag_of_word( sort[train_size:] +  tree[train_size:] + dp[train_size:])
+    X_train = bag_of_word(sort[0: train_size] + tree[0: train_size] + dp[0: dp_train_size])
+    Y_train =  [label["sort"]] * train_size + [label["tree"]] * train_size + [label["dp"]] * dp_train_size
+    X_test = bag_of_word(sort[train_size:] + tree[train_size:] + dp[dp_train_size: ])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
              [label["tree"]] * (tree.__len__() - train_size) + \
-             [label["dp"]] * (dp.__len__() - train_size)
+             [label["dp"]] * (dp.__len__() - dp_train_size)
 
     x_train = np.array(X_train)
     x_test = np.array(X_test)
@@ -241,9 +243,9 @@ def prepare_data():
 def init_model():
     model = Sequential()
     model.add(Dense(input_dim=features, units=1000, activation='relu'))
-    model.add(Dense(units=1000, activation='relu'))
-    model.add(Dense(units=1000, activation='relu'))
-    model.add(Dense(units=1000, activation='relu'))
+    model.add(Dense(units=500, activation='relu'))
+    model.add(Dense(units=300, activation='relu'))
+    model.add(Dense(units=50, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
@@ -252,43 +254,63 @@ def init_model():
     return model
 
 
-def self_learning():
+# 每次把结果最好的5个raw data扔进训练集再次训练
+# 最好指的是这个raw data在上一次的模型的预测结果能做到类似于[0.8, 0.1, 0.1, 0]
+# 即这个raw data是class 1的概率远大于在其他class的概率，而不是类似于[0.3, 0.2, 0.25, 0.25]
+def self_training():
     (x_train, y_train), (x_test, y_test) , raw = prepare_data()
     model = init_model()
     # 一次确定多少个
-    n = 1
-    while raw:
-        model.fit(x_train, y_train, batch_size=80, epochs=30,
+    n = 10
+    l = raw.__len__()
+    while raw and l is not raw.__len__():
+        l = raw.__len__()
+        model.fit(x_train, y_train, batch_size=80, epochs=40,
             validation_data=(x_test, y_test), verbose=2)
         prediction = model.predict(raw)
         max_prediction = []
         for i in range(prediction.__len__()):
             max_prediction.append(max(prediction[i]))
-
         for i in range(n):
-            if raw:
+            if raw and max(max_prediction) > 0.95:
                 index = max_prediction.index(max(max_prediction))
                 data = np.array(raw[index])
-                label = np.array(soft_max(prediction[index]))
+                label = np.array(one_hot(prediction[index]))
                 x_train = np.row_stack((x_train, data))
                 y_train = np.row_stack((y_train, label))
                 max_prediction.pop(index)
                 raw.pop(index)
-    model.save('function_classifier.h5')
+    model.save('function_classifier_self_training.h5')
     return model
 
 
+def train_once():
+    (x_train, y_train), (x_test, y_test), raw = prepare_data()
+    model = init_model()
+    model.fit(x_train, y_train, batch_size=100, epochs=100,
+              validation_data=(x_test, y_test), verbose=2)
+    model.save('function_classifier.h5')
+
+
+def predict(path):
+    feature = get_feature_bag_of_word(path)
+    model = load_model('function_classifier.h5')
+    prediction = model.predict(feature)
+    tmp = clc.one_hot(prediction)
+    clazz = ""
+    if tmp == label["sort"]:
+        clazz = "sort"
+    elif tmp == label["tree"]:
+        clazz = "tree"
+    elif tmp == label["dp"]:
+        clazz = "dp"
+    print("predict class:", clazz)
+    print("possibility:", max(prediction))
+    return
+
+
 if __name__ == "__main__":
-    # get_feature_bag_of_word("../../data/test/java_file2.java")
-    # creat_ast_xml()
-    init_tokenizer()
     count()
-    self_learning()
-
-    # (x_train, y_train), (x_test, y_test) , raw = prepare_data()
-    # model.fit(x_train, y_train, batch_size=100, epochs=30,
-    #       validation_data=(x_test, y_test), verbose=2)
-
-
-    # init_node_tokenizer()
-    # get_feature_ast_node_embedding("../../data/test/java_file2.java")
+    # init_tokenizer()
+    self_training()
+    # train_once()

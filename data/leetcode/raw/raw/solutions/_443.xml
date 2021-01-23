@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_443.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_443</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * This is breaking the rules, it's not in-place.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>compress</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>chars</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>chars</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>chars</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>sb</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>char</name></type> <name>prev</name> <init>= <expr><name><name>chars</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>chars</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>prev</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>count</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>prev</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>count</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>prev</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name>prev</name> <operator>=</operator> <name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>count</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>prev</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>count</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>sb</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>sb</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>toCharArray</name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name><name>chars</name><index>[<expr><name>i</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><call><name><name>sb</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

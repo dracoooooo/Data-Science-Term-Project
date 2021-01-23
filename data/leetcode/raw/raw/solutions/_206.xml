@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_206.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * 206. Reverse Linked List
+ *
+ * Reverse a singly linked list.
+ *
+ * Example:
+ * Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+ * Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+ *
+ * Follow up:
+ * A linked list can be reversed either iteratively or recursively. Could you implement both?
+ * */</comment>
+<class><specifier>public</specifier> class <name>_206</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>reverseList</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>prev</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>curr</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>curr</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>ListNode</name></type> <name>next</name> <init>= <expr><name><name>curr</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>curr</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>prev</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>prev</name> <operator>=</operator> <name>curr</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>curr</name> <operator>=</operator> <name>next</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>prev</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>reverseList</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>reverse</name><argument_list>(<argument><expr><name>head</name></expr></argument>, <argument><expr><literal type="null">null</literal></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>ListNode</name></type> <name>reverse</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>, <parameter><decl><type><name>ListNode</name></type> <name>newHead</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>head</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>newHead</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>next</name> <init>= <expr><name><name>head</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>head</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>newHead</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>newHead</name> <operator>=</operator> <name>head</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>head</name> <operator>=</operator> <name>next</name></expr>;</expr_stmt>
+            <return>return <expr><call><name>reverse</name><argument_list>(<argument><expr><name>head</name></expr></argument>, <argument><expr><name>newHead</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class></unit>

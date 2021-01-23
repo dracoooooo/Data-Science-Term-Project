@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_37.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_37</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>solveSudoku</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>board</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>board</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><call><name>solve</name><argument_list>(<argument><expr><name>board</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>solve</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>board</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="char">'.'</literal></expr>)</condition> <block>{<block_content>
+                        <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <init>= <expr><literal type="char">'1'</literal></expr></init></decl>;</init> <condition><expr><name>c</name> <operator>&lt;=</operator> <literal type="char">'9'</literal></expr>;</condition> <incr><expr><name>c</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                            <comment type="line">//try 1 to 9</comment>
+                            <if_stmt><if>if <condition>(<expr><call><name>isValid</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>c</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                                <expr_stmt><expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name>c</name></expr>;</expr_stmt>
+
+                                <if_stmt><if>if <condition>(<expr><call><name>solve</name><argument_list>(<argument><expr><name>board</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                                </block_content>}</block></if> <else>else <block>{<block_content>
+                                    <expr_stmt><expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="char">'.'</literal></expr>;</expr_stmt><comment type="line">//recover it to be '.'</comment>
+                                </block_content>}</block></else></if_stmt>
+                            </block_content>}</block></if></if_stmt>
+                        </block_content>}</block></for>
+                        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>isValid</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>row</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>col</name></decl></parameter>, <parameter><decl><type><name>char</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">9</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>col</name></expr>]</index></name> <operator>!=</operator> <literal type="char">'.'</literal> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>col</name></expr>]</index></name> <operator>==</operator> <name>c</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return><comment type="line">//check row</comment>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><name>row</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <literal type="char">'.'</literal> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><name>row</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>c</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return><comment type="line">//check column</comment>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>board</name><index>[<expr><literal type="number">3</literal> <operator>*</operator> <operator>(</operator><name>row</name> <operator>/</operator> <literal type="number">3</literal><operator>)</operator> <operator>+</operator> <name>i</name> <operator>/</operator> <literal type="number">3</literal></expr>]</index><index>[<expr><literal type="number">3</literal> <operator>*</operator> <operator>(</operator><name>col</name> <operator>/</operator> <literal type="number">3</literal><operator>)</operator> <operator>+</operator> <name>i</name> <operator>%</operator> <literal type="number">3</literal></expr>]</index></name> <operator>!=</operator> <literal type="char">'.'</literal> <operator>&amp;&amp;</operator> <name><name>board</name><index>[<expr><literal type="number">3</literal> <operator>*</operator> <operator>(</operator><name>row</name> <operator>/</operator> <literal type="number">3</literal><operator>)</operator> <operator>+</operator> <name>i</name> <operator>/</operator> <literal type="number">3</literal></expr>]</index><index>[<expr><literal type="number">3</literal> <operator>*</operator> <operator>(</operator><name>col</name> <operator>/</operator> <literal type="number">3</literal><operator>)</operator> <operator>+</operator> <name>i</name> <operator>%</operator> <literal type="number">3</literal></expr>]</index></name> <operator>==</operator> <name>c</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return> <comment type="line">//check 3*3 block</comment>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

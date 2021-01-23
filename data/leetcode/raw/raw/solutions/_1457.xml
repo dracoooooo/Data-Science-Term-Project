@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1457.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1457</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>pseudoPalindromicPaths</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>allPaths</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>path</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>path</name></expr></argument>, <argument><expr><name>allPaths</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>thisPath</name> <range>: <expr><name>allPaths</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>count</name> <init>= <expr><call><name>findCount</name><argument_list>(<argument><expr><name>thisPath</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>oddCount</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>num</name> <range>: <expr><call><name><name>count</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>count</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call> <operator>%</operator> <literal type="number">2</literal> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>oddCount</name><operator>++</operator></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>oddCount</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <break>break;</break>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <if_stmt><if>if <condition>(<expr><name>oddCount</name> <operator>&lt;=</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>result</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>path</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>allPaths</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>right</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>path</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>allPaths</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><name>path</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>path</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>path</name></expr></argument>, <argument><expr><name>allPaths</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>path</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><call><name><name>path</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>path</name></expr></argument>, <argument><expr><name>allPaths</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>path</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><call><name><name>path</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>findCount</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>path</name><operator>.</operator><name>forEach</name></name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>i</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><call><name><name>map</name><operator>.</operator><name>getOrDefault</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>map</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

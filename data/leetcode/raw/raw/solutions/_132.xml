@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_132.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * 132. Palindrome Partitioning II
+
+ Given a string s, partition s such that every substring of the partition is a palindrome.
+
+ Return the minimum cuts needed for a palindrome partitioning of s.
+
+ For example, given s = "aab",
+ Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
+
+ */</comment>
+<class><specifier>public</specifier> class <name>_132</name> <block>{
+
+  <comment type="block" format="javadoc">/**This solution is cooler than Jiuzhang: https://discuss.leetcode.com/topic/32575/easiest-java-dp-solution-97-36*/</comment>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+      <comment type="line">//cut[i] stands for the minimum number of cut needed to cut [0, i] into palindromes</comment>
+      <comment type="line">//we initiazlie cut[i] with its max possible value which is i, this is because a single char is naturally a palindrome, so, we'll cut this string into all single-char substrings, which is the max cuts needed</comment>
+
+      <comment type="line">//dp[j][i] == true stands for s.substring(j,i) is a palindrome</comment>
+      <function><type><specifier>public</specifier> <name>int</name></type> <name>minCut</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>char</name><index>[]</index></name></type> <name>c</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>cut</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <expr_stmt><expr><name><name>cut</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;=</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>c</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name><name>c</name><index>[<expr><name>j</name></expr>]</index></name> <operator>&amp;&amp;</operator> <operator>(</operator><name>j</name> <operator>+</operator> <literal type="number">1</literal> <operator>&gt;</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal> <operator>||</operator> <name><name>dp</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+              <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>cut</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+              </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name><name>cut</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name><name>cut</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;</operator> <name><name>cut</name><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr> ?</condition><then> <expr><name><name>cut</name><index>[<expr><name>i</name></expr>]</index></name></expr> </then><else>: <expr><name><name>cut</name><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr></else></ternary></expr>;</expr_stmt>
+              </block_content>}</block></else></if_stmt>
+            </block_content>}</block></if></if_stmt>
+          </block_content>}</block></for>
+        </block_content>}</block></for>
+
+        <return>return <expr><name><name>cut</name><index>[<expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</return>
+      </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_139.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>utils</name><operator>.</operator><name>CommonUtils</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_139</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * this solution takes between 7 and 8 ms to finish on LeetCode
+         * beats around 38% to 48% submissions as of 6/27/2020
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>wordBreak</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>wordDict</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index></name>
+                            <operator>&amp;&amp;</operator>
+                            <call><name><name>wordDict</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <break>break;</break>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>CommonUtils</name><operator>.</operator><name>printArray</name></name><argument_list>(<argument><expr><name>dp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Added pruning based on max word length.
+         * this solution takes between 2 and 3 ms to finish on LeetCode
+         * this beats 94.53% submissions as of 6/27/2020
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>wordBreak</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>wordDict</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>maxLen</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>word</name> <range>: <expr><name>wordDict</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>maxLen</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>maxLen</name><operator>)</operator></expr> ?</condition><then> <expr><call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr> </then><else>: <expr><name>maxLen</name></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><operator>(</operator><name>i</name> <operator>-</operator> <name>j</name><operator>)</operator> <operator>&gt;</operator> <name>maxLen</name></expr>)</condition> <block>{<block_content>
+                        <continue>continue;</continue>
+                    </block_content>}</block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index></name> <operator>&amp;&amp;</operator> <call><name><name>wordDict</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <break>break;</break>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution3</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Added pruning, plus start from the end to check.
+         * This solution takes 1 ms to finish on LeetCode
+         * This beats 99.02% submissions as of 6/27/2020.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>wordBreak</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>wordDict</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>maxLen</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>word</name> <range>: <expr><name>wordDict</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>maxLen</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>maxLen</name><operator>)</operator></expr> ?</condition><then> <expr><call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr> </then><else>: <expr><name>maxLen</name></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>lastWordLength</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>lastWordLength</name> <operator>&lt;=</operator> <name>i</name> <operator>&amp;&amp;</operator> <name>lastWordLength</name> <operator>&lt;=</operator> <name>maxLen</name></expr>;</condition> <incr><expr><name>lastWordLength</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>i</name> <operator>-</operator> <name>lastWordLength</name></expr>]</index></name> <operator>&amp;&amp;</operator> <call><name><name>wordDict</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name> <operator>-</operator> <name>lastWordLength</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                        <break>break;</break>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_169.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * 169. Majority Element
+
+ Given an array of size n, find the majority element. The majority element is the element that appears more than â n/2 â times.
+ You may assume that the array is non-empty and the majority element always exist in the array.
+
+ Example 1:
+ Input: [3,2,3]
+ Output: 3
+
+ Example 2:
+ Input: [2,2,1,1,1,2,2]
+ Output: 2
+ */</comment>
+<class><specifier>public</specifier> class <name>_169</name> <block>{
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+    <comment type="block" format="javadoc">/**Moore Voting Algorithm
+     * How to understand this:
+     * 1. For a number to qualify as a majority element, it needs to occur more than 1/2 times, which
+     *          means there are a max of only one such element in any given array.
+     * 2. E.g. given this array [1,2,3,1,1,1], two of the 1s will be balanced off by 2 and 3, still there are two 1s remaining in the end
+     * which is the majority element*/</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>majorityElement</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>majority</name> <init>= <expr><name><name>nums</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>count</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+          <expr_stmt><expr><name>majority</name> <operator>=</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <name>majority</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <expr_stmt><expr><name>count</name><operator>--</operator></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></for>
+      <return>return <expr><name>majority</name></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+
+  <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+    <comment type="line">//bit manipulation</comment>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>majorityElement</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>bit</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">32</literal></expr>]</index></name></expr></init></decl>;</decl_stmt><comment type="line">//because an integer is 32 bits, so we use an array of 32 long</comment>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>num</name> <range>: <expr><name>nums</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">32</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><operator>(</operator><name>num</name> <operator>&gt;&gt;</operator> <operator>(</operator><literal type="number">31</literal> <operator>-</operator> <name>i</name><operator>)</operator> <operator>&amp;</operator> <literal type="number">1</literal><operator>)</operator> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>bit</name><index>[<expr><name>i</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt><comment type="line">//this is to compute each number's ones frequency</comment>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+      </block_content>}</block></for>
+      <decl_stmt><decl><type><name>int</name></type> <name>res</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+      <comment type="line">//this below for loop is to construct the majority element: since every bit of this element would have appeared more than n/2 times</comment>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">32</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>bit</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name><name>bit</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>/</operator> <literal type="number">2</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr>
+                </then><else>: <expr><literal type="number">0</literal></expr></else></ternary></expr>;</expr_stmt><comment type="line">//we get rid of those that bits that are not part of the majority number</comment>
+        <expr_stmt><expr><name>res</name> <operator>+=</operator> <name><name>bit</name><index>[<expr><name>i</name></expr>]</index></name> <operator>*</operator> <operator>(</operator><literal type="number">1</literal> <operator>&lt;&lt;</operator> <operator>(</operator><literal type="number">31</literal> <operator>-</operator> <name>i</name><operator>)</operator><operator>)</operator></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <return>return <expr><name>res</name></expr>;</return>
+    </block_content>}</block></function>
+  }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1485.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1485</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>NodeCopy</name></type> <name>copyRandomBinaryTree</name><parameter_list>(<parameter><decl><type><name>Node</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="null">null</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>, <argument><name>NodeCopy</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>NodeCopy</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfsAgain</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>dfsAgain</name><parameter_list>(<parameter><decl><type><name>Node</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>, <argument><name>NodeCopy</name></argument>&gt;</argument_list></name></type> <name>map</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>NodeCopy</name></type> <name>copy</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>left</name></name> <operator>=</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>right</name></name> <operator>=</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>random</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>random</name></name> <operator>=</operator> <call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>random</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>copy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfsAgain</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfsAgain</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>Node</name></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Node</name></argument>, <argument><name>NodeCopy</name></argument>&gt;</argument_list></name></type> <name>map</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>NodeCopy</name></type> <name>copy</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>getOrDefault</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>NodeCopy</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>left</name></name> <operator>=</operator> <operator>new</operator> <call><name>NodeCopy</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>right</name></name> <operator>=</operator> <operator>new</operator> <call><name>NodeCopy</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>random</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name><name>copy</name><operator>.</operator><name>random</name></name> <operator>=</operator> <operator>new</operator> <call><name>NodeCopy</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>random</name><operator>.</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>copy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>right</name></name></expr></argument>, <argument><expr><name>map</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Node</name> <block>{
+        <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>Node</name></type> <name>left</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>Node</name></type> <name>right</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>Node</name></type> <name>random</name></decl>;</decl_stmt>
+
+        <constructor><specifier>public</specifier> <name>Node</name><parameter_list>()</parameter_list> <block>{<block_content>
+        </block_content>}</block></constructor>
+
+        <empty_stmt>;</empty_stmt>
+
+        <constructor><specifier>public</specifier> <name>Node</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>val</name></name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+
+        <empty_stmt>;</empty_stmt>
+
+        <constructor><specifier>public</specifier> <name>Node</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>, <parameter><decl><type><name>Node</name></type> <name>left</name></decl></parameter>, <parameter><decl><type><name>Node</name></type> <name>right</name></decl></parameter>, <parameter><decl><type><name>Node</name></type> <name>random</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>val</name></name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>left</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>right</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>random</name></name> <operator>=</operator> <name>random</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>NodeCopy</name> <block>{
+        <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>NodeCopy</name></type> <name>left</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>NodeCopy</name></type> <name>right</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>public</specifier> <name>NodeCopy</name></type> <name>random</name></decl>;</decl_stmt>
+
+        <constructor><specifier>public</specifier> <name>NodeCopy</name><parameter_list>()</parameter_list> <block>{<block_content>
+        </block_content>}</block></constructor>
+
+        <empty_stmt>;</empty_stmt>
+
+        <constructor><specifier>public</specifier> <name>NodeCopy</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>val</name></name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+
+        <empty_stmt>;</empty_stmt>
+
+        <constructor><specifier>public</specifier> <name>NodeCopy</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>, <parameter><decl><type><name>NodeCopy</name></type> <name>left</name></decl></parameter>, <parameter><decl><type><name>NodeCopy</name></type> <name>right</name></decl></parameter>, <parameter><decl><type><name>NodeCopy</name></type> <name>random</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>val</name></name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name>left</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>right</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>this</name><operator>.</operator><name>random</name></name> <operator>=</operator> <name>random</name></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+    }</block></class>
+}</block></class>
+</unit>

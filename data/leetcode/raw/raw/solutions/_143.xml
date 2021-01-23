@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_143.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_143</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>reorderList</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>head</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>head</name><operator>.</operator><name>next</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>
+            <comment type="block">/* first we use two pointers to separate this list into two parts */</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>slowNode</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>fastNode</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name><name>fastNode</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>fastNode</name> <operator>=</operator> <name><name>fastNode</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>fastNode</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>fastNode</name> <operator>=</operator> <name><name>fastNode</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <break>break;</break>
+                </block_content>}</block></else></if_stmt>
+                <expr_stmt><expr><name>slowNode</name> <operator>=</operator> <name><name>slowNode</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <comment type="line">// two sublist heads</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>head1</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>head2</name> <init>= <expr><name><name>slowNode</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+            <comment type="line">// detach the two sublists;</comment>
+            <expr_stmt><expr><name><name>slowNode</name><operator>.</operator><name>next</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+
+            <comment type="line">// reverse the second sublist</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>cur</name> <init>= <expr><name>head2</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>post</name> <init>= <expr><name><name>cur</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>cur</name><operator>.</operator><name>next</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+            <while>while <condition>(<expr><name>post</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>ListNode</name></type> <name>temp</name> <init>= <expr><name><name>post</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>post</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>cur</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>cur</name> <operator>=</operator> <name>post</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>post</name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><name>head2</name> <operator>=</operator> <name>cur</name></expr>;</expr_stmt><comment type="line">// the new head of the reversed sublist</comment>
+
+            <comment type="line">// merge the two sublists as required</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>p</name> <init>= <expr><name>head1</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>q</name> <init>= <expr><name>head2</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>q</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>ListNode</name></type> <name>temp1</name> <init>= <expr><name><name>p</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>ListNode</name></type> <name>temp2</name> <init>= <expr><name><name>q</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>p</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>q</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>q</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>temp1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>p</name> <operator>=</operator> <name>temp1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>q</name> <operator>=</operator> <name>temp2</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

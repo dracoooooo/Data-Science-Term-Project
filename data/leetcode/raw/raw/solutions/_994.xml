@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_994.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_994</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>directions</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[]</index></name><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>orangesRotting</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>rottens</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>grid</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>rottens</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <name><name>int</name><index>[]</index></name><block>{<expr><name>i</name></expr>, <expr><name>j</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <decl_stmt><decl><type><name>int</name></type> <name>times</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>rottens</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>size</name> <init>= <expr><call><name><name>rottens</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>boolean</name></type> <name>counted</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>size</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>rotten</name> <init>= <expr><call><name><name>rottens</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <decl_stmt><decl><type><name>int</name></type> <name>x</name> <init>= <expr><name><name>rotten</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+</operator> <name><name>directions</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                        <decl_stmt><decl><type><name>int</name></type> <name>y</name> <init>= <expr><name><name>rotten</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <name><name>directions</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                        <if_stmt><if>if <condition>(<expr><name>x</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>x</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name>y</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>y</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name> <operator>&amp;&amp;</operator> <name><name>grid</name><index>[<expr><name>x</name></expr>]</index><index>[<expr><name>y</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name><name>grid</name><index>[<expr><name>x</name></expr>]</index><index>[<expr><name>y</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+                            <if_stmt><if>if <condition>(<expr><operator>!</operator><name>counted</name></expr>)</condition> <block>{<block_content>
+                                <expr_stmt><expr><name>times</name><operator>++</operator></expr>;</expr_stmt>
+                            </block_content>}</block></if></if_stmt>
+                            <expr_stmt><expr><name>counted</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                            <expr_stmt><expr><call><name><name>rottens</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <name><name>int</name><index>[]</index></name><block>{<expr><name>x</name></expr>, <expr><name>y</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></for>
+                </block_content>}</block></for>
+            </block_content>}</block></while>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name><name>grid</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><name>times</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>
