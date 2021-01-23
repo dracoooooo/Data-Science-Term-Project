@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_480.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>PriorityQueue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_480</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <comment type="block" format="javadoc">/**
+         * You cannot simply use minus sign '-' to denote the descending order, because e.g. 3 and -3 might both exist in this array,
+         * so we'll have to use the original numbers themselves to store in the heaps.
+         */</comment>
+        <decl_stmt><decl><type><specifier>private</specifier> <name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>minHeap</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>private</specifier> <name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>maxHeap</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><call><name><name>Collections</name><operator>.</operator><name>reverseOrder</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name><name>double</name><index>[]</index></name></type> <name>medianSlidingWindow</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>k</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>n</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><operator>new</operator> <name><name>double</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name><name>double</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <name><name>double</name><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;=</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>result</name><index>[<expr><name>i</name> <operator>-</operator> <name>k</name></expr>]</index></name> <operator>=</operator> <call><name>getMedian</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name>remove</name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <name>k</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name>add</name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>double</name></type> <name>getMedian</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>maxHeap</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>minHeap</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <if_stmt><if>if <condition>(<expr><call><name><name>maxHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>minHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><operator>(</operator><operator>(</operator><name>double</name><operator>)</operator> <call><name><name>maxHeap</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call> <operator>+</operator> <operator>(</operator><name>double</name><operator>)</operator> <call><name><name>minHeap</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call><operator>)</operator> <operator>/</operator> <literal type="number">2.0</literal></expr>;</return>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <return>return <expr><operator>(</operator><name>double</name><operator>)</operator> <call><name><name>minHeap</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>remove</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name> <operator>&lt;</operator> <call><name>getMedian</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>maxHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>minHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>maxHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>minHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>maxHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>minHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>add</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name> <operator>&lt;</operator> <call><name>getMedian</name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>maxHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <call><name><name>minHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>maxHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>minHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>maxHeap</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>maxHeap</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>minHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

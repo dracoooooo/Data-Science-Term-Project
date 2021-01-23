@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1413.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * 1413. Minimum Value to Get Positive Step by Step Sum
+ *
+ * Given an array of integers nums, you start with an initial positive value startValue.
+ * In each iteration, you calculate the step by step sum of startValue plus elements in nums (from left to right).
+ * Return the minimum positive value of startValue such that the step by step sum is never less than 1.
+ *
+ * Example 1:
+ * Input: nums = [-3,2,-3,4,2]
+ * Output: 5
+ * Explanation: If you choose startValue = 4, in the third iteration your step by step sum is less than 1.
+ *                 step by step sum
+ *                 startValue = 4 | startValue = 5 | nums
+ *                   (4 -3 ) = 1  | (5 -3 ) = 2    |  -3
+ *                   (1 +2 ) = 3  | (2 +2 ) = 4    |   2
+ *                   (3 -3 ) = 0  | (4 -3 ) = 1    |  -3
+ *                   (0 +4 ) = 4  | (1 +4 ) = 5    |   4
+ *                   (4 +2 ) = 6  | (5 +2 ) = 7    |   2
+ *
+ * Example 2:
+ * Input: nums = [1,2]
+ * Output: 1
+ * Explanation: Minimum start value should be positive.
+ *
+ * Example 3:
+ * Input: nums = [1,-2,-3]
+ * Output: 5
+ *
+ * Constraints:
+ * 1 &lt;= nums.length &lt;= 100
+ * -100 &lt;= nums[i] &lt;= 100
+ * */</comment>
+<class><specifier>public</specifier> class <name>_1413</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>minStartValue</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>min</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>num</name> <range>: <expr><name>nums</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name>num</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>min</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>sum</name></expr></argument>, <argument><expr><name>min</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><ternary><condition><expr><name>min</name> <operator>&gt;</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

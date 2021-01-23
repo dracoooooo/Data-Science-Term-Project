@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_131.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_131</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>partition</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;=</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call> <operator>&amp;&amp;</operator> <operator>(</operator><name>j</name> <operator>+</operator> <literal type="number">1</literal> <operator>&gt;=</operator> <name>i</name> <operator>-</operator> <literal type="number">1</literal> <operator>||</operator> <name><name>dp</name><index>[<expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+                        <comment type="line">// j+1 &gt;= i-1 means j and i are adjance to each other or only one char apart from each other</comment>
+                        <comment type="line">//dp[j+1][i-1] means its inner substring is a palindrome, so as long as s.charAt(j) == s.charAt(i), then dp[j][i] must be a palindrome.</comment>
+                        <expr_stmt><expr><name><name>dp</name><index>[<expr><name>j</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+
+            <for>for <control>(<init><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>list</name> <range>: <expr><name>dp</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>boolean</name></type> <name>b</name> <range>: <expr><name>list</name></expr></range></decl></init>)</control> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><name>b</name> <operator>+</operator> <literal type="string">", "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+                <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+            <expr_stmt><expr><call><name>backtracking</name><argument_list>(<argument><expr><name>s</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>dp</name></expr></argument>, <argument><expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>void</name></type> <name>backtracking</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>dp</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>temp</name></decl></parameter>,
+                          <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>result</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>start</name> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>newTemp</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>(<argument><expr><name>temp</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>newTemp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>start</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>start</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>temp</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>start</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name>backtracking</name><argument_list>(<argument><expr><name>s</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>dp</name></expr></argument>, <argument><expr><name>temp</name></expr></argument>, <argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>temp</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><call><name><name>temp</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

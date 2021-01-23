@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1428.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>BinaryMatrix</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Collections</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1428</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>leftMostColumnWithOne</name><parameter_list>(<parameter><decl><type><name>BinaryMatrix</name></type> <name>binaryMatrix</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>dimensions</name> <init>= <expr><call><name><name>binaryMatrix</name><operator>.</operator><name>dimensions</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><call><name><name>dimensions</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>dimensions</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>int</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name>ArrayList</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>leftMostColumn</name> <init>= <expr><call><name>binarySearch</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>binaryMatrix</name></expr></argument>, <argument><expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <name><name>int</name><index>[]</index></name><block>{<expr><name>i</name></expr>, <expr><name>leftMostColumn</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><name>list</name></expr></argument>, <argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name><name>a</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>-</operator> <name><name>b</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><ternary><condition><expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index> <operator>==</operator> <literal type="number">101</literal></expr> ?</condition><then> <expr><operator>-</operator><literal type="number">1</literal></expr> </then><else>: <expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>binarySearch</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>row</name></decl></parameter>, <parameter><decl><type><name>BinaryMatrix</name></type> <name>binaryMatrix</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>right</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>binaryMatrix</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>row</name></expr></argument>, <argument><expr><name>right</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">101</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <while>while <condition>(<expr><name>left</name> <operator>&lt;</operator> <name>right</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>mid</name> <init>= <expr><name>left</name> <operator>+</operator> <operator>(</operator><name>right</name> <operator>-</operator> <name>left</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>binaryMatrix</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>row</name></expr></argument>, <argument><expr><name>mid</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>left</name> <operator>=</operator> <name>mid</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>right</name> <operator>=</operator> <name>mid</name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>left</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

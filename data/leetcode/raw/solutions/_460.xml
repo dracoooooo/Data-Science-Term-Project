@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_460.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedHashSet</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_460</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Wikipedia: The simplest method to employ an LFU algorithm is to assign a counter to every
+         * block that is loaded into the cache. Each time a reference is made to that block the counter
+         * is increased by one. When the cache reaches capacity and has a new block waiting to be
+         * inserted the system will search for the block with the lowest counter and remove it from the
+         * cache.
+         * Policy to handle frequency ties: based on timestamp, the entries that get set into cache earlier will be evicted first.
+         */</comment>
+
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>LFUCache</name> <block>{
+            <comment type="block" format="javadoc">/**
+             * credit: https://discuss.leetcode.com/topic/69737/java-o-1-very-easy-solution-using-3-hashmaps-and-linkedhashset/2
+             */</comment>
+
+            <decl_stmt><decl><type><name><name>HashMap</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>keyToValue</name></decl>;</decl_stmt>
+            <comment type="block" format="javadoc">/**
+             * key is the key, value is the value
+             */</comment>
+            <decl_stmt><decl><type><name><name>HashMap</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>keyToCount</name></decl>;</decl_stmt>
+            <comment type="block" format="javadoc">/**
+             * key is the key, value if the count of the key/value pair
+             */</comment>
+            <decl_stmt><decl><type><name><name>HashMap</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>LinkedHashSet</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>countToLRUKeys</name></decl>;</decl_stmt>
+            <comment type="block" format="javadoc">/**
+             * key is count, value is a set of keys that have the same key, but keeps insertion order
+             */</comment>
+            <decl_stmt><decl><type><name>int</name></type> <name>cap</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>minimumCount</name></decl>;</decl_stmt>
+
+            <constructor><specifier>public</specifier> <name>LFUCache</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>capacity</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>minimumCount</name></name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>cap</name></name> <operator>=</operator> <name>capacity</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>keyToValue</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>keyToCount</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>countToLRUKeys</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>this</name><operator>.</operator><name>countToLRUKeys</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>LinkedHashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <function><type><specifier>public</specifier> <name>int</name></type> <name>get</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>key</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>keyToValue</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><call><name><name>keyToCount</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>keyToCount</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>, <argument><expr><name>count</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>remove</name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+                <if_stmt><if>if <condition>(<expr><name>count</name> <operator>==</operator> <name>minimumCount</name> <operator>&amp;&amp;</operator> <call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <comment type="block" format="javadoc">/**This means this key's count equals to current minimumCount
+                     * AND
+                     * this count doesn't have any entries in the cache.
+                     * So, we'll increment minimumCount by 1 to get the next LFU cache entry
+                     * when we need to evict.*/</comment>
+                    <expr_stmt><expr><name>minimumCount</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>countToLRUKeys</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>count</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>count</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>LinkedHashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>count</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+                <return>return <expr><call><name><name>keyToValue</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>put</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>key</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>value</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>cap</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <return>return;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <if_stmt><if>if <condition>(<expr><call><name><name>keyToValue</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <comment type="block" format="javadoc">/**If the key is already in the cache, we can simply overwrite this entry;
+                     * then call get(key) which will do the update work.*/</comment>
+                    <expr_stmt><expr><call><name><name>keyToValue</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>, <argument><expr><name>value</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name>get</name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <return>return;</return>
+                </block_content>}</block></if></if_stmt>
+
+                <comment type="block" format="javadoc">/**If the key is not in the cache, we'll check the size first, evict the LFU entry first,
+                 * then insert this one into cache.*/</comment>
+                <if_stmt><if>if <condition>(<expr><call><name><name>keyToValue</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;=</operator> <name>cap</name></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>evit</name> <init>= <expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>minimumCount</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>iterator</name><argument_list>()</argument_list></call><operator>.</operator><call><name>next</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>minimumCount</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>remove</name><argument_list>(<argument><expr><name>evit</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>keyToValue</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>evit</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>keyToValue</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>, <argument><expr><name>value</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>keyToCount</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>key</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>countToLRUKeys</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><name>key</name></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="block" format="javadoc">/**Because we put this key/value into cache for the first time, so its count is 1*/</comment>
+                <expr_stmt><expr><name>minimumCount</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt><comment type="block" format="javadoc">/**For the same above reason, minimumCount is of course 1*/</comment>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+
+}</block></class>
+</unit>

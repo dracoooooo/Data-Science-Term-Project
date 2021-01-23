@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_114.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_114</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>flatten</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <while>while <condition>(<expr><name>root</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>TreeNode</name></type> <name>previousNode</name> <init>= <expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></init></decl>;</decl_stmt>
+                    <while>while <condition>(<expr><name><name>previousNode</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>previousNode</name> <operator>=</operator> <name><name>previousNode</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+                    </block_content>}</block></while>
+                    <expr_stmt><expr><name><name>previousNode</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>left</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>root</name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_636.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Deque</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_636</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Based on the example, it's difficult to see how function 2 executes 4 units of time, actually
+         * we can add 1 to all end times to make it easier to understand and AC'ed.
+         */</comment>
+        <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>exclusiveTime</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>logs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="block" format="javadoc">/**Stack is the way to go:
+             * we keep pushing the logId onto the stack whenever we just encounter this logId's start timestamp,
+             * we'll pop this logId only when we encounter this logId's end timestamp.
+             * Meanwhile, we keep a counter called prevTime,
+             * whenever the stack is not empty, we'll always deduct prevTime from the last logId on the stack.*/</comment>
+            <decl_stmt><decl><type><name><name>Deque</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>stack</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>prevTime</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>String</name></type> <name>log</name> <range>: <expr><name>logs</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>parts</name> <init>= <expr><call><name><name>log</name><operator>.</operator><name>split</name></name><argument_list>(<argument><expr><literal type="string">":"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>stack</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>result</name><index>[<expr><call><name><name>stack</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call></expr>]</index></name> <operator>+=</operator> <call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>parts</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call> <operator>-</operator> <name>prevTime</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>prevTime</name> <operator>=</operator> <call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>parts</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>parts</name><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><literal type="string">"start"</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>stack</name><operator>.</operator><name>addFirst</name></name><argument_list>(<argument><expr><call><name><name>Integer</name><operator>.</operator><name>parseInt</name></name><argument_list>(<argument><expr><name><name>parts</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="line">//i.e. stack.push()</comment>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>prevTime</name><operator>++</operator></expr>;</expr_stmt>
+                    <comment type="line">//remember to have result pluse 1 to match the problem AC criteria</comment>
+                    <expr_stmt><expr><name><name>result</name><index>[<expr><call><name><name>stack</name><operator>.</operator><name>pollFirst</name></name><argument_list>()</argument_list></call></expr>]</index></name><operator>++</operator></expr>;</expr_stmt><comment type="line">//i.e. stack.pop()</comment>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

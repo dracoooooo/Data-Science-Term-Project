@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_587.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>Point</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashSet</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Set</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_587</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/89323/java-solution-convex-hull-algorithm-gift-wrapping-aka-jarvis-march
+         * There are couple of ways to solve Convex Hull problem. https://en.wikipedia.org/wiki/Convex_hull_algorithms
+         * The following code implements Gift wrapping aka Jarvis march algorithm
+         * https://en.wikipedia.org/wiki/Gift_wrapping_algorithm and
+         * also added logic to handle case of multiple Points in a line
+         * because original Jarvis march algorithm assumes no three points are collinear.
+         * It also uses knowledge in this problem https://leetcode.com/problems/convex-polygon.
+         * Disscussion: https://discuss.leetcode.com/topic/70706/beyond-my-knowledge-java-solution-with-in-line-explanation
+         */</comment>
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>outerTrees</name><parameter_list>(<parameter><decl><type><name><name>Point</name><index>[]</index></name></type> <name>points</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Set</name><argument_list type="generic">&lt;<argument><name>Point</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>HashSet</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">// Find the leftmost point</comment>
+            <decl_stmt><decl><type><name>Point</name></type> <name>first</name> <init>= <expr><name><name>points</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>firstIndex</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>points</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>points</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>x</name> <operator>&lt;</operator> <name><name>first</name><operator>.</operator><name>x</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>first</name> <operator>=</operator> <name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>firstIndex</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>first</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name>Point</name></type> <name>cur</name> <init>= <expr><name>first</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>curIndex</name> <init>= <expr><name>firstIndex</name></expr></init></decl>;</decl_stmt>
+            <do>do <block>{<block_content>
+                <decl_stmt><decl><type><name>Point</name></type> <name>next</name> <init>= <expr><name><name>points</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>nextIndex</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>points</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <name>curIndex</name></expr>)</condition> <block>{<block_content>
+                        <continue>continue;</continue>
+                    </block_content>}</block></if></if_stmt>
+                    <decl_stmt><decl><type><name>int</name></type> <name>cross</name> <init>= <expr><call><name>crossProductLength</name><argument_list>(<argument><expr><name>cur</name></expr></argument>, <argument><expr><name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>next</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>nextIndex</name> <operator>==</operator> <name>curIndex</name> <operator>||</operator> <name>cross</name> <operator>&gt;</operator> <literal type="number">0</literal>
+                            <comment type="line">// Handle collinear points</comment>
+                            <operator>||</operator> <operator>(</operator><name>cross</name> <operator>==</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <call><name>distance</name><argument_list>(<argument><expr><name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>cur</name></expr></argument>)</argument_list></call> <operator>&gt;</operator> <call><name>distance</name><argument_list>(<argument><expr><name>next</name></expr></argument>, <argument><expr><name>cur</name></expr></argument>)</argument_list></call><operator>)</operator></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>next</name> <operator>=</operator> <name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                        <expr_stmt><expr><name>nextIndex</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <comment type="line">// Handle collinear points</comment>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>points</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <name>curIndex</name></expr>)</condition> <block>{<block_content>
+                        <continue>continue;</continue>
+                    </block_content>}</block></if></if_stmt>
+                    <decl_stmt><decl><type><name>int</name></type> <name>cross</name> <init>= <expr><call><name>crossProductLength</name><argument_list>(<argument><expr><name>cur</name></expr></argument>, <argument><expr><name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>next</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>cross</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name><name>points</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+
+                <expr_stmt><expr><name>cur</name> <operator>=</operator> <name>next</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>curIndex</name> <operator>=</operator> <name>nextIndex</name></expr>;</expr_stmt>
+
+            </block_content>}</block> while <condition>(<expr><name>curIndex</name> <operator>!=</operator> <name>firstIndex</name></expr>)</condition>;</do>
+
+            <return>return <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>crossProductLength</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>A</name></decl></parameter>, <parameter><decl><type><name>Point</name></type> <name>B</name></decl></parameter>, <parameter><decl><type><name>Point</name></type> <name>C</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// Get the vectors' coordinates.</comment>
+            <decl_stmt><decl><type><name>int</name></type> <name>BAx</name> <init>= <expr><name><name>A</name><operator>.</operator><name>x</name></name> <operator>-</operator> <name><name>B</name><operator>.</operator><name>x</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>BAy</name> <init>= <expr><name><name>A</name><operator>.</operator><name>y</name></name> <operator>-</operator> <name><name>B</name><operator>.</operator><name>y</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>BCx</name> <init>= <expr><name><name>C</name><operator>.</operator><name>x</name></name> <operator>-</operator> <name><name>B</name><operator>.</operator><name>x</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>BCy</name> <init>= <expr><name><name>C</name><operator>.</operator><name>y</name></name> <operator>-</operator> <name><name>B</name><operator>.</operator><name>y</name></name></expr></init></decl>;</decl_stmt>
+
+            <comment type="line">// Calculate the Z coordinate of the cross product.</comment>
+            <return>return <expr><operator>(</operator><name>BAx</name> <operator>*</operator> <name>BCy</name> <operator>-</operator> <name>BAy</name> <operator>*</operator> <name>BCx</name><operator>)</operator></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>distance</name><parameter_list>(<parameter><decl><type><name>Point</name></type> <name>p1</name></decl></parameter>, <parameter><decl><type><name>Point</name></type> <name>p2</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><operator>(</operator><name><name>p1</name><operator>.</operator><name>x</name></name> <operator>-</operator> <name><name>p2</name><operator>.</operator><name>x</name></name><operator>)</operator> <operator>*</operator> <operator>(</operator><name><name>p1</name><operator>.</operator><name>x</name></name> <operator>-</operator> <name><name>p2</name><operator>.</operator><name>x</name></name><operator>)</operator> <operator>+</operator> <operator>(</operator><name><name>p1</name><operator>.</operator><name>y</name></name> <operator>-</operator> <name><name>p2</name><operator>.</operator><name>y</name></name><operator>)</operator> <operator>*</operator> <operator>(</operator><name><name>p1</name><operator>.</operator><name>y</name></name> <operator>-</operator> <name><name>p2</name><operator>.</operator><name>y</name></name><operator>)</operator></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

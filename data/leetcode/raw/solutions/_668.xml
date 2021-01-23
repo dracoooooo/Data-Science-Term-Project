@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_668.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>PriorityQueue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_668</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * This brute force approach resulted in
+         * TLE on Leetcode and
+         * OOM error by _668test.test3() when running in my localhost:
+         * java.lang.OutOfMemoryError: Java heap space
+         * at java.util.Arrays.copyOf(Arrays.java:3210)
+         * at java.util.Arrays.copyOf(Arrays.java:3181)
+         * at java.util.PriorityQueue.grow(PriorityQueue.java:300)
+         * at java.util.PriorityQueue.offer(PriorityQueue.java:339)
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findKthNumber</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>minHeap</name> <init>= <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><name>a</name> <operator>-</operator> <name>b</name></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>i</name> <operator>*</operator> <name>j</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <while>while <condition>(<expr><name>k</name><operator>--</operator> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>minHeap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>minHeap</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * reference: https://discuss.leetcode.com/topic/101132/java-solution-binary-search
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>findKthNumber</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>low</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>high</name> <init>= <expr><name>m</name> <operator>*</operator> <name>n</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>low</name> <operator>&lt;</operator> <name>high</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>mid</name> <init>= <expr><name>low</name> <operator>+</operator> <operator>(</operator><name>high</name> <operator>-</operator> <name>low</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><call><name>count</name><argument_list>(<argument><expr><name>mid</name></expr></argument>, <argument><expr><name>m</name></expr></argument>, <argument><expr><name>n</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>&gt;=</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>high</name> <operator>=</operator> <name>mid</name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>low</name> <operator>=</operator> <name>mid</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>high</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>int</name></type> <name>count</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>v</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>temp</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>v</name> <operator>/</operator> <name>i</name></expr></argument>, <argument><expr><name>n</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>count</name> <operator>+=</operator> <name>temp</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>count</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

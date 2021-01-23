@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_358.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>PriorityQueue</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_358</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>rearrangeString</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>count</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><call><name><name>count</name><operator>.</operator><name>getOrDefault</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name><name>PriorityQueue</name><argument_list type="generic">&lt;<argument><name><name>Map</name><operator>.</operator><name><name>Entry</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></name></argument>&gt;</argument_list></name></type> <name>heap</name> <init>=
+                    <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(<argument><expr><lambda><parameter_list>(<parameter><decl><name>a</name></decl></parameter>, <parameter><decl><name>b</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><call><name><name>b</name><operator>.</operator><name>getValue</name></name><argument_list>()</argument_list></call> <operator>-</operator> <call><name><name>a</name><operator>.</operator><name>getValue</name></name><argument_list>()</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>heap</name><operator>.</operator><name>addAll</name></name><argument_list>(<argument><expr><call><name><name>count</name><operator>.</operator><name>entrySet</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+            <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name><name>Map</name><operator>.</operator><name><name>Entry</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></name></argument>&gt;</argument_list></name></type> <name>waitQueue</name> <init>= <expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <decl_stmt><decl><type><name>StringBuilder</name></type> <name>stringBuilder</name> <init>= <expr><operator>new</operator> <call><name>StringBuilder</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>heap</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>Map</name><operator>.</operator><name><name>Entry</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></name></type> <name>entry</name> <init>= <expr><call><name><name>heap</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>stringBuilder</name><operator>.</operator><name>append</name></name><argument_list>(<argument><expr><call><name><name>entry</name><operator>.</operator><name>getKey</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>entry</name><operator>.</operator><name>setValue</name></name><argument_list>(<argument><expr><call><name><name>entry</name><operator>.</operator><name>getValue</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>waitQueue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>entry</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>waitQueue</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                    <continue>continue;</continue> <comment type="line">//there's only k-1 chars in the waitHeap, not full yet</comment>
+                </block_content>}</block></if></if_stmt>
+                <decl_stmt><decl><type><name><name>Map</name><operator>.</operator><name><name>Entry</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></name></type> <name>front</name> <init>= <expr><call><name><name>waitQueue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>front</name><operator>.</operator><name>getValue</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>heap</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>front</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></while>
+
+            <return>return <expr><ternary><condition><expr><call><name><name>stringBuilder</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr> ?</condition><then> <expr><call><name><name>stringBuilder</name><operator>.</operator><name>toString</name></name><argument_list>()</argument_list></call></expr> </then><else>: <expr><literal type="string">""</literal></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_79.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_79</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="line">//credit: https://discuss.leetcode.com/topic/21142/my-java-solution</comment>
+
+        <decl_stmt><decl><type><name><name>boolean</name><index>[]</index><index>[]</index></name></type> <name>visited</name></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>exist</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>word</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><name><name>board</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>visited</name> <operator>=</operator> <operator>new</operator> <name><name>boolean</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>word</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call> <operator>==</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>&amp;&amp;</operator> <call><name>search</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>word</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>boolean</name></type> <name>search</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index><index>[]</index></name></type> <name>board</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>word</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>pos</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>pos</name> <operator>==</operator> <call><name><name>word</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name>j</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name>i</name> <operator>&gt;=</operator> <name><name>board</name><operator>.</operator><name>length</name></name> <operator>||</operator> <name>j</name> <operator>&gt;=</operator> <name><name>board</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name> <operator>||</operator> <call><name><name>word</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>pos</name></expr></argument>)</argument_list></call> <operator>!=</operator> <name><name>board</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>||</operator> <name><name>visited</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name>search</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>word</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>pos</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call>
+                    <operator>||</operator> <call><name>search</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>word</name></expr></argument>, <argument><expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>pos</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call>
+                    <operator>||</operator> <call><name>search</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>word</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>pos</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call>
+                    <operator>||</operator> <call><name>search</name><argument_list>(<argument><expr><name>board</name></expr></argument>, <argument><expr><name>word</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>pos</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

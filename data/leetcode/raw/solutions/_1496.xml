@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1496.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Objects</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Stack</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_1496</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isPathCrossing</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>path</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>Stack</name><argument_list type="generic">&lt;<argument><name>Coord</name></argument>&gt;</argument_list></name></type> <name>visited</name> <init>= <expr><operator>new</operator> <call><name><name>Stack</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Coord</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><call><name><name>path</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>Coord</name></type> <name>last</name> <init>= <expr><call><name><name>visited</name><operator>.</operator><name>peek</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'N'</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Coord</name></type> <name>nextStep</name> <init>= <expr><operator>new</operator> <call><name>Coord</name><argument_list>(<argument><expr><name><name>last</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>last</name><operator>.</operator><name>y</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>visited</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'S'</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Coord</name></type> <name>nextStep</name> <init>= <expr><operator>new</operator> <call><name>Coord</name><argument_list>(<argument><expr><name><name>last</name><operator>.</operator><name>x</name></name></expr></argument>, <argument><expr><name><name>last</name><operator>.</operator><name>y</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>visited</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'E'</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Coord</name></type> <name>nextStep</name> <init>= <expr><operator>new</operator> <call><name>Coord</name><argument_list>(<argument><expr><name><name>last</name><operator>.</operator><name>x</name></name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>last</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>visited</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>c</name> <operator>==</operator> <literal type="char">'W'</literal></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>Coord</name></type> <name>nextStep</name> <init>= <expr><operator>new</operator> <call><name>Coord</name><argument_list>(<argument><expr><name><name>last</name><operator>.</operator><name>x</name></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name><name>last</name><operator>.</operator><name>y</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name><name>visited</name><operator>.</operator><name>contains</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>nextStep</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <class><specifier>static</specifier> class <name>Coord</name> <block>{
+            <decl_stmt><decl><type><name>int</name></type> <name>x</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>y</name></decl>;</decl_stmt>
+
+            <constructor><specifier>public</specifier> <name>Coord</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>x</name></name> <operator>=</operator> <name>x</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>y</name></name> <operator>=</operator> <name>y</name></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <function><annotation>@<name>Override</name></annotation>
+            <type><specifier>public</specifier> <name>boolean</name></type> <name>equals</name><parameter_list>(<parameter><decl><type><name>Object</name></type> <name>o</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>this</name> <operator>==</operator> <name>o</name></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name>o</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <call><name>getClass</name><argument_list>()</argument_list></call> <operator>!=</operator> <call><name><name>o</name><operator>.</operator><name>getClass</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+                </block_content>}</block></if></if_stmt>
+                <decl_stmt><decl><type><name>Coord</name></type> <name>coord</name> <init>= <expr><operator>(</operator><name>Coord</name><operator>)</operator> <name>o</name></expr></init></decl>;</decl_stmt>
+                <return>return <expr><name>x</name> <operator>==</operator> <name><name>coord</name><operator>.</operator><name>x</name></name> <operator>&amp;&amp;</operator> <name>y</name> <operator>==</operator> <name><name>coord</name><operator>.</operator><name>y</name></name></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><annotation>@<name>Override</name></annotation>
+            <type><specifier>public</specifier> <name>int</name></type> <name>hashCode</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>Objects</name><operator>.</operator><name>hash</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>y</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class>
+</unit>

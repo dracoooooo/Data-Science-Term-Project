@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_395.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_395</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * Reference: https://discuss.leetcode.com/topic/57372/java-divide-and-conquer-recursion-solution
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>longestSubstring</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name>findLongestSubstring</name><argument_list>(<argument><expr><call><name><name>s</name><operator>.</operator><name>toCharArray</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>int</name></type> <name>findLongestSubstring</name><parameter_list>(<parameter><decl><type><name><name>char</name><index>[]</index></name></type> <name>chars</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>end</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="block" format="javadoc">/**Base case 1 of 2*/</comment>
+            <if_stmt><if>if <condition>(<expr><name>end</name> <operator>-</operator> <name>start</name> <operator>&lt;</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>count</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">26</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>start</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>end</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>index</name> <init>= <expr><name><name>chars</name><index>[<expr><name>i</name></expr>]</index></name> <operator>-</operator> <literal type="char">'a'</literal></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name><name>count</name><index>[<expr><name>index</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <comment type="block" format="javadoc">/**For every character in the above frequency table*/</comment>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">26</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;</operator> <name>k</name> <operator>&amp;&amp;</operator> <name><name>count</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>start</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>end</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><name><name>chars</name><index>[<expr><name>j</name></expr>]</index></name> <operator>==</operator> <name>i</name> <operator>+</operator> <literal type="char">'a'</literal></expr>)</condition> <block>{<block_content>
+                            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><call><name>findLongestSubstring</name><argument_list>(<argument><expr><name>chars</name></expr></argument>, <argument><expr><name>start</name></expr></argument>, <argument><expr><name>j</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                            <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><call><name>findLongestSubstring</name><argument_list>(<argument><expr><name>chars</name></expr></argument>, <argument><expr><name>j</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>end</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                            <return>return <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>left</name></expr></argument>, <argument><expr><name>right</name></expr></argument>)</argument_list></call></expr>;</return>
+                        </block_content>}</block></if></if_stmt>
+                    </block_content>}</block></for>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <comment type="block" format="javadoc">/**Base case 2 of 2:
+             * when any characters in this substring has repeated at least k times, then this entire substring is a valid answer*/</comment>
+            <return>return <expr><name>end</name> <operator>-</operator> <name>start</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

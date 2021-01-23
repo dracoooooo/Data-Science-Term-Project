@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_365.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_365</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>canMeasureWater</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>z</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>x</name> <operator>+</operator> <name>y</name> <operator>&lt;</operator> <name>z</name></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>x</name> <operator>==</operator> <name>z</name> <operator>||</operator> <name>y</name> <operator>==</operator> <name>z</name> <operator>||</operator> <name>x</name> <operator>+</operator> <name>y</name> <operator>==</operator> <name>z</name></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><name>z</name> <operator>%</operator> <call><name>gcd</name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><name>y</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><name>int</name></type> <name>gcd</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>y</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <while>while <condition>(<expr><name>y</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>temp</name> <init>= <expr><name>y</name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>y</name> <operator>=</operator> <name>x</name> <operator>%</operator> <name>y</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>x</name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>x</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>
