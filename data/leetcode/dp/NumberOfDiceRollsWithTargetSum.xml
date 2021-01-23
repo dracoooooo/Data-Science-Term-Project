@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\NumberOfDiceRollsWithTargetSum.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 29/11/2019 You have d dice, and each die has f faces numbered
+ * 1, 2, ..., f.
+ *
+ * &lt;p&gt;Return the number of possible ways (out of fd total ways) modulo 10^9 + 7 to roll the dice so
+ * the sum of the face up numbers equals target.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: d = 1, f = 6, target = 3 Output: 1 Explanation: You throw one die with 6 faces. There
+ * is only one way to get a sum of 3. Example 2:
+ *
+ * &lt;p&gt;Input: d = 2, f = 6, target = 7 Output: 6 Explanation: You throw two dice, each with 6 faces.
+ * There are 6 ways to get a sum of 7: 1+6, 2+5, 3+4, 4+3, 5+2, 6+1. Example 3:
+ *
+ * &lt;p&gt;Input: d = 2, f = 5, target = 10 Output: 1 Explanation: You throw two dice, each with 5 faces.
+ * There is only one way to get a sum of 10: 5+5. Example 4:
+ *
+ * &lt;p&gt;Input: d = 1, f = 2, target = 3 Output: 0 Explanation: You throw one die with 2 faces. There
+ * is no way to get a sum of 3. Example 5:
+ *
+ * &lt;p&gt;Input: d = 30, f = 30, target = 500 Output: 222616187 Explanation: The answer must be returned
+ * modulo 10^9 + 7.
+ *
+ * &lt;p&gt;Constraints:
+ *
+ * &lt;p&gt;1 &lt;= d, f &lt;= 30 1 &lt;= target &lt;= 1000
+ */</comment>
+<class><specifier>public</specifier> class <name>NumberOfDiceRollsWithTargetSum</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NumberOfDiceRollsWithTargetSum</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numRollsToTarget</name><argument_list>(<argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>, <argument><expr><literal type="number">3</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name>int</name></type> <name>MOD</name> <init>= <expr><literal type="number">1000000007</literal></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numRollsToTarget</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>d</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>f</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>d</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>target</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>f</name></expr></argument>, <argument><expr><name>target</name></expr></argument>)</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>DP</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>d</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;=</operator> <name>target</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name>f</name></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name><name>DP</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <name>k</name></expr>]</index></name><operator>)</operator> <operator>==</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr> </then><else>: <expr><operator>(</operator><operator>(</operator><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><name><name>DP</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>j</name> <operator>-</operator> <name>k</name></expr>]</index></name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>MOD</name><operator>)</operator></expr></else></ternary></expr>;</expr_stmt>
+        </block_content>}</block></for>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name><name>DP</name><index>[<expr><name>d</name></expr>]</index><index>[<expr><name>target</name></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

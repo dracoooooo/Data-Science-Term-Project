@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\CountVowelsPermutation.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 25/01/2020 Given an integer n, your task is to count how many
+ * strings of length n can be formed under the following rules:
+ *
+ * &lt;p&gt;Each character is a lower case vowel ('a', 'e', 'i', 'o', 'u') Each vowel 'a' may only be
+ * followed by an 'e'. Each vowel 'e' may only be followed by an 'a' or an 'i'. Each vowel 'i' may
+ * not be followed by another 'i'. Each vowel 'o' may only be followed by an 'i' or a 'u'. Each
+ * vowel 'u' may only be followed by an 'a'. Since the answer may be too large, return it modulo
+ * 10^9 + 7.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: n = 1 Output: 5 Explanation: All possible strings are: "a", "e", "i" , "o" and "u".
+ * Example 2:
+ *
+ * &lt;p&gt;Input: n = 2 Output: 10 Explanation: All possible strings are: "ae", "ea", "ei", "ia", "ie",
+ * "io", "iu", "oi", "ou" and "ua". Example 3:
+ *
+ * &lt;p&gt;Input: n = 5 Output: 68
+ */</comment>
+<class><specifier>public</specifier> class <name>CountVowelsPermutation</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content/>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>countVowelPermutation</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">5</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>graph</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>vowels</name> <init>= <expr><call><name><name>Arrays</name><operator>.</operator><name>asList</name></name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>, <argument><expr><literal type="char">'e'</literal></expr></argument>, <argument><expr><literal type="char">'i'</literal></expr></argument>, <argument><expr><literal type="char">'o'</literal></expr></argument>, <argument><expr><literal type="char">'u'</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>count</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>vowels</name><operator>.</operator><name>forEach</name></name><argument_list>(<argument><expr><lambda><parameter_list type="pseudo"><parameter><decl><name>v</name></decl></parameter></parameter_list> -&gt;<block type="pseudo"><block_content> <expr><call><name><name>graph</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>v</name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></block_content></block></lambda></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'o'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'u'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'u'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'o'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><literal type="char">'o'</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><literal type="char">'u'</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'a'</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'e'</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'i'</literal></expr></argument>, <argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'o'</literal></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><literal type="char">'u'</literal></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>charCount</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">5</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name>charCount</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><name>vowels</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Character</name></argument>&gt;</argument_list></name></type> <name>children</name> <init>= <expr><call><name><name>graph</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>char</name></type> <name>child</name> <range>: <expr><name>children</name></expr></range></decl></init>)</control> <block>{<block_content>
+          <expr_stmt><expr><name><name>charCount</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <operator>(</operator><operator>(</operator><name><name>charCount</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <call><name><name>count</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>child</name></expr></argument>)</argument_list></call><operator>)</operator> <operator>%</operator> <literal type="number">1000000007</literal><operator>)</operator></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name>j</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><name>vowels</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>count</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>, <argument><expr><name><name>charCount</name><index>[<expr><name>j</name><operator>++</operator></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>char</name></type> <name>c</name> <range>: <expr><name>vowels</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>sum</name> <operator>=</operator> <operator>(</operator><operator>(</operator><name>sum</name> <operator>+</operator> <operator>(</operator><call><name><name>count</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>c</name></expr></argument>)</argument_list></call><operator>)</operator><operator>)</operator> <operator>%</operator> <literal type="number">1000000007</literal><operator>)</operator></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>sum</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

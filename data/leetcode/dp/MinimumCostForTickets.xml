@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\MinimumCostForTickets.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 05/05/2019 In a country popular for train travel, you have
+ * planned some train travelling one year in advance. The days of the year that you will travel is
+ * given as an array days. Each day is an integer from 1 to 365.
+ *
+ * &lt;p&gt;Train tickets are sold in 3 different ways:
+ *
+ * &lt;p&gt;a 1-day pass is sold for costs[0] dollars; a 7-day pass is sold for costs[1] dollars; a 30-day
+ * pass is sold for costs[2] dollars. The passes allow that many days of consecutive travel. For
+ * example, if we get a 7-day pass on day 2, then we can travel for 7 days: day 2, 3, 4, 5, 6, 7,
+ * and 8.
+ *
+ * &lt;p&gt;Return the minimum number of dollars you need to travel every day in the given list of days.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: days = [1,4,6,7,8,20], costs = [2,7,15] Output: 11 Explanation: For example, here is
+ * one way to buy passes that lets you travel your travel plan: On day 1, you bought a 1-day pass
+ * for costs[0] = $2, which covered day 1. On day 3, you bought a 7-day pass for costs[1] = $7,
+ * which covered days 3, 4, ..., 9. On day 20, you bought a 1-day pass for costs[0] = $2, which
+ * covered day 20. In total you spent $11 and covered all the days of your travel. Example 2:
+ *
+ * &lt;p&gt;Input: days = [1,2,3,4,5,6,7,8,9,10,30,31], costs = [2,7,15] Output: 17 Explanation: For
+ * example, here is one way to buy passes that lets you travel your travel plan: On day 1, you
+ * bought a 30-day pass for costs[2] = $15 which covered days 1, 2, ..., 30. On day 31, you bought a
+ * 1-day pass for costs[0] = $2 which covered day 31. In total you spent $17 and covered all the
+ * days of your travel.
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= days.length &lt;= 365 1 &lt;= days[i] &lt;= 365 days is in strictly increasing order. costs.length
+ * == 3 1 &lt;= costs[i] &lt;= 1000
+ *
+ * &lt;p&gt;Solution: O(N ^ 2 x 3)
+ */</comment>
+<class><specifier>public</specifier> class <name>MinimumCostForTickets</name> <block>{
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>days</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">7</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">9</literal></expr>, <expr><literal type="number">10</literal></expr>, <expr><literal type="number">30</literal></expr>, <expr><literal type="number">31</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>costs</name> <init>= <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">7</literal></expr>, <expr><literal type="number">15</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MinimumCostForTickets</name><argument_list>()</argument_list></call><operator>.</operator><call><name>mincostTickets</name><argument_list>(<argument><expr><name>days</name></expr></argument>, <argument><expr><name>costs</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param days
+   * @param costs
+   * @return
+   */</comment>
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>mincostTickets</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>days</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>costs</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>min</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>days</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name>min</name></expr></argument>, <argument><expr><name><name>Integer</name><operator>.</operator><name>MAX_VALUE</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>days</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>costs</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>costs</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <operator>(</operator><ternary><condition><expr><operator>(</operator><name>i</name> <operator>+</operator> <literal type="number">1</literal> <operator>&gt;=</operator> <name><name>min</name><operator>.</operator><name>length</name></name><operator>)</operator></expr> ?</condition><then> <expr><literal type="number">0</literal></expr> </then><else>: <expr><name><name>min</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></else></ternary><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name><name>days</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>days</name><index>[<expr><name>k</name></expr>]</index></name> <operator>&gt;=</operator> <operator>(</operator><name><name>days</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <literal type="number">7</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name>c</name> <operator>=</operator> <name><name>min</name><index>[<expr><name>k</name></expr>]</index></name></expr>;</expr_stmt>
+              <break>break;</break>
+            </block_content>}</block></if></if_stmt>
+          </block_content>}</block></for>
+          <expr_stmt><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>costs</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+          <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name><name>days</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>days</name><index>[<expr><name>k</name></expr>]</index></name> <operator>&gt;=</operator> <operator>(</operator><name><name>days</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <literal type="number">30</literal><operator>)</operator></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name>c</name> <operator>=</operator> <name><name>min</name><index>[<expr><name>k</name></expr>]</index></name></expr>;</expr_stmt>
+              <break>break;</break>
+            </block_content>}</block></if></if_stmt>
+          </block_content>}</block></for>
+          <expr_stmt><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>min</name></name><argument_list>(<argument><expr><name><name>min</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>costs</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name><name>min</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

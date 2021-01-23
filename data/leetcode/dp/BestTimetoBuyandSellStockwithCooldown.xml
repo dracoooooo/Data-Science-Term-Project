@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\BestTimetoBuyandSellStockwithCooldown.java"><class><specifier>public</specifier> class <name>BestTimetoBuyandSellStockwithCooldown</name> <block>{
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>maxProfit</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>prices</name><operator>.</operator><name>length</name></name><operator>&lt;=</operator><literal type="number">1</literal></expr>)</condition><block>{<block_content>
+            <return>return <expr><literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>no_stocks_profit</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>hold_profit</name> <init>= <expr><operator>-</operator><name><name>prices</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sold_profit</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;</operator><name><name>prices</name><operator>.</operator><name>length</name></name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        
+            <expr_stmt><expr><name>hold_profit</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>hold_profit</name></expr></argument>, <argument><expr><name>no_stocks_profit</name><operator>-</operator><name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>no_stocks_profit</name><operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>no_stocks_profit</name></expr></argument>,<argument><expr><name>sold_profit</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>          
+            <expr_stmt><expr><name>sold_profit</name> <operator>=</operator> <name>hold_profit</name><operator>+</operator><name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>no_stocks_profit</name></expr></argument>,<argument><expr><name>sold_profit</name></expr></argument>)</argument_list></call></expr>;</return>
+       
+    </block_content>}</block></function>
+}</block></class>
+</unit>

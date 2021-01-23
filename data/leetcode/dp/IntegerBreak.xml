@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\IntegerBreak.java"><class><specifier>public</specifier> class <name>IntegerBreak</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name><name>dp</name><index>[]</index></name></decl>;</decl_stmt>
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>integerBreak</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><name>dp</name><operator>=</operator><operator>new</operator> <name><name>int</name><index>[<expr><name>n</name><operator>+</operator><literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+        <return>return <expr><call><name>breaker</name><argument_list>(<argument><expr><name>n</name></expr></argument>,<argument><expr><name>n</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><specifier>public</specifier> <name>int</name></type> <name>breaker</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>,<parameter><decl><type><name>int</name></type> <name>real</name></decl></parameter>)</parameter_list><block>{<block_content>
+    	<if_stmt><if>if<condition>(<expr><name>n</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+    		<return>return <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr>;</return>
+    	</block_content>}</block></if></if_stmt>
+    	<if_stmt><if>if<condition>(<expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name><operator>!=</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content><return>return <expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if<condition>(<expr><name>n</name><operator>==</operator><literal type="number">0</literal></expr>)</condition><block>{<block_content>
+            <return>return <expr><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>prod</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init><condition><expr><name>i</name><operator>&lt;=</operator><name>n</name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>i</name><operator>!=</operator><name>real</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>prod</name><operator>=</operator><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><call><name>breaker</name><argument_list>(<argument><expr><name>n</name><operator>-</operator><name>i</name></expr></argument>,<argument><expr><name>real</name></expr></argument>)</argument_list></call><operator>*</operator><name>i</name></expr></argument>,<argument><expr><name>prod</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name><name>dp</name><index>[<expr><name>n</name></expr>]</index></name><operator>=</operator><name>prod</name></expr>;</expr_stmt>
+        <return>return <expr><name>prod</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

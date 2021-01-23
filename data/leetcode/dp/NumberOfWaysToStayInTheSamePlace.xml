@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\NumberOfWaysToStayInTheSamePlace.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 05/04/2020 You have a pointer at index 0 in an array of size
+ * arrLen. At each step, you can move 1 position to the left, 1 position to the right in the array
+ * or stay in the same place (The pointer should not be placed outside the array at any time).
+ *
+ * &lt;p&gt;Given two integers steps and arrLen, return the number of ways such that your pointer still at
+ * index 0 after exactly steps steps.
+ *
+ * &lt;p&gt;Since the answer may be too large, return it modulo 10^9 + 7.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: steps = 3, arrLen = 2 Output: 4 Explanation: There are 4 differents ways to stay at
+ * index 0 after 3 steps. Right, Left, Stay Stay, Right, Left Right, Stay, Left Stay, Stay, Stay
+ * Example 2:
+ *
+ * &lt;p&gt;Input: steps = 2, arrLen = 4 Output: 2 Explanation: There are 2 differents ways to stay at
+ * index 0 after 2 steps Right, Left Stay, Stay Example 3:
+ *
+ * &lt;p&gt;Input: steps = 4, arrLen = 2 Output: 8
+ *
+ * &lt;p&gt;Constraints:
+ *
+ * &lt;p&gt;1 &lt;= steps &lt;= 500 1 &lt;= arrLen &lt;= 10^6
+ *
+ * &lt;p&gt;Solution O(S x S) where S is number of steps. This is quite a straight forward problem. Every
+ * state is a combination of position in the array and the number of steps. From every state we can
+ * traverse in three direction remain in the same position i.e (i, n - 1), move right (i + 1, n - 1)
+ * and move left (i - 1, n - 1). The base state will be (0, 0) which is equal to count of 1, memoize
+ * each state and do a dop down dp staring from state (0, N).
+ */</comment>
+<class><specifier>public</specifier> class <name>NumberOfWaysToStayInTheSamePlace</name> <block>{
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>static</specifier> <specifier>final</specifier> <name>int</name></type> <name>MOD</name> <init>= <expr><operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><literal type="number">1e9</literal> <operator>+</operator> <literal type="number">7</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NumberOfWaysToStayInTheSamePlace</name><argument_list>()</argument_list></call><operator>.</operator><call><name>numWays</name><argument_list>(<argument><expr><literal type="number">500</literal></expr></argument>, <argument><expr><literal type="number">1000000</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>numWays</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>steps</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>arrLen</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>colLimit</name> <init>= <expr><ternary><condition><expr><name>arrLen</name> <operator>&lt;</operator> <name>steps</name></expr> ?</condition><then> <expr><name>arrLen</name></expr> </then><else>: <expr><name>steps</name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><name>colLimit</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>steps</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name>colLimit</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name><name>DP</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    <return>return <expr><operator>(</operator><name>int</name><operator>)</operator> <call><name>dp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>steps</name></expr></argument>, <argument><expr><name>arrLen</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>long</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>A</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>||</operator> <name>i</name> <operator>&gt;=</operator> <name>A</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>n</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+    <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name> <operator>=</operator>
+        <operator>(</operator><name>int</name><operator>)</operator>
+            <operator>(</operator><operator>(</operator><operator>(</operator><operator>(</operator><operator>(</operator><call><name>dp</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>A</name></expr></argument>)</argument_list></call> <operator>%</operator> <name>MOD</name><operator>)</operator> <operator>+</operator> <operator>(</operator><call><name>dp</name><argument_list>(<argument><expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>A</name></expr></argument>)</argument_list></call> <operator>%</operator> <name>MOD</name><operator>)</operator><operator>)</operator> <operator>%</operator> <name>MOD</name><operator>)</operator>
+                    <operator>+</operator> <operator>(</operator><call><name>dp</name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>n</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>A</name></expr></argument>)</argument_list></call> <operator>%</operator> <name>MOD</name><operator>)</operator><operator>)</operator>
+                <operator>%</operator> <name>MOD</name><operator>)</operator></expr>;</expr_stmt>
+    <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

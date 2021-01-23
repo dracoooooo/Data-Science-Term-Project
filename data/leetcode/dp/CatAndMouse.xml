@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\CatAndMouse.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 03/03/2019
+ *
+ * &lt;p&gt;A game on an undirected graph is played by two players, Mouse and Cat, who alternate turns.
+ *
+ * &lt;p&gt;The graph is given as follows: graph[a] is a list of all nodes b such that ab is an edge of
+ * the graph.
+ *
+ * &lt;p&gt;Mouse starts at node 1 and goes first, Cat starts at node 2 and goes second, and there is a
+ * Hole at node 0.
+ *
+ * &lt;p&gt;During each player's turn, they must travel along one edge of the graph that meets where they
+ * are. For example, if the Mouse is at node 1, it must travel to any node in graph[1].
+ *
+ * &lt;p&gt;Additionally, it is not allowed for the Cat to travel to the Hole (node 0.)
+ *
+ * &lt;p&gt;Then, the game can end in 3 ways:
+ *
+ * &lt;p&gt;If ever the Cat occupies the same node as the Mouse, the Cat wins. If ever the Mouse reaches
+ * the Hole, the Mouse wins. If ever a position is repeated (ie. the players are in the same
+ * position as a previous turn, and it is the same player's turn to move), the game is a draw. Given
+ * a graph, and assuming both players play optimally, return 1 if the game is won by Mouse, 2 if the
+ * game is won by Cat, and 0 if the game is a draw.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: [[2,5],[3],[0,4,5],[1,4,5],[2,3],[0,2,3]] Output: 0 Explanation: 4---3---1 | | 2---5 \
+ * / 0
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;3 &lt;= graph.length &lt;= 50 It is guaranteed that graph[1] is non-empty. It is guaranteed that
+ * graph[2] contains a non-zero element.
+ *
+ * &lt;p&gt;Solution: Each combination of mouse, cat and turn for a state (m, c, p). Transition between
+ * different states form a state graph - start to color each state with either MOUSE, CAT or a DRAW
+ * based on who wins this state. Perform a bottom up dp inorder to arrive at the answer.
+ */</comment>
+<class><specifier>public</specifier> class <name>CatAndMouse</name> <block>{
+
+  <decl_stmt><decl><type><specifier>private</specifier> <specifier>final</specifier> <name>int</name></type> <name>CAT</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>, <decl><type ref="prev"/><name>MOUSE</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>DRAW</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>PLAYER_CAT</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>PLAYER_MOUSE</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>Queue</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>queue</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayDeque</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+  <class>class <name>State</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>catPos</name></decl>, <decl><type ref="prev"/><name>mPos</name></decl>, <decl><type ref="prev"/><name>player</name></decl>, <decl><type ref="prev"/><name>color</name></decl>;</decl_stmt>
+
+    <constructor><name>State</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>mPos</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>catPos</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>player</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>color</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>catPos</name></name> <operator>=</operator> <name>catPos</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>mPos</name></name> <operator>=</operator> <name>mPos</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>player</name></name> <operator>=</operator> <name>player</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>color</name></name> <operator>=</operator> <name>color</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>graph</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">3</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>CatAndMouse</name><argument_list>()</argument_list></call><operator>.</operator><call><name>catMouseGame</name><argument_list>(<argument><expr><name>graph</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>catMouseGame</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>graph</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>color</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>graph</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>graph</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>degree</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>graph</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>graph</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>graph</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>color</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <name>MOUSE</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>MOUSE</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>color</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <name>CAT</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>CAT</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>m</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>m</name> <operator>&lt;</operator> <name><name>graph</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>m</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>c</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>c</name> <operator>&lt;</operator> <name><name>graph</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>c</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>degree</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name><name>graph</name><index>[<expr><name>m</name></expr>]</index></name><operator>.</operator><name>length</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>degree</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>graph</name><index>[<expr><name>c</name></expr>]</index></name><operator>.</operator><name>length</name></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>v</name> <range>: <expr><name><name>graph</name><index>[<expr><name>c</name></expr>]</index></name></expr></range></decl></init>)</control> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name>v</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>degree</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>--</operator></expr>;</expr_stmt>
+            <break>break;</break>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>queue</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <decl_stmt><decl><type><name>State</name></type> <name>current</name> <init>= <expr><call><name><name>queue</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>parents</name> <init>= <expr><call><name>getParents</name><argument_list>(<argument><expr><name>graph</name></expr></argument>, <argument><expr><name>current</name></expr></argument>, <argument><expr><name>color</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name><name>current</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name><name>current</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name><name>current</name><operator>.</operator><name>player</name></name></expr>]</index></name> <operator>==</operator> <name>CAT</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name>enqueue</name><argument_list>(<argument><expr><name>queue</name></expr></argument>, <argument><expr><name>parents</name></expr></argument>, <argument><expr><name>PLAYER_CAT</name></expr></argument>, <argument><expr><name>CAT</name></expr></argument>, <argument><expr><name>color</name></expr></argument>, <argument><expr><name>degree</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><call><name>enqueue</name><argument_list>(<argument><expr><name>queue</name></expr></argument>, <argument><expr><name>parents</name></expr></argument>, <argument><expr><name>PLAYER_MOUSE</name></expr></argument>, <argument><expr><name>MOUSE</name></expr></argument>, <argument><expr><name>color</name></expr></argument>, <argument><expr><name>degree</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></while>
+    <return>return <expr><name><name>color</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>void</name></type> <name>enqueue</name><parameter_list>(
+      <parameter><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>queue</name></decl></parameter>,
+      <parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>parents</name></decl></parameter>,
+      <parameter><decl><type><name>int</name></type> <name>player</name></decl></parameter>,
+      <parameter><decl><type><name>int</name></type> <name>col</name></decl></parameter>,
+      <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>color</name></decl></parameter>,
+      <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>degree</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <for>for <control>(<init><decl><type><name>State</name></type> <name>parent</name> <range>: <expr><name>parents</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr>]</index></name> <operator>==</operator> <name>DRAW</name></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>parent</name><operator>.</operator><name>player</name></name> <operator>==</operator> <name>player</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>color</name><index>[<expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr>]</index></name> <operator>=</operator> <name>col</name></expr>;</expr_stmt>
+          <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr></argument>, <argument><expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr></argument>, <argument><expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr></argument>, <argument><expr><name>col</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <decl_stmt><decl><type><name>int</name></type> <name>currDegree</name> <init>= <expr><operator>--</operator><name><name>degree</name><index>[<expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+          <if_stmt><if>if <condition>(<expr><name>currDegree</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>color</name><index>[<expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr>]</index></name> <operator>=</operator> <name>col</name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>queue</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name><name>parent</name><operator>.</operator><name>mPos</name></name></expr></argument>, <argument><expr><name><name>parent</name><operator>.</operator><name>catPos</name></name></expr></argument>, <argument><expr><name><name>parent</name><operator>.</operator><name>player</name></name></expr></argument>, <argument><expr><name>col</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>getParents</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>graph</name></decl></parameter>, <parameter><decl><type><name>State</name></type> <name>current</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>color</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>player</name> <init>= <expr><name><name>current</name><operator>.</operator><name>player</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>positions</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>State</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>player</name> <operator>==</operator> <name>PLAYER_MOUSE</name></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><name>positions</name> <operator>=</operator> <name><name>graph</name><index>[<expr><name><name>current</name><operator>.</operator><name>catPos</name></name></expr>]</index></name></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>pos</name> <range>: <expr><name>positions</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>pos</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name><name>current</name><operator>.</operator><name>mPos</name></name></expr>]</index><index>[<expr><name>pos</name></expr>]</index><index>[<expr><name>PLAYER_CAT</name></expr>]</index></name> <operator>==</operator> <name>DRAW</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name><name>current</name><operator>.</operator><name>mPos</name></name></expr></argument>, <argument><expr><name>pos</name></expr></argument>, <argument><expr><name>PLAYER_CAT</name></expr></argument>, <argument><expr><name>DRAW</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></if> <else>else <block>{<block_content>
+      <expr_stmt><expr><name>positions</name> <operator>=</operator> <name><name>graph</name><index>[<expr><name><name>current</name><operator>.</operator><name>mPos</name></name></expr>]</index></name></expr>;</expr_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>pos</name> <range>: <expr><name>positions</name></expr></range></decl></init>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name>pos</name></expr>]</index><index>[<expr><name><name>current</name><operator>.</operator><name>catPos</name></name></expr>]</index><index>[<expr><name>PLAYER_MOUSE</name></expr>]</index></name> <operator>==</operator> <name>DRAW</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name>pos</name></expr></argument>, <argument><expr><name><name>current</name><operator>.</operator><name>catPos</name></name></expr></argument>, <argument><expr><name>PLAYER_MOUSE</name></expr></argument>, <argument><expr><name>DRAW</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></else></if_stmt>
+    <return>return <expr><name>list</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

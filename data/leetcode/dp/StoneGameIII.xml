@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\StoneGameIII.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 16/04/2020 Alice and Bob continue their games with piles of
+ * stones. There are several stones arranged in a row, and each stone has an associated value which
+ * is an integer given in the array stoneValue.
+ *
+ * &lt;p&gt;Alice and Bob take turns, with Alice starting first. On each player's turn, that player can
+ * take 1, 2 or 3 stones from the first remaining stones in the row.
+ *
+ * &lt;p&gt;The score of each player is the sum of values of the stones taken. The score of each player is
+ * 0 initially.
+ *
+ * &lt;p&gt;The objective of the game is to end with the highest score, and the winner is the player with
+ * the highest score and there could be a tie. The game continues until all the stones have been
+ * taken.
+ *
+ * &lt;p&gt;Assume Alice and Bob play optimally.
+ *
+ * &lt;p&gt;Return "Alice" if Alice will win, "Bob" if Bob will win or "Tie" if they end the game with the
+ * same score.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: values = [1,2,3,7] Output: "Bob" Explanation: Alice will always lose. Her best move
+ * will be to take three piles and the score become 6. Now the score of Bob is 7 and Bob wins.
+ * Example 2:
+ *
+ * &lt;p&gt;Input: values = [1,2,3,-9] Output: "Alice" Explanation: Alice must choose all the three piles
+ * at the first move to win and leave Bob with negative score. If Alice chooses one pile her score
+ * will be 1 and the next move Bob's score becomes 5. The next move Alice will take the pile with
+ * value = -9 and lose. If Alice chooses two piles her score will be 3 and the next move Bob's score
+ * becomes 3. The next move Alice will take the pile with value = -9 and also lose. Remember that
+ * both play optimally so here Alice will choose the scenario that makes her win. Example 3:
+ *
+ * &lt;p&gt;Input: values = [1,2,3,6] Output: "Tie" Explanation: Alice cannot win this game. She can end
+ * the game in a draw if she decided to choose all the first three piles, otherwise she will lose.
+ * Example 4:
+ *
+ * &lt;p&gt;Input: values = [1,2,3,-1,-2,-3,7] Output: "Alice" Example 5:
+ *
+ * &lt;p&gt;Input: values = [-1,-2,-3] Output: "Tie"
+ *
+ * &lt;p&gt;Constraints:
+ *
+ * &lt;p&gt;1 &lt;= values.length &lt;= 50000 -1000 &lt;= values[i] &lt;= 1000
+ */</comment>
+<class><specifier>public</specifier> class <name>StoneGameIII</name> <block>{
+  <class><specifier>private</specifier> class <name>State</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>;</decl_stmt>
+
+    <constructor><name>State</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>a</name></name> <operator>=</operator> <name>a</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>b</name></name> <operator>=</operator> <name>b</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>V</name> <init>= <expr><block>{<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><operator>-</operator><literal type="number">3</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>StoneGameIII</name><argument_list>()</argument_list></call><operator>.</operator><call><name>stoneGameIII</name><argument_list>(<argument><expr><name>V</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>State</name><index>[]</index><index>[]</index></name></type> <name>DP</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>String</name></type> <name>stoneGameIII</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>stoneValue</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>State</name><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><name><name>stoneValue</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>State</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>stoneValue</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <return>return <expr><ternary><condition><expr><operator>(</operator><name><name>result</name><operator>.</operator><name>a</name></name> <operator>&gt;</operator> <name><name>result</name><operator>.</operator><name>b</name></name><operator>)</operator></expr> ?</condition><then> <expr><literal type="string">"Alice"</literal></expr> </then><else>: <expr><ternary><condition><expr><operator>(</operator><name><name>result</name><operator>.</operator><name>b</name></name> <operator>&gt;</operator> <name><name>result</name><operator>.</operator><name>a</name></name><operator>)</operator></expr> ?</condition><then> <expr><literal type="string">"Bob"</literal></expr> </then><else>: <expr><literal type="string">"Tie"</literal></expr></else></ternary></expr></else></ternary></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>State</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>p</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>stoneValue</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;=</operator> <name><name>stoneValue</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</return></block_content></block></if>
+    <else>else <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <name>j</name> <operator>&gt;=</operator> <name><name>stoneValue</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <break>break;</break></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <operator>(</operator><name><name>stoneValue</name><index>[<expr><name>i</name> <operator>+</operator> <name>j</name></expr>]</index></name><operator>)</operator></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>State</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <name>j</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><operator>(</operator><name>p</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>%</operator> <literal type="number">2</literal></expr></argument>, <argument><expr><name>stoneValue</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>p</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>a</name></name><operator>)</operator></expr></argument>, <argument><expr><name><name>result</name><operator>.</operator><name>b</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>a</name> <operator>&lt;</operator> <operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>a</name></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>a</name></name><operator>)</operator></expr></argument>, <argument><expr><name><name>result</name><operator>.</operator><name>b</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name><name>result</name><operator>.</operator><name>a</name></name></expr></argument>, <argument><expr><operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>b</name></name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>b</name> <operator>&lt;</operator> <operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>b</name></name><operator>)</operator></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>State</name><argument_list>(<argument><expr><name><name>result</name><operator>.</operator><name>a</name></name></expr></argument>, <argument><expr><operator>(</operator><name>sum</name> <operator>+</operator> <name><name>result</name><operator>.</operator><name>b</name></name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></for>
+      <return>return <expr><name><name>DP</name><index>[<expr><name>p</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

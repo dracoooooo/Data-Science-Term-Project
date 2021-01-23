@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\CherryPickup.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 27/01/2018. In a N x N grid representing a field of cherries,
+ * each cell is one of three possible integers.
+ *
+ * &lt;p&gt;0 means the cell is empty, so you can pass through; 1 means the cell contains a cherry, that
+ * you can pick up and pass through; -1 means the cell contains a thorn that blocks your way. Your
+ * task is to collect maximum number of cherries possible by following the rules below:
+ *
+ * &lt;p&gt;Starting at the position (0, 0) and reaching (N-1, N-1) by moving right or down through valid
+ * path cells (cells with value 0 or 1); After reaching (N-1, N-1), returning to (0, 0) by moving
+ * left or up through valid path cells; When passing through a path cell containing a cherry, you
+ * pick it up and the cell becomes an empty cell (0); If there is no valid path between (0, 0) and
+ * (N-1, N-1), then no cherries can be collected. Example 1: Input: grid = [[0, 1, -1], [1, 0, -1],
+ * [1, 1, 1]] Output: 5 Explanation: The player started at (0, 0) and went down, down, right right
+ * to reach (2, 2). 4 cherries were picked up during this single trip, and the matrix becomes
+ * [[0,1,-1],[0,0,-1],[0,0,0]]. Then, the player went left, up, up, left to return home, picking up
+ * one more cherry. The total number of cherries picked up is 5, and this is the maximum possible.
+ * Note:
+ *
+ * &lt;p&gt;grid is an N by N 2D array, with 1 &lt;= N &lt;= 50. Each grid[i][j] is an integer in the set {-1,
+ * 0, 1}. It is guaranteed that grid[0][0] and grid[N-1][N-1] are not -1.
+ *
+ * &lt;p&gt;Solution O(N ^ 3) time-complexity. Traversing from (0, 0) -&gt; (n - 1, n - 1) or the other way
+ * around both are the same. The key point to note here is the traversal should be done by two
+ * person simultaneously starting from (0, 0). Notice after t steps, each position (r, c) we could
+ * be, is on the line r + c = t (along the diagonal). So if we have two people at positions (r1, c1)
+ * and (r2, c2), then r2 = r1 + c1 - c2.
+ */</comment>
+<class><specifier>public</specifier> class <name>CherryPickup</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>CherryPickup</name><argument_list>()</argument_list></call><operator>.</operator><call><name>cherryPickup</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>cherryPickup</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>DP</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name><name>grid</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><call><name>dp</name><argument_list>(<argument><expr><name><name>grid</name><operator>.</operator><name>length</name></name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>DP</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>result</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <else>else<block type="pseudo"><block_content> <return>return <expr><name>result</name></expr>;</return></block_content></block></else></if_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>N</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>r1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c1</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c2</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>DP</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>r2</name> <init>= <expr><name>r1</name> <operator>+</operator> <operator>(</operator><name>c1</name> <operator>-</operator> <name>c2</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if <condition>(<expr><name>r1</name> <operator>&gt;=</operator> <name>N</name> <operator>||</operator> <name>c1</name> <operator>&gt;=</operator> <name>N</name> <operator>||</operator> <name>c2</name> <operator>&gt;=</operator> <name>N</name> <operator>||</operator> <name>r2</name> <operator>&gt;=</operator> <name>N</name> <operator>||</operator> <name><name>grid</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index></name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal> <operator>||</operator> <name><name>grid</name><index>[<expr><name>r2</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index></name> <operator>==</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+      <return>return <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index></name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index></name></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>r1</name> <operator>==</operator> <name>N</name> <operator>-</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>c1</name> <operator>==</operator> <name>N</name> <operator>-</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>grid</name><index>[<expr><name>N</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index><index>[<expr><name>N</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</return></block_content></block></if>
+    <else>else <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><ternary><condition><expr><operator>(</operator><name>c1</name> <operator>==</operator> <name>c2</name><operator>)</operator></expr> ?</condition><then> <expr><name><name>grid</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index></name></expr> </then><else>: <expr><operator>(</operator><name><name>grid</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index></name> <operator>+</operator> <name><name>grid</name><index>[<expr><name>r2</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index></name><operator>)</operator></expr></else></ternary></expr></init></decl>;</decl_stmt>
+      <comment type="line">// verify all the 4 possibilities. (P1 down + P2 right), (P1 right, P2 right), (P1 right + P2</comment>
+      <comment type="line">// down),</comment>
+      <comment type="line">// (P1 down, P2 down)</comment>
+      <expr_stmt><expr><name>max</name> <operator>+=</operator>
+          <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(
+              <argument><expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(
+                  <argument><expr><call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><call><name>dp</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><name>r1</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>c1</name></expr></argument>, <argument><expr><name>c2</name></expr></argument>, <argument><expr><name>DP</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr><call><name>dp</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><name>r1</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>c1</name></expr></argument>, <argument><expr><name>c2</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>DP</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>,
+                  <argument><expr><call><name>dp</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><name>r1</name></expr></argument>, <argument><expr><name>c1</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>c2</name></expr></argument>, <argument><expr><name>DP</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></argument>,
+              <argument><expr><call><name>dp</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><name>r1</name></expr></argument>, <argument><expr><name>c1</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>c2</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>DP</name></expr></argument>, <argument><expr><name>grid</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>DP</name><index>[<expr><name>r1</name></expr>]</index><index>[<expr><name>c1</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index></name> <operator>=</operator> <name>max</name></expr>;</expr_stmt>
+      <return>return <expr><name>max</name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

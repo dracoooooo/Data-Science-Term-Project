@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\CountingBits.java"><class><specifier>public</specifier> class <name>CountingBits</name> <block>{
+    <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>countBits</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name><name>arr</name><index>[]</index></name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>num</name><operator>+</operator><literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>arr</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><name>num</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+            <return>return <expr><name>arr</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name><name>arr</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>index</name> <init>= <expr><literal type="number">2</literal></expr></init></decl>;</init> <condition><expr><name>index</name> <operator>&lt;=</operator> <name>num</name></expr>;</condition> <incr><expr><name>index</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>number</name> <init>= <expr><name>index</name></expr></init></decl>;</decl_stmt>
+            <while>while<condition>(<expr><name>number</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+                <expr_stmt><expr><name>number</name> <operator>&amp;=</operator> <operator>(</operator><name>number</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><name><name>arr</name><index>[<expr><name>index</name></expr>]</index></name> <operator>=</operator> <name>count</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>arr</name></expr>;</return>
+    </block_content>}</block></function>
+}</block></class>
+</unit>

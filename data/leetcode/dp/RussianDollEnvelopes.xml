@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\RussianDollEnvelopes.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 05/05/2019 You have a number of envelopes with widths and
+ * heights given as a pair of integers (w, h). One envelope can fit into another if and only if both
+ * the width and height of one envelope is greater than the width and height of the other envelope.
+ *
+ * &lt;p&gt;What is the maximum number of envelopes can you Russian doll? (put one inside other)
+ *
+ * &lt;p&gt;Note: Rotation is not allowed.
+ *
+ * &lt;p&gt;Example:
+ *
+ * &lt;p&gt;Input: [[5,4],[6,4],[6,7],[2,3]] Output: 3 Explanation: The maximum number of envelopes you
+ * can Russian doll is 3 ([2,3] =&gt; [5,4] =&gt; [6,7]).
+ *
+ * &lt;p&gt;Solution: O(N ^ 2) Sort the envelopes based on increasing order of area and for each envelope
+ * iterate through all the possible envelopes which are smaller than that the current envelope and
+ * check the maximum possible envelopes which an be russian dolled.
+ */</comment>
+<class><specifier>public</specifier> class <name>RussianDollEnvelopes</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><block>{<expr><literal type="number">5</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">6</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">6</literal></expr>, <expr><literal type="number">7</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">3</literal></expr>}</block></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>RussianDollEnvelopes</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maxEnvelopes</name><argument_list>(<argument><expr><name>A</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <class>class <name>Envelope</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>l</name></decl>, <decl><type ref="prev"/><name>b</name></decl>;</decl_stmt>
+
+    <constructor><name>Envelope</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>l</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>l</name></name> <operator>=</operator> <name>l</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>b</name></name> <operator>=</operator> <name>b</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+  <comment type="block" format="javadoc">/**
+   * @param envelopes
+   * @return
+   */</comment>
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>maxEnvelopes</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>envelopes</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name><name>envelopes</name><operator>.</operator><name>length</name></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Envelope</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name><name>int</name><index>[]</index></name></type> <name>row</name> <range>: <expr><name>envelopes</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Envelope</name><argument_list>(<argument><expr><name><name>row</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></argument>, <argument><expr><name><name>row</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>list</name><operator>.</operator><name>sort</name></name><argument_list>(<argument><expr><operator>(</operator><lambda><parameter_list>(<parameter><decl><name>o1</name></decl></parameter>, <parameter><decl><name>o2</name></decl></parameter>)</parameter_list> -&gt;<block type="pseudo"><block_content> <expr><call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><name><name>o2</name><operator>.</operator><name>l</name></name> <operator>*</operator> <name><name>o2</name><operator>.</operator><name>b</name></name></expr></argument>, <argument><expr><name><name>o1</name><operator>.</operator><name>l</name></name> <operator>*</operator> <name><name>o1</name><operator>.</operator><name>b</name></name></expr></argument>)</argument_list></call></expr></block_content></block></lambda><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>DP</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>envelopes</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name>DP</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>Envelope</name></type> <name>env</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>Envelope</name></type> <name>childEnv</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>env</name><operator>.</operator><name>l</name></name> <operator>&gt;</operator> <name><name>childEnv</name><operator>.</operator><name>l</name></name> <operator>&amp;&amp;</operator> <name><name>env</name><operator>.</operator><name>b</name></name> <operator>&gt;</operator> <name><name>childEnv</name><operator>.</operator><name>b</name></name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>DP</name><index>[<expr><name>j</name></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>ans</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><name>DP</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>ans</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>ans</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>ans</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

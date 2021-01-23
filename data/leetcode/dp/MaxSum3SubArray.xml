@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\MaxSum3SubArray.java"><package>package <name>dynamic_programming</name>;</package>
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 22/11/2017.
+ *
+ * &lt;p&gt;In a given array nums of positive integers, find three non-overlapping subarrays with maximum
+ * sum.
+ *
+ * &lt;p&gt;Each subarray will be of size k, and we want to maximize the sum of all 3*k entries.
+ *
+ * &lt;p&gt;Return the result as a list of indices representing the starting position of each interval
+ * (0-indexed). If there are multiple answers, return the lexicographically smallest one.
+ *
+ * &lt;p&gt;Example: Input: [1,2,1,2,6,7,5,1], 2 Output: [0, 3, 5] Explanation: Subarrays [1, 2], [2, 6],
+ * [7, 5] correspond to the starting indices [0, 3, 5]. We could have also taken [2, 1], but an
+ * answer of [1, 3, 5] would be lexicographically larger. Note: nums.length will be between 1 and
+ * 20000. nums[i] will be between 1 and 65535. k will be between 1 and floor(nums.length / 3).
+ *
+ * &lt;p&gt;Solution: O(N) solution by prefix and reverse-prefix sum First calculate max index for array
+ * index k, then use this to calculate max index for two array indices j and k and again use this
+ * result to calculate the final max index for i, j and k for the 3 arrays.
+ */</comment>
+<class><specifier>public</specifier> class <name>MaxSum3SubArray</name> <block>{
+
+  <class>class <name>Max</name> <block>{
+    <decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>, <decl><type ref="prev"/><name>j</name></decl>, <decl><type ref="prev"/><name>k</name></decl>, <decl><type ref="prev"/><name>max</name></decl>;</decl_stmt>
+
+    <constructor><name>Max</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>max</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>i</name></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>max</name></name> <operator>=</operator> <name>max</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+
+    <constructor><name>Max</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>max</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>i</name></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>j</name></name> <operator>=</operator> <name>j</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>max</name></name> <operator>=</operator> <name>max</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>A</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name>MaxSum3SubArray</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maxSumOfThreeSubarrays</name><argument_list>(<argument><expr><name>A</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>result</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>print</name></name><argument_list>(<argument><expr><name><name>result</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>int</name><index>[]</index></name></type> <name>maxSumOfThreeSubarrays</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>fPrefix</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt> <comment type="line">// forward prefix sum</comment>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>rPrefix</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt> <comment type="line">// reverse prefix sum</comment>
+
+    <comment type="line">// calculate forward prefix sum</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>k</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name><name>fPrefix</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+=</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <name>k</name> <operator>-</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>fPrefix</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>fPrefix</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <name><name>nums</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>k</name></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>Max</name><index>[]</index></name></type> <name>max1</name> <init>= <expr><operator>new</operator> <name><name>Max</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name><name>max1</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>k</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Max</name><argument_list>(<argument><expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>k</name></expr></argument>, <argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <comment type="line">// calculate reverse prefix sum</comment>
+    <expr_stmt><expr><name><name>rPrefix</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <name>k</name></expr>]</index></name> <operator>=</operator> <name>sum</name></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <name>k</name> <operator>&gt;=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+      <expr_stmt><expr><name><name>rPrefix</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>rPrefix</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>-</operator> <name><name>nums</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name> <operator>+</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <comment type="line">// calculate max for k index</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <name>k</name> <operator>&gt;=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+      <expr_stmt><expr><name><name>max1</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Max</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name><name>rPrefix</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>max1</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>max</name> <operator>&lt;</operator> <name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>max</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>max1</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Max</name><argument_list>(<argument><expr><name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>i</name></expr></argument>, <argument><expr><name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>max</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <comment type="line">// calculate max for j and k index</comment>
+    <decl_stmt><decl><type><name><name>Max</name><index>[]</index></name></type> <name>max2</name> <init>= <expr><operator>new</operator> <name><name>Max</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <name>k</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>&amp;&amp;</operator> <name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>max2</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Max</name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name><operator>.</operator><name>i</name></expr></argument>, <argument><expr><name><name>fPrefix</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>max1</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name><operator>.</operator><name>max</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal> <operator>&gt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal> <operator>||</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+      <if_stmt><if>if <condition>(<expr><name><name>max2</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>max</name> <operator>&lt;</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>max</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>max2</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>max</name> <operator>=</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>max</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>max2</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>i</name> <operator>=</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>i</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>max2</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>j</name> <operator>=</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>j</name></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <comment type="line">// calculate max for i, j and k index</comment>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>result</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">3</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><name>i</name> <operator>+</operator> <name>k</name><operator>)</operator> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>temp</name> <init>= <expr><name><name>fPrefix</name><index>[<expr><name>i</name></expr>]</index></name> <operator>+</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name><operator>.</operator><name>max</name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>temp</name> <operator>&gt;</operator> <name>max</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name>max</name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>result</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>result</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name><operator>.</operator><name>i</name></expr>;</expr_stmt>
+          <expr_stmt><expr><name><name>result</name><index>[<expr><literal type="number">2</literal></expr>]</index></name> <operator>=</operator> <name><name>max2</name><index>[<expr><name>i</name> <operator>+</operator> <name>k</name></expr>]</index></name><operator>.</operator><name>j</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

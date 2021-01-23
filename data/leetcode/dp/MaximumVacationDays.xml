@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\MaximumVacationDays.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 13/04/2019
+ *
+ * &lt;p&gt;LeetCode wants to give one of its best employees the option to travel among N cities to
+ * collect algorithm problems. But all work and no play makes Jack a dull boy, you could take
+ * vacations in some particular cities and weeks. Your job is to schedule the traveling to maximize
+ * the number of vacation days you could take, but there are certain rules and restrictions you need
+ * to follow.
+ *
+ * &lt;p&gt;Rules and restrictions: You can only travel among N cities, represented by indexes from 0 to
+ * N-1. Initially, you are in the city indexed 0 on Monday. The cities are connected by flights. The
+ * flights are represented as a N*N matrix (not necessary symmetrical), called flights representing
+ * the airline status from the city i to the city j. If there is no flight from the city i to the
+ * city j, flights[i][j] = 0; Otherwise, flights[i][j] = 1. Also, flights[i][i] = 0 for all i. You
+ * totally have K weeks (each week has 7 days) to travel. You can only take flights at most once per
+ * day and can only take flights on each week's Monday morning. Since flight time is so short, we
+ * don't consider the impact of flight time. For each city, you can only have restricted vacation
+ * days in different weeks, given an N*K matrix called days representing this relationship. For the
+ * value of days[i][j], it represents the maximum days you could take vacation in the city i in the
+ * week j. You're given the flights matrix and days matrix, and you need to output the maximum
+ * vacation days you could take during K weeks.
+ *
+ * &lt;p&gt;Example 1: Input:flights = [[0,1,1],[1,0,1],[1,1,0]], days = [[1,3,1],[6,0,3],[3,3,3]] Output:
+ * 12 Explanation: Ans = 6 + 3 + 3 = 12.
+ *
+ * &lt;p&gt;One of the best strategies is: 1st week : fly from city 0 to city 1 on Monday, and play 6 days
+ * and work 1 day. (Although you start at city 0, we could also fly to and start at other cities
+ * since it is Monday.) 2nd week : fly from city 1 to city 2 on Monday, and play 3 days and work 4
+ * days. 3rd week : stay at city 2, and play 3 days and work 4 days. Example 2: Input:flights =
+ * [[0,0,0],[0,0,0],[0,0,0]], days = [[1,1,1],[7,7,7],[7,7,7]] Output: 3 Explanation: Ans = 1 + 1 +
+ * 1 = 3.
+ *
+ * &lt;p&gt;Since there is no flights enable you to move to another city, you have to stay at city 0 for
+ * the whole 3 weeks. For each week, you only have one day to play and six days to work. So the
+ * maximum number of vacation days is 3. Example 3: Input:flights = [[0,1,1],[1,0,1],[1,1,0]], days
+ * = [[7,0,0],[0,7,0],[0,0,7]] Output: 21 Explanation: Ans = 7 + 7 + 7 = 21
+ *
+ * &lt;p&gt;One of the best strategies is: 1st week : stay at city 0, and play 7 days. 2nd week : fly from
+ * city 0 to city 1 on Monday, and play 7 days. 3rd week : fly from city 1 to city 2 on Monday, and
+ * play 7 days. Note: N and K are positive integers, which are in the range of [1, 100]. In the
+ * matrix flights, all the values are integers in the range of [0, 1]. In the matrix days, all the
+ * values are integers in the range [0, 7]. You could stay at a city beyond the number of vacation
+ * days, but you should work on the extra days, which won't be counted as vacation days. If you fly
+ * from the city A to the city B and take the vacation on that day, the deduction towards vacation
+ * days will count towards the vacation days of city B in that week. We don't consider the impact of
+ * flight hours towards the calculation of vacation days.
+ *
+ * &lt;p&gt;Solution: O(N x N x K) Start from the last week K; Calculate for the last week maximum
+ * vacation days for all possible cities. Now, iteratively calculate backwards for each week K - 1
+ * and for each city and for each available connection from the city memoize the maximum vacation
+ * days possible for this city Return the answer for city 0 and week 0
+ */</comment>
+<class><specifier>public</specifier> class <name>MaximumVacationDays</name> <block>{
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>flights</name> <init>= <expr><block>{
+      <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>
+    }</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>days</name> <init>= <expr><block>{
+      <expr><block>{<expr><literal type="number">0</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">6</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">4</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">0</literal></expr>, <expr><literal type="number">1</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">3</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">5</literal></expr>, <expr><literal type="number">0</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>, <expr><block>{<expr><literal type="number">5</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">3</literal></expr>, <expr><literal type="number">4</literal></expr>}</block></expr>
+    }</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>MaximumVacationDays</name><argument_list>()</argument_list></call><operator>.</operator><call><name>maxVacationDays</name><argument_list>(<argument><expr><name>flights</name></expr></argument>, <argument><expr><name>days</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>maxVacationDays</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>flights</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>days</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><name><name>days</name><operator>.</operator><name>length</name></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>W</name> <init>= <expr><name><name>days</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><name>length</name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>N</name></expr>]</index><index>[<expr><name>W</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>w</name> <init>= <expr><name>W</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>w</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>w</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>n</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>n</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><name>n</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <expr_stmt><expr><name><name>DP</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>w</name></expr>]</index></name> <operator>=</operator> <name><name>days</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>w</name></expr>]</index></name> <operator>+</operator> <name><name>DP</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>w</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></for>
+
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>n</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>n</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><name>n</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>max</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>F</name> <init>= <expr><name><name>flights</name><index>[<expr><name>n</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>F</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><name><name>F</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name>max</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>max</name></expr></argument>, <argument><expr><name><name>days</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>w</name></expr>]</index></name> <operator>+</operator> <name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>w</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name><name>DP</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>w</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>DP</name><index>[<expr><name>n</name></expr>]</index><index>[<expr><name>w</name></expr>]</index></name></expr></argument>, <argument><expr><name>max</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name><name>DP</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

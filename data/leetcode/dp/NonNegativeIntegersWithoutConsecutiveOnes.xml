@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\NonNegativeIntegersWithoutConsecutiveOnes.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 20/10/2019 Given a positive integer n, find the number of
+ * non-negative integers less than or equal to n, whose binary representations do NOT contain
+ * consecutive ones.
+ *
+ * &lt;p&gt;Example 1: Input: 5 Output: 5 Explanation: Here are the non-negative integers &lt;= 5 with their
+ * corresponding binary representations: 0 : 0 1 : 1 2 : 10 3 : 11 4 : 100 5 : 101 Among them, only
+ * integer 3 disobeys the rule (two consecutive ones) and the other 5 satisfy the rule. Note: 1 &lt;= n
+ * &lt;= 109
+ *
+ * &lt;p&gt;Solution: O(1) (30 ^ 2) For each bit we can set either '0' or '1' starting from index i to 0,
+ * if we set 0 then the next bit i + 1 can be either set to 0 or 1 but, if we set it to 1 then the
+ * next bit at position i + 1 can only be 0 because two consecutive 1s are invalid. This gives us a
+ * general dp formula DP[0][i] = DP[0][i + 1] + DP[1][i + 1] for bit 0 and similarly DP[1][i] =
+ * DP[0][i + 1].
+ *
+ * &lt;p&gt;Lets consider an example with number = 4 (binary representation is 100). Now, the above
+ * approach would calculate all possible number ranging from 0 (000) -&gt; 7 (111), lets say the count
+ * is x. But, we actually want to restrict until only 100. Therefore we have to calculate all valid
+ * states starting from 100 until 111 and lets say this is y. Now, the answer would be x - y + 1.
+ * Adding 1 here because the state 100 (which is a valid state) would be counted twice in x and also
+ * in y. For cases where a binary representation of given N is like 1100 we have to find a max
+ * possible valid state which occurs just before 1100 which in this case is 1010 and now calculate y
+ * starting from 1010 to 1111.
+ */</comment>
+<class><specifier>public</specifier> class <name>NonNegativeIntegersWithoutConsecutiveOnes</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>NonNegativeIntegersWithoutConsecutiveOnes</name><argument_list>()</argument_list></call><operator>.</operator><call><name>findIntegers</name><argument_list>(<argument><expr><literal type="number">1000000000</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>findIntegers</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>msbIndex</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">31</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><operator>(</operator><operator>(</operator><literal type="number">1</literal> <operator>&lt;&lt;</operator> <name>i</name><operator>)</operator> <operator>&amp;</operator> <name>num</name><operator>)</operator> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>msbIndex</name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP1</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><name>msbIndex</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt> <comment type="line">// count from 0 until all possible value.</comment>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>DP2</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><name>msbIndex</name> <operator>+</operator> <literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt> <comment type="line">// count from given N until max possible value</comment>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>msbIndex</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <name>msbIndex</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>msbIndex</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>DP1</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>msbIndex</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <name><name>DP1</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>DP1</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <comment type="line">// find valid state just before given num</comment>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>bits</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name>msbIndex</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>boolean</name></type> <name>bitFlipped</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>msbIndex</name></expr></init></decl>, <decl><type ref="prev"/><name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr><operator>,</operator> <expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name>j</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>bits</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>bitFlipped</name></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>bits</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name><name>bits</name><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><literal type="number">0</literal></expr></else></ternary></expr>;</expr_stmt>
+        </block_content>}</block></if> <else>else <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><operator>(</operator><operator>(</operator><literal type="number">1</literal> <operator>&lt;&lt;</operator> <name>i</name><operator>)</operator> <operator>&amp;</operator> <name>num</name><operator>)</operator> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>bits</name><index>[<expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+              <expr_stmt><expr><name><name>bits</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+              <expr_stmt><expr><name>bitFlipped</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else<block type="pseudo"><block_content> <expr_stmt><expr><name><name>bits</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></else></if_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name><name>DP2</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>msbIndex</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name><name>bits</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>i</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+      <if_stmt><if>if <condition>(<expr><name><name>bits</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name><name>DP2</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>DP2</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <name><name>DP2</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+        <comment type="line">// if the curr bit is 0 then, we can make this 1 provided the previous bit was not 1</comment>
+        <if_stmt><if>if <condition>(<expr><name><name>bits</name><index>[<expr><name>i</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+          <expr_stmt><expr><name><name>DP2</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>i</name> <operator>==</operator> <name><name>bits</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></else></ternary></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></if> <else>else <block>{<block_content>
+        <expr_stmt><expr><name><name>DP2</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>DP2</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+      </block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <return>return <expr><operator>(</operator><name><name>DP1</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+</operator> <name><name>DP1</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>)</operator> <operator>-</operator> <operator>(</operator><name><name>DP2</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>+</operator> <name><name>DP2</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>)</operator> <operator>+</operator> <literal type="number">1</literal></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

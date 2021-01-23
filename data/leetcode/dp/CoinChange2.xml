@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\CoinChange2.java"><package>package <name>dynamic_programming</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Arrays</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 22/03/2017. You are given coins of different denominations and
+ * a total amount of money. Write a function to compute the number of combinations that make up that
+ * amount. You may assume that you have infinite number of each kind of coin.
+ *
+ * &lt;p&gt;Note: You can assume that
+ *
+ * &lt;p&gt;0 &lt;= amount &lt;= 5000 1 &lt;= coin &lt;= 5000 the number of coins is less than 500 the answer is
+ * guaranteed to fit into signed 32-bit integer Example 1:
+ *
+ * &lt;p&gt;Input: amount = 5, coins = [1, 2, 5] Output: 4 Explanation: there are four ways to make up the
+ * amount: 5=5 5=2+2+1 5=2+1+1+1 5=1+1+1+1+1 Example 2:
+ *
+ * &lt;p&gt;Input: amount = 3, coins = [2] Output: 0 Explanation: the amount of 3 cannot be made up just
+ * with coins of 2. Example 3:
+ *
+ * &lt;p&gt;Input: amount = 10, coins = [10] Output: 1
+ */</comment>
+<class><specifier>public</specifier> class <name>CoinChange2</name> <block>{
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index></name></type> <name>coins</name> <init>= <expr><block>{<expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">5</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>CoinChange2</name><argument_list>()</argument_list></call><operator>.</operator><call><name>change</name><argument_list>(<argument><expr><literal type="number">5</literal></expr></argument>, <argument><expr><name>coins</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>change</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>amount</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>coins</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>dp</name> <init>= <expr><operator>new</operator> <name><name>int</name><index>[<expr><name><name>coins</name><operator>.</operator><name>length</name></name></expr>]</index><index>[<expr><name>amount</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>l</name> <init>= <expr><name><name>coins</name><operator>.</operator><name>length</name></name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>l</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>Arrays</name><operator>.</operator><name>fill</name></name><argument_list>(<argument><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+    <return>return <expr><call><name>dp</name><argument_list>(<argument><expr><name>dp</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>coins</name></expr></argument>, <argument><expr><name><name>coins</name><operator>.</operator><name>length</name></name></expr></argument>, <argument><expr><name>amount</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index><index>[]</index></name></type> <name>dp</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>coins</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>l</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>n</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>i</name> <operator>&gt;=</operator> <name>l</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>n</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+    <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name> <operator>=</operator> <call><name>dp</name><argument_list>(<argument><expr><name>dp</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>coins</name></expr></argument>, <argument><expr><name>l</name></expr></argument>, <argument><expr><name>n</name></expr></argument>)</argument_list></call> <operator>+</operator> <call><name>dp</name><argument_list>(<argument><expr><name>dp</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>coins</name></expr></argument>, <argument><expr><name>l</name></expr></argument>, <argument><expr><name>n</name> <operator>-</operator> <name><name>coins</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name><name>dp</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>n</name></expr>]</index></name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

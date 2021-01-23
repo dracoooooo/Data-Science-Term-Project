@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\sort\TopKFrequentWords.java"><package>package <name>heap</name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>*</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 07/04/2018. Given a non-empty list of words, return the k most
+ * frequent elements.
+ *
+ * &lt;p&gt;Your answer should be sorted by frequency from highest to lowest. If two words have the same
+ * frequency, then the word with the lower alphabetical order comes first.
+ *
+ * &lt;p&gt;Example 1: Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2 Output: ["i",
+ * "love"] Explanation: "i" and "love" are the two most frequent words. Note that "i" comes before
+ * "love" due to a lower alphabetical order. Example 2: Input: ["the", "day", "is", "sunny", "the",
+ * "the", "the", "sunny", "is", "is"], k = 4 Output: ["the", "is", "sunny", "day"] Explanation:
+ * "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence
+ * being 4, 3, 2 and 1 respectively. Note: You may assume k is always valid, 1 â¤ k â¤ number of
+ * unique elements. Input words contain only lowercase letters. Follow up: Try to solve it in O(n
+ * log k) time and O(n) extra space.
+ *
+ * &lt;p&gt;Solution: O(n log k). Calculate frequency and maintain a inverse priority queue of size k and
+ * add elements. Return result by reversing the priority queue elements.
+ */</comment>
+<class><specifier>public</specifier> class <name>TopKFrequentWords</name> <block>{
+
+  <class>class <name>Pair</name> <block>{
+    <decl_stmt><decl><type><name>String</name></type> <name>word</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>freq</name></decl>;</decl_stmt>
+
+    <constructor><name>Pair</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>word</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>freq</name></decl></parameter>)</parameter_list> <block>{<block_content>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>word</name></name> <operator>=</operator> <name>word</name></expr>;</expr_stmt>
+      <expr_stmt><expr><name><name>this</name><operator>.</operator><name>freq</name></name> <operator>=</operator> <name>freq</name></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+  }</block></class>
+
+  <comment type="block" format="javadoc">/**
+   * Main method
+   *
+   * @param args
+   * @throws Exception
+   */</comment>
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <throws>throws <argument><expr><name>Exception</name></expr></argument></throws> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name> <init>= <expr><block>{<expr><literal type="string">"i"</literal></expr>, <expr><literal type="string">"love"</literal></expr>, <expr><literal type="string">"leetcode"</literal></expr>, <expr><literal type="string">"i"</literal></expr>, <expr><literal type="string">"love"</literal></expr>, <expr><literal type="string">"coding"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>sorted</name> <init>= <expr><operator>new</operator> <call><name>TopKFrequentWords</name><argument_list>()</argument_list></call><operator>.</operator><call><name>topKFrequent</name><argument_list>(<argument><expr><name>words</name></expr></argument>, <argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>sorted</name><operator>.</operator><name>stream</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>forEach</name><argument_list>(<argument><expr><name><name>System</name><operator>.</operator><name>out</name></name><operator>::</operator><name>println</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>topKFrequent</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>words</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>String</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>map</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>String</name></type> <name>w</name> <range>: <expr><name>words</name></expr></range></decl></init>)</control> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>putIfAbsent</name></name><argument_list>(<argument><expr><name>w</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>freq</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>w</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>w</name></expr></argument>, <argument><expr><name>freq</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Pair</name></argument>&gt;</argument_list></name></type> <name>pq</name> <init>=
+        <expr><operator>new</operator> <call><name><name>PriorityQueue</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>(
+            <argument><expr><ternary><condition><expr><operator>(</operator><name>o1</name>, <name>o2</name><operator>)</operator> <operator>-&gt;</operator>
+                <operator>(</operator><name><name>o1</name><operator>.</operator><name>freq</name></name> <operator>==</operator> <name><name>o2</name><operator>.</operator><name>freq</name></name><operator>)</operator></expr>
+                    ?</condition><then> <expr><call><name><name>o2</name><operator>.</operator><name>word</name><operator>.</operator><name>compareTo</name></name><argument_list>(<argument><expr><name><name>o1</name><operator>.</operator><name>word</name></name></expr></argument>)</argument_list></call></expr>
+                    </then><else>: <expr><call><name><name>Integer</name><operator>.</operator><name>compare</name></name><argument_list>(<argument><expr><name><name>o1</name><operator>.</operator><name>freq</name></name></expr></argument>, <argument><expr><name><name>o2</name><operator>.</operator><name>freq</name></name></expr></argument>)</argument_list></call></expr></else></ternary></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>String</name></type> <name>w</name> <range>: <expr><call><name><name>map</name><operator>.</operator><name>keySet</name></name><argument_list>()</argument_list></call></expr></range></decl></init>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>f</name> <init>= <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>w</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+      <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>Pair</name><argument_list>(<argument><expr><name>w</name></expr></argument>, <argument><expr><name>f</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+      <if_stmt><if>if <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while <condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>)</condition> <block>{<block_content>
+      <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><call><name><name>pq</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call><operator>.</operator><name>word</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <expr_stmt><expr><call><name><name>Collections</name><operator>.</operator><name>reverse</name></name><argument_list>(<argument><expr><name>result</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>result</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

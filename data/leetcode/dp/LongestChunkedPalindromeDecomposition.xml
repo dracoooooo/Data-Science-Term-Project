@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\LongestChunkedPalindromeDecomposition.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 17/04/2020 Return the largest possible k such that there exists
+ * a_1, a_2, ..., a_k such that:
+ *
+ * &lt;p&gt;Each a_i is a non-empty string; Their concatenation a_1 + a_2 + ... + a_k is equal to text;
+ * For all 1 &lt;= i &lt;= k, a_i = a_{k+1 - i}.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: text = "ghiabcdefhelloadamhelloabcdefghi" Output: 7 Explanation: We can split the
+ * string on "(ghi)(abcdef)(hello)(adam)(hello)(abcdef)(ghi)". Example 2:
+ *
+ * &lt;p&gt;Input: text = "merchant" Output: 1 Explanation: We can split the string on "(merchant)".
+ * Example 3:
+ *
+ * &lt;p&gt;Input: text = "antaprezatepzapreanta" Output: 11 Explanation: We can split the string on
+ * "(a)(nt)(a)(pre)(za)(tpe)(za)(pre)(a)(nt)(a)". Example 4:
+ *
+ * &lt;p&gt;Input: text = "aaa" Output: 3 Explanation: We can split the string on "(a)(a)(a)".
+ *
+ * &lt;p&gt;Constraints:
+ *
+ * &lt;p&gt;text consists only of lowercase English characters. 1 &lt;= text.length &lt;= 1000
+ */</comment>
+<class><specifier>public</specifier> class <name>LongestChunkedPalindromeDecomposition</name> <block>{
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(
+        <argument><expr><operator>new</operator> <call><name>LongestChunkedPalindromeDecomposition</name><argument_list>()</argument_list></call><operator>.</operator><call><name>longestDecomposition</name><argument_list>(<argument><expr><literal type="string">"merchant"</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><specifier>private</specifier> <name><name>int</name><index>[]</index></name></type> <name>DP</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>longestDecomposition</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>text</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr>]</index></name></expr>;</expr_stmt>
+    <return>return <expr><call><name>dp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><call><name><name>text</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>text</name></expr></argument>)</argument_list></call></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>e</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>text</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>i</name> <operator>&gt;</operator> <name>e</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name>i</name> <operator>==</operator> <name>e</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal></expr>;</return></block_content></block></if>
+    <if type="elseif">else if <condition>(<expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</return></block_content></block></if>
+    <else>else <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>e</name></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&gt;</operator> <name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>--</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>text</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>text</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+          <if_stmt><if>if <condition>(<expr><call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>, <argument><expr><name>e</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><call><name><name>text</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <operator>(</operator><name>e</name> <operator>-</operator> <name>j</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+            <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><call><name>dp</name><argument_list>(<argument><expr><name>i</name> <operator>+</operator> <operator>(</operator><name>e</name> <operator>-</operator> <name>j</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr></argument>, <argument><expr><name>j</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>text</name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+          </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+      </block_content>}</block></for>
+      <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name> <operator>==</operator> <literal type="number">0</literal></expr> ?</condition><then> <expr><literal type="number">1</literal></expr> </then><else>: <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr></else></ternary></expr>;</expr_stmt>
+      <return>return <expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+  </block_content>}</block></function>
+}</block></class>
+</unit>

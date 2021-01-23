@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\dp\KnightDialer.java"><package>package <name>dynamic_programming</name>;</package>
+
+<comment type="block" format="javadoc">/**
+ * Created by gouthamvidyapradhan on 24/09/2019 A chess knight can move as indicated in the chess
+ * diagram below:
+ *
+ * &lt;p&gt;.
+ *
+ * &lt;p&gt;This time, we place our chess knight on any numbered key of a phone pad (indicated above), and
+ * the knight makes N-1 hops. Each hop must be from one key to another numbered key.
+ *
+ * &lt;p&gt;Each time it lands on a key (including the initial placement of the knight), it presses the
+ * number of that key, pressing N digits total.
+ *
+ * &lt;p&gt;How many distinct numbers can you dial in this manner?
+ *
+ * &lt;p&gt;Since the answer may be large, output the answer modulo 10^9 + 7.
+ *
+ * &lt;p&gt;Example 1:
+ *
+ * &lt;p&gt;Input: 1 Output: 10 Example 2:
+ *
+ * &lt;p&gt;Input: 2 Output: 20 Example 3:
+ *
+ * &lt;p&gt;Input: 3 Output: 46
+ *
+ * &lt;p&gt;Note:
+ *
+ * &lt;p&gt;1 &lt;= N &lt;= 5000
+ *
+ * &lt;p&gt;Solution: O(N x 4 x 3) Visit all different possible states and sum up the total possible
+ * moves. Cache the states to avoid recalculating.
+ */</comment>
+<class><specifier>public</specifier> class <name>KnightDialer</name> <block>{
+
+  <decl_stmt><decl><type><specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>R</name> <init>= <expr><block>{<expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><literal type="number">2</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+  <decl_stmt><decl><type><specifier>final</specifier> <name><name>int</name><index>[]</index></name></type> <name>C</name> <init>= <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><literal type="number">2</literal></expr>, <expr><operator>-</operator><literal type="number">2</literal></expr>, <expr><literal type="number">1</literal></expr>, <expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <specifier>static</specifier> <name>void</name></type> <name>main</name><parameter_list>(<parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>args</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><call><name><name>System</name><operator>.</operator><name>out</name><operator>.</operator><name>println</name></name><argument_list>(<argument><expr><operator>new</operator> <call><name>KnightDialer</name><argument_list>()</argument_list></call><operator>.</operator><call><name>knightDialer</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+  </block_content>}</block></function>
+
+  <decl_stmt><decl><type><name><name>int</name><index>[]</index><index>[]</index><index>[]</index></name></type> <name>DP</name></decl>;</decl_stmt>
+
+  <function><type><specifier>public</specifier> <name>int</name></type> <name>knightDialer</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>N</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <expr_stmt><expr><name>DP</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><literal type="number">4</literal></expr>]</index><index>[<expr><literal type="number">3</literal></expr>]</index><index>[<expr><name>N</name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>ans</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>i</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>j</name> <operator>==</operator> <literal type="number">0</literal><operator>)</operator> <operator>||</operator> <operator>(</operator><name>i</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>j</name> <operator>==</operator> <literal type="number">2</literal><operator>)</operator></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name><name>DP</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>j</name></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">4</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>(</operator><name>i</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>j</name> <operator>==</operator> <literal type="number">0</literal><operator>)</operator> <operator>||</operator> <operator>(</operator><name>i</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>j</name> <operator>==</operator> <literal type="number">2</literal><operator>)</operator></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name>ans</name> <operator>+=</operator> <operator>(</operator><call><name>dp</name><argument_list>(<argument><expr><name>N</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>j</name></expr></argument>)</argument_list></call> <operator>%</operator> <literal type="number">10e9</literal> <operator>+</operator> <literal type="number">7</literal><operator>)</operator></expr>;</expr_stmt>
+        <expr_stmt><expr><name>ans</name> <operator>%=</operator> <literal type="number">10e9</literal> <operator>+</operator> <literal type="number">7</literal></expr>;</expr_stmt>
+      </block_content>}</block></for>
+    </block_content>}</block></for>
+    <return>return <expr><name>ans</name></expr>;</return>
+  </block_content>}</block></function>
+
+  <function><type><specifier>private</specifier> <name>int</name></type> <name>dp</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>N</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>)</parameter_list> <block>{<block_content>
+    <if_stmt><if>if <condition>(<expr><name>N</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>r</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>c</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name>r</name> <operator>==</operator> <literal type="number">3</literal> <operator>&amp;&amp;</operator> <name>c</name> <operator>==</operator> <literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+    <if_stmt><if>if <condition>(<expr><name><name>DP</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><name>N</name></expr>]</index></name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name><name>DP</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><name>N</name></expr>]</index></name></expr>;</return></block_content></block></if></if_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <literal type="number">8</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+      <decl_stmt><decl><type><name>int</name></type> <name>newR</name> <init>= <expr><name>r</name> <operator>+</operator> <name><name>R</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <decl_stmt><decl><type><name>int</name></type> <name>newC</name> <init>= <expr><name>c</name> <operator>+</operator> <name><name>C</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+      <if_stmt><if>if <condition>(<expr><name>newR</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>newR</name> <operator>&lt;</operator> <literal type="number">4</literal> <operator>&amp;&amp;</operator> <name>newC</name> <operator>&lt;</operator> <literal type="number">3</literal></expr>)</condition> <block>{<block_content>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <operator>(</operator><call><name>dp</name><argument_list>(<argument><expr><name>N</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>newR</name></expr></argument>, <argument><expr><name>newC</name></expr></argument>)</argument_list></call> <operator>%</operator> <literal type="number">10e9</literal> <operator>+</operator> <literal type="number">7</literal><operator>)</operator></expr>;</expr_stmt>
+        <expr_stmt><expr><name>sum</name> <operator>%=</operator> <literal type="number">10e9</literal> <operator>+</operator> <literal type="number">7</literal></expr>;</expr_stmt>
+      </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><name><name>DP</name><index>[<expr><name>r</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><name>N</name></expr>]</index></name> <operator>=</operator> <name>sum</name></expr>;</expr_stmt>
+    <return>return <expr><name>sum</name></expr>;</return>
+  </block_content>}</block></function>
+}</block></class>
+</unit>
