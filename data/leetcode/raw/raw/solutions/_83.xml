@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_83.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_83</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>deleteDuplicates</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>ret</name> <init>= <expr><operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>ret</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>head</name></expr>;</expr_stmt>
+            <while>while <condition>(<expr><name>head</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <while>while <condition>(<expr><name><name>head</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>head</name><operator>.</operator><name>next</name><operator>.</operator><name>val</name></name> <operator>==</operator> <name><name>head</name><operator>.</operator><name>val</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>head</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>head</name><operator>.</operator><name>next</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></while>
+                <expr_stmt><expr><name>head</name> <operator>=</operator> <name><name>head</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name><name>ret</name><operator>.</operator><name>next</name></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>deleteDuplicates</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>curr</name> <init>= <expr><name>head</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>curr</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>curr</name><operator>.</operator><name>next</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>curr</name><operator>.</operator><name>val</name></name> <operator>==</operator> <name><name>curr</name><operator>.</operator><name>next</name><operator>.</operator><name>val</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>curr</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>next</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>curr</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><name>head</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

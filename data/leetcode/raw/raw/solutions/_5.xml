@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_5.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_5</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>low</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>maxLen</name></decl>;</decl_stmt>
+
+        <function><type><specifier>public</specifier> <name>String</name></type> <name>longestPalindrome</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>len</name> <init>= <expr><call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>len</name> <operator>&lt;</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>s</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>len</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><call><name>extendPalindrome</name><argument_list>(<argument><expr><name>s</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// assume odd length, try to extend Palindrome as possible</comment>
+                <expr_stmt><expr><call><name>extendPalindrome</name><argument_list>(<argument><expr><name>s</name></expr></argument>, <argument><expr><name>i</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <comment type="line">// assume even length.</comment>
+            </block_content>}</block></for>
+            <return>return <expr><call><name><name>s</name><operator>.</operator><name>substring</name></name><argument_list>(<argument><expr><name>low</name></expr></argument>, <argument><expr><name>low</name> <operator>+</operator> <name>maxLen</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>void</name></type> <name>extendPalindrome</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>left</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>right</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <while>while <condition>(<expr><name>left</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>right</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>length</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>left</name></expr></argument>)</argument_list></call> <operator>==</operator> <call><name><name>s</name><operator>.</operator><name>charAt</name></name><argument_list>(<argument><expr><name>right</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>left</name><operator>--</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>right</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <if_stmt><if>if <condition>(<expr><name>maxLen</name> <operator>&lt;</operator> <name>right</name> <operator>-</operator> <name>left</name> <operator>-</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>low</name> <operator>=</operator> <name>left</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>maxLen</name> <operator>=</operator> <name>right</name> <operator>-</operator> <name>left</name> <operator>-</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

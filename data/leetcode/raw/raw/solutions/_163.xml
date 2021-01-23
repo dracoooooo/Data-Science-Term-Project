@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_163.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>ArrayList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * 163. Missing Ranges
+ *
+ * Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
+ * For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4-&gt;49", "51-&gt;74", "76-&gt;99"].
+ */</comment>
+<class><specifier>public</specifier> class <name>_163</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>findMissingRanges</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>lower</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>upper</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>String</name></argument>&gt;</argument_list></name></type> <name>result</name> <init>= <expr><operator>new</operator> <call><name><name>ArrayList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>long</name></type> <name>low</name> <init>= <expr><operator>(</operator><name>long</name><operator>)</operator> <name>lower</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>long</name></type> <name>up</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;=</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>i</name> <operator>==</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>up</name> <operator>=</operator> <operator>(</operator><name>long</name><operator>)</operator> <name>upper</name> <operator>+</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>up</name> <operator>=</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name>up</name> <operator>==</operator> <name>low</name> <operator>+</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><name>low</name> <operator>+</operator> <literal type="number">1</literal> <operator>+</operator> <literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>up</name> <operator>&gt;</operator> <name>low</name> <operator>+</operator> <literal type="number">2</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>add</name></name><argument_list>(<argument><expr><operator>(</operator><name>low</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>+</operator> <literal type="string">"-&gt;"</literal> <operator>+</operator> <operator>(</operator><name>up</name> <operator>-</operator> <literal type="number">1</literal><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>low</name> <operator>=</operator> <name>up</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>result</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

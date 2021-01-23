@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1344.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_1344</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>double</name></type> <name>angleClock</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>hour</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>minutes</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>double</name></type> <name>minAngle</name> <init>= <expr><name>minutes</name> <operator>*</operator> <literal type="number">360</literal> <operator>/</operator> <literal type="number">60</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>hourAnglePart1</name> <init>= <expr><ternary><condition><expr><name>hour</name> <operator>!=</operator> <literal type="number">12</literal></expr> ?</condition><then> <expr><operator>(</operator><name>hour</name> <operator>*</operator> <literal type="number">360</literal><operator>)</operator> <operator>/</operator> <literal type="number">12</literal></expr> </then><else>: <expr><literal type="number">0</literal></expr></else></ternary></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>hourAnglePart2</name> <init>= <expr><operator>(</operator><name>double</name><operator>)</operator> <operator>(</operator><literal type="number">30</literal> <operator>*</operator> <name>minutes</name><operator>)</operator> <operator>/</operator> <operator>(</operator><name>double</name><operator>)</operator> <literal type="number">60</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>hourAngle</name> <init>= <expr><name>hourAnglePart1</name> <operator>+</operator> <name>hourAnglePart2</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>preResult</name> <init>= <expr><call><name><name>Math</name><operator>.</operator><name>abs</name></name><argument_list>(<argument><expr><name>minAngle</name> <operator>-</operator> <operator>(</operator><name>hourAngle</name><operator>)</operator></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <return>return <expr><ternary><condition><expr><name>preResult</name> <operator>&gt;</operator> <literal type="number">180</literal></expr> ?</condition><then> <expr><literal type="number">360</literal> <operator>-</operator> <name>preResult</name></expr> </then><else>: <expr><name>preResult</name></expr></else></ternary></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

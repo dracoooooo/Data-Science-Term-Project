@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_1396.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * 1396. Design Underground System
+ *
+ * Implement the class UndergroundSystem that supports three methods:
+ *
+ * 1. checkIn(int id, string stationName, int t)
+ * A customer with id card equal to id, gets in the station stationName at time t.
+ * A customer can only be checked into one place at a time.
+ * 2. checkOut(int id, string stationName, int t)
+ * A customer with id card equal to id, gets out from the station stationName at time t.
+ * 3. getAverageTime(string startStation, string endStation)
+ * Returns the average time to travel between the startStation and the endStation.
+ * The average time is computed from all the previous traveling from startStation to endStation that happened directly.
+ * Call to getAverageTime is always valid.
+ * You can assume all calls to checkIn and checkOut methods are consistent. That is, if a customer gets in at time t1 at some station, then it gets out at time t2 with t2 &gt; t1. All events happen in chronological order.
+ *
+ * Example 1:
+ * Input
+ * ["UndergroundSystem","checkIn","checkIn","checkIn","checkOut","checkOut","checkOut","getAverageTime","getAverageTime","checkIn","getAverageTime","checkOut","getAverageTime"]
+ * [[],[45,"Leyton",3],[32,"Paradise",8],[27,"Leyton",10],[45,"Waterloo",15],[27,"Waterloo",20],[32,"Cambridge",22],["Paradise","Cambridge"],["Leyton","Waterloo"],[10,"Leyton",24],["Leyton","Waterloo"],[10,"Waterloo",38],["Leyton","Waterloo"]]
+ * Output
+ * [null,null,null,null,null,null,null,14.0,11.0,null,11.0,null,12.0]
+ *
+ * Explanation
+ * UndergroundSystem undergroundSystem = new UndergroundSystem();
+ * undergroundSystem.checkIn(45, "Leyton", 3);
+ * undergroundSystem.checkIn(32, "Paradise", 8);
+ * undergroundSystem.checkIn(27, "Leyton", 10);
+ * undergroundSystem.checkOut(45, "Waterloo", 15);
+ * undergroundSystem.checkOut(27, "Waterloo", 20);
+ * undergroundSystem.checkOut(32, "Cambridge", 22);
+ * undergroundSystem.getAverageTime("Paradise", "Cambridge");       // return 14.0. There was only one travel from "Paradise" (at time 8) to "Cambridge" (at time 22)
+ * undergroundSystem.getAverageTime("Leyton", "Waterloo");          // return 11.0. There were two travels from "Leyton" to "Waterloo", a customer with id=45 from time=3 to time=15 and a customer with id=27 from time=10 to time=20. So the average time is ( (15-3) + (20-10) ) / 2 = 11.0
+ * undergroundSystem.checkIn(10, "Leyton", 24);
+ * undergroundSystem.getAverageTime("Leyton", "Waterloo");          // return 11.0
+ * undergroundSystem.checkOut(10, "Waterloo", 38);
+ * undergroundSystem.getAverageTime("Leyton", "Waterloo");          // return 12.0
+ *
+ * Constraints:
+ * There will be at most 20000 operations.
+ * 1 &lt;= id, t &lt;= 10^6
+ * All strings consist of uppercase, lowercase English letters and digits.
+ * 1 &lt;= stationName.length &lt;= 10
+ * Answers within 10^-5 of the actual value will be accepted as correct.
+ * */</comment>
+<class><specifier>public</specifier> class <name>_1396</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <class><specifier>public</specifier> class <name>UndergroundSystem</name> <block>{
+
+            <class>class <name>StationAndTime</name> <block>{
+                <decl_stmt><decl><type><name>String</name></type> <name>stationName</name></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>t</name></decl>;</decl_stmt>
+
+                <constructor><specifier>public</specifier> <name>StationAndTime</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>stationName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>stationName</name></name> <operator>=</operator> <name>stationName</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>this</name><operator>.</operator><name>t</name></name> <operator>=</operator> <name>t</name></expr>;</expr_stmt>
+                </block_content>}</block></constructor>
+
+                <function><type><specifier>public</specifier> <name>String</name></type> <name>getStation</name><parameter_list>()</parameter_list> <block>{<block_content>
+                    <return>return <expr><name><name>this</name><operator>.</operator><name>stationName</name></name></expr>;</return>
+                </block_content>}</block></function>
+
+                <function><type><specifier>public</specifier> <name>int</name></type> <name>getTime</name><parameter_list>()</parameter_list> <block>{<block_content>
+                    <return>return <expr><name><name>this</name><operator>.</operator><name>t</name></name></expr>;</return>
+                </block_content>}</block></function>
+            }</block></class>
+
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>String</name></argument>, <argument><name><name>double</name><index>[]</index></name></argument>&gt;</argument_list></name></type> <name>averageTimeMap</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name><name>LinkedList</name><argument_list type="generic">&lt;<argument><name>StationAndTime</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>travelerMap</name> <init>= <expr><operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+
+            <constructor><specifier>public</specifier> <name>UndergroundSystem</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name>averageTimeMap</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>travelerMap</name> <operator>=</operator> <operator>new</operator> <call><name><name>HashMap</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>checkIn</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>id</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>stationName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>travelerMap</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>id</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>travelerMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>id</name></expr></argument>, <argument><expr><operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;&gt;</argument_list></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>travelerMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>id</name></expr></argument>)</argument_list></call><operator>.</operator><call><name>add</name><argument_list>(<argument><expr><operator>new</operator> <call><name>StationAndTime</name><argument_list>(<argument><expr><name>stationName</name></expr></argument>, <argument><expr><name>t</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>checkOut</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>id</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>stationName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name><name>LinkedList</name><argument_list type="generic">&lt;<argument><name>StationAndTime</name></argument>&gt;</argument_list></name></type> <name>list</name> <init>= <expr><call><name><name>travelerMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>id</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>StationAndTime</name></type> <name>stationAndTime</name> <init>= <expr><call><name><name>list</name><operator>.</operator><name>getLast</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>String</name></type> <name>startToEndStation</name> <init>= <expr><call><name><name>stationAndTime</name><operator>.</operator><name>getStation</name></name><argument_list>()</argument_list></call> <operator>+</operator> <literal type="string">"-&gt;"</literal> <operator>+</operator> <name>stationName</name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>duration</name> <init>= <expr><name>t</name> <operator>-</operator> <call><name><name>stationAndTime</name><operator>.</operator><name>getTime</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name><name>averageTimeMap</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>startToEndStation</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>averageTimeMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>startToEndStation</name></expr></argument>, <argument><expr><operator>new</operator> <name><name>double</name><index>[]</index></name><block>{<expr><name>duration</name></expr>, <expr><literal type="number">1</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <decl_stmt><decl><type><name><name>double</name><index>[]</index></name></type> <name>pair</name> <init>= <expr><call><name><name>averageTimeMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>startToEndStation</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>double</name></type> <name>newAverage</name> <init>= <expr><operator>(</operator><name>double</name><operator>)</operator> <operator>(</operator><name><name>pair</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>*</operator> <name><name>pair</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <name>duration</name><operator>)</operator> <operator>/</operator> <operator>(</operator><name>double</name><operator>)</operator> <operator>(</operator><name><name>pair</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>averageTimeMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>startToEndStation</name></expr></argument>, <argument><expr><operator>new</operator> <name><name>double</name><index>[]</index></name><block>{<expr><name>newAverage</name></expr>, <expr><name><name>pair</name><index>[<expr><literal type="number">1</literal></expr>]</index></name> <operator>+</operator> <literal type="number">1</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></function>
+
+            <function><type><specifier>public</specifier> <name>double</name></type> <name>getAverageTime</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>startStation</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>endStation</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>averageTimeMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>startStation</name> <operator>+</operator> <literal type="string">"-&gt;"</literal> <operator>+</operator> <name>endStation</name></expr></argument>)</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class>
+</unit>

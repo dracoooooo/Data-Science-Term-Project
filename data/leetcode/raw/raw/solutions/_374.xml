@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_374.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_374</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * The core problem/trouble to solve this problem is to figure out the problem description: this
+         * API: guess(int num) means to take your guess num and let you know if your guessed num is
+         * bigger or smaller than the answer. That's why if num &gt; target, it returns -1 which means the
+         * target is smaller than your guess!!!
+         */</comment>
+
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>guessNumber</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><name>n</name></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>left</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name>right</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>mid</name> <init>= <expr><name>left</name> <operator>+</operator> <operator>(</operator><name>right</name> <operator>-</operator> <name>left</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>g</name> <init>= <expr><call><name>guess</name><argument_list>(<argument><expr><name>mid</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name>g</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <return>return <expr><name>mid</name></expr>;</return>
+                </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>g</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name>left</name> <operator>=</operator> <name>mid</name></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name>right</name> <operator>=</operator> <name>mid</name></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></while>
+            <if_stmt><if>if <condition>(<expr><call><name>guess</name><argument_list>(<argument><expr><name>left</name></expr></argument>)</argument_list></call> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>left</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <return>return <expr><name>right</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="block" format="javadoc">/**
+         * This is a fake guess method that I wrote just to compile/test, I'll have to change it to
+         * another number other than 6 based on the number to be found.
+         */</comment>
+        <function><type><specifier>private</specifier> <name>int</name></type> <name>guess</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name> <operator>&gt;</operator> <literal type="number">6</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>num</name> <operator>&lt;</operator> <literal type="number">6</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">1</literal></expr>;</return>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_381.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Random</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_381</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+
+        <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>forwardMap</name></decl>;</decl_stmt>
+        <comment type="line">//key is the to-be-inserted number, value is its auto-incremented index</comment>
+        <decl_stmt><decl><type><name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>reverseMap</name></decl>;</decl_stmt><comment type="line">//the other way around</comment>
+        <decl_stmt><decl><type><name>int</name></type> <name>index</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Random</name></type> <name>rand</name></decl>;</decl_stmt>
+
+        <comment type="block" format="javadoc">/**
+         * Initialize your data structure here.
+         */</comment>
+        <constructor><specifier>public</specifier> <name>Solution1</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>forwardMap</name> <operator>=</operator> <operator>new</operator> <call><name>HashMap</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>reverseMap</name> <operator>=</operator> <operator>new</operator> <call><name>HashMap</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>index</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>rand</name> <operator>=</operator> <operator>new</operator> <call><name>Random</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></constructor>
+
+        <comment type="block" format="javadoc">/**
+         * Inserts a value to the collection. Returns true if the collection did not already contain the
+         * specified element.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>insert</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>contains</name></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>reverseMap</name><operator>.</operator><name>containsValue</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>contains</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name>contains</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><call><name><name>forwardMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>,
+                    <argument><expr><name>index</name></expr></argument>)</argument_list></call></expr>;</expr_stmt><comment type="line">//this will overwrite the preivous key with a new index if the key already exists</comment>
+            <expr_stmt><expr><call><name><name>reverseMap</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>, <argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>index</name><operator>++</operator></expr>;</expr_stmt>
+            <return>return <expr><name>contains</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="block" format="javadoc">/**
+         * Removes a value from the collection. Returns true if the collection contained the specified
+         * element.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>remove</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>boolean</name></type> <name>contains</name></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name><name>reverseMap</name><operator>.</operator><name>containsValue</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>contains</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><call><name><name>forwardMap</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>forwardMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+                    <expr_stmt><expr><call><name><name>forwardMap</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>reverseMap</name><operator>.</operator><name>remove</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <comment type="line">//remove the entry in revserve map that has val as its value</comment>
+                    <expr_stmt><expr><call><name><name>reverseMap</name><operator>.</operator><name>values</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>remove</name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></if> <else>else <block>{<block_content>
+                <expr_stmt><expr><name>contains</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <return>return <expr><name>contains</name></expr>;</return>
+        </block_content>}</block></function>
+
+        <comment type="block" format="javadoc">/**
+         * Get a random element from the collection.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>getRandom</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>randNum</name> <init>= <expr><call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>reverseMap</name><operator>.</operator><name>containsKey</name></name><argument_list>(<argument><expr><name>randNum</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><name>randNum</name> <operator>=</operator> <call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><name>index</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><call><name><name>reverseMap</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><name>randNum</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

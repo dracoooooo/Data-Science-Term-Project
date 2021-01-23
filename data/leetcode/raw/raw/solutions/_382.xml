@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_382.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>HashMap</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Map</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Random</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_382</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution</name> <block>{
+        <decl_stmt><decl><type><specifier>private</specifier> <name><name>Map</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>, <argument><name>ListNode</name></argument>&gt;</argument_list></name></type> <name>map</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><specifier>private</specifier> <name>Random</name></type> <name>rand</name></decl>;</decl_stmt>
+
+        <comment type="block" format="javadoc">/**
+         * @param head The linked list's head. Note that the head is guanranteed to be not null, so it contains at least one node.
+         */</comment>
+        <constructor><specifier>public</specifier> <name>Solution</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <expr_stmt><expr><name>map</name> <operator>=</operator> <operator>new</operator> <call><name>HashMap</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>rand</name> <operator>=</operator> <operator>new</operator> <call><name>Random</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>head</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <expr_stmt><expr><call><name><name>map</name><operator>.</operator><name>put</name></name><argument_list>(<argument><expr><name>i</name><operator>++</operator></expr></argument>, <argument><expr><name>head</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>head</name> <operator>=</operator> <name><name>head</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+        </block_content>}</block></constructor>
+
+        <comment type="block" format="javadoc">/**
+         * Returns a random node's value.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>getRandom</name><parameter_list>()</parameter_list> <block>{<block_content>
+            <return>return <expr><call><name><name>map</name><operator>.</operator><name>get</name></name><argument_list>(<argument><expr><call><name><name>rand</name><operator>.</operator><name>nextInt</name></name><argument_list>(<argument><expr><call><name><name>map</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>.</operator><name>val</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+
+</unit>

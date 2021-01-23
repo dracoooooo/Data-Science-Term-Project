@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_362.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_362</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <class><specifier>public</specifier> <specifier>static</specifier> class <name>HitCounter</name> <block>{
+            <comment type="block" format="javadoc">/**
+             * Reference: https://discuss.leetcode.com/topic/48758/super-easy-design-o-1-hit-o-s-gethits-no-fancy-data-structure-is-needed,
+             * I added one more field k to make it more generic.
+             * It basically maintains a window of size 300, use modular to update the index.
+             */</comment>
+            <decl_stmt><decl><type><specifier>private</specifier> <name><name>int</name><index>[]</index></name></type> <name>times</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>private</specifier> <name><name>int</name><index>[]</index></name></type> <name>hits</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>private</specifier> <name>int</name></type> <name>k</name></decl>;</decl_stmt>
+
+            <comment type="block" format="javadoc">/**
+             * Initialize your data structure here.
+             */</comment>
+            <constructor><specifier>public</specifier> <name>HitCounter</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name>k</name> <operator>=</operator> <literal type="number">300</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>times</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><name>k</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>hits</name> <operator>=</operator> <operator>new</operator> <name><name>int</name><index>[<expr><name>k</name></expr>]</index></name></expr>;</expr_stmt>
+            </block_content>}</block></constructor>
+
+            <comment type="block" format="javadoc">/**
+             * Record a hit.
+             *
+             * @param timestamp - The current timestamp (in seconds granularity).
+             */</comment>
+            <function><type><specifier>public</specifier> <name>void</name></type> <name>hit</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>timestamp</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>index</name> <init>= <expr><name>timestamp</name> <operator>%</operator> <name>k</name></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>times</name><index>[<expr><name>index</name></expr>]</index></name> <operator>!=</operator> <name>timestamp</name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>times</name><index>[<expr><name>index</name></expr>]</index></name> <operator>=</operator> <name>timestamp</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>hits</name><index>[<expr><name>index</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                </block_content>}</block></if> <else>else <block>{<block_content>
+                    <expr_stmt><expr><name><name>hits</name><index>[<expr><name>index</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>
+            </block_content>}</block></function>
+
+            <comment type="block" format="javadoc">/**
+             * Return the number of hits in the past 5 minutes.
+             *
+             * @param timestamp - The current timestamp (in seconds granularity).
+             */</comment>
+            <function><type><specifier>public</specifier> <name>int</name></type> <name>getHits</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>timestamp</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>total</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>k</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>timestamp</name> <operator>-</operator> <name><name>times</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&lt;</operator> <name>k</name></expr>)</condition> <block>{<block_content>
+                        <expr_stmt><expr><name>total</name> <operator>+=</operator> <name><name>hits</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                </block_content>}</block></for>
+                <return>return <expr><name>total</name></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class></unit>

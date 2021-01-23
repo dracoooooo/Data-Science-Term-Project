@@ -2,13 +2,13 @@ import os
 import pickle
 import random
 import re
-
 import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 import matplotlib.pyplot as plt
+from tensorflow.python.keras.models import load_model
 # 使用神经网络进行代码语言分类
 
 # 代码文件数量：
@@ -17,7 +17,6 @@ import matplotlib.pyplot as plt
 # js: 2099
 # c&cpp: 1570
 # 每种语言取1000份代码作为训练集，500份代码作为验证集
-from tensorflow.python.keras.models import load_model
 java_path = "../../data/java"
 python_path = "../../data/python"
 js_path = "../../data/javascript"
@@ -237,7 +236,7 @@ def train():
     model.save('language_classifier.h5')
 
 
-def soft_max(arr):
+def one_hot(arr):
     max1 = max(arr)
     ret = []
     for i in arr:
@@ -254,7 +253,7 @@ def predict(path):
     test = handle_user_data(path)
     prediction = model.predict(test)
     tmp = prediction[0]
-    int_tmp = soft_max(tmp)
+    int_tmp = one_hot(tmp)
     lang = ""
     if int_tmp == label["java"]:
         lang = "java"
@@ -269,7 +268,7 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    train()
+    # train()
     # count()
     predict('./code_language_classifier.py')
     predict('../../data/test/java_file1.js')
@@ -279,6 +278,3 @@ if __name__ == "__main__":
     predict('../../data/test/python_file1.java')
     predict('../../data/test/python_file2.js')
     predict('../../data/test/ccpp_file1.cpp')
-
-
-

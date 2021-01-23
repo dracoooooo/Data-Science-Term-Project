@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_9.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_9</name> <block>{
+    <comment type="block" format="javadoc">/**credit: https://discuss.leetcode.com/topic/8090/9-line-accepted-java-code-without-the-need-of-handling-overflow
+     * reversing only half and then compare if they're equal.*/</comment>
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>isPalindrome</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>x</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>x</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>x</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if> <if type="elseif">else if <condition>(<expr><name>x</name> <operator>%</operator> <literal type="number">10</literal> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>reversed</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>x</name> <operator>&gt;</operator> <name>reversed</name></expr>)</condition> <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>digit</name> <init>= <expr><name>x</name> <operator>%</operator> <literal type="number">10</literal></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>reversed</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>reversed</name> <operator>+=</operator> <name>digit</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>x</name> <operator>/=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <return>return <expr><operator>(</operator><name>x</name> <operator>==</operator> <name>reversed</name> <operator>||</operator> <name>x</name> <operator>==</operator> <name>reversed</name> <operator>/</operator> <literal type="number">10</literal><operator>)</operator></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

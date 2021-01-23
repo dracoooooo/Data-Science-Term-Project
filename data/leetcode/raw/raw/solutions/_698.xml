@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_698.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_698</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>boolean</name></type> <name>canPartitionKSubsets</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>sum</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>num</name> <range>: <expr><name>nums</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name>num</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <if_stmt><if>if <condition>(<expr><name>sum</name> <operator>%</operator> <name>k</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>equalSum</name> <init>= <expr><operator>(</operator><name>int</name><operator>)</operator> <operator>(</operator><name>sum</name> <operator>/</operator> <name>k</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>visited</name> <init>= <expr><operator>new</operator> <name><name>boolean</name><index>[<expr><name><name>nums</name><operator>.</operator><name>length</name></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <return>return <expr><call><name>canPartition</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>visited</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>k</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>equalSum</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+
+        <function><type><specifier>private</specifier> <name>boolean</name></type> <name>canPartition</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name><name>boolean</name><index>[]</index></name></type> <name>visited</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>startIndex</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>currSum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>currNum</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>k</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>currSum</name> <operator>==</operator> <name>target</name> <operator>&amp;&amp;</operator> <name>currNum</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <comment type="block" format="javadoc">/**Everytime when we get currSum == target, we'll start from index 0 and look up the numbers that are not used yet
+                 * and try to find another sum that could equal to target*/</comment>
+                <return>return <expr><call><name>canPartition</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>visited</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>k</name> <operator>-</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>target</name></expr></argument>)</argument_list></call></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><name>startIndex</name></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>nums</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>visited</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition> <block>{<block_content>
+                    <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+                    <if_stmt><if>if <condition>(<expr><call><name>canPartition</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>visited</name></expr></argument>, <argument><expr><name>i</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>k</name></expr></argument>, <argument><expr><name>currSum</name> <operator>+</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>currNum</name><operator>++</operator></expr></argument>, <argument><expr><name>target</name></expr></argument>)</argument_list></call></expr>)</condition> <block>{<block_content>
+                        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+                    </block_content>}</block></if></if_stmt>
+                    <expr_stmt><expr><name><name>visited</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+}</block></class>
+</unit>

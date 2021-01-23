@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_116.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeLinkNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_116</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/1106/o-1-space-o-n-complexity-iterative-solution
+         * based on level order traversal
+         */</comment>
+        <function><type><specifier>public</specifier> <name>void</name></type> <name>connect</name><parameter_list>(<parameter><decl><type><name>TreeLinkNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+
+            <decl_stmt><decl><type><name>TreeLinkNode</name></type> <name>head</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt> <comment type="line">//head of the next level</comment>
+            <decl_stmt><decl><type><name>TreeLinkNode</name></type> <name>prev</name> <init>= <expr><literal type="null">null</literal></expr></init></decl>;</decl_stmt> <comment type="line">//the leading node on the next level</comment>
+            <decl_stmt><decl><type><name>TreeLinkNode</name></type> <name>curr</name> <init>= <expr><name>root</name></expr></init></decl>;</decl_stmt>  <comment type="line">//current node of current level</comment>
+
+            <while>while <condition>(<expr><name>curr</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <while>while <condition>(<expr><name>curr</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content> <comment type="line">//iterate on the current level</comment>
+                    <comment type="line">//left child</comment>
+                    <if_stmt><if>if <condition>(<expr><name><name>curr</name><operator>.</operator><name>left</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><name>prev</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name><name>prev</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>left</name></name></expr>;</expr_stmt>
+                        </block_content>}</block></if> <else>else <block>{<block_content>
+                            <expr_stmt><expr><name>head</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>left</name></name></expr>;</expr_stmt>
+                        </block_content>}</block></else></if_stmt>
+                        <expr_stmt><expr><name>prev</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>left</name></name></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <comment type="line">//right child</comment>
+                    <if_stmt><if>if <condition>(<expr><name><name>curr</name><operator>.</operator><name>right</name></name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><name>prev</name> <operator>!=</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                            <expr_stmt><expr><name><name>prev</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+                        </block_content>}</block></if> <else>else <block>{<block_content>
+                            <expr_stmt><expr><name>head</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+                        </block_content>}</block></else></if_stmt>
+                        <expr_stmt><expr><name>prev</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+                    </block_content>}</block></if></if_stmt>
+                    <comment type="line">//move to next node</comment>
+                    <expr_stmt><expr><name>curr</name> <operator>=</operator> <name><name>curr</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                </block_content>}</block></while>
+                <comment type="line">//move to next level</comment>
+                <expr_stmt><expr><name>curr</name> <operator>=</operator> <name>head</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>head</name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>prev</name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+            </block_content>}</block></while>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

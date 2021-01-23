@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_156.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>TreeNode</name></name>;</import>
+
+<comment type="block" format="javadoc">/**
+ * 156. Binary Tree Upside Down
+ *
+ * Given a binary tree where all the right nodes are either leaf nodes with a sibling
+ * (a left node that shares the same parent node) or empty,
+ * flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
+
+ For example:
+ Given a binary tree {1,2,3,4,5},
+    1
+   / \
+  2  3
+ / \
+4   5
+
+ return the root of the binary tree [4,5,2,#,#,3,1].
+    4
+   / \
+  5  2
+    / \
+   3  1
+
+ confused what "{1,#,2,3}" means? &gt; read more on how binary tree is serialized on OJ.
+ */</comment>
+<class><specifier>public</specifier> class <name>_156</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <function><type><specifier>public</specifier> <name>TreeNode</name></type> <name>upsideDownBinaryTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>root</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>root</name><operator>.</operator><name>left</name></name> <operator>==</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <name><name>root</name><operator>.</operator><name>right</name></name> <operator>==</operator> <literal type="null">null</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>root</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>TreeNode</name></type> <name>newRoot</name> <init>= <expr><call><name>upsideDownBinaryTree</name><argument_list>(<argument><expr><name><name>root</name><operator>.</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>left</name></name> <operator>=</operator> <name><name>root</name><operator>.</operator><name>right</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name><operator>.</operator><name>right</name></name> <operator>=</operator> <name>root</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>root</name><operator>.</operator><name>left</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>root</name><operator>.</operator><name>right</name></name> <operator>=</operator> <literal type="null">null</literal></expr>;</expr_stmt>
+            <return>return <expr><name>newRoot</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

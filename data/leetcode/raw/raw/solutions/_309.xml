@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_309.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_309</name> <block>{
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * The series of problems are typical dp. The key for dp is to find the variables to
+         * represent the states and deduce the transition function.
+         *
+         * Of course one may come up with a O(1) space solution directly, but I think it is better
+         * to be generous when you think and be greedy when you implement.
+         *
+         * The natural states for this problem is the 3 possible transactions : buy, sell, rest.
+         * Here rest means no transaction on that day (aka cooldown).
+         *
+         * Then the transaction sequences can end with any of these three states.
+         *
+         * For each of them we make an array, buy[n], sell[n] and rest[n].
+         *
+         * buy[i] means before day i what is the maxProfit for any sequence end with buy.
+         *
+         * sell[i] means before day i what is the maxProfit for any sequence end with sell.
+         *
+         * rest[i] means before day i what is the maxProfit for any sequence end with rest.
+         *
+         * Then we want to deduce the transition functions for buy sell and rest. By definition we
+         * have:
+         *
+         * buy[i] = max(rest[i-1]-price, buy[i-1])
+         * sell[i] = max(buy[i-1]+price, sell[i-1])
+         * rest[i] = max(sell[i-1], buy[i-1], rest[i-1])
+         *
+         * Where price is the price of day i. All of these are very straightforward. They simply represents :
+         *
+         * (1) We have to `rest` before we `buy` and
+         * (2) we have to `buy` before we `sell`
+         * One tricky point is how do you make sure you sell before you buy, since from the equations it seems that [buy, rest, buy] is entirely possible.
+         *
+         * Well, the answer lies within the fact that buy[i] &lt;= rest[i] which means rest[i] =
+         * max(sell[i-1], rest[i-1]). That made sure [buy, rest, buy] is never occurred.
+         *
+         * A further observation is that and rest[i] &lt;= sell[i] is also true therefore
+         *
+         * rest[i] = sell[i-1] Substitute this in to buy[i] we now have 2 functions instead of 3:
+         *
+         * buy[i] = max(sell[i-2]-price, buy[i-1]) sell[i] = max(buy[i-1]+price, sell[i-1]) This is
+         * better than 3, but
+         *
+         * we can do even better
+         *
+         * Since states of day i relies only on i-1 and i-2 we can reduce the O(n) space to O(1).
+         * And here we are at our final solution:
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>maxProfit</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>sell</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>prevSell</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>buy</name> <init>= <expr><name><name>Integer</name><operator>.</operator><name>MIN_VALUE</name></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>prevBuy</name></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>price</name> <range>: <expr><name>prices</name></expr></range></decl></init>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>prevBuy</name> <operator>=</operator> <name>buy</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>buy</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>prevSell</name> <operator>-</operator> <name>price</name></expr></argument>, <argument><expr><name>prevBuy</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>prevSell</name> <operator>=</operator> <name>sell</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>sell</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>prevBuy</name> <operator>+</operator> <name>price</name></expr></argument>, <argument><expr><name>prevSell</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>sell</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution2</name> <block>{
+        <comment type="block" format="javadoc">/**Surprisingly, this solution is even much faster than the one above provided by the author.*/</comment>
+        <comment type="block" format="javadoc">/**
+         * Here I share my no brainer weapon when it comes to this kind of problems.
+         *
+         * 1. Define States
+         *
+         * To represent the decision at index i:
+         *
+         * buy[i]: Max profit till index i. The series of transaction is ending with a buy.
+         * sell[i]: Max profit till index i. The series of transaction is ending with a sell.
+         *
+         * 2. Define Recursion
+         *
+         * buy[i]: To make a decision whether to buy at i, we either take a rest, by just using the
+         * old decision at i - 1, or sell at/before i - 2, then buy at i, We cannot sell at i - 1,
+         * then buy at i, because of cooldown.
+         * sell[i]: To make a decision whether to sell at i, we either take a rest, by just using the old decision at i - 1,
+         * or buy at/before i - 1, then sell at i.
+         *
+         * So we get the following formula:
+         *
+         * buy[i] = Math.max(buy[i - 1], sell[i - 2] - prices[i]);
+         * sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
+         *
+         * 3. Optimize to O(1) Space
+         *
+         * DP solution only depending on i - 1 and i - 2 can be optimized using O(1) space.
+         *
+         * Let b2, b1, b0 represent buy[i - 2], buy[i - 1], buy[i]
+         * Let s2, s1, s0 represent sell[i - 2], sell[i - 1], sell[i]
+         *
+         * Then arrays turn into Fibonacci like recursion:
+         *
+         * b0 = Math.max(b1, s2 - prices[i]);
+         * s0 = Math.max(s1, b1 + prices[i]);
+         *
+         * 4. Write Code in 5 Minutes
+         *
+         * First we define the initial states at i = 0:
+         *
+         * We can buy. The max profit at i = 0 ending with a buy is -prices[0].
+         * We cannot sell. The max profit at i = 0 ending with a sell is 0.
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>maxProfit</name><parameter_list>(<parameter><decl><type><name><name>int</name><index>[]</index></name></type> <name>prices</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>prices</name> <operator>==</operator> <literal type="null">null</literal> <operator>||</operator> <name><name>prices</name><operator>.</operator><name>length</name></name> <operator>&lt;=</operator> <literal type="number">1</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><literal type="number">0</literal></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+
+            <decl_stmt><decl><type><name>int</name></type> <name>b0</name> <init>= <expr><operator>-</operator><name><name>prices</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>b1</name> <init>= <expr><name>b0</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>b2</name> <init>= <expr><name>b0</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>s0</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>s1</name> <init>= <expr><name>s0</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>s2</name> <init>= <expr><name>s0</name></expr></init></decl>;</decl_stmt>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name><name>prices</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>b0</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>b1</name></expr></argument>, <argument><expr><name>s2</name> <operator>-</operator> <name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>s0</name> <operator>=</operator> <call><name><name>Math</name><operator>.</operator><name>max</name></name><argument_list>(<argument><expr><name>s1</name></expr></argument>, <argument><expr><name>b1</name> <operator>+</operator> <name><name>prices</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>b2</name> <operator>=</operator> <name>b1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>b1</name> <operator>=</operator> <name>b0</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>s2</name> <operator>=</operator> <name>s1</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>s1</name> <operator>=</operator> <name>s0</name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <return>return <expr><name>s0</name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

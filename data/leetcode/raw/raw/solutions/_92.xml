@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_92.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>common</name><operator>.</operator><name>classes</name><operator>.</operator><name>ListNode</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_92</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * credit: https://discuss.leetcode.com/topic/8976/simple-java-solution-with-clear-explanation
+         */</comment>
+        <function><type><specifier>public</specifier> <name>ListNode</name></type> <name>reverseBetween</name><parameter_list>(<parameter><decl><type><name>ListNode</name></type> <name>head</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <comment type="line">// use four nodes, pre, start, then, dummy</comment>
+            <comment type="line">// just reverse the nodes along the way</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>dummy</name> <init>= <expr><operator>new</operator> <call><name>ListNode</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>dummy</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>head</name></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>pre</name> <init>= <expr><name>dummy</name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>m</name> <operator>-</operator> <literal type="number">1</literal></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <expr_stmt><expr><name>pre</name> <operator>=</operator> <name><name>pre</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>start</name> <init>= <expr><name><name>pre</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt><comment type="line">// start is the node prior to reversing, in the given example,</comment>
+            <comment type="line">// start is node with value 1</comment>
+            <decl_stmt><decl><type><name>ListNode</name></type> <name>then</name> <init>= <expr><name><name>start</name><operator>.</operator><name>next</name></name></expr></init></decl>;</decl_stmt><comment type="line">// then is the node that we'll start to reverse, in the given</comment>
+            <comment type="line">// example, it's 2</comment>
+
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name> <operator>&lt;</operator> <name>n</name> <operator>-</operator> <name>m</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control> <block>{<block_content>
+                <comment type="line">// pay special attention to this for loop, it's assigning then.next to start.next, it</comment>
+                <comment type="line">// didn't initialize a new node</comment>
+                <comment type="line">// this does exactly what I desired to do, but I just didn't figure out how to implement</comment>
+                <comment type="line">// it, thumbs up to the OP!</comment>
+                <expr_stmt><expr><name><name>start</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>then</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>then</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name><name>pre</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>pre</name><operator>.</operator><name>next</name></name> <operator>=</operator> <name>then</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>then</name> <operator>=</operator> <name><name>start</name><operator>.</operator><name>next</name></name></expr>;</expr_stmt>
+            </block_content>}</block></for>
+
+            <return>return <expr><name><name>dummy</name><operator>.</operator><name>next</name></name></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

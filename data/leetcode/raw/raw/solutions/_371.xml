@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_371.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<class><specifier>public</specifier> class <name>_371</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <comment type="block" format="javadoc">/**
+         * reference: http://stackoverflow.com/questions/9070937/adding-two-numbers-without-operator-clarification
+         */</comment>
+        <function><type><specifier>public</specifier> <name>int</name></type> <name>getSum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>)</parameter_list> <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>b</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                <return>return <expr><name>a</name></expr>;</return>
+            </block_content>}</block></if></if_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><name>a</name> <operator>^</operator> <name>b</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>carry</name> <init>= <expr><operator>(</operator><name>a</name> <operator>&amp;</operator> <name>b</name><operator>)</operator> <operator>&lt;&lt;</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <return>return <expr><call><name>getSum</name><argument_list>(<argument><expr><name>sum</name></expr></argument>, <argument><expr><name>carry</name></expr></argument>)</argument_list></call></expr>;</return>
+        </block_content>}</block></function>
+    }</block></class>
+}</block></class>
+</unit>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="Java" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode\raw\solutions\_251.java"><package>package <name><name>com</name><operator>.</operator><name>fishercoder</name><operator>.</operator><name>solutions</name></name>;</package>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Iterator</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>LinkedList</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>List</name></name>;</import>
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Queue</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>_251</name> <block>{
+
+    <class><specifier>public</specifier> <specifier>static</specifier> class <name>Solution1</name> <block>{
+        <class>class <name>Vector2D</name> <super_list><implements>implements <super><name><name>Iterator</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></super></implements></super_list> <block>{
+            <decl_stmt><decl><type><specifier>private</specifier> <name><name>Queue</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>cache</name></decl>;</decl_stmt>
+            <decl_stmt><decl><type><specifier>private</specifier> <name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>vec2d</name></decl>;</decl_stmt>
+
+            <constructor><specifier>public</specifier> <name>Vector2D</name><parameter_list>(<parameter><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></argument>&gt;</argument_list></name></type> <name>vec2d</name></decl></parameter>)</parameter_list> <block>{<block_content>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>vec2d</name></name> <operator>=</operator> <name>vec2d</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>this</name><operator>.</operator><name>cache</name></name> <operator>=</operator> <operator>new</operator> <call><name><name>LinkedList</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>vec2d</name> <operator>!=</operator> <literal type="null">null</literal> <operator>&amp;&amp;</operator> <call><name><name>vec2d</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition> <block>{<block_content>
+                    <for>for <control>(<init><decl><type><name><name>List</name><argument_list type="generic">&lt;<argument><name>Integer</name></argument>&gt;</argument_list></name></type> <name>list</name> <range>: <expr><name>vec2d</name></expr></range></decl></init>)</control> <block>{<block_content>
+                        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <range>: <expr><name>list</name></expr></range></decl></init>)</control> <block>{<block_content>
+                            <expr_stmt><expr><call><name><name>cache</name><operator>.</operator><name>offer</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        </block_content>}</block></for>
+                    </block_content>}</block></for>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></constructor>
+
+            <function><annotation>@<name>Override</name></annotation>
+            <type><specifier>public</specifier> <name>Integer</name></type> <name>next</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <return>return <expr><call><name><name>cache</name><operator>.</operator><name>poll</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+
+            <function><annotation>@<name>Override</name></annotation>
+            <type><specifier>public</specifier> <name>boolean</name></type> <name>hasNext</name><parameter_list>()</parameter_list> <block>{<block_content>
+                <return>return <expr><operator>!</operator><call><name><name>cache</name><operator>.</operator><name>isEmpty</name></name><argument_list>()</argument_list></call></expr>;</return>
+            </block_content>}</block></function>
+        }</block></class>
+    }</block></class>
+}</block></class></unit>
