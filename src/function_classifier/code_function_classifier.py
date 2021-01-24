@@ -2,6 +2,7 @@ import os
 import pickle
 import random
 import re
+import sys
 
 import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
@@ -116,7 +117,7 @@ def creat_ast_xml():
 # 提取特征————词袋模型
 # 单个文件
 def get_feature_bag_of_word(path):
-    f1 = open('tokenizer_bow.pkl', 'rb')
+    f1 = open(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'tokenizer_bow.pkl', 'rb')
     tokenizer = pickle.load(f1)
     f1.close()
     code = code2text(path)
@@ -297,7 +298,7 @@ def train_once():
 
 def predict(path):
     feature = get_feature_bag_of_word(path)
-    model = load_model('function_classifier.h5')
+    model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'function_classifier.h5')
     prediction = model.predict([feature])[0]
     tmp = clc.one_hot(prediction)
     clazz = ""
