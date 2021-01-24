@@ -39,6 +39,7 @@ raw_path = "../../data/leetcode/raw"
 features = 1000
 data_path = "../../data/leetcode"
 
+cpp_data_path = '../../data/leetcode_cpp'
 
 def file_paths(data_path, language):
     ret = []
@@ -61,11 +62,7 @@ def count():
     dp = load_data(dp_path, "java")
     raw = load_data(raw_path, "java")
 
-    # print(array.__len__())
-    # print(math.__len__())
-    # print(search.__len__())
     print(sort.__len__())
-    # print(string.__len__())
     print(tree.__len__())
     print(dp.__len__())
     print(raw.__len__())

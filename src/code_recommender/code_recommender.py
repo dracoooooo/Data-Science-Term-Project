@@ -12,6 +12,11 @@ file_name = "input_file.txt"
 model_abs_path = os.path.abspath('../languange_classifier/language_classifier.h5')
 language_tokenizer_path = os.path.abspath('../languange_classifier/tokenizer.pkl')
 
+data_path_dict = {"java" : os.path.abspath('../../data/leetcode'),
+                  "cpp" : os.path.abspath('../../data/leetcode_cpp')
+                  }
+
+
 def recommend_code(source_text):
     file_path = os.path.join(input_file_path, file_name)
     creat_file(file_path, source_text)
@@ -28,6 +33,8 @@ def evaluate_func(path, language):
         pass
     elif language == 'cpp':
         pass
+
+
 
 
 def creat_file(file_path, source_text):
