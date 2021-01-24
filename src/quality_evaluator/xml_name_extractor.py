@@ -39,5 +39,5 @@ def find_names(root):
 
 
 if __name__ =="__main__":
-    print(search__names('../test','Game.xml'));
+    print(search__names('../../test', 'Game.xml'));
 

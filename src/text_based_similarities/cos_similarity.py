@@ -1,4 +1,3 @@
-from src import code_smell_detector
 from src.text_based_similarities.text_preprocessor import load
 import src.text_based_similarities.text_preprocessor as processor
 import numpy as np

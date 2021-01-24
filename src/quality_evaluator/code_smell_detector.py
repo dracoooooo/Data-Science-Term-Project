@@ -1,8 +1,8 @@
-from src import xml_name_extractor
+from src.quality_evaluator import xml_name_extractor
 import os
 import re
 from functools import reduce
-java_path = "../test"
+java_path = "../../test"
 file = "Node.java"
 
 def average_name_score(arg_list):
@@ -45,7 +45,7 @@ def load_source_codes(code_path, file_name):
     f = open(abs_path, encoding='UTF-8')
     source_text = f.read();
     f.close()
-    xml_file_name = file_name.replace(".java", ".xml")
+    xml_file_name = file_name[0:file_name.rfind('.')] + ".xml"
     name_list = xml_name_extractor.search__names(code_path, xml_file_name)
     return (source_text,name_list)
 

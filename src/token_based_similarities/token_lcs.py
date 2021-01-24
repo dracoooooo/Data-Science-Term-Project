@@ -58,8 +58,8 @@ def token_cos(path1, path2):
     return cos_similarity.cos_similarity_text(seq1, seq2)
 
 if __name__ == "__main__":
-    # init_tokenizer()
-    path1 = "../../data/leetcode/raw/solutions/_1.java"
+    init_tokenizer()
+    path1 = "../../data/leetcode/raw/solutions/_50.java"
     path2 = "../../data/leetcode/raw/solutions/_2.java"
     similarity = token_cos(path1, path2)
     print(similarity)

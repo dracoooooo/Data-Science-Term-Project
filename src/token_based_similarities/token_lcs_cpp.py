@@ -14,7 +14,7 @@ def init_tokenizer():
     tokenizer = Tokenizer(filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',)
     tokenizer.fit_on_texts(cpp_data)
     # save
-    f = open('tokenizer_lcs.pkl_cpp', 'wb')
+    f = open('tokenizer_lcs_cpp.pkl', 'wb')
     pickle.dump(tokenizer, f)
     f.close()
 
@@ -59,7 +59,7 @@ def token_cos(path1, path2):
 
 if __name__ == "__main__":
     # init_tokenizer()
-    path1 = "../../test/bubblesort."
-    path2 = "../../data/leetcode/raw/solutions/_2.java"
+    path1 = "../../test/bubblesort.cpp"
+    path2 = "../../test/heapsort.cpp"
     similarity = token_cos(path1, path2)
     print(similarity)

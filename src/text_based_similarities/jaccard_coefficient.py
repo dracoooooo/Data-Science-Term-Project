@@ -1,8 +1,6 @@
 import src.text_based_similarities.text_preprocessor as processor
 from src.text_based_similarities.text_preprocessor import load
 
-from src import code_smell_detector
-
 
 # definition : |A∩B|/|A∪B|
 
