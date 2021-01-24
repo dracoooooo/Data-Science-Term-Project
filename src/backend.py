@@ -1,3 +1,5 @@
+from time import sleep
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import src.code_recommender.code_recommender as cr
@@ -54,17 +56,17 @@ def get3code():
         code = post_data['code']
         print(code)
         ret = cr.recommend_code(code)
+        print(ret)
         recommends = []
+        recommend = {}
+        print(ret.__len__())
+
         for i in range(ret.__len__()):
-            recommends.append(
-                {
-                    "name": ret[i][0],
-                    "code": ret[i][1],
-                    "similarity": ret[i][2],
-                    "qualiry": ret[i][3]
-                }
-            )
-        ret = {}
+            recommend["name"] = ret[i][0],
+            recommend["code"] = ret[i][1],
+            recommend["similarity"] = ret[i][2],
+            recommend["qualiry"] = ret[i][3]
+            recommends.append(recommend)
         for i in range(recommends.__len__()):
             ret["r" + i] = recommends[i]
         print(ret)
@@ -72,6 +74,6 @@ def get3code():
 
 
 if __name__ == "__main__":
-    ret = cr.recommend_code("dfajklshgksdfg")
-    print(ret)
-    # app.run()
+    # ret = cr.recommend_code("dfajklshgksdfg")
+    # print(ret)
+    app.run()

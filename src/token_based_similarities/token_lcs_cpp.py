@@ -53,6 +53,7 @@ def token_cos(path1, path2):
     # tokenizer = Tokenizer(filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',)
     # tokenizer.fit_on_texts(java_data)
 
+    # 这里有一个问题：如果一段text从未在tokenizer中出现，则cos_similarity的除数是0
     seq1 = tokenizer.texts_to_sequences([text1])[0]
     seq2 = tokenizer.texts_to_sequences([text2])[0]
     return cos_similarity.cos_similarity_text(seq1, seq2)

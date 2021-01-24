@@ -52,7 +52,7 @@ def recommend_code(source_text):
         func_path = get_func_path(func, lang)
         text_sim_list = get_recommend_list_token(func_path, new_file, lang)
         # top_three_ast = get_top_three_ast_sim(text_sim_list, xml_file)
-        top_three =  get_top_three(text_sim_list)
+        top_three = get_top_three(text_sim_list)
         return top_three
     else:
         return "Sorry, we can't recommend code for you"
@@ -71,6 +71,8 @@ def get_top_three(text_sim_list):
         tmp_list = []
         tmp_list.append(l[0])
         tmp_list.append(l[1])
+        tmp_list.append(l[2])
+        tmp_list.append(l[3])
         avg = l[2] * 100 * 0.75 + l[3] *0.25
         tmp_list.append(avg)
         new_list.append(tmp_list)
@@ -108,7 +110,7 @@ def get_recommend_list_token(func_path, file, language_label):
     lang = file[file.rfind('.')+1:]
     paths = cfc.file_paths(func_path, lang)
     for path in paths:
-        ans = token_sim[language_label].token_cos(path, file)
+        ans = token_sim[language_label].token_lcs(path, file)
         sim_dict[path] = ans
     sim_dict = sorted(sim_dict.items(), key=lambda d: d[1], reverse=True)
 
