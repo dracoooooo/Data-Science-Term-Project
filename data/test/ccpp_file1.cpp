@@ -1,7 +1,2 @@
-#include <iostream>
-int main(){
-	using namespace std;
-	cout << "hello world"<<endl <<"hello";
-	cin.get();
-	return 0;
-}
+# python hello world
+print("hello world")
