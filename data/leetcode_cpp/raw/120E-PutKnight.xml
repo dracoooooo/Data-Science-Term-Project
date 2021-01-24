@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\120E-PutKnight.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;sstream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ifstream</name></name></type> <name>inputFile</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>inputFile</name><operator>.</operator><name>open</name></name><argument_list>(<argument><expr><literal type="string">"input.txt"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>T</name></decl>;</decl_stmt> <expr_stmt><expr><name>inputFile</name> <operator>&gt;&gt;</operator> <name>T</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>FILE</name> <modifier>*</modifier></type> <name>outputFile</name> <init>= <expr><call><name>fopen</name><argument_list>(<argument><expr><literal type="string">"output.txt"</literal></expr></argument>,<argument><expr><literal type="string">"w"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>T</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>;</decl_stmt> <expr_stmt><expr><name>inputFile</name> <operator>&gt;&gt;</operator> <name>n</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><ternary><condition><expr><operator>(</operator><name>n</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator></expr> ?</condition><then> <expr><literal type="string">"0\n"</literal></expr> </then><else>: <expr><literal type="string">"1\n"</literal></expr></else></ternary></expr></argument>, <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><call><name><name>inputFile</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>fclose</name><argument_list>(<argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

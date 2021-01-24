@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\165B-BurningMidnightOil.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>long</name> <name>long</name></type> <name>totalSum</name><parameter_list>(<parameter><decl><type><name>long</name></type> <name>x</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>d</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <if_stmt><if>if<condition>(<expr><name>d</name> <operator>&lt;=</operator> <literal type="number">1</literal></expr>)</condition><block>{<block_content><return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content>}</block></if></if_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>output</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>currentDivisor</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>currentDivisor</name> <operator>&lt;=</operator> <name>x</name></expr>)</condition><block>{<block_content>
+        <expr_stmt><expr><name>output</name> <operator>+=</operator> <name>x</name> <operator>/</operator> <name>currentDivisor</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>currentDivisor</name> <operator>*=</operator> <name>d</name></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <return>return <expr><name>output</name></expr>;</return>
+</block_content>}</block></function>
+
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>n</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>k</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lld %lld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>k</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>currentMin</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>currentMax</name> <init>= <expr><name>n</name></expr></init></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><name>currentMin</name> <operator>+</operator> <literal type="number">1</literal> <operator>&lt;</operator> <name>currentMax</name></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>currentMid</name> <init>= <expr><operator>(</operator><name>currentMin</name> <operator>+</operator> <name>currentMax</name><operator>)</operator> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>testMid</name> <init>= <expr><call><name>totalSum</name><argument_list>(<argument><expr><name>currentMid</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>testMid</name> <operator>&lt;</operator> <name>n</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>currentMin</name> <operator>=</operator> <name>currentMid</name></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>testMid</name> <operator>&gt;=</operator> <name>n</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>currentMax</name> <operator>=</operator> <name>currentMid</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%lld\n"</literal></expr></argument>, <argument><expr><name>currentMax</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

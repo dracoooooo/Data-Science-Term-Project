@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\185A-Plant.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>long</name> <name>long</name></type> <name>findPower</name><parameter_list>(<parameter><decl><type><name>long</name> <name>long</name></type> <name>base</name></decl></parameter>, <parameter><decl><type><name>long</name> <name>long</name></type> <name>exponent</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <name>unsigned</name> <name>long</name> <name>long</name></type> <name>N</name> <init>= <expr><literal type="number">1000000007</literal></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if<condition>(<expr><name>exponent</name> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><return>return <expr><literal type="number">1</literal></expr>;</return></block_content>}</block></if>
+    <if type="elseif">else if<condition>(<expr><name>exponent</name> <operator>==</operator> <literal type="number">1</literal></expr>)</condition><block>{<block_content><return>return <expr><name>base</name></expr>;</return></block_content>}</block></if>
+    <else>else<block>{<block_content>
+        <decl_stmt><decl><type><name>unsigned</name> <name>long</name> <name>long</name></type> <name>output</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <while>while<condition>(<expr><name>exponent</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>exponent</name> <operator>%</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>output</name> <operator>*=</operator> <name>base</name></expr>;</expr_stmt> <expr_stmt><expr><name>output</name> <operator>%=</operator> <name>N</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>base</name> <operator>*=</operator> <name>base</name></expr>;</expr_stmt> <expr_stmt><expr><name>base</name> <operator>%=</operator> <name>N</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>exponent</name> <operator>/=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>output</name></expr>;</return>
+    </block_content>}</block></else></if_stmt>
+
+    <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+</block_content>}</block></function>
+
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <name>unsigned</name> <name>long</name> <name>long</name></type> <name>N</name> <init>= <expr><literal type="number">1000000007</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>unsigned</name> <name>long</name> <name>long</name></type> <name>n</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>temp</name> <init>= <expr><call><name>findPower</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>, <argument><expr><name>n</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%llu\n"</literal></expr></argument>, <argument><expr><operator>(</operator><operator>(</operator><name>temp</name> <operator>*</operator> <operator>(</operator><literal type="number">1</literal> <operator>+</operator> <name>temp</name><operator>)</operator><operator>)</operator> <operator>/</operator> <literal type="number">2</literal><operator>)</operator> <operator>%</operator> <name>N</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

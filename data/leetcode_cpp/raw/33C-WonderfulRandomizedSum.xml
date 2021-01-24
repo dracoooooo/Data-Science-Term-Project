@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\33C-WonderfulRandomizedSum.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>sum</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>target</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>maxsubsum</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>n</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>a</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>sum</name> <operator>+=</operator> <name>a</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>target</name> <operator>+=</operator> <name>a</name></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><name>target</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>target</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+        <if_stmt><if>if<condition>(<expr><name>target</name> <operator>&gt;</operator> <name>maxsubsum</name></expr> )</condition><block>{<block_content><expr_stmt><expr><name>maxsubsum</name> <operator>=</operator> <name>target</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><literal type="number">2</literal> <operator>*</operator> <name>maxsubsum</name> <operator>-</operator> <name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\24A-RingRoad-old.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;set&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>set</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>first</name></decl>, <decl><type ref="prev"/><name>second</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>totalCost</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>current</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><name>n</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>, <decl><type ref="prev"/><name>c</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>b</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>totalCost</name> <operator>+=</operator> <name>c</name></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><call><name><name>first</name><operator>.</operator><name>count</name></name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call> <operator>||</operator> <call><name><name>second</name><operator>.</operator><name>count</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>)</condition><block>{<block_content><expr_stmt><expr><name>current</name> <operator>+=</operator> <name>c</name></expr>;</expr_stmt> <expr_stmt><expr><call><name><name>first</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><call><name><name>second</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><call><name><name>first</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><call><name><name>second</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    </block_content>}</block></while>
+
+    <if_stmt><if>if<condition>(<expr><name>totalCost</name> <operator>-</operator> <name>current</name> <operator>&lt;</operator> <name>current</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>current</name> <operator>=</operator> <name>totalCost</name> <operator>-</operator> <name>current</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>current</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

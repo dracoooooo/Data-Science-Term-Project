@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\46C-HamstersAndTigers.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>n</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>s</name></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>m</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><name>m</name> <operator>+=</operator> <operator>(</operator><name><name>s</name><index>[<expr><name>p</name></expr>]</index></name> <operator>==</operator> <literal type="char">'H'</literal><operator>)</operator></expr>;</expr_stmt></block_content>}</block></for>
+    <decl_stmt><decl><type><name>long</name></type> <name>minCount</name><argument_list>(<argument><expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>start</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>start</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>start</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>cnt</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><name>cnt</name> <operator>+=</operator> <operator>(</operator><name><name>s</name><index>[<expr><operator>(</operator><name>start</name> <operator>+</operator> <name>p</name><operator>)</operator> <operator>%</operator> <name>n</name></expr>]</index></name> <operator>==</operator> <literal type="char">'T'</literal><operator>)</operator></expr>;</expr_stmt></block_content>}</block></for>
+        <expr_stmt><expr><name>minCount</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>minCount</name> <operator>&lt;</operator> <name>cnt</name><operator>)</operator></expr> ?</condition><then> <expr><name>minCount</name></expr> </then><else>: <expr><name>cnt</name></expr></else></ternary></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>minCount</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\121A-LuckySum.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+<function><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>long</name> <name>long</name></expr></argument>&gt;</argument_list></name></type> <name>findNext</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>long</name> <name>long</name></expr></argument>&gt;</argument_list></name></type> <name>luckyVec</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>bool</name></type> <name>done</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <call><name><name>luckyVec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>luckyVec</name><index>[<expr><name>p</name></expr>]</index></name> <operator>==</operator> <literal type="number">4</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name><name>luckyVec</name><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <literal type="number">7</literal></expr>;</expr_stmt> <expr_stmt><expr><name>done</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <break>break;</break></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name><name>luckyVec</name><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <literal type="number">4</literal></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if<condition>(<expr><operator>!</operator><name>done</name></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name><name>luckyVec</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+
+    <return>return <expr><name>luckyVec</name></expr>;</return>
+</block_content>}</block></function>
+
+
+<function><type><name>long</name> <name>long</name></type> <name>luckyEvaluate</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>long</name> <name>long</name></expr></argument>&gt;</argument_list></name></type> <name>luckyVec</name></decl></parameter>)</parameter_list><block>{<block_content>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>output</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><call><name><name>luckyVec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>p</name><operator>--</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><name>output</name> <operator>=</operator> <literal type="number">10</literal> <operator>*</operator> <name>output</name> <operator>+</operator> <name><name>luckyVec</name><index>[<expr><name>p</name></expr>]</index></name></expr>;</expr_stmt></block_content>}</block></for>
+    <return>return <expr><name>output</name></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>long</name> <name>long</name></expr></argument>&gt;</argument_list></name></type> <name>luckyDigits</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>,<argument><expr><literal type="number">4</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>left</name></decl>, <decl><type ref="prev"/><name>right</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>left</name> <operator>&gt;&gt;</operator> <name>right</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>currentNumber</name> <init>= <expr><name>left</name></expr></init></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><call><name>luckyEvaluate</name><argument_list>(<argument><expr><name>luckyDigits</name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <name>left</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>luckyDigits</name> <operator>=</operator> <call><name>findNext</name><argument_list>(<argument><expr><name>luckyDigits</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></while>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>total</name> <init>= <expr><call><name>luckyEvaluate</name><argument_list>(<argument><expr><name>luckyDigits</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><name>currentNumber</name> <operator>&lt;</operator> <name>right</name></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>currentLucky</name> <init>= <expr><call><name>luckyEvaluate</name><argument_list>(<argument><expr><name>luckyDigits</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>dist</name></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>currentLucky</name> <operator>&lt;</operator> <name>right</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>dist</name> <operator>=</operator> <name>currentLucky</name> <operator>-</operator> <name>currentNumber</name></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>dist</name> <operator>=</operator> <name>right</name> <operator>-</operator> <name>currentNumber</name></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><name>total</name> <operator>+=</operator> <name>currentLucky</name> <operator>*</operator> <name>dist</name></expr>;</expr_stmt>
+        <comment type="line">//std::cout &lt;&lt; "LUCKY:" &lt;&lt; currentLucky &lt;&lt; "\tStart:"&lt;&lt;currentNumber &lt;&lt; "\tEnd:" &lt;&lt; currentLucky &lt;&lt; "\tSum:" &lt;&lt; total &lt;&lt;  std::endl;</comment>
+        <expr_stmt><expr><name>currentNumber</name> <operator>=</operator> <name>currentLucky</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>luckyDigits</name> <operator>=</operator> <call><name>findNext</name><argument_list>(<argument><expr><name>luckyDigits</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>total</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

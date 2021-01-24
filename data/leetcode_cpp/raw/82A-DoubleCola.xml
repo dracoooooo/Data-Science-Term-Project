@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\82A-DoubleCola.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+<using>using <namespace>namespace <name>std</name>;</namespace></using>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></type> <name>names</name> <init>= <expr><block>{<expr><literal type="string">"Sheldon"</literal></expr>, <expr><literal type="string">"Leonard"</literal></expr>, <expr><literal type="string">"Penny"</literal></expr>, <expr><literal type="string">"Rajesh"</literal></expr>, <expr><literal type="string">"Howard"</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>numFriends</name> <init>= <expr><call><name><name>names</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>power</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>,<argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while<condition>(<expr><name>n</name> <operator>&gt;</operator> <name>power</name> <operator>*</operator> <name>numFriends</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>n</name> <operator>-=</operator> <name>power</name> <operator>*</operator> <name>numFriends</name></expr>;</expr_stmt> <expr_stmt><expr><name>power</name> <operator>*=</operator> <literal type="number">2</literal></expr>;</expr_stmt></block_content>}</block></while>
+    <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <name><name>names</name><index>[ <expr><operator>(</operator><name>n</name><operator>-</operator><literal type="number">1</literal><operator>)</operator> <operator>/</operator> <name>power</name></expr>]</index></name> <operator>&lt;&lt;</operator> <name>endl</name></expr>;</expr_stmt> 
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

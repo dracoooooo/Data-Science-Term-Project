@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\146B-LuckyMask.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>long</name></type> <name>luckyMask</name><parameter_list>(<parameter><decl><type><name>long</name></type> <name>input</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>output</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>mult</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>input</name> <operator>&gt;</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name>input</name> <operator>%</operator> <literal type="number">10</literal> <operator>==</operator> <literal type="number">4</literal> <operator>||</operator> <name>input</name> <operator>%</operator> <literal type="number">10</literal>  <operator>==</operator> <literal type="number">7</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>output</name> <operator>+=</operator> <name>mult</name> <operator>*</operator> <operator>(</operator><name>input</name> <operator>%</operator> <literal type="number">10</literal><operator>)</operator></expr>;</expr_stmt> <expr_stmt><expr><name>mult</name> <operator>*=</operator> <literal type="number">10</literal></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>input</name> <operator>/=</operator> <literal type="number">10</literal></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <return>return <expr><name>output</name></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>a</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>b</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld %ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>output</name><argument_list>(<argument><expr><name>a</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><call><name>luckyMask</name><argument_list>(<argument><expr><name>output</name></expr></argument>)</argument_list></call> <operator>!=</operator> <name>b</name></expr>)</condition><block>{<block_content><expr_stmt><expr><operator>++</operator><name>output</name></expr>;</expr_stmt></block_content>}</block></while>
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>output</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

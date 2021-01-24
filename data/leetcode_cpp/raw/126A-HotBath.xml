@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\126A-HotBath.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int64_t</name></type>  <name>t1</name></decl>, <decl><type ref="prev"/><name>t2</name></decl>, <decl><type ref="prev"/><name>x1</name></decl>, <decl><type ref="prev"/><name>x2</name></decl>,<decl><type ref="prev"/><name>t0</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>t1</name> <operator>&gt;&gt;</operator> <name>t2</name> <operator>&gt;&gt;</operator> <name>x1</name> <operator>&gt;&gt;</operator> <name>x2</name> <operator>&gt;&gt;</operator> <name>t0</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>double</name></type> <name>best</name> <init>= <expr><literal type="number">1e15</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int64_t</name></type> <name>y1</name></decl>, <decl><type ref="prev"/><name>y2</name></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>x1</name> <operator>&gt;=</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>x2</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>t</name> <init>= <expr><operator>(</operator><literal type="number">1.0</literal> <operator>*</operator> <name>t1</name> <operator>*</operator> <name>x1</name> <operator>+</operator> <literal type="number">1.0</literal> <operator>*</operator> <name>t2</name> <operator>*</operator> <name>x2</name><operator>)</operator> <operator>/</operator> <operator>(</operator> <literal type="number">1.0</literal> <operator>*</operator> <name>x1</name> <operator>+</operator> <literal type="number">1.0</literal> <operator>*</operator> <name>x2</name><operator>)</operator></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>t</name> <operator>&lt;</operator> <name>t0</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>x1</name><operator>--</operator></expr>;</expr_stmt> <continue>continue;</continue></block_content>}</block></if></if_stmt>
+        <if_stmt><if>if<condition>(<expr><name>t</name> <operator>&lt;</operator> <name>best</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>best</name> <operator>=</operator> <name>t</name></expr>;</expr_stmt> <expr_stmt><expr><name>y1</name> <operator>=</operator> <name>x1</name></expr>;</expr_stmt> <expr_stmt><expr><name>y2</name> <operator>=</operator> <name>x2</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>x2</name><operator>--</operator></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>y1</name> <operator>&lt;&lt;</operator> <literal type="string">" "</literal> <operator>&lt;&lt;</operator> <name>y2</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

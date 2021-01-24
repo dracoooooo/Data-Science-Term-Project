@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\196A-LexicographicallyMaximumSubsequence.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>input</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>getline</name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>cin</name></name></expr></argument>, <argument><expr><name>input</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>output</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>char</name></type> <name>current</name> <init>= <expr><literal type="char">'a'</literal></expr></init></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>p</name><operator>--</operator></expr></incr>)</control><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>input</name><index>[<expr><name>p</name></expr>]</index></name> <operator>&gt;=</operator> <name>current</name></expr>)</condition><block>{<block_content>
+            <expr_stmt><expr><name>output</name> <operator>=</operator> <name><name>input</name><index>[<expr><name>p</name></expr>]</index></name> <operator>+</operator> <name>output</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>current</name> <operator>=</operator> <name><name>input</name><index>[<expr><name>p</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>output</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

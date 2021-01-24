@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\127A-WastedTime.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cmath&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<using>using <namespace>namespace <name>std</name>;</namespace></using>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+    <decl_stmt><decl><type><name>int</name></type> <name>numPoints</name></decl>, <decl><type ref="prev"/><name>numPapers</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>numPoints</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>numPapers</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>double</name></type> <name>distance</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>oldX</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>oldY</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>newX</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>newY</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt> 
+    <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>oldX</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>oldY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while<condition>(<expr><operator>--</operator><name>numPoints</name></expr>)</condition><block>{<block_content>
+        <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>newX</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>newY</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>distance</name> <operator>+=</operator> <call><name>sqrt</name><argument_list>(<argument><expr><operator>(</operator><name>newX</name> <operator>-</operator> <name>oldX</name><operator>)</operator><operator>*</operator><operator>(</operator><name>newX</name> <operator>-</operator> <name>oldX</name><operator>)</operator> <operator>+</operator> <operator>(</operator><name>newY</name> <operator>-</operator> <name>oldY</name><operator>)</operator><operator>*</operator><operator>(</operator><name>newY</name> <operator>-</operator> <name>oldY</name><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>oldX</name> <operator>=</operator> <name>newX</name></expr>;</expr_stmt> <expr_stmt><expr><name>oldY</name> <operator>=</operator> <name>newY</name></expr>;</expr_stmt>
+    </block_content>}</block></while>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>speed</name> <init>= <expr><literal type="number">50</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%.9lf\n"</literal></expr></argument>, <argument><expr><name>numPapers</name> <operator>*</operator> <name>distance</name> <operator>/</operator> <name>speed</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

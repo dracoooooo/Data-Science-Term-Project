@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\167A-WizardsAndTrolleybuses.cpp"><cpp:include>#<cpp:directive>include</cpp:directive><cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive><cpp:file>&lt;cmath&gt;</cpp:file></cpp:include>
+<typedef>typedef <type><name>long</name> <name>long</name></type> <name>ll</name>;</typedef>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>ll</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>a</name></decl>, <decl><type ref="prev"/><name>d</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lld %lld %lld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>d</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>double</name></type> <name>y</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>x</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>n</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>ll</name></type> <name>t</name></decl>, <decl><type ref="prev"/><name>v</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lld %lld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>t</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>v</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <if_stmt><if>if<condition>(<expr><literal type="number">2</literal> <operator>*</operator> <name>d</name> <operator>*</operator> <name>a</name> <operator>&gt;</operator> <name>v</name> <operator>*</operator> <name>v</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>x</name><operator>=</operator><literal type="number">0.5</literal> <operator>*</operator> <name>v</name> <operator>/</operator> <name>a</name> <operator>+</operator> <literal type="number">1.0</literal> <operator>*</operator> <name>d</name> <operator>/</operator> <name>v</name></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>x</name><operator>=</operator><call><name>sqrt</name><argument_list>(<argument><expr><literal type="number">2.0</literal> <operator>*</operator> <name>d</name> <operator>/</operator> <name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+        <expr_stmt><expr><name>x</name> <operator>+=</operator> <name>t</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>y</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>y</name> <operator>&gt;</operator> <name>x</name><operator>)</operator></expr> ?</condition><then> <expr><name>y</name></expr> </then><else>: <expr><name>x</name></expr></else></ternary></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%.5lf\n"</literal></expr></argument>, <argument><expr><name>y</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

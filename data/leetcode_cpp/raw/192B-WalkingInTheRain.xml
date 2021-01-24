@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\192B-WalkingInTheRain.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>first</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>first</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>second</name><argument_list>(<argument><expr><name>first</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>minSoFar</name><argument_list>(<argument><expr><name>first</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>second</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>current</name> <init>= <expr><ternary><condition><expr><operator>(</operator><name>first</name> <operator>&gt;</operator> <name>second</name><operator>)</operator></expr> ?</condition><then> <expr><name>first</name></expr> </then><else>: <expr><name>second</name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>current</name> <operator>&lt;</operator> <name>minSoFar</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>minSoFar</name> <operator>=</operator> <name>current</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><name>first</name> <operator>=</operator> <name>second</name></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <if_stmt><if>if<condition>(<expr><name>second</name> <operator>&lt;</operator> <name>minSoFar</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>minSoFar</name> <operator>=</operator> <name>second</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%d\n"</literal></expr></argument>, <argument><expr><name>minSoFar</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

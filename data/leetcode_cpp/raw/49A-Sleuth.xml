@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\49A-Sleuth.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>question</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>getline</name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>cin</name></name></expr></argument>, <argument><expr><name>question</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><call><name><name>question</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>;</condition> <incr><expr><name>k</name><operator>--</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>current</name> <init>= <expr><call><name><name>std</name><operator>::</operator><name>tolower</name></name><argument_list>(<argument><expr><name><name>question</name><index>[<expr><name>k</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><operator>!</operator><operator>(</operator><name>current</name> <operator>&gt;=</operator> <literal type="char">'a'</literal> <operator>&amp;&amp;</operator> <name>current</name> <operator>&lt;=</operator> <literal type="char">'z'</literal><operator>)</operator></expr>)</condition><block>{<block_content><continue>continue;</continue></block_content>}</block></if></if_stmt>
+        <if_stmt><if>if<condition>(<expr><name>current</name> <operator>==</operator> <literal type="char">'a'</literal> <operator>||</operator> <name>current</name> <operator>==</operator> <literal type="char">'e'</literal> <operator>||</operator> <name>current</name> <operator>==</operator> <literal type="char">'i'</literal> <operator>||</operator> <name>current</name> <operator>==</operator> <literal type="char">'o'</literal> <operator>||</operator> <name>current</name> <operator>==</operator> <literal type="char">'u'</literal> <operator>||</operator> <name>current</name> <operator>==</operator> <literal type="char">'y'</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"YES"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"NO"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+        <break>break;</break>
+    </block_content>}</block></for>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

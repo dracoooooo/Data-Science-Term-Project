@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\15A-CottageVillage.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;algorithm&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>ios_base</name><operator>::</operator><name>sync_with_stdio</name></name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>t</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>n</name> <operator>&gt;&gt;</operator> <name>t</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>, <argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></expr></argument> &gt;</argument_list></name></type> <name>v</name><argument_list>(<argument><expr><name>n</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>x</name></decl>, <decl><type ref="prev"/><name>a</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>x</name> <operator>&gt;&gt;</operator> <name>a</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>v</name><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <call><name><name>std</name><operator>::</operator><name>make_pair</name></name><argument_list>(<argument><expr><name>x</name> <operator>-</operator> <name>a</name> <operator>/</operator> <literal type="number">2.0</literal></expr></argument>, <argument><expr><name>x</name> <operator>+</operator> <name>a</name><operator>/</operator><literal type="number">2.0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>v</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>v</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    
+    <decl_stmt><decl><type><name>int</name></type> <name>count</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>diff</name> <init>= <expr><name><name>v</name><index>[<expr><name>p</name></expr>]</index></name><operator>.</operator><name>first</name> <operator>-</operator> <name><name>v</name><index>[<expr><name>p</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name><operator>.</operator><name>second</name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name>count</name> <operator>+=</operator> <literal type="number">2</literal> <operator>*</operator> <operator>(</operator><name>diff</name> <operator>&gt;</operator> <name>t</name><operator>)</operator> <operator>+</operator> <operator>(</operator><name>diff</name> <operator>==</operator> <name>t</name><operator>)</operator></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>count</name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

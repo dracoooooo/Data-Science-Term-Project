@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\38C-Blinds.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <name>long</name></type> <name>M</name> <init>= <expr><literal type="number">101</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>l</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld %ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>l</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>long</name></expr></argument>&gt;</argument_list></name></type> <name>a</name><argument_list>(<argument><expr><name>n</name></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name><name>a</name><index>[<expr><name>p</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for>
+    <decl_stmt><decl><type><name>long</name></type> <name>maxArea</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>u</name> <init>= <expr><name>l</name></expr></init></decl>;</init> <condition><expr><name>u</name> <operator>&lt;</operator> <name>M</name></expr>;</condition> <incr><expr><name>u</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>area</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><name>area</name> <operator>+=</operator> <name>u</name> <operator>*</operator> <operator>(</operator><name><name>a</name><index>[<expr><name>p</name></expr>]</index></name> <operator>/</operator> <name>u</name><operator>)</operator></expr>;</expr_stmt></block_content>}</block></for>
+        <expr_stmt><expr><name>maxArea</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>maxArea</name> <operator>&gt;</operator> <name>area</name><operator>)</operator></expr> ?</condition><then> <expr><name>maxArea</name></expr> </then><else>: <expr><name>area</name></expr></else></ternary></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>maxArea</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

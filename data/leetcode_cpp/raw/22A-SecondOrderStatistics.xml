@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\22A-SecondOrderStatistics.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>temp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>currentMin</name><argument_list>(<argument><expr><literal type="number">101</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>secondMin</name><argument_list>(<argument><expr><literal type="number">101</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <while>while<condition>(<expr><name>n</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>temp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><name>temp</name> <operator>&lt;</operator> <name>currentMin</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>secondMin</name> <operator>=</operator> <name>currentMin</name></expr>;</expr_stmt> <expr_stmt><expr><name>currentMin</name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if <condition>(<expr><name>currentMin</name> <operator>&lt;</operator> <name>temp</name> <operator>&amp;&amp;</operator> <name>temp</name> <operator>&lt;</operator> <name>secondMin</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>secondMin</name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+
+    <if_stmt><if>if<condition>(<expr><name>secondMin</name> <operator>==</operator> <name>currentMin</name> <operator>||</operator> <name>secondMin</name> <operator>==</operator> <literal type="number">101</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"NO"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+    <else>else<block>{<block_content><expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%d\n"</literal></expr></argument>, <argument><expr><name>secondMin</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

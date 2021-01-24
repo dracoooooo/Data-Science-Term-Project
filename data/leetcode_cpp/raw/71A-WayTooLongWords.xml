@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\71A-WayTooLongWords.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<using>using <namespace>namespace <name>std</name>;</namespace></using>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+    <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>threshold</name> <init>= <expr><literal type="number">10</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>numWords</name></decl>;</decl_stmt> <expr_stmt><expr><name>cin</name> <operator>&gt;&gt;</operator> <name>numWords</name></expr>;</expr_stmt>
+    <do>do<block>{<block_content> <decl_stmt><decl><type><name>string</name></type> <name>input</name></decl>;</decl_stmt> <expr_stmt><expr><name>cin</name> <operator>&gt;&gt;</operator> <name>input</name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>inputSize</name> <init>= <expr><call><name><name>input</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>inputSize</name> <operator>&lt;=</operator> <name>threshold</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <name>input</name> <operator>&lt;&lt;</operator> <name>endl</name></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <name><name>input</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>&lt;&lt;</operator> <name>inputSize</name> <operator>-</operator> <literal type="number">2</literal> <operator>&lt;&lt;</operator> <name><name>input</name><index>[<expr><name>inputSize</name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>&lt;&lt;</operator> <name>endl</name></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    </block_content>}</block>while<condition>(<expr><operator>--</operator><name>numWords</name></expr>)</condition>;</do>
+    
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

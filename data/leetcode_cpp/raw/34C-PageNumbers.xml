@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\34C-PageNumbers.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+<function><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>parseString</name><parameter_list>(<parameter><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>x</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>nums</name></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>s</name><index>[<expr><name>p</name></expr>]</index></name> <operator>==</operator> <literal type="char">','</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name><name>nums</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><name>x</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>x</name> <operator>=</operator> <literal type="number">10</literal> <operator>*</operator> <name>x</name> <operator>+</operator> <operator>(</operator><name><name>s</name><index>[<expr><name>p</name></expr>]</index></name> <operator>-</operator> <literal type="char">'0'</literal><operator>)</operator></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name><name>nums</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <return>return <expr><name>nums</name></expr>;</return>
+</block_content>}</block></function>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <name>long</name></type> <name>N</name> <init>= <expr><literal type="number">1111</literal></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>ios_base</name><operator>::</operator><name>sync_with_stdio</name></name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>s</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>nums</name> <init>= <expr><call><name>parseString</name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name></type> <name>a</name><argument_list>(<argument><expr><name>N</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><name><name>a</name><index>[<expr><name><name>nums</name><index>[<expr><name>p</name></expr>]</index></name></expr>]</index></name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt></block_content>}</block></for>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>from</name><argument_list>(<argument><expr><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>initial</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><operator>!</operator><name><name>a</name><index>[<expr><name>p</name></expr>]</index></name></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>from</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content>
+                <decl_stmt><decl><type><name>long</name></type> <name>to</name> <init>= <expr><name>p</name> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if<condition>(<expr><operator>!</operator><name>initial</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">","</literal></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+                <expr_stmt><expr><name>initial</name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+                <if_stmt><if>if<condition>(<expr><name>from</name> <operator>&lt;</operator> <name>to</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>from</name> <operator>&lt;&lt;</operator> <literal type="string">"-"</literal> <operator>&lt;&lt;</operator> <name>to</name></expr>;</expr_stmt></block_content>}</block></if>
+                <else>else<block>{<block_content><expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>from</name></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>from</name> <operator>=</operator> <operator>-</operator><literal type="number">1</literal></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name><name>a</name><index>[<expr><name>p</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name>from</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>from</name> <operator>=</operator> <name>p</name></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

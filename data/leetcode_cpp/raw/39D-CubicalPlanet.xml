@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\39D-CubicalPlanet.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>x1</name></decl>, <decl><type ref="prev"/><name>y1</name></decl>, <decl><type ref="prev"/><name>z1</name></decl>, <decl><type ref="prev"/><name>x2</name></decl>, <decl><type ref="prev"/><name>y2</name></decl>, <decl><type ref="prev"/><name>z2</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d %d %d %d %d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>x1</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>y1</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>z1</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>x2</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>y2</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>z2</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><ternary><condition><expr><operator>(</operator><operator>(</operator><name>x1</name> <operator>^</operator> <name>x2</name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name>y1</name> <operator>^</operator> <name>y2</name><operator>)</operator> <operator>&amp;&amp;</operator> <operator>(</operator><name>z1</name> <operator>^</operator> <name>z2</name><operator>)</operator><operator>)</operator></expr> ?</condition><then> <expr><literal type="string">"NO"</literal></expr> </then><else>: <expr><literal type="string">"YES"</literal></expr></else></ternary></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\103B-Cthulhu.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+<decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument> &gt;</argument_list></name></type> <name>edges</name></decl>;</decl_stmt>
+<decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>bool</name></expr></argument>&gt;</argument_list></name></type> <name>visited</name></decl>;</decl_stmt>
+<decl_stmt><decl><type><name>int</name></type> <name>totalVisited</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+<function><type><name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>node</name></decl></parameter>)</parameter_list><block>{<block_content>
+    <if_stmt><if>if<condition>(<expr><name><name>visited</name><index>[<expr><name>node</name></expr>]</index></name></expr>)</condition><block>{<block_content><return>return;</return></block_content>}</block></if></if_stmt>
+    <expr_stmt><expr><name><name>visited</name><index>[<expr><name>node</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <expr_stmt><expr><operator>++</operator><name>totalVisited</name></expr>;</expr_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name><name>edges</name><index>[<expr><name>node</name></expr>]</index></name><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>edges</name><index>[<expr><name>node</name></expr>]</index><index>[<expr><name>p</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for>
+</block_content>}</block></function>
+
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>m</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>m</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <if_stmt><if>if<condition>(<expr><name>n</name> <operator>!=</operator> <name>m</name></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"NO"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content>}</block></if></if_stmt>
+
+    <expr_stmt><expr><call><name><name>edges</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>n</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>m</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%d %d\n"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>edges</name><index>[<expr><name>a</name></expr>]</index></name><operator>.</operator><call><name>push_back</name><argument_list>(<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><name><name>edges</name><index>[<expr><name>b</name></expr>]</index></name><operator>.</operator><call><name>push_back</name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <if_stmt><if>if<condition>(<expr><name>totalVisited</name> <operator>&lt;</operator> <name>n</name></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"NO"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+    <else>else<block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"FHTAGN!"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>
