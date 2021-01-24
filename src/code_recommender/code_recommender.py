@@ -51,11 +51,16 @@ def recommend_code(source_text):
 
         func_path = get_func_path(func, lang)
         text_sim_list = get_recommend_list_token(func_path, new_file, lang)
-        # top_three = get_top_three_ast_sim(text_sim_list, xml_file)
+        # top_three_ast = get_top_three_ast_sim(text_sim_list, xml_file)
+        top_three = []
+        for i in range(len(text_sim_list)):
+            if i < 3:
+                top_three.append(text_sim_list[i])
+            else:
+                break
+        return top_three
     else:
         return "Sorry, we can't recommend code for you"
-
-    return text_sim_list
 
 
 def get_lang(text):
@@ -101,14 +106,12 @@ def get_recommend_list_token(func_path, file, language_label):
         path = tuple[0]
         code_path = path[0:path.rfind('\\')]
         file_name = path[path.rfind('\\')+1:]
-        print(code_path, file_name)
         score = quality_evaluator.average_score(code_path, file_name)
-        tmp_list.append(path)
+        tmp_list.append(file_name)
         tmp_list.append(token.code2text(path))
         tmp_list.append(tuple[1])
         tmp_list.append(score)
         recommend_list.append(tmp_list)
-        print(file_name, tmp_list[2], tmp_list[3])
     return recommend_list
 
 
@@ -116,7 +119,7 @@ def get_top_three_ast_sim(sim_list, xml_file):
     list = []
     for i in range(len(sim_list)):
         path = sim_list[i][0]
-        if i <3 :
+        if i < 3 :
             xml_path = cfc.code_path2xml_path(path)
             ans = ast_evaluator.tree_distance_similarities(xml_path, xml_file)
             list.append(ans)
@@ -137,11 +140,10 @@ def creat_file(file_path, source_text):
     f = open(file_path, 'w+',encoding='UTF-8')
     f.write(source_text)
 
-def initRecommender():
-    # cfc.creat_ast_xml()
-    cfc_cpp.creat_ast_xml()
+
 if __name__ == "__main__":
-    initRecommender()
     data_path = '../../data/leetcode_cpp/raw'
     ret = clc.load_data(data_path, "cpp")
-    recommend_code(ret[1])
+    ret = recommend_code(ret[1])
+    for i in ret:
+        print(i)
