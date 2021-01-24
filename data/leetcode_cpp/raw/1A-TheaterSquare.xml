@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\1A-TheaterSquare.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<using>using <namespace>namespace <name>std</name>;</namespace></using>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+    <decl_stmt><decl><type><name>unsigned</name> <name>long</name> <name>long</name></type> <name>length</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>width</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>stone</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>  <expr_stmt><expr><name>cin</name> <operator>&gt;&gt;</operator> <name>length</name> <operator>&gt;&gt;</operator> <name>width</name> <operator>&gt;&gt;</operator> <name>stone</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>unsigned</name> <name>long</name> <name>long</name></type> <name>numStones</name> <init>= <expr><operator>(</operator><name>length</name><operator>/</operator><name>stone</name> <operator>+</operator> <operator>(</operator><name>length</name> <operator>%</operator> <name>stone</name> <operator>&gt;</operator> <literal type="number">0</literal><operator>)</operator> <operator>)</operator> <operator>*</operator> <operator>(</operator><name>width</name><operator>/</operator><name>stone</name> <operator>+</operator> <operator>(</operator><name>width</name> <operator>%</operator> <name>stone</name> <operator>&gt;</operator> <literal type="number">0</literal><operator>)</operator> <operator>)</operator></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <name>numStones</name> <operator>&lt;&lt;</operator> <name>endl</name></expr>;</expr_stmt>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

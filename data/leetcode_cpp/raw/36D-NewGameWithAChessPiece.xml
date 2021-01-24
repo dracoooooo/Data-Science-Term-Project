@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\36D-NewGameWithAChessPiece.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;sstream&gt;</cpp:file></cpp:include>
+
+<function><type><name>bool</name></type> <name>firstWins</name><parameter_list>(<parameter><decl><type><name>long</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>long</name></type> <name>k</name></decl></parameter>)</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>min</name> <init>= <expr><ternary><condition><expr><operator>(</operator><name>m</name> <operator>&lt;</operator> <name>n</name><operator>)</operator></expr> ?</condition><then> <expr><name>m</name></expr> </then><else>: <expr><name>n</name></expr></else></ternary></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if<condition>(<expr><name>min</name> <operator>%</operator> <operator>(</operator><name>k</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content>}</block></if>
+    <if type="elseif">else if<condition>(<expr><name>k</name> <operator>==</operator> <literal type="number">1</literal> <operator>||</operator> <operator>(</operator><name>min</name> <operator>/</operator> <operator>(</operator><name>k</name> <operator>+</operator> <literal type="number">1</literal><operator>)</operator><operator>)</operator> <operator>%</operator> <literal type="number">2</literal> <operator>==</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><return>return <expr><operator>(</operator><name>m</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator> <operator>!=</operator> <operator>(</operator><name>n</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator></expr>;</return></block_content>}</block></if>
+    <else>else<block>{<block_content><return>return <expr><operator>(</operator><name>m</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator> <operator>==</operator> <operator>(</operator><name>n</name> <operator>%</operator> <literal type="number">2</literal><operator>)</operator></expr>;</return></block_content>}</block></else></if_stmt>
+</block_content>}</block></function>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ifstream</name></name></type> <name>instream</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>instream</name><operator>.</operator><name>open</name></name><argument_list>(<argument><expr><literal type="string">"input.txt"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>FILE</name> <modifier>*</modifier></type> <name>outputFile</name> <init>= <expr><call><name>fopen</name><argument_list>(<argument><expr><literal type="string">"output.txt"</literal></expr></argument>,<argument><expr><literal type="string">"w"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>t</name></decl>, <decl><type ref="prev"/><name>k</name></decl>;</decl_stmt> <expr_stmt><expr><name>instream</name> <operator>&gt;&gt;</operator> <name>t</name> <operator>&gt;&gt;</operator> <name>k</name></expr>;</expr_stmt>
+    <while>while<condition>(<expr><name>t</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>m</name></decl>;</decl_stmt> <expr_stmt><expr><name>instream</name> <operator>&gt;&gt;</operator> <name>n</name> <operator>&gt;&gt;</operator> <name>m</name></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><ternary><condition><expr><call><name>firstWins</name><argument_list>(<argument><expr><name>n</name></expr></argument>, <argument><expr><name>m</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr> ?</condition><then> <expr><literal type="string">"+\n"</literal></expr> </then><else>: <expr><literal type="string">"-\n"</literal></expr></else></ternary></expr></argument>, <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><call><name><name>instream</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>fclose</name><argument_list>(<argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

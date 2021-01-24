@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\148B-Escape.cpp"><cpp:include>#<cpp:directive>include</cpp:directive><cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>double</name></type> <name>vp</name></decl>, <decl><type ref="prev"/><name>vd</name></decl>, <decl><type ref="prev"/><name>t</name></decl>, <decl><type ref="prev"/><name>f</name></decl>, <decl><type ref="prev"/><name>c</name></decl>, <decl><type ref="prev"/><name>distance</name></decl>;</decl_stmt> 
+    <decl_stmt><decl><type><name>long</name></type> <name>bijous</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lf %lf %lf %lf %lf"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>vp</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>vd</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>t</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>f</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>bijous</name><operator>=</operator><literal type="number">0</literal></expr>;</expr_stmt>
+
+    <if_stmt><if>if<condition>(<expr><name>vp</name> <operator>&lt;</operator> <name>vd</name></expr>)</condition><block>{<block_content>
+        <expr_stmt><expr><name>distance</name> <operator>=</operator> <name>vd</name> <operator>*</operator> <name>vp</name> <operator>*</operator> <name>t</name> <operator>/</operator> <operator>(</operator><name>vd</name><operator>-</operator><name>vp</name><operator>)</operator></expr>;</expr_stmt>
+        <while>while<condition>(<expr><name>distance</name><operator>&lt;</operator><name>c</name></expr>)</condition><block>{<block_content>
+            <expr_stmt><expr><name>distance</name> <operator>=</operator> <name>vd</name> <operator>*</operator> <operator>(</operator><name>distance</name> <operator>+</operator> <name>vp</name> <operator>*</operator> <operator>(</operator><name>f</name> <operator>+</operator> <name>distance</name> <operator>/</operator> <name>vd</name><operator>)</operator><operator>)</operator> <operator>/</operator> <operator>(</operator><name>vd</name><operator>-</operator><name>vp</name><operator>)</operator></expr>;</expr_stmt>
+            <expr_stmt><expr><operator>++</operator><name>bijous</name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+    </block_content>}</block></if></if_stmt>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>bijous</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+</block_content>}</block></function>
+</unit>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\77B-FallingAnvils.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>t</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>t</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <while>while<condition>(<expr><name>t</name><operator>--</operator></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>double</name></type> <name>a</name></decl>, <decl><type ref="prev"/><name>b</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%lf %lf"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>a</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>double</name></type> <name>prob</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>b</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>prob</name> <operator>=</operator> <literal type="number">1.0</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>a</name> <operator>&lt;=</operator> <literal type="number">0</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>prob</name> <operator>=</operator> <literal type="number">0.5</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>prob</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>a</name> <operator>&lt;</operator> <literal type="number">4</literal> <operator>*</operator> <name>b</name><operator>)</operator></expr> ?</condition><then> <expr><operator>(</operator><literal type="number">0.5</literal> <operator>+</operator> <name>a</name> <operator>/</operator><operator>(</operator><literal type="number">16</literal> <operator>*</operator> <name>b</name><operator>)</operator><operator>)</operator></expr> </then><else>: <expr><operator>(</operator><literal type="number">1</literal> <operator>-</operator> <name>b</name> <operator>/</operator> <name>a</name><operator>)</operator></expr></else></ternary></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+
+        <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%.7lf\n"</literal></expr></argument>, <argument><expr><name>prob</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></while>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

@@ -1,37 +1,21 @@
 package com.fishercoder.solutions ; 
 
-import java.util.ArrayList ; 
-import java.util.List ; 
-
-public class _1002  { 
+public class _1004  { 
     public static class Solution1  { 
-        public List<String> commonChars(String[] A)  { 
-            int[][] charCount = new int[A.length][26] ; 
-            for (int i = 0 ;  i < A.length ;  i++)  { 
-                for (char c : A[i].toCharArray())  { 
-                    charCount[i][c - 'a']++ ; 
+        public int longestOnes(int[] A, int k)  { 
+            int result = 0 ; 
+            int i = 0 ; 
+            for (int j = 0 ;  j < A.length ;  j++)  { 
+                if (A[j] == 0)  { 
+                    k-- ; 
                  } 
-             } 
-            List<String> result = new ArrayList<>() ; 
-            for (int i = 0 ;  i < 26 ;  i++)  { 
-                while (charCount[0][i] != 0)  { 
-                    char c = (char) (i + 'a') ; 
-                    boolean valid = true ; 
-                    charCount[0][i]-- ; 
-                    for (int j = 1 ;  j < A.length ;  j++)  { 
-                        if (charCount[j][i] == 0)  { 
-                            valid = false ; 
-                            break ; 
-                         }  else  { 
-                            charCount[j][i]-- ; 
-                         } 
+                while (k < 0)  { 
+                    if (A[i] == 0)  { 
+                        k++ ; 
                      } 
-                    if (!valid)  { 
-                        break ; 
-                     }  else  { 
-                        result.add("" + c) ; 
-                     } 
+                    i++ ; 
                  } 
+                result = Math.max(result, j - i + 1) ; 
              } 
             return result ; 
          } 

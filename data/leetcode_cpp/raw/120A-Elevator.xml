@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\120A-Elevator.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;fstream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;sstream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>door</name></decl>, <decl><type ref="prev"/><name>rail</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>ifstream</name></name></type> <name>inputFile</name></decl>;</decl_stmt> <expr_stmt><expr><call><name><name>inputFile</name><operator>.</operator><name>open</name></name><argument_list>(<argument><expr><literal type="string">"input.txt"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><name>inputFile</name> <operator>&gt;&gt;</operator> <name>door</name> <operator>&gt;&gt;</operator> <name>rail</name></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name><name>inputFile</name><operator>.</operator><name>close</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>FILE</name> <modifier>*</modifier></type> <name>outputFile</name> <init>= <expr><call><name>fopen</name><argument_list>(<argument><expr><literal type="string">"output.txt"</literal></expr></argument>,<argument><expr><literal type="string">"w"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <if_stmt><if>if<condition>(<expr><name>door</name> <operator>==</operator> <literal type="string">"front"</literal> <operator>&amp;&amp;</operator> <name>rail</name> <operator>==</operator> <literal type="string">"1"</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><literal type="string">"L"</literal></expr></argument> , <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+    <if type="elseif">else if<condition>(<expr><name>door</name> <operator>==</operator> <literal type="string">"front"</literal> <operator>&amp;&amp;</operator> <name>rail</name> <operator>==</operator> <literal type="string">"2"</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><literal type="string">"R"</literal></expr></argument> , <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+    <if type="elseif">else if<condition>(<expr><name>door</name> <operator>==</operator> <literal type="string">"back"</literal> <operator>&amp;&amp;</operator> <name>rail</name> <operator>==</operator> <literal type="string">"1"</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><literal type="string">"R"</literal></expr></argument> , <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if>
+    <if type="elseif">else if<condition>(<expr><name>door</name> <operator>==</operator> <literal type="string">"back"</literal> <operator>&amp;&amp;</operator> <name>rail</name> <operator>==</operator> <literal type="string">"2"</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>fputs</name><argument_list>(<argument><expr><literal type="string">"L"</literal></expr></argument> , <argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    <expr_stmt><expr><call><name>fclose</name><argument_list>(<argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

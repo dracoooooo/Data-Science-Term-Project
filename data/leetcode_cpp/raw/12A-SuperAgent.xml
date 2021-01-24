@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\12A-SuperAgent.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>N</name> <init>= <expr><literal type="number">3</literal> <operator>*</operator> <literal type="number">3</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>bool</name></type> <name><name>buttons</name><index>[<expr><name>N</name></expr>]</index></name> <init>= <expr><block>{<expr><literal type="number">0</literal></expr>}</block></expr></init></decl>;</decl_stmt>
+    
+    <decl_stmt><decl><type><name>int</name></type> <name>k</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <while>while<condition>(<expr><name>k</name> <operator>&lt;</operator> <name>N</name></expr>)</condition><block>{<block_content>
+        <decl_stmt><decl><type><name>char</name></type> <name>temp</name></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%c"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>temp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><name>temp</name> <operator>==</operator> <literal type="char">'X'</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name><name>buttons</name><index>[<expr><name>k</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if <condition>(<expr><name>temp</name> <operator>==</operator> <literal type="char">'.'</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name><name>buttons</name><index>[<expr><name>k</name><operator>++</operator></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+
+    <decl_stmt><decl><type><name>bool</name></type> <name>symmetric</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>N</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control><block>{<block_content><if_stmt><if>if<condition>(<expr><name><name>buttons</name><index>[<expr><name>k</name></expr>]</index></name> <operator>!=</operator> <name><name>buttons</name><index>[<expr><name>N</name> <operator>-</operator> <literal type="number">1</literal> <operator>-</operator> <name>k</name></expr>]</index></name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>symmetric</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt> <break>break;</break></block_content>}</block></if></if_stmt></block_content>}</block></for>
+    <if_stmt><if>if<condition>(<expr><name>symmetric</name></expr>)</condition><block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"YES"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></if> <else>else<block>{<block_content><expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"NO"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

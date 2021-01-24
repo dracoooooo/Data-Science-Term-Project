@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\181A-SeriesOfCrimes.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>ios_base</name><operator>::</operator><name>sync_with_stdio</name></name><argument_list>(<argument><expr><literal type="boolean">false</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name></decl>, <decl><type ref="prev"/><name>m</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>n</name> <operator>&gt;&gt;</operator> <name>m</name></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>rr</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>cc</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>row</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>row</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>row</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>s</name></decl>;</decl_stmt> <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cin</name></name> <operator>&gt;&gt;</operator> <name>s</name></expr>;</expr_stmt>
+        <for>for<control>(<init><decl><type><name>long</name></type> <name>col</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>col</name> <operator>&lt;</operator> <call><name><name>s</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>col</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>s</name><index>[<expr><name>col</name></expr>]</index></name> <operator>!=</operator> <literal type="char">'*'</literal></expr>)</condition><block>{<block_content><continue>continue;</continue></block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>rr</name> <operator>^=</operator> <name>row</name></expr>;</expr_stmt> <expr_stmt><expr><name>cc</name> <operator>^=</operator> <name>col</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld %ld\n"</literal></expr></argument>, <argument><expr><name>rr</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>, <argument><expr><name>cc</name> <operator>+</operator> <literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

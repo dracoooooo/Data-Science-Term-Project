@@ -2,8 +2,6 @@ from src.quality_evaluator import xml_name_extractor
 import os
 import re
 from functools import reduce
-java_path = "../../test"
-file = "Node.java"
 
 def average_name_score(arg_list):
     total_num = 0
@@ -82,6 +80,8 @@ def average_method_score(source_text, method_list):
         line_size_dict[i] = get_method_lines(source_text, i)
         total+=line_size_dict[i]
         method_cnt+=1
+    # 没有方法的代码
+    if method_cnt == 0: return 50
     portion_size_dict = {}
     for lines in line_size_dict.items():
         portion_size_dict[lines[0]] = lines[1] *100 / total
@@ -119,7 +119,6 @@ def load_source_codes_del_comments(code_path, file_name):
     f.close()
     return del_comments_text
 
-def test():
-    print(average_score(java_path, file))
+
 if __name__ == "__main__":
-    test()
+    pass

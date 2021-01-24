@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\120B-QuizLeague.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>FILE</name> <modifier>*</modifier></type> <name>inputFile</name> <init>= <expr><call><name>fopen</name><argument_list>(<argument><expr><literal type="string">"input.txt"</literal></expr></argument>,<argument><expr><literal type="string">"r"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>k</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>fscanf</name><argument_list>(<argument><expr><name>inputFile</name></expr></argument>, <argument><expr><literal type="string">"%d %d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>k</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>bool</name></type> <name>noneSoFar</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt> 
+    <decl_stmt><decl><type><name>int</name></type> <name>firstUnanswered</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;=</operator> <name>n</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>temp</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>fscanf</name><argument_list>(<argument><expr><name>inputFile</name></expr></argument>, <argument><expr><literal type="string">"%d"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>temp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><name>temp</name></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>p</name> <operator>&gt;=</operator> <name>k</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>firstUnanswered</name> <operator>=</operator> <name>p</name></expr>;</expr_stmt> <break>break;</break></block_content>}</block></if>
+            <if type="elseif">else if<condition>(<expr><name>noneSoFar</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>firstUnanswered</name> <operator>=</operator> <name>p</name></expr>;</expr_stmt> <expr_stmt><expr><name>noneSoFar</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></for>
+    <expr_stmt><expr><call><name>fclose</name><argument_list>(<argument><expr><name>inputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>FILE</name> <modifier>*</modifier></type> <name>outputFile</name> <init>= <expr><call><name>fopen</name><argument_list>(<argument><expr><literal type="string">"output.txt"</literal></expr></argument>,<argument><expr><literal type="string">"w"</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <expr_stmt><expr><call><name>fprintf</name><argument_list>(<argument><expr><name>outputFile</name></expr></argument>, <argument><expr><literal type="string">"%d\n"</literal></expr></argument>, <argument><expr><name>firstUnanswered</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <expr_stmt><expr><call><name>fclose</name><argument_list>(<argument><expr><name>outputFile</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

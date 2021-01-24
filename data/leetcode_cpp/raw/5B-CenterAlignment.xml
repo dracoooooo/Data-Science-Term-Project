@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\5B-CenterAlignment.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;iostream&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>temp</name></decl>;</decl_stmt> 
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>string</name></name></expr></argument>&gt;</argument_list></name></type> <name>lineVec</name></decl>;</decl_stmt> 
+    <decl_stmt><decl><type><name>int</name></type> <name>maxSize</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><call><name>getline</name><argument_list>(<argument><expr><name><name>std</name><operator>::</operator><name>cin</name></name></expr></argument>, <argument><expr><name>temp</name></expr></argument>)</argument_list></call></expr>)</condition><block>{<block_content>
+        <expr_stmt><expr><call><name><name>lineVec</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>temp</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if<condition>(<expr><call><name><name>temp</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&gt;</operator> <name>maxSize</name></expr>)</condition><block>{<block_content><expr_stmt><expr><name>maxSize</name> <operator>=</operator> <call><name><name>temp</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content>}</block></if></if_stmt>
+    </block_content>}</block></while>
+
+
+    <decl_stmt><decl><type><name>bool</name></type> <name>addLeft</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>maxSize</name> <operator>+</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"*"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for><empty_stmt>;</empty_stmt> <expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <call><name><name>lineVec</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>string</name></name></type> <name>current</name> <init>= <expr><name><name>lineVec</name><index>[<expr><name>p</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>totalSpace</name> <init>= <expr><operator>(</operator><name>maxSize</name> <operator>-</operator> <call><name><name>current</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>)</operator></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>leftSpace</name>  <init>= <expr><name>totalSpace</name> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>rightSpace</name> <init>= <expr><name>totalSpace</name> <operator>/</operator> <literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if<condition>(<expr><name>totalSpace</name> <operator>%</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name>addLeft</name></expr>)</condition><block>{<block_content><expr_stmt><expr><operator>++</operator><name>leftSpace</name></expr>;</expr_stmt></block_content>}</block></if> <else>else<block>{<block_content><expr_stmt><expr><operator>++</operator><name>rightSpace</name></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><name>addLeft</name> <operator>=</operator> <literal type="number">1</literal> <operator>-</operator> <name>addLeft</name></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+
+        <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"*"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>q</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>q</name> <operator>&lt;</operator> <name>leftSpace</name></expr>;</condition> <incr><expr><name>q</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for>
+        <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name>current</name></expr>;</expr_stmt>
+        <for>for<control>(<init><decl><type><name>int</name></type> <name>q</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>q</name> <operator>&lt;</operator> <name>rightSpace</name></expr>;</condition> <incr><expr><name>q</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">" "</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for>
+        <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"*\n"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    </block_content>}</block></for>
+
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>maxSize</name> <operator>+</operator> <literal type="number">2</literal></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control><block>{<block_content><expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"*"</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content>}</block></for><empty_stmt>;</empty_stmt> <expr_stmt><expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">""</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

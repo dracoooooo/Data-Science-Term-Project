@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\79A-BusGame.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>hundreds</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>tens</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld %ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>hundreds</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>tens</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    <decl_stmt><decl><type><name>bool</name></type> <name>loser</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+
+    <while>while<condition>(<expr><literal type="boolean">true</literal></expr>)</condition><block>{<block_content>
+
+        <comment type="line">//Ciel</comment>
+        <if_stmt><if>if<condition>(<expr><name>hundreds</name> <operator>&gt;=</operator> <literal type="number">2</literal> <operator>&amp;&amp;</operator> <name>tens</name> <operator>&gt;=</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>hundreds</name> <operator>-=</operator> <literal type="number">2</literal></expr>;</expr_stmt> <expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">2</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>hundreds</name> <operator>&gt;=</operator> <literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>tens</name> <operator>&gt;=</operator> <literal type="number">12</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>hundreds</name> <operator>-=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">12</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>tens</name> <operator>&gt;=</operator> <literal type="number">22</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">22</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>loser</name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <break>break;</break></block_content>}</block></else></if_stmt>
+
+        <comment type="line">//Hanako</comment>
+        <if_stmt><if>if<condition>(<expr><name>tens</name> <operator>&gt;=</operator> <literal type="number">22</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">22</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>tens</name> <operator>&gt;=</operator> <literal type="number">12</literal> <operator>&amp;&amp;</operator> <name>hundreds</name> <operator>&gt;=</operator> <literal type="number">1</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>hundreds</name> <operator>-=</operator> <literal type="number">1</literal></expr>;</expr_stmt> <expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">12</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <if type="elseif">else if<condition>(<expr><name>tens</name> <operator>&gt;=</operator> <literal type="number">2</literal> <operator>&amp;&amp;</operator> <name>hundreds</name> <operator>&gt;=</operator> <literal type="number">2</literal></expr>)</condition><block>{<block_content><expr_stmt><expr><name>hundreds</name> <operator>-=</operator> <literal type="number">2</literal></expr>;</expr_stmt> <expr_stmt><expr><name>tens</name> <operator>-=</operator> <literal type="number">2</literal></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>loser</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt> <break>break;</break></block_content>}</block></else></if_stmt>
+    </block_content>}</block></while>
+
+    <expr_stmt><expr><ternary><condition><expr><name>loser</name></expr> ?</condition><then> <expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"Hanako"</literal></expr></argument>)</argument_list></call></expr> </then><else>: <expr><call><name>puts</name><argument_list>(<argument><expr><literal type="string">"Ciel"</literal></expr></argument>)</argument_list></call></expr></else></ternary></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>

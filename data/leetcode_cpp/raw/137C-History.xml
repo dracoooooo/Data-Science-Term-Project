@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" xmlns:cpp="http://www.srcML.org/srcML/cpp" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\raw\137C-History.cpp"><cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdio&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;cstdlib&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;vector&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;algorithm&gt;</cpp:file></cpp:include>
+
+
+<function><type><name>int</name></type> <name>pairCompare</name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>long</name></expr></argument>,<argument><expr><name>long</name></expr></argument>&gt;</argument_list></name> <modifier>&amp;</modifier></type><name>lhs</name></decl></parameter>, <parameter><decl><type><specifier>const</specifier> <name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>long</name></expr></argument>,<argument><expr><name>long</name></expr></argument>&gt;</argument_list></name> <modifier>&amp;</modifier></type><name>rhs</name></decl></parameter>)</parameter_list><block>{<block_content><return>return <expr><operator>(</operator><name><name>lhs</name><operator>.</operator><name>first</name></name> <operator>&lt;</operator> <name><name>rhs</name><operator>.</operator><name>first</name></name><operator>)</operator></expr>;</return></block_content>}</block></function>
+
+<function><type><name>int</name></type> <name>main</name><parameter_list>()</parameter_list><block>{<block_content>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>n</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name><name>std</name><operator>::</operator><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>long</name></expr></argument>, <argument><expr><name>long</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>events</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name></type> <name>start</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>finish</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>long</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <expr_stmt><expr><call><name>scanf</name><argument_list>(<argument><expr><literal type="string">"%ld %ld"</literal></expr></argument>, <argument><expr><operator>&amp;</operator><name>start</name></expr></argument>, <argument><expr><operator>&amp;</operator><name>finish</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>events</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name><name>std</name><operator>::</operator><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>long</name></expr></argument>,<argument><expr><name>long</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>start</name></expr></argument>,<argument><expr><name>finish</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name><name>std</name><operator>::</operator><name>sort</name></name><argument_list>(<argument><expr><call><name><name>events</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>events</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><name>pairCompare</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <decl_stmt><decl><type><name>long</name></type> <name>count</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>, <decl><type ref="prev"/><name>currentMaxEnd</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+    <for>for<control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;</operator> <name>n</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control><block>{<block_content>
+        <if_stmt><if>if<condition>(<expr><name><name>events</name><index>[<expr><name>k</name></expr>]</index></name><operator>.</operator><name>second</name> <operator>&lt;</operator> <name>currentMaxEnd</name></expr>)</condition><block>{<block_content><expr_stmt><expr><operator>++</operator><name>count</name></expr>;</expr_stmt></block_content>}</block></if>
+        <else>else<block>{<block_content><expr_stmt><expr><name>currentMaxEnd</name> <operator>=</operator> <name><name>events</name><index>[<expr><name>k</name></expr>]</index></name><operator>.</operator><name>second</name></expr>;</expr_stmt></block_content>}</block></else></if_stmt>
+    </block_content>}</block></for>
+
+    <expr_stmt><expr><call><name>printf</name><argument_list>(<argument><expr><literal type="string">"%ld\n"</literal></expr></argument>, <argument><expr><name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+    <return>return <expr><literal type="number">0</literal></expr>;</return>
+</block_content>}</block></function>
+</unit>
