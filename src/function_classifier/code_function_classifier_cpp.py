@@ -300,7 +300,7 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    # count()
+    count()
     # init_tokenizer()
     # self_training()
     # train_once()
