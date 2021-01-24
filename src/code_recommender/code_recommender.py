@@ -13,9 +13,9 @@ import src.token_based_similarities.token_lcs as token
 import src.token_based_similarities.token_lcs_cpp as token_cpp
 import src.quality_evaluator.code_smell_detector as quality_evaluator
 
-data_path_dict = {"java" : os.path.abspath('../../data/leetcode'),
-                  "c&cpp" : os.path.abspath('../../data/leetcode_cpp')
-                  }
+data_path_dict = {"java" : os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + "..\\\\..\\\\data\\\\leetcode"),
+                      "c&cpp" : os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + "..\\\\..\\\\data\\\\leetcode_cpp")
+                      }
 
 func_model= {"java" : cfc,
                   "c&cpp" : cfc_cpp
@@ -156,5 +156,5 @@ def creat_file(file_path, source_text):
 if __name__ == "__main__":
     data_path = '../../data/leetcode/raw'
     ret = clc.load_data(data_path, "java")
-    ret = recommend_code(ret[0])
+    ret = recommend_code("sdjklalasdjfsdf")
     print(ret)

@@ -49,6 +49,7 @@ cpp_data_path = '../../data/leetcode_cpp'
 
 def file_paths(data_path, language):
     ret = []
+    tmp = os.walk(data_path)
     for dirpath, dirnames, filenames in os.walk(data_path):
         for file in filenames:
             if file.endswith(suffix[language]):

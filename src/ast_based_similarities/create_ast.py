@@ -9,7 +9,7 @@ def create_ast(path):
     os.chdir(dir)
     cmd = "srcml " + path + " -o " + name + ".xml"
     os.system(cmd)
-    os.chdir(abs_back_path)
+    # os.chdir(abs_back_path)
 
 
 if __name__ == "__main__":
