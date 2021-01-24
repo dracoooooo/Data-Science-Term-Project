@@ -52,12 +52,7 @@ def recommend_code(source_text):
         func_path = get_func_path(func, lang)
         text_sim_list = get_recommend_list_token(func_path, new_file, lang)
         # top_three_ast = get_top_three_ast_sim(text_sim_list, xml_file)
-        top_three = []
-        for i in range(len(text_sim_list)):
-            if i < 3:
-                top_three.append(text_sim_list[i])
-            else:
-                break
+        top_three =  get_top_three(text_sim_list)
         return top_three
     else:
         return "Sorry, we can't recommend code for you"
@@ -69,8 +64,25 @@ def get_lang(text):
     lang, lan_prob = clc.predict(tmp_path + '.txt')
     os.remove(tmp_path + '.txt')
     return lang, lan_prob
+# 相似度权重 0.75 质量权重 0.25
+def get_top_three(text_sim_list):
+    new_list = []
+    for l in text_sim_list:
+        tmp_list = []
+        tmp_list.append(l[0])
+        tmp_list.append(l[1])
+        avg = l[2] * 100 * 0.75 + l[3] *0.25
+        tmp_list.append(avg)
+        new_list.append(tmp_list)
+    new_list = sorted(new_list, key=lambda d: d[2], reverse=True)
+    top_three = []
+    for i in range(len(new_list)):
+        if i < 3:
+            top_three.append(new_list[i])
+        else:
+            break
 
-
+    return top_three
 def get_func(text):
     tmp_path = os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), "input_code_file"), 'input_file')
     creat_file(tmp_path + '.txt', text)
@@ -109,7 +121,7 @@ def get_recommend_list_token(func_path, file, language_label):
         score = quality_evaluator.average_score(code_path, file_name)
         tmp_list.append(file_name)
         tmp_list.append(token.code2text(path))
-        tmp_list.append(tuple[1])
+        tmp_list.append(tuple[1]) #相似度
         tmp_list.append(score)
         recommend_list.append(tmp_list)
     return recommend_list
@@ -142,8 +154,7 @@ def creat_file(file_path, source_text):
 
 
 if __name__ == "__main__":
-    data_path = '../../data/leetcode_cpp/raw'
-    ret = clc.load_data(data_path, "cpp")
-    ret = recommend_code(ret[1])
-    for i in ret:
-        print(i)
+    data_path = '../../data/leetcode/raw'
+    ret = clc.load_data(data_path, "java")
+    ret = recommend_code(ret[0])
+    print(ret)

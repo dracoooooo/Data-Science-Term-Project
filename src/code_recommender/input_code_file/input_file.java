@@ -1,23 +1,22 @@
 package com.fishercoder.solutions ; 
 
-public class _1004  { 
+import java.util.HashMap ; 
+import java.util.Map ; 
+
+public class _1  { 
+
     public static class Solution1  { 
-        public int longestOnes(int[] A, int k)  { 
-            int result = 0 ; 
-            int i = 0 ; 
-            for (int j = 0 ;  j < A.length ;  j++)  { 
-                if (A[j] == 0)  { 
-                    k-- ; 
+        public int[] twoSum(int[] nums, int target)  { 
+            Map<Integer, Integer> map = new HashMap() ; 
+            for (int i = 0 ;  i < nums.length ;  i++)  { 
+                if (map.containsKey(target - nums[i]))  { 
+                    return new int[] { map.get(target - nums[i]), i }  ; 
+                 }  else  { 
+                    map.put(nums[i], i) ; 
                  } 
-                while (k < 0)  { 
-                    if (A[i] == 0)  { 
-                        k++ ; 
-                     } 
-                    i++ ; 
-                 } 
-                result = Math.max(result, j - i + 1) ; 
              } 
-            return result ; 
+            return new int[] { -1, -1 }  ; 
          } 
      } 
+
  } 
