@@ -36,22 +36,24 @@ def recommend_code(source_text):
     # 消除文本文件
     os.remove(tmp_path + '.txt')
 
-    new_file = tmp_path + '.' + lang
-    # 特判c&cpp
-    if new_file.endswith(".c&cpp"):
-        new_file = new_file[0: new_file.rfind('.')] + '.cpp'
-    #
+    if lang in func_model.keys():
+        new_file = tmp_path + '.' + lang
+        # 特判c&cpp
+        if new_file.endswith(".c&cpp"):
+            new_file = new_file[0: new_file.rfind('.')] + '.cpp'
+        #
 
-    creat_file(new_file, source_text)
-    func,func_prob = predict_function(new_file, lang)
-    ast_creator.create_ast(new_file)
+        creat_file(new_file, source_text)
+        func, func_prob = predict_function(new_file, lang)
+        ast_creator.create_ast(new_file)
 
+        xml_file = tmp_path + '.xml'
 
-    xml_file = tmp_path + '.xml'
-
-    func_path = get_func_path(func, lang)
-    text_sim_list = get_recommend_list_token(func_path, new_file, lang)
-    # top_three = get_top_three_ast_sim(text_sim_list, xml_file)
+        func_path = get_func_path(func, lang)
+        text_sim_list = get_recommend_list_token(func_path, new_file, lang)
+        # top_three = get_top_three_ast_sim(text_sim_list, xml_file)
+    else:
+        return "Sorry, we can't recommend code for you"
 
     return text_sim_list
 
