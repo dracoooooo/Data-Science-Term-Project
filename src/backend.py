@@ -48,7 +48,7 @@ def LandF():
         return {'lang': lang, 'func': func, 'lang_prob': str(lang_prob), 'func_prob': str(func_prob)}
 
 
-@app.route('/get3code/', methods=['POST'])
+@app.route('/getcode/', methods=['POST'])
 def get3code():
     response_object = {'status': 'success'}
     if request.method == 'POST':
@@ -57,7 +57,7 @@ def get3code():
         print(code)
         ret = cr.recommend_code(code)
         print(ret)
-        recommends = []
+        recommends = {}
         recommend = {}
         print(ret.__len__())
 
@@ -65,12 +65,10 @@ def get3code():
             recommend["name"] = ret[i][0],
             recommend["code"] = ret[i][1],
             recommend["similarity"] = ret[i][2],
-            recommend["qualiry"] = ret[i][3]
-            recommends.append(recommend)
-        for i in range(recommends.__len__()):
-            ret["r" + i] = recommends[i]
-        print(ret)
-        return ret
+            recommend["quality"] = ret[i][3]
+            recommends['r' + str(i)] = recommend
+        print(recommends)
+        return jsonify(recommends)
 
 
 if __name__ == "__main__":
