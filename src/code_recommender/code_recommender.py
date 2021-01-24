@@ -51,11 +51,9 @@ def recommend_code(source_text):
 
     func_path = get_func_path(func, lang)
     text_sim_list = get_recommend_list_token(func_path, new_file, lang)
-    for i in text_sim_list:
-        print(i)
     # top_three = get_top_three_ast_sim(text_sim_list, xml_file)
 
-    return
+    return text_sim_list
 
 
 def get_recommend_list_token(func_path, file, language_label):
@@ -74,7 +72,9 @@ def get_recommend_list_token(func_path, file, language_label):
         path = tuple[0]
         code_path = path[0:path.rfind('\\')]
         file_name = path[path.rfind('\\')+1:]
+        print(code_path, file_name)
         score = quality_evaluator.average_score(code_path, file_name)
+        tmp_list.append(path)
         tmp_list.append(token.code2text(path))
         tmp_list.append(tuple[1])
         tmp_list.append(score)
@@ -106,7 +106,11 @@ def creat_file(file_path, source_text):
     f = open(file_path, 'w+',encoding='UTF-8')
     f.write(source_text)
 
+def initRecommender():
+    cfc.creat_ast_xml()
+
 if __name__ == "__main__":
-    data_path = '../../test'
-    ret = clc.load_data(data_path, "cpp")
-    recommend_code(ret[0])
+    # initRecommender()
+    data_path = '../../data/leetcode/raw'
+    ret = clc.load_data(data_path, "java")
+    recommend_code(ret[3])

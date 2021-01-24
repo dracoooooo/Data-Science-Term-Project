@@ -23,16 +23,19 @@ def search__names(xml_path, file_name):
 def find_names(root):
     if (root.tag == prefix+'decl'):
         name = root.find('./'+prefix + 'name')
-        if(name.text != None):
-            variable_names_list.append(name.text)
+        if(name != None):
+            if (name.text!= None):
+                variable_names_list.append(name.text)
     if(root.tag == prefix+'function'):
         name = root.find(prefix+'name')
-        if(name.text!=None):
-            function_names_list.append(name.text)
+        if(name!=None):
+            if(name.text != None):
+                function_names_list.append(name.text)
     if(root.tag == prefix+'class'):
         name = root.find(prefix+'name')
-        if(name.text!=None):
-            class_names_list.append(name.text)
+        if(name!=None):
+            if(name.text!=None):
+                class_names_list.append(name.text)
     for child in root:
         find_names(child)
     return

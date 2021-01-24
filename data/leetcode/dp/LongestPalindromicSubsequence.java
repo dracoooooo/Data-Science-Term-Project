@@ -1,15 +1,19 @@
 public class LongestPalindromicSubsequence {
-    int len = s.length();
-    int[][] dp = new int[len+1][len+1];
-    
-    for(int i=1;i<=len;i++) {
-        for(int j=1;j<=len;j++) {
-            if(s.charAt(i-1)==s.charAt(len-j)) {
-                dp[i][j] = dp[i-1][j-1] + 1;
-            } else {
-                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
-            }
-        }
-    }
-    return dp[len][len];
+    public int longestPalindromeSubseq(String s) {
+	int[] dp = new int[s.length()];
+	for (int i = s.length() - 1; i >= 0; i--) {
+		dp[i] = 1;
+		int pre = 0;
+		for (int j = i + 1; j < s.length(); j++) {
+			int tmp = dp[j];
+			if (s.charAt(i) == s.charAt(j)) {
+				dp[j] = pre + 2;
+			} else {
+				dp[j] = Math.max(dp[j], dp[j - 1]);
+			}
+			pre = tmp;
+		}
+	}
+
+	return dp[s.length() - 1];
 }
