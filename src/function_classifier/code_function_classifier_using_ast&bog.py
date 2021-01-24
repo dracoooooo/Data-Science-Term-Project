@@ -101,8 +101,8 @@ def init_node_tokenizer():
     return
 
 
-def creat_ast_xml():
-    path_list = file_paths(data_path, "java")
+def creat_ast_xml(language):
+    path_list = file_paths(data_path, language)
     for p in path_list:
         create_ast(p)
         print("creating xml in " + p)

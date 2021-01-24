@@ -107,7 +107,6 @@ def creat_ast_xml():
         create_ast(p)
         print("creating xml in " + p)
 
-
 # 提取特征————词袋模型
 # 单个文件
 def get_feature_bag_of_word(path):

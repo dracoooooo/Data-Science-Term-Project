@@ -25,18 +25,30 @@ func_tokenizer_dict = {"java" : os.path.abspath('../function_classifier/tokenize
                       "c&cpp" : os.path.abspath('../function_classifier/tokenizer_bow_cpp.pkl')
 }
 
+
+threshold = 0.75
+
 def recommend_code(source_text):
     tmp_path = os.path.join(os.path.abspath('./input_code_file'), "input_file")
     lang,lan_prob = predict_language(source_text)
     new_file = tmp_path + '.' + lang
+
+    # 特判
+    if new_file.endswith(".c&cpp"):
+        new_file = new_file[0: new_file.rfind('.')] + '.cpp'
+    #
+
     creat_file(new_file, source_text)
     func,func_prob = predict_function(source_text, lang)
-    # ast_creator.create_ast(new_file)
+    ast_creator.create_ast(new_file)
+    func_path = get_func_path(func, lang)
+    print(func_path)
     return
 
 
-def evaluate_func_path(func, language):
-    pass
+def get_func_path(func, language):
+    return os.path.join(data_path_dict[language], func)
+
 
 
 def predict_function(source_text, language):
@@ -114,6 +126,5 @@ def get_feature_bag_of_word(source_text, language):
 
 if __name__ == "__main__":
     data_path = '../../test'
-    ret = clc.load_data(data_path, "cpp")
-    for i in ret:
-        recommend_code(i)
+    ret = clc.load_data(data_path, "java")
+    recommend_code(ret[0])
