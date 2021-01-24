@@ -24,7 +24,7 @@ def get_normalized_language(language_code):
 
 def get_current_language():
     """
-    Wrapper around `translation.get_language` that returns the normalized
+    Wrapper around `translation.predict_language` that returns the normalized
     language code.
     """
-    return get_normalized_language(translation.get_language())
+    return get_normalized_language(translation.predict_language())

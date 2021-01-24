@@ -74,7 +74,7 @@ class BaseTranslator(nodes.NodeVisitor):
         nodes.NodeVisitor.__init__(self, document)
         self.settings = settings = document.settings
         lcode = settings.language_code
-        self.language = languages.get_language(lcode, document.reporter)
+        self.language = languages.predict_language(lcode, document.reporter)
         self.meta = [self.generator % docutils.__version__]
         self.head_prefix = []
         self.html_prolog = []
