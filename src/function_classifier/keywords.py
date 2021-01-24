@@ -36,7 +36,9 @@ tree_keywords = [
 ]
 
 dp_keywords = [
-    'dp'
+    'dp',
+    'min',
+    'max'
 ]
 
 key_words = sort_keywords + tree_keywords + dp_keywords

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\253.Meeting-Rooms-II.cpp"><comment type="block" format="doxygen">/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <function><type><specifier>static</specifier> <name>bool</name></type> <name>cmp1</name><parameter_list>(<parameter><decl><type><name>Interval</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>Interval</name></type> <name>b</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <return>return <expr><name><name>a</name><operator>.</operator><name>start</name></name><operator>&lt;</operator><name><name>b</name><operator>.</operator><name>start</name></name></expr>;</return>
+    </block_content>}</block></function>
+    <struct>struct <name>cmp2</name>
+    <block>{<public type="default">
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>()</name></name><parameter_list>(<parameter><decl><type><name>Interval</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>Interval</name></type> <name>b</name></decl></parameter>)</parameter_list>
+        <block>{<block_content>
+            <return>return <expr><name><name>a</name><operator>.</operator><name>end</name></name><operator>&gt;</operator><name><name>b</name><operator>.</operator><name>end</name></name></expr>;</return>
+        </block_content>}</block></function>            
+    </public>}</block>;</struct>
+    
+</private><public>public:
+    <function><type><name>int</name></type> <name>minMeetingRooms</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>intervals</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>intervals</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>intervals</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><name>cmp1</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name><name>priority_queue</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>,<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name></expr></argument>,<argument><expr><name>cmp2</name></expr></argument>&gt;</argument_list></name></type><name>pq</name></decl>;</decl_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>count</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>i</name><operator>&lt;</operator><call><name><name>intervals</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <while>while <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>||</operator> <name>i</name><operator>&lt;</operator><call><name><name>intervals</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><name>end</name><operator>&gt;</operator><name><name>intervals</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><name>start</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name><name>intervals</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>                
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name><init>=<expr><call><name><name>pq</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>count</name><operator>=</operator><call><name>max</name><argument_list>(<argument><expr><name>count</name></expr></argument>,<argument><expr><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>count</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

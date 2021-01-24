@@ -28,8 +28,6 @@ def traverse_and_parse(root):
 def tree_distance_similarities(xml_path_1,xml_path_2):
     (zss_tree_1, num1) = parse_tree(xml_path_1)
     (zss_tree_2, num2) = parse_tree(xml_path_2)
-    print(num1)
-    print(num2)
     dis = edit_distance(zss_tree_1, zss_tree_2)
     return 1 - dis/max(num1,num2)
 
@@ -59,7 +57,6 @@ def test():
     path = '../../test'
     file1 = os.path.join(path, 'ALU.xml')
     file2 = os.path.join(path, 'Game.xml')
-    output_label(parse_tree(file1)[0])
     # print(tree_distance_similarities(file1,file2))
 
 

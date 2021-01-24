@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\360.Sort-Transformed-Array.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>sortTransformedArray</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>result</name></decl>;</decl_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name>a</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>b</name><operator>*</operator><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name><operator>+</operator><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+            <if_stmt><if>if <condition>(<expr><name>b</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name>reverse</name><argument_list>(<argument><expr><call><name><name>result</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>result</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></if>
+        <else>else 
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>flag</name> <init>= <expr><operator>(</operator><name>a</name><operator>&gt;</operator><literal type="number">0</literal><operator>)</operator></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>float</name></type> <name>mid</name><init>=<expr><operator>-</operator><name>b</name><operator>/</operator><literal type="number">2.0</literal><operator>/</operator><name>a</name></expr></init></decl>;</decl_stmt>
+            
+            <decl_stmt><decl><type><name>int</name></type> <name>left</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>right</name><init>=<expr><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name>left</name><operator>&lt;=</operator><name>right</name></expr>)</condition>
+            <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name>abs</name><argument_list>(<argument><expr><name>mid</name><operator>-</operator><name><name>nums</name><index>[<expr><name>left</name></expr>]</index></name></expr></argument>)</argument_list></call><operator>&gt;</operator><call><name>abs</name><argument_list>(<argument><expr><name>mid</name><operator>-</operator><name><name>nums</name><index>[<expr><name>right</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>a</name><operator>*</operator><name><name>nums</name><index>[<expr><name>left</name></expr>]</index></name><operator>*</operator><name><name>nums</name><index>[<expr><name>left</name></expr>]</index></name><operator>+</operator><name>b</name><operator>*</operator><name><name>nums</name><index>[<expr><name>left</name></expr>]</index></name><operator>+</operator><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>left</name><operator>++</operator></expr>;</expr_stmt>
+                </block_content>}</block></if>
+                <else>else
+                <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>a</name><operator>*</operator><name><name>nums</name><index>[<expr><name>right</name></expr>]</index></name><operator>*</operator><name><name>nums</name><index>[<expr><name>right</name></expr>]</index></name><operator>+</operator><name>b</name><operator>*</operator><name><name>nums</name><index>[<expr><name>right</name></expr>]</index></name><operator>+</operator><name>c</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>right</name><operator>--</operator></expr>;</expr_stmt>
+                </block_content>}</block></else></if_stmt>                
+            </block_content>}</block></while>            
+            <if_stmt><if>if <condition>(<expr><name>flag</name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name>reverse</name><argument_list>(<argument><expr><call><name><name>result</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>result</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>            
+        </block_content>}</block></else></if_stmt>        
+        <return>return <expr><name>result</name></expr>;</return>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\352.Data-Stream-as-Disjoint-Intervals-v3.cpp"><comment type="block" format="doxygen">/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */</comment>
+<class>class <name>SummaryRanges</name> <block>{<private type="default">
+</private><public>public:
+    <decl_stmt><decl><type><name><name>map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Map</name></decl>;</decl_stmt>
+    
+    <comment type="block" format="doxygen">/** Initialize your data structure here. */</comment>
+    <constructor><name>SummaryRanges</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>Map</name><index>[<expr><operator>-</operator><literal type="number">2</literal></expr>]</index></name><operator>=</operator><operator>-</operator><literal type="number">2</literal></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    
+    <function><type><name>void</name></type> <name>addNum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>pos</name> <init>= <expr><call><name><name>Map</name><operator>.</operator><name>lower_bound</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>        
+
+        <if_stmt><if>if <condition>(<expr><name>pos</name><operator>!=</operator><call><name><name>Map</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>pos</name><operator>-&gt;</operator><name>first</name></name><operator>==</operator><name>val</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>                        
+        <if_stmt><if>if <condition>(<expr><call><name>prev</name><argument_list>(<argument><expr><name>pos</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>-&gt;</operator><name>second</name><operator>&gt;=</operator><name>val</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>  <comment type="line">// if val is already within an interval                                        </comment>
+        
+        <if_stmt><if>if <condition>(<expr><call><name>prev</name><argument_list>(<argument><expr><name>pos</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>-&gt;</operator><name>second</name><operator>==</operator><name>val</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>prev</name><argument_list>(<argument><expr><name>pos</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>-&gt;</operator><name>second</name><operator>=</operator><name>val</name></expr>;</expr_stmt></block_content></block></if>   <comment type="line">// if val is at the right boundary of the previous interval</comment>
+        <else>else<block type="pseudo"><block_content>        
+            <expr_stmt><expr><name><name>Map</name><index>[<expr><name>val</name></expr>]</index></name><operator>=</operator><name>val</name></expr>;</expr_stmt></block_content></block></else></if_stmt>               <comment type="line">// if val is not connected to the previous interval, create a new one</comment>
+                
+        <expr_stmt><expr><name>pos</name> <operator>=</operator> <call><name><name>Map</name><operator>.</operator><name>upper_bound</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>        
+        <if_stmt><if>if <condition>(<expr><name>pos</name><operator>!=</operator><call><name><name>Map</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>pos</name><operator>-&gt;</operator><name>first</name></name><operator>==</operator><call><name>prev</name><argument_list>(<argument><expr><name>pos</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>-&gt;</operator><name>second</name><operator>+</operator><literal type="number">1</literal></expr>)</condition> <comment type="line">// if the new interval is conneted to the next interval</comment>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>prev</name><argument_list>(<argument><expr><name>pos</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>-&gt;</operator><name>second</name> <operator>=</operator> <name><name>pos</name><operator>-&gt;</operator><name>second</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Map</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>pos</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>         
+        
+    </block_content>}</block></function>
+    
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name></type> <name>getIntervals</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>a</name><range>:<expr><name>Map</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>a</name><operator>.</operator><name>first</name></name><operator>!=</operator><operator>-</operator><literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name><name>a</name><operator>.</operator><name>first</name></name></expr></argument>,<argument><expr><name><name>a</name><operator>.</operator><name>second</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>results</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen">/**
+ * Your SummaryRanges object will be instantiated and called as such:
+ * SummaryRanges obj = new SummaryRanges();
+ * obj.addNum(val);
+ * vector&lt;Interval&gt; param_2 = obj.getIntervals();
+ */</comment>
+</unit>

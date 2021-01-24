@@ -165,11 +165,6 @@ def get_feature_word_embedding(path):
     return
 
 
-# def xml2tree(path):
-#     xml_file_tree = ET.parse(path)
-#     return xml_file_tree
-
-
 def code_path2xml_path(code_path):
     return code_path[0:code_path.rfind('.')] + '.xml'
 
@@ -269,7 +264,7 @@ def self_training():
     l = raw.__len__()
     while raw and l is not raw.__len__():
         l = raw.__len__()
-        model.fit(x_train, y_train, batch_size=80, epochs=40,
+        model.fit(x_train, y_train, batch_size=80, epochs=90,
             validation_data=(x_test, y_test), verbose=2)
         prediction = model.predict(raw)
         max_prediction = []
@@ -291,7 +286,7 @@ def self_training():
 def train_once():
     (x_train, y_train), (x_test, y_test), raw = prepare_data()
     model = init_model()
-    model.fit(x_train, y_train, batch_size=100, epochs=90,
+    model.fit(x_train, y_train, batch_size=100, epochs=40,
               validation_data=(x_test, y_test), verbose=2)
     model.save('function_classifier.h5')
 
@@ -310,11 +305,11 @@ def predict(path):
         clazz = "dp"
     print("predict class:", clazz)
     print("possibility:", max(prediction))
-    return
+    return clazz, max(prediction)
 
 
 if __name__ == "__main__":
-    # count()
+    count()
     # init_tokenizer()
     # self_training()
     train_once()

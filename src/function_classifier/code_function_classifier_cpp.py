@@ -13,23 +13,14 @@ from tensorflow.keras.preprocessing.sequence import skipgrams
 from src.ast_based_similarities.ast_similarities import parse_tree, traverse_and_parse, prefix
 from src.ast_based_similarities.create_ast import create_ast
 from tensorflow.python.keras.models import load_model
-
+from src.function_classifier.keywords import key_words
 label = {
-    # "array":    [1, 0, 0, 0, 0],
-    # "math":     [0, 1, 0, 0, 0, 0],
-    # "search":   [0, 1, 0, 0, 0],
-    # "sort":   [0, 0, 1, 0, 0],
-    # "string":   [0, 0, 0, 1, 0],
-    # "tree":     [0, 0, 0, 0, 1]
     "sort": [1, 0, 0],
     "tree": [0, 1, 0],
     "dp":   [0, 0, 1]
 }
 
 
-# array_path = "../../data/leetcode/array"
-# math_path = "../../data/leetcode/math"
-# search_path = "../../data/leetcode/search"
 sort_path = "../../data/leetcode_cpp/sort"
 # string_path = "../../data/leetcode/string"
 tree_path = "../../data/leetcode_cpp/tree"
@@ -37,6 +28,8 @@ dp_path = "../../data/leetcode_cpp/dp"
 # raw_path = "../../data/leetcode/raw"
 
 features = 1000
+new_features = features + key_words.__len__()
+weight = 200
 data_path = "../../data/leetcode"
 
 cpp_data_path = '../../data/leetcode_cpp'
@@ -53,19 +46,13 @@ def file_paths(data_path, language):
 
 
 def count():
-    # array = load_data(array_path, "java")
-    # math = load_data(math_path, "java")
-    # search = load_data(search_path, "java")
     sort = load_data(sort_path, "cpp")
-    # string = load_data(string_path, "java")
     tree = load_data(tree_path, "cpp")
     dp = load_data(dp_path, "cpp")
-    # raw = load_data(raw_path, "java")
 
     print(sort.__len__())
     print(tree.__len__())
     print(dp.__len__())
-    # print(raw.__len__())
 
 
 def init_tokenizer():
@@ -80,7 +67,7 @@ def init_tokenizer():
 
 def init_node_tokenizer():
     # get preorder feature
-    paths = file_paths(data_path, "cpp")
+    paths = file_paths(cpp_data_path, "cpp")
     label_preorder_text = []
     pre_order_list = []
     for path in paths:
@@ -110,7 +97,7 @@ def creat_ast_xml():
 # 提取特征————词袋模型
 # 单个文件
 def get_feature_bag_of_word(path):
-    f1 = open('tokenizer_bow_cpp.pkl', 'rb')
+    f1 = open(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'tokenizer_bow_cpp.pkl', 'rb')
     tokenizer = pickle.load(f1)
     f1.close()
     code = code2text(path)
@@ -119,7 +106,10 @@ def get_feature_bag_of_word(path):
     for i in range(seq.__len__()):
         if 0 < seq[i] < features:
             feature[seq[i]] += 1
-    return feature
+    another_feature = [0] * key_words.__len__()
+    for i in range(key_words.__len__()):
+        another_feature[i] = code.count(key_words[i]) * weight
+    return feature + another_feature
 
 
 # 多个文件
@@ -193,18 +183,13 @@ def get_feature_ast_node_embedding(path):
 
 
 train_size = 50
-dp_train_size = 85
+dp_train_size = 80
 
 
 def prepare_data():
-    # array = file_paths(array_path, "java")
-    # math = file_paths(math_path, "java")
-    # search = file_paths(search_path, "java")
     sort = file_paths(sort_path, "cpp")
-    # string = file_paths(string_path, "java")
     tree = file_paths(tree_path, "cpp")
     dp = file_paths(dp_path, "cpp")
-    # raw = file_paths(raw_path, "java")
     X_train = bag_of_word(sort[0: train_size] + tree[0: train_size] + dp[0: dp_train_size])
     Y_train =  [label["sort"]] * train_size + [label["tree"]] * train_size + [label["dp"]] * dp_train_size
     X_test = bag_of_word(sort[train_size:] + tree[train_size:] + dp[dp_train_size: ])
@@ -231,10 +216,8 @@ def prepare_data():
 
 def init_model():
     model = Sequential()
-    model.add(Dense(input_dim=features, units=1000, activation='relu'))
-    model.add(Dense(units=500, activation='relu'))
-    model.add(Dense(units=300, activation='relu'))
-    model.add(Dense(units=50, activation='relu'))
+    model.add(Dense(input_dim=new_features, units=1000, activation='relu'))
+    model.add(Dense(units=100, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
@@ -242,49 +225,48 @@ def init_model():
                   metrics=['accuracy'])
     return model
 
-
 # 每次把结果最好的5个raw data扔进训练集再次训练
 # 最好指的是这个raw data在上一次的模型的预测结果能做到类似于[0.8, 0.1, 0.1, 0]
 # 即这个raw data是class 1的概率远大于在其他class的概率，而不是类似于[0.3, 0.2, 0.25, 0.25]
-def self_training():
-    (x_train, y_train), (x_test, y_test) , raw = prepare_data()
-    model = init_model()
-    # 一次确定多少个
-    n = 10
-    l = raw.__len__()
-    while raw and l is not raw.__len__():
-        l = raw.__len__()
-        model.fit(x_train, y_train, batch_size=80, epochs=30,
-            validation_data=(x_test, y_test), verbose=2)
-        prediction = model.predict(raw)
-        max_prediction = []
-        for i in range(prediction.__len__()):
-            max_prediction.append(max(prediction[i]))
-        for i in range(n):
-            if raw and max(max_prediction) > 0.95:
-                index = max_prediction.index(max(max_prediction))
-                data = np.array(raw[index])
-                label = np.array(one_hot(prediction[index]))
-                x_train = np.row_stack((x_train, data))
-                y_train = np.row_stack((y_train, label))
-                max_prediction.pop(index)
-                raw.pop(index)
-    model.save('function_classifier_self_training.h5')
-    return model
-
+# def self_training():
+#     (x_train, y_train), (x_test, y_test) , raw = prepare_data()
+#     model = init_model()
+    一次确定多少个
+    # n = 10
+    # l = raw.__len__()
+    # while raw and l is not raw.__len__():
+    #     l = raw.__len__()
+    #     model.fit(x_train, y_train, batch_size=80, epochs=30,
+    #         validation_data=(x_test, y_test), verbose=2)
+    #     prediction = model.predict(raw)
+    #     max_prediction = []
+    #     for i in range(prediction.__len__()):
+    #         max_prediction.append(max(prediction[i]))
+    #     for i in range(n):
+    #         if raw and max(max_prediction) > 0.95:
+    #             index = max_prediction.index(max(max_prediction))
+    #             data = np.array(raw[index])
+    #             label = np.array(one_hot(prediction[index]))
+    #             x_train = np.row_stack((x_train, data))
+    #             y_train = np.row_stack((y_train, label))
+    #             max_prediction.pop(index)
+    #             raw.pop(index)
+    # model.save('function_classifier_self_training.h5')
+    # return model
+#
 
 def train_once():
     (x_train, y_train), (x_test, y_test), raw = prepare_data()
     model = init_model()
-    model.fit(x_train, y_train, batch_size=100, epochs=100,
+    model.fit(x_train, y_train, batch_size=100, epochs=40,
               validation_data=(x_test, y_test), verbose=2)
     model.save('function_classifier_cpp.h5')
 
 
 def predict(path):
     feature = get_feature_bag_of_word(path)
-    model = load_model('function_classifier_cpp.h5')
-    prediction = model.predict(feature)
+    model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'function_classifier_cpp.h5')
+    prediction = model.predict([feature])[0]
     tmp = clc.one_hot(prediction)
     clazz = ""
     if tmp == label["sort"]:
@@ -295,11 +277,11 @@ def predict(path):
         clazz = "dp"
     print("predict class:", clazz)
     print("possibility:", max(prediction))
-    return
+    return clazz, max(prediction)
 
 
 if __name__ == "__main__":
     count()
-    # init_tokenizer()
+    init_tokenizer()
     # self_training()
-    # train_once()
+    train_once()

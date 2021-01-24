@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\352.Data-Stream-as-Disjoint-Intervals.cpp"><comment type="block" format="doxygen">/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */</comment>
+<class>class <name>SummaryRanges</name> <block>{<private type="default">
+    <struct>struct <name>cmp</name>
+    <block>{<public type="default">
+        <function type="operator"><type><name>bool</name></type> <name>operator<name>()</name></name><parameter_list>(<parameter><decl><type><name>Interval</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>Interval</name></type> <name>b</name></decl></parameter>)</parameter_list>
+        <block>{<block_content>
+            <return>return <expr><name><name>a</name><operator>.</operator><name>start</name></name><operator>&lt;</operator><name><name>b</name><operator>.</operator><name>end</name></name></expr>;</return>
+        </block_content>}</block></function>
+    </public>}</block>;</struct>
+    <decl_stmt><decl><type><name><name>set</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>,<argument><expr><name>cmp</name></expr></argument>&gt;</argument_list></name></type><name>Set</name></decl>;</decl_stmt>
+    
+</private><public>public:
+    <comment type="block" format="doxygen">/** Initialize your data structure here. */</comment>
+    <macro><name>SummaryRanges</name><argument_list>()</argument_list></macro> <block>{<block_content>
+        
+    </block_content>}</block>
+    
+    <function><type><name>void</name></type> <name>addNum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>val</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>flag</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>a</name></decl>,<decl><type ref="prev"/><name>b</name></decl>;</decl_stmt>
+        
+        <comment type="line">// ç©ºéç¹æ®å¤ç</comment>
+        <if_stmt><if>if <condition>(<expr><call><name><name>Set</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        
+        <comment type="line">// å¦æå·²ç»å­å¨äºå·²æçåºé´ä¸­ï¼é£ä¹ä»ä¹é½ä¸ç¨å</comment>
+        <decl_stmt><decl><type><name>auto</name></type> <name>it</name> <init>= <expr><call><name><name>Set</name><operator>.</operator><name>lower_bound</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>            
+        <if_stmt><if>if <condition>(<expr><name>val</name><operator>&gt;=</operator><name><name>it</name><operator>-&gt;</operator><name>start</name></name> <operator>&amp;&amp;</operator> <name>val</name><operator>&lt;=</operator><name><name>it</name><operator>-&gt;</operator><name>end</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return;</return></block_content></block></if></if_stmt>        
+        
+        <if_stmt><if>if <condition>(<expr><name>it</name><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>it</name><operator>--</operator></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>val</name><operator>&gt;=</operator><name><name>it</name><operator>-&gt;</operator><name>start</name></name> <operator>&amp;&amp;</operator> <name>val</name><operator>&lt;=</operator><name><name>it</name><operator>-&gt;</operator><name>end</name></name></expr>)</condition><block type="pseudo"><block_content>
+                <return>return;</return></block_content></block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+            
+        <comment type="line">// å¦æå¯ä»¥ä¸ä¸ä¸ªåºé´ç¸æ¥ï¼é£ä¹æ´æ°é£ä¸ªåºé´</comment>
+        <expr_stmt><expr><name>it</name> <operator>=</operator> <call><name><name>Set</name><operator>.</operator><name>lower_bound</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name>it</name><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>it</name><operator>--</operator></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name><name>it</name><operator>-&gt;</operator><name>end</name></name><operator>==</operator><name>val</name><operator>-</operator><literal type="number">1</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>a</name> <operator>=</operator> <name><name>it</name><operator>-&gt;</operator><name>start</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>b</name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>it</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>a</name></expr></argument>,<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>flag</name><operator>=</operator><literal type="number">1</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if></if_stmt>
+        
+
+        <expr_stmt><expr><name>it</name> <operator>=</operator> <call><name><name>Set</name><operator>.</operator><name>lower_bound</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name>it</name><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>it</name><operator>-&gt;</operator><name>start</name></name><operator>==</operator><name>val</name><operator>+</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>a</name> <operator>=</operator> <name>val</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>b</name> <operator>=</operator> <name><name>it</name><operator>-&gt;</operator><name>end</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>it</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>a</name></expr></argument>,<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>flag</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        
+        <comment type="line">// å¦ææ´æ°äºä¸¤ä¸ªåºé´ï¼è¯´æè¿ä¸¤ä¸ªåºé´å¯ä»¥æ¼æ¥èµ·æ¥ã</comment>
+        <if_stmt><if>if <condition>(<expr><name>flag</name><operator>==</operator><literal type="number">2</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>it</name> <operator>=</operator> <call><name><name>Set</name><operator>.</operator><name>lower_bound</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>it</name><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name>it</name><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>auto</name></type> <name>it0</name><init>=<expr><name>it</name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>it0</name><operator>--</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>it0</name><operator>-&gt;</operator><name>end</name></name><operator>==</operator><name><name>it</name><operator>-&gt;</operator><name>start</name></name></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><name>a</name><operator>=</operator><name><name>it0</name><operator>-&gt;</operator><name>start</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>b</name><operator>=</operator><name><name>it</name><operator>-&gt;</operator><name>end</name></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>it0</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><name>it</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>a</name></expr></argument>,<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></if>
+        <comment type="line">// æ²¡æç¸é»æ¥çåºé´å¯ä»¥æ´æ°ï¼é£ä¹å°±èªå·±åç¬ä½ä¸ºä¸ä¸ªåºé´</comment>
+        <if type="elseif">else if <condition>(<expr><name>flag</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><call><name>Interval</name><argument_list>(<argument><expr><name>val</name></expr></argument>,<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        
+        
+    </block_content>}</block></function>
+    
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name></type> <name>getIntervals</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>Interval</name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>a</name><range>:<expr><name>Set</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        <return>return <expr><name>results</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen">/**
+ * Your SummaryRanges object will be instantiated and called as such:
+ * SummaryRanges obj = new SummaryRanges();
+ * obj.addNum(val);
+ * vector&lt;Interval&gt; param_2 = obj.getIntervals();
+ */</comment>
+</unit>

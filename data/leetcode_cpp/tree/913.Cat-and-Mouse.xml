@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\913.Cat-and-Mouse.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name><name>color</name><index>[<expr><literal type="number">50</literal></expr>]</index><index>[<expr><literal type="number">50</literal></expr>]</index><index>[<expr><literal type="number">3</literal></expr>]</index></name></decl>;</decl_stmt>
+    
+</private><public>public:
+    <function><type><name>int</name></type> <name>catMouseGame</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>graph</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><call><name><name>graph</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                
+        <decl_stmt><decl><type><name><name>queue</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>q</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>turn</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>turn</name><operator>&lt;=</operator><literal type="number">2</literal></expr>;</condition> <incr><expr><name>turn</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>color</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>turn</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>  <comment type="line">// mouse win conditions</comment>
+                <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><literal type="number">0</literal></expr>,<expr><name>i</name></expr>,<expr><name>turn</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                
+                <if_stmt><if>if <condition>(<expr><name>i</name><operator>!=</operator><literal type="number">0</literal></expr>)</condition>               
+                <block>{<block_content>
+                    <expr_stmt><expr><name><name>color</name><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>i</name></expr>]</index><index>[<expr><name>turn</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>  <comment type="line">// cat win conditions</comment>
+                    <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>i</name></expr>,<expr><name>i</name></expr>,<expr><name>turn</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for></block_content></block></for>
+        
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>            
+            <decl_stmt><decl><type><name>int</name></type> <name>m</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index></expr></init></decl>;</decl_stmt> 
+            <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>t</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">2</literal></expr>]</index></expr></init></decl>;</decl_stmt>            
+            <decl_stmt><decl><type><name>int</name></type> <name>status</name> <init>= <expr><name><name>color</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><name>t</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                        
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>nextNode</name><range>: <expr><call><name>findAllParents</name><argument_list>(<argument><expr><name>graph</name></expr></argument>,<argument><expr><name>m</name></expr></argument>,<argument><expr><name>c</name></expr></argument>,<argument><expr><name>t</name></expr></argument>)</argument_list></call></expr></range></decl></init>)</control>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>m2</name> <init>= <expr><name><name>nextNode</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>c2</name> <init>= <expr><name><name>nextNode</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>t2</name> <init>= <expr><name><name>nextNode</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                
+                <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name>m2</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index><index>[<expr><name>t2</name></expr>]</index></name><operator>!=</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt> <comment type="line">// has been determined</comment>
+                
+                <if_stmt><if>if <condition>(<expr><name>t2</name><operator>==</operator><name>status</name></expr>)</condition>   <comment type="line">// immediate win, (m2,c2,t2)-&gt;(m,c,t)</comment>
+                <block>{<block_content>
+                    <expr_stmt><expr><name><name>color</name><index>[<expr><name>m2</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index><index>[<expr><name>t2</name></expr>]</index></name> <operator>=</operator> <name>status</name></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>m2</name></expr>,<expr><name>c2</name></expr>,<expr><name>t2</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>                    
+                </block_content>}</block></if>
+                <if type="elseif">else if <condition>(<expr><call><name>allChildrenWin</name><argument_list>(<argument><expr><name>graph</name></expr></argument>, <argument><expr><name>m2</name></expr></argument>,<argument><expr><name>c2</name></expr></argument>,<argument><expr><name>t2</name></expr></argument>)</argument_list></call></expr>)</condition>    <comment type="line">// eventually lose</comment>
+                <block>{<block_content>
+                    <expr_stmt><expr><name><name>color</name><index>[<expr><name>m2</name></expr>]</index><index>[<expr><name>c2</name></expr>]</index><index>[<expr><name>t2</name></expr>]</index></name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name>t2</name><operator>==</operator><literal type="number">1</literal><operator>)</operator></expr>?</condition><then> <expr><literal type="number">2</literal></expr></then><else>:<expr><literal type="number">1</literal></expr></else></ternary></expr>;</expr_stmt>
+                    <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>m2</name></expr>,<expr><name>c2</name></expr>,<expr><name>t2</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>                
+                </block_content>}</block></if></if_stmt>                
+            </block_content>}</block></for>
+        </block_content>}</block></while>
+        <return>return <expr><name><name>color</name><index>[<expr><literal type="number">1</literal></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr>;</return>
+    </block_content>}</block></function>
+    
+    
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>findAllParents</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>graph</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>neighbours</name></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>t</name><operator>==</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>c_next</name><range>: <expr><name><name>graph</name><index>[<expr><name>c</name></expr>]</index></name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+                <if_stmt><if>if <condition>(<expr><name>c_next</name><operator>!=</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>neighbours</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><block>{<expr><name>m</name></expr>,<expr><name>c_next</name></expr>,<expr><literal type="number">2</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt></block_content></block></for>
+        </block_content>}</block></if>
+        <else>else
+        <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>m_next</name><range>: <expr><name><name>graph</name><index>[<expr><name>m</name></expr>]</index></name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>neighbours</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><block>{<expr><name>m_next</name></expr>,<expr><name>c</name></expr>,<expr><literal type="number">1</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        </block_content>}</block></else></if_stmt>
+        <return>return <expr><name>neighbours</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>bool</name></type> <name>allChildrenWin</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>graph</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>c</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>t</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>t</name><operator>==</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>m_next</name><range>: <expr><name><name>graph</name><index>[<expr><name>m</name></expr>]</index></name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>color</name><index>[<expr><name>m_next</name></expr>]</index><index>[<expr><name>c</name></expr>]</index><index>[<expr><literal type="number">2</literal></expr>]</index></name><operator>!=</operator><literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+        </block_content>}</block></if>
+        <if type="elseif">else if <condition>(<expr><name>t</name><operator>==</operator><literal type="number">2</literal></expr>)</condition>
+        <block>{<block_content>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>c_next</name><range>: <expr><name><name>graph</name><index>[<expr><name>c</name></expr>]</index></name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+                <if_stmt><if>if <condition>(<expr><name>c_next</name><operator>!=</operator><literal type="number">0</literal> <operator>&amp;&amp;</operator> <name><name>color</name><index>[<expr><name>m</name></expr>]</index><index>[<expr><name>c_next</name></expr>]</index><index>[<expr><literal type="number">1</literal></expr>]</index></name><operator>!=</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+        </block_content>}</block></if></if_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

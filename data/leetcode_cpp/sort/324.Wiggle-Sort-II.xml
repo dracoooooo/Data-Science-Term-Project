@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\324.Wiggle-Sort-II.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>void</name></type> <name>wiggleSort</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>nums</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>nums</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><operator>(</operator><name>N</name><operator>-</operator><literal type="number">1</literal><operator>)</operator><operator>/</operator><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><name>N</name><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>flag</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>result</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>flag</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>i</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>result</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>j</name><operator>--</operator></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+            <expr_stmt><expr><name>flag</name> <operator>=</operator> <literal type="number">1</literal><operator>-</operator><name>flag</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name>nums</name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

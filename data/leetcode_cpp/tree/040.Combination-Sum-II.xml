@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\040.Combination-Sum-II.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>rets</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>combinationSum2</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>candidates</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>candidates</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>candidates</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>comb</name> <init>= <expr><block>{}</block></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>candidates</name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><name>comb</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>rets</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>candidates</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>idx</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sum</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type><name>comb</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>target</name><operator>==</operator><name>sum</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>comb</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>sum</name><operator>&gt;</operator><name>target</name></expr>)</condition>
+        <block>{<block_content>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><name>idx</name></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>candidates</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>i</name><operator>&gt;</operator><name>idx</name> <operator>&amp;&amp;</operator> <name><name>candidates</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><name><name>candidates</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content>
+                <continue>continue;</continue></block_content></block></if></if_stmt>
+            
+            <expr_stmt><expr><call><name><name>comb</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>candidates</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>candidates</name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>i</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name>sum</name><operator>+</operator><name><name>candidates</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name>comb</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>comb</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

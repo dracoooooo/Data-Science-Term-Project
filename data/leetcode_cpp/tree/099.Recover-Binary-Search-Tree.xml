@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\099.Recover-Binary-Search-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>CurMax</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><name>INT_MIN</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>first</name> <init>= <expr><name>NULL</name></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>second</name> <init>= <expr><name>NULL</name></expr></init></decl>;</decl_stmt>
+
+</private><public>public:
+    <function><type><name>void</name></type> <name>recoverTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+       <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+       
+       <decl_stmt><decl><type><name>int</name></type> <name>temp</name> <init>= <expr><name><name>first</name><operator>-&gt;</operator><name>val</name></name></expr></init></decl>;</decl_stmt>
+       <expr_stmt><expr><name><name>first</name><operator>-&gt;</operator><name>val</name></name> <operator>=</operator> <name><name>second</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+       <expr_stmt><expr><name><name>second</name><operator>-&gt;</operator><name>val</name></name> <operator>=</operator> <name>temp</name></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name> <operator>&gt;=</operator> <name><name>CurMax</name><operator>-&gt;</operator><name>val</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>CurMax</name> <operator>=</operator> <name>node</name></expr>;</expr_stmt></block_content></block></if>
+        <else>else
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>first</name><operator>==</operator><name>NULL</name></expr>)</condition> 
+            <block>{<block_content>
+                <expr_stmt><expr><name>first</name><operator>=</operator><name>CurMax</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>second</name><operator>=</operator><name>node</name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>CurMax</name><operator>=</operator><name>node</name></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><name>second</name><operator>=</operator><name>node</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+        
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            
+    </block_content>}</block></function>
+    
+</public>}</block>;</class>
+</unit>

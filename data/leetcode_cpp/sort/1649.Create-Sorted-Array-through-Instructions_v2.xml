@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\1649.Create-Sorted-Array-through-Instructions_v2.cpp"><decl_stmt><decl><type><specifier>const</specifier> <name>int</name></type> <name>MAX_N</name> <init>= <expr><literal type="number">100000</literal></expr></init></decl>;</decl_stmt>
+
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:    
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name><name>bitArr</name><index>[<expr><name>MAX_N</name><operator>+</operator><literal type="number">1</literal></expr>]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name><name>nums</name><index>[<expr><name>MAX_N</name><operator>+</operator><literal type="number">1</literal></expr>]</index></name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>M</name> <init>= <expr><literal type="number">1e9</literal><operator>+</operator><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+
+    <function><type><name>void</name></type> <name>updateDelta</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>long</name> <name>long</name></type> <name>delta</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>idx</name> <init>= <expr><name>i</name></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>idx</name> <operator>&lt;=</operator> <name>MAX_N</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name><name>bitArr</name><index>[<expr><name>idx</name></expr>]</index></name><operator>+=</operator><name>delta</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>bitArr</name><index>[<expr><name>idx</name></expr>]</index></name> <operator>%=</operator> <name>M</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>idx</name><operator>+=</operator><name>idx</name><operator>&amp;</operator><operator>(</operator><operator>-</operator><name>idx</name><operator>)</operator></expr>;</expr_stmt>
+        </block_content>}</block></while>
+    </block_content>}</block></function>
+
+    <function><type><name>long</name> <name>long</name></type> <name>queryPreSum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>idx</name></decl></parameter>)</parameter_list><block>{<block_content>
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>idx</name></expr>)</condition><block>{<block_content>
+            <expr_stmt><expr><name>result</name> <operator>+=</operator> <name><name>bitArr</name><index>[<expr><name>idx</name></expr>]</index></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>result</name> <operator>%=</operator> <name>M</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>idx</name><operator>-=</operator><name>idx</name><operator>&amp;</operator><operator>(</operator><operator>-</operator><name>idx</name><operator>)</operator></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>result</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>long</name> <name>long</name></type> <name>sumRange</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>i</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>j</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <return>return <expr><call><name>queryPreSum</name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call><operator>-</operator><call><name>queryPreSum</name><argument_list>(<argument><expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>createSortedArray</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>instructions</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>        
+        <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>ret</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>:<expr><name>instructions</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>updateDelta</name><argument_list>(<argument><expr><name>x</name></expr></argument>, <argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>a</name> <init>= <expr><call><name>sumRange</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><name>x</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>long</name> <name>long</name></type> <name>b</name> <init>= <expr><call><name>sumRange</name><argument_list>(<argument><expr><name>x</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name>MAX_N</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>+=</operator> <call><name>min</name><argument_list>(<argument><expr><name>a</name></expr></argument>,<argument><expr><name>b</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>%=</operator> <name>M</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>ret</name></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

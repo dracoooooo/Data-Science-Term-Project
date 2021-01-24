@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\1681.Minimum-Incompatibility_v2.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>int</name></type> <name>minimumIncompatibility</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>count</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>nums</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name><name>count</name><index>[<expr><name>x</name></expr>]</index></name><operator>++</operator></expr>;</expr_stmt></block_content></block></for>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>count</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>x</name><operator>.</operator><name>second</name></name> <operator>&gt;</operator> <name>k</name></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+
+        <expr_stmt><expr><name>n</name><operator>=</operator> <call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>states</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>values</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>state</name> <init>= <expr><operator>(</operator><literal type="number">1</literal> <operator>&lt;&lt;</operator> <name>n</name><operator>/</operator><name>k</name><operator>)</operator> <operator>-</operator> <literal type="number">1</literal></expr></init></decl>;</decl_stmt>            
+        <while>while <condition>(<expr><name>state</name> <operator>&lt;</operator> <operator>(</operator><literal type="number">1</literal> <operator>&lt;&lt;</operator> <name>n</name><operator>)</operator></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>val</name></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>containDuplicate</name><argument_list>(<argument><expr><name>nums</name></expr></argument>, <argument><expr><name>state</name></expr></argument>, <argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>states</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>state</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>values</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>val</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>                
+            </block_content>}</block></if></if_stmt>
+            
+            <decl_stmt><decl><type><name>int</name></type> <name>c</name> <init>= <expr><name>state</name> <operator>&amp;</operator> <operator>-</operator> <name>state</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>r</name> <init>= <expr><name>state</name> <operator>+</operator> <name>c</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>state</name> <operator>=</operator> <operator>(</operator><operator>(</operator><operator>(</operator><name>r</name> <operator>^</operator> <name>state</name><operator>)</operator> <operator>&gt;&gt;</operator> <literal type="number">2</literal><operator>)</operator> <operator>/</operator> <name>c</name><operator>)</operator> <operator>|</operator> <name>r</name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>dpstates</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>state</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>state</name><operator>&lt;</operator><operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>n</name><operator>)</operator></expr>;</condition> <incr><expr><name>state</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name>__builtin_popcount</name><argument_list>(<argument><expr><name>state</name></expr></argument>)</argument_list></call> <operator>%</operator> <operator>(</operator><name>n</name><operator>/</operator><name>k</name><operator>)</operator> <operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> 
+                <expr_stmt><expr><call><name><name>dpstates</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>state</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name>reverse</name><argument_list>(<argument><expr><call><name><name>dpstates</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>dpstates</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>dp</name><argument_list>(<argument><expr><literal type="number">1</literal><operator>&lt;&lt;</operator><name>n</name></expr></argument>, <argument><expr><name>INT_MAX</name><operator>/</operator><literal type="number">2</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>states</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>            
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>dpstate</name><range>: <expr><name>dpstates</name></expr></range></decl></init>)</control>
+            <block>{<block_content>                
+                <if_stmt><if>if <condition>(<expr><operator>(</operator><name>dpstate</name> <operator>&amp;</operator> <name><name>states</name><index>[<expr><name>i</name></expr>]</index></name><operator>)</operator><operator>!=</operator><name><name>states</name><index>[<expr><name>i</name></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>dpstate</name></expr>]</index></name> <operator>=</operator> <call><name>min</name><argument_list>(<argument><expr><name><name>dp</name><index>[<expr><name>dpstate</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>dp</name><index>[<expr><name>dpstate</name><operator>-</operator><name><name>states</name><index>[<expr><name>i</name></expr>]</index></name></expr>]</index></name><operator>+</operator><name><name>values</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+        <return>return <expr><name><name>dp</name><index>[<expr><operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>n</name><operator>)</operator><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>containDuplicate</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type><name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>state</name></decl></parameter>, <parameter><decl><type><name>int</name><modifier>&amp;</modifier></type><name>val</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>p</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><operator>(</operator><name>state</name><operator>&gt;&gt;</operator><name>i</name><operator>)</operator><operator>&amp;</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>p</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>p</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>p</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>p</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>p</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><name><name>p</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+        <expr_stmt><expr><name>val</name> <operator>=</operator> <call><name><name>p</name><operator>.</operator><name>back</name></name><argument_list>()</argument_list></call><operator>-</operator><call><name><name>p</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

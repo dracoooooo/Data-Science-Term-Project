@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\637.Average-of-Levels-in-Binary-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type> <name>averageOfLevels</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>queue</name><argument_list type="generic">&lt;<argument><expr><name>TreeNode</name><modifier>*</modifier></expr></argument>&gt;</argument_list></name></type><name>q</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>double</name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>        
+        
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name><init>=<expr><call><name><name>q</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>double</name></type> <name>sum</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name><init>=<expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>sum</name><operator>+=</operator><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>sum</name><operator>/</operator><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>            
+        </block_content>}</block></while>
+        
+        <return>return <expr><name>results</name></expr>;</return>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

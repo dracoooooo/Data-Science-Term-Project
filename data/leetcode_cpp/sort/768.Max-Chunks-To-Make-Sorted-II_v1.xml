@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\768.Max-Chunks-To-Make-Sorted-II_v1.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>maxChunksToSorted</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>arr</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>auto</name></type> <name>expect</name> <init>= <expr><name>arr</name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>expect</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>expect</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+        <decl_stmt><decl><type><name>long</name></type> <name>sum1</name><init>=<expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>sum2</name><init>=<expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>count</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>arr</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><name>sum1</name><operator>+=</operator><name><name>arr</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>sum2</name><operator>+=</operator><name><name>expect</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+            <if_stmt><if>if <condition>(<expr><name>sum1</name><operator>==</operator><name>sum2</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>count</name> <operator>+=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>sum1</name> <operator>=</operator> <literal type="number">0</literal></expr><operator>,</operator> <expr><name>sum2</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>count</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

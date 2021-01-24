@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\802.Find-Eventual-Safe-States_DFS.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>visited</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>graph</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>eventualSafeNodes</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>graph</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name><name>graph</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>visited</name><operator>.</operator><name>resize</name></name><argument_list>(<argument><expr><name>n</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>this</name><operator>-&gt;</operator><name>graph</name></name> <operator>=</operator> <name>graph</name></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>rets</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <if_stmt><if>if <condition>(<expr><call><name>DFS</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt></block_content></block></for>
+        <return>return <expr><name>rets</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <function><type><name>bool</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>cur</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>visited</name><index>[<expr><name>cur</name></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>visited</name><index>[<expr><name>cur</name></expr>]</index></name><operator>==</operator><literal type="number">2</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name><name>visited</name><index>[<expr><name>cur</name></expr>]</index></name> <operator>=</operator> <literal type="number">2</literal></expr>;</expr_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>next</name><range>: <expr><name><name>graph</name><index>[<expr><name>cur</name></expr>]</index></name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>DFS</name><argument_list>(<argument><expr><name>next</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <expr_stmt><expr><name><name>visited</name><index>[<expr><name>cur</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

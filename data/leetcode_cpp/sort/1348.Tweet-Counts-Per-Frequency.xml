@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\1348.Tweet-Counts-Per-Frequency.cpp"><class>class <name>TweetCounts</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>,<argument><expr><name><name>multiset</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>Map</name></decl>;</decl_stmt>
+</private><public>public:
+    <constructor><name>TweetCounts</name><parameter_list>()</parameter_list> <block>{<block_content>
+        
+    </block_content>}</block></constructor>
+    
+    <function><type><name>void</name></type> <name>recordTweet</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>tweetName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>time</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>Map</name><index>[<expr><name>tweetName</name></expr>]</index></name><operator>.</operator><call><name>insert</name><argument_list>(<argument><expr><name>time</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>getTweetCountsPerFrequency</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>freq</name></decl></parameter>, <parameter><decl><type><name>string</name></type> <name>tweetName</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>startTime</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>endTime</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>rets</name></decl>;</decl_stmt>
+                
+        <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>delta</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>freq</name><operator>==</operator><literal type="string">"minute"</literal></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>delta</name> <operator>=</operator> <literal type="number">60</literal></expr>;</expr_stmt></block_content></block></if>
+        <if type="elseif">else if <condition>(<expr><name>freq</name><operator>==</operator><literal type="string">"hour"</literal></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>delta</name> <operator>=</operator> <literal type="number">60</literal><operator>*</operator><literal type="number">60</literal></expr>;</expr_stmt></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <expr_stmt><expr><name>delta</name> <operator>=</operator> <literal type="number">60</literal><operator>*</operator><literal type="number">60</literal><operator>*</operator><literal type="number">24</literal></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        
+        <decl_stmt><decl><type><name>auto</name></type> <name>iter</name> <init>= <expr><name><name>Map</name><index>[<expr><name>tweetName</name></expr>]</index></name><operator>.</operator><call><name>lower_bound</name><argument_list>(<argument><expr><name>startTime</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>                
+        
+        <while>while <condition>(<expr><name>startTime</name> <operator>&lt;=</operator> <name>endTime</name></expr>)</condition>
+        <block>{<block_content>            
+            <if_stmt><if>if <condition>(<expr><name>iter</name><operator>!=</operator><name><name>Map</name><index>[<expr><name>tweetName</name></expr>]</index></name><operator>.</operator><call><name>end</name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <operator>*</operator><name>iter</name> <operator>&lt;</operator> <name>startTime</name><operator>+</operator><name>delta</name> <operator>&amp;&amp;</operator> <operator>*</operator><name>iter</name><operator>&lt;=</operator><name>endTime</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>count</name><operator>++</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>iter</name> <operator>=</operator> <call><name>next</name><argument_list>(<argument><expr><name>iter</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <else>else
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>count</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>count</name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                <expr_stmt><expr><name>startTime</name> <operator>+=</operator> <name>delta</name></expr>;</expr_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></while>
+        
+        <return>return <expr><name>rets</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen">/**
+ * Your TweetCounts object will be instantiated and called as such:
+ * TweetCounts* obj = new TweetCounts();
+ * obj-&gt;recordTweet(tweetName,time);
+ * vector&lt;int&gt; param_2 = obj-&gt;getTweetCountsPerFrequency(freq,tweetName,startTime,endTime);
+ */</comment>
+</unit>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\49.Group-Anagrams.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>groupAnagrams</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>strs</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>,<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>Map</name></decl>;</decl_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>strs</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>string</name></type> <name>t</name> <init>= <expr><name><name>strs</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>t</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>t</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>Map</name><index>[<expr><name>t</name></expr>]</index></name><operator>.</operator><call><name>push_back</name><argument_list>(<argument><expr><name><name>strs</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>a</name><range>:<expr><name>Map</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>a</name><operator>.</operator><name>second</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        
+        <return>return <expr><name>results</name></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\295.Find-Median-from-Data-Stream_v2.cpp"><class>class <name>MedianFinder</name> <block>{<private type="default">
+</private><public>public:
+    <comment type="block" format="doxygen">/** initialize your data structure here. */</comment>
+    <decl_stmt><decl><type><name>double</name></type> <name>result</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>multiset</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Set</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name><name>multiset</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><operator>::</operator><name>iterator</name></name></type> <name>iter</name></decl>;</decl_stmt>
+    
+    <constructor><name>MedianFinder</name><parameter_list>()</parameter_list> <block>{<block_content>
+        
+    </block_content>}</block></constructor>
+    
+    <function><type><name>void</name></type> <name>addNum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><call><name><name>Set</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>==</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>iter</name> <operator>=</operator> <call><name><name>Set</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <operator>*</operator><name>iter</name></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><call><name><name>Set</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>%</operator><literal type="number">2</literal><operator>==</operator><literal type="number">1</literal></expr>)</condition>    <comment type="line">// OOXOOO</comment>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name><operator>&gt;=</operator><operator>*</operator><name>iter</name></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>iter</name> <operator>=</operator> <call><name>next</name><argument_list>(<argument><expr><name>iter</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <operator>*</operator><name>iter</name></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else    <comment type="line">// OOXOO</comment>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name><operator>&lt;</operator><operator>*</operator><name>iter</name></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>iter</name> <operator>=</operator> <call><name>prev</name><argument_list>(<argument><expr><name>iter</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <operator>*</operator><name>iter</name><operator>*</operator><literal type="number">0.5</literal> <operator>+</operator> <operator>*</operator><call><name>next</name><argument_list>(<argument><expr><name>iter</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></call><operator>*</operator><literal type="number">0.5</literal></expr>;</expr_stmt>                
+        </block_content>}</block></else></if_stmt>        
+    </block_content>}</block></function>
+    
+    <function><type><name>double</name></type> <name>findMedian</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <return>return <expr><name>result</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen">/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj-&gt;addNum(num);
+ * double param_2 = obj-&gt;findMedian();
+ */</comment>
+</unit>

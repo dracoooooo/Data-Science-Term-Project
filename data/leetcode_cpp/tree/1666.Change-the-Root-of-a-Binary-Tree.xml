@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\1666.Change-the-Root-of-a-Binary-Tree.cpp"><comment type="block">/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* parent;
+};
+*/</comment>
+
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>Node</name><modifier>*</modifier></type> <name>flipBinaryTree</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>Node</name> <modifier>*</modifier></type> <name>leaf</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>NULL</name></expr></argument>,<argument><expr><name>leaf</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>leaf</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>pre</name></decl></parameter>,<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>p</name><init>=<expr><name><name>node</name><operator>-&gt;</operator><name>parent</name></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>parent</name></name><operator>=</operator><name>pre</name></expr>;</expr_stmt>
+                
+        <if_stmt><if>if <condition>(<expr><name>p</name><operator>==</operator><name>NULL</name></expr>)</condition>
+        <block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name><operator>==</operator><name>pre</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <name>NULL</name></expr>;</expr_stmt>
+            </block_content>}</block></if>            
+            <if type="elseif">else if<condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name><operator>==</operator><name>pre</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name> <operator>=</operator> <name>NULL</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>            
+        </block_content>}</block></if>
+        <else>else
+        <block>{<block_content>
+            <if_stmt><if>if<condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name><operator>==</operator><name>pre</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <name>p</name></expr>;</expr_stmt>
+            </block_content>}</block></if>            
+            <if type="elseif">else if<condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name><operator>==</operator><name>pre</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name><operator>=</operator><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <name>p</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+        </block_content>}</block></else></if_stmt>
+            
+        <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>node</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

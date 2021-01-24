@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\437.PathSumIII.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>count</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    
+</private><public>public:
+    <function><type><name>int</name></type> <name>pathSum</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sum</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>GoThrough</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>count</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>GoThrough</name><parameter_list>(<parameter><decl><type><name>TreeNode</name> <modifier>*</modifier></type><name>root</name></decl></parameter>,<parameter><decl><type><name>int</name></type> <name>sum</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name>GoThrough</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>        
+        <expr_stmt><expr><call><name>GoThrough</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>count</name><operator>+=</operator> <call><name>pathSumNum</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>sum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>        
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>pathSumNum</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>sum</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name><operator>==</operator><name>sum</name></expr>)</condition><block type="pseudo"><block_content> 
+            <return>return <expr><literal type="number">1</literal><operator>+</operator><call><name>pathSumNum</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call><operator>+</operator><call><name>pathSumNum</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><call><name>pathSumNum</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>sum</name><operator>-</operator><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>+</operator><call><name>pathSumNum</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>sum</name><operator>-</operator><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

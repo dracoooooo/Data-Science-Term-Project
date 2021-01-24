@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\358.Rearrange-String-k-Distance-Apart.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>string</name></type> <name>rearrangeString</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>s</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>k</name><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>s</name></expr>;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>, <argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Map</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>ch</name><range>:<expr><name>s</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name><name>Map</name><index>[<expr><name>ch</name></expr>]</index></name><operator>+=</operator><literal type="number">1</literal></expr>;</expr_stmt></block_content></block></for>
+        <decl_stmt><decl><type><name><name>priority_queue</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>pq</name></decl>;</decl_stmt> <comment type="line">// freq, character</comment>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>Map</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name><name>x</name><operator>.</operator><name>second</name></name></expr>, <expr><name><name>x</name><operator>.</operator><name>first</name></name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        
+        <decl_stmt><decl><type><name>string</name></type> <name>ret</name></decl>;</decl_stmt>
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>pq</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&lt;</operator> <name>k</name> <operator>&amp;&amp;</operator> <call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><name>first</name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+            
+            <decl_stmt><decl><type><name>int</name></type> <name>n</name> <init>= <expr><call><name>min</name><argument_list>(<argument><expr><name>k</name></expr></argument>, <argument><expr><operator>(</operator><name>int</name><operator>)</operator><call><name><name>pq</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>temp</name></decl>;</decl_stmt>
+            
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <expr_stmt><expr><call><name><name>ret</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><operator>.</operator><name>second</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>temp</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>                
+            </block_content>}</block></for>
+            
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>temp</name></expr></range></decl></init>)</control>
+            <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>x</name><operator>.</operator><name>first</name></name> <operator>&gt;</operator> <literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name><name>x</name><operator>.</operator><name>first</name></name><operator>-</operator><literal type="number">1</literal></expr>, <expr><name><name>x</name><operator>.</operator><name>second</name></name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></while>
+        <return>return <expr><name>ret</name></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+
+
+</unit>

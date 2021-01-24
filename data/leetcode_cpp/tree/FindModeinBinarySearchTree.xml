@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\FindModeinBinarySearchTree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>findMode</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name>root</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><block>{}</block></expr>;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>res</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>TreeNode</name> <modifier>*</modifier></type><name>now</name> <init>= <expr><name>root</name></expr></init></decl>, <decl><type ref="prev"><modifier>*</modifier></type><name>pre</name> <init>= <expr><name>NULL</name></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>stack</name><argument_list type="generic">&lt;<argument><expr><name>TreeNode</name><modifier>*</modifier></expr></argument>&gt;</argument_list></name></type> <name>s</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>mx</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>cnt</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>s</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>||</operator> <name>now</name></expr>)</condition> <block>{<block_content>
+            <while>while <condition>(<expr><name>now</name></expr>)</condition> <block>{<block_content>             <comment type="line">//ä¸­åºéåï¼å·¦ä¸­å³ãå°æ¯ä¸ªç»ç¹çå·¦å­æ å¥æ </comment>
+                <expr_stmt><expr><call><name><name>s</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>now</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>now</name> <operator>=</operator> <name><name>now</name><operator>-&gt;</operator><name>left</name></name></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><name>now</name> <operator>=</operator> <call><name><name>s</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> <expr_stmt><expr><call><name><name>s</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt> <comment type="line">//åæ é¡¶åç´ </comment>
+            <if_stmt><if>if <condition>(<expr><name>pre</name></expr>)</condition> <block>{<block_content>              <comment type="line">//å¤æ­å½ååç´ åä¸ä¸ä¸ªåç´ å¼æ¯å¦ä¸æ ·ï¼ä¸æ ·cntè®¡æ°å ä¸</comment>
+                <expr_stmt><expr><name>cnt</name> <operator>=</operator> <ternary><condition><expr><operator>(</operator><name><name>now</name><operator>-&gt;</operator><name>val</name></name> <operator>==</operator> <name><name>pre</name><operator>-&gt;</operator><name>val</name></name><operator>)</operator></expr> ?</condition><then> <expr><name>cnt</name> <operator>+</operator> <literal type="number">1</literal></expr> </then><else>: <expr><literal type="number">1</literal></expr></else></ternary></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>                       <comment type="line">//å¦æcntå¤§äºç­äºmxï¼è¯´æå½ååç´ éå¤æ¬¡æ°å¤§äºä¹åæå¤§çéå¤åç´ çæ¬¡æ°ï¼éè¦å°æ°ç»æå¥ç»ææ ã</comment>
+            <if_stmt><if>if <condition>(<expr><name>cnt</name> <operator>&gt;=</operator> <name>mx</name></expr>)</condition> <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>cnt</name> <operator>&gt;</operator> <name>mx</name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                <expr_stmt><expr><call><name><name>res</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>now</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><name>mx</name> <operator>=</operator> <name>cnt</name></expr>;</expr_stmt>
+            </block_content>}</block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><name>pre</name></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>pre</name> <operator>=</operator> <operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><name><name>now</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt> 
+            <expr_stmt><expr><name><name>pre</name><operator>-&gt;</operator><name>val</name></name> <operator>=</operator> <name><name>now</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>now</name> <operator>=</operator> <name><name>now</name><operator>-&gt;</operator><name>right</name></name></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>res</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class></unit>

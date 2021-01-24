@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\1411.Number-of-Ways-to-Paint-N¡Á3-Grid_v1.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>numOfWays</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>long</name></type> <name>colors2</name> <init>= <expr><literal type="number">6</literal></expr></init></decl>, <decl><type ref="prev"/><name>colors3</name> <init>= <expr><literal type="number">6</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>long</name></type> <name>M</name> <init>= <expr><literal type="number">1e9</literal><operator>+</operator><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>n</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>long</name></type> <name>temp2</name> <init>= <expr><name>colors2</name></expr></init></decl>, <decl><type ref="prev"/><name>temp3</name> <init>= <expr><name>colors3</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name>colors2</name> <operator>=</operator> <operator>(</operator><operator>(</operator><literal type="number">3</literal><operator>*</operator><name>temp2</name><operator>)</operator><operator>%</operator><name>M</name> <operator>+</operator> <operator>(</operator><literal type="number">2</literal><operator>*</operator><name>temp3</name><operator>)</operator><operator>%</operator><name>M</name><operator>)</operator><operator>%</operator><name>M</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>colors3</name> <operator>=</operator> <operator>(</operator><operator>(</operator><literal type="number">2</literal><operator>*</operator><name>temp2</name><operator>)</operator><operator>%</operator><name>M</name> <operator>+</operator> <operator>(</operator><literal type="number">2</literal><operator>*</operator><name>temp3</name><operator>)</operator><operator>%</operator><name>M</name><operator>)</operator><operator>%</operator><name>M</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <return>return <expr><operator>(</operator><name>colors2</name><operator>+</operator><name>colors3</name><operator>)</operator><operator>%</operator><name>M</name></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

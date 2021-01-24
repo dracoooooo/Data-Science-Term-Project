@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\270.ClosestBinarySearchTreeValue.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>double</name></type> <name>closestValue</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>double</name></type> <name>target</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+
+        
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>double</name></type> <name>temp</name> <init>= <expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></init></decl>;</decl_stmt>        
+        
+       <while>while <condition>(<expr><name>root</name><operator>!=</operator><name>NULL</name></expr>)</condition>
+       <block>{<block_content>
+           
+           <if_stmt><if>if <condition>(<expr><call><name>fabs</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name><operator>-</operator><name>target</name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <call><name>fabs</name><argument_list>(<argument><expr><name>temp</name><operator>-</operator><name>target</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>temp</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+           
+           <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>==</operator> <name>target</name></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><name>target</name></expr>;</return></block_content></block></if>
+           <if type="elseif">else if<condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>&lt;</operator> <name>target</name></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>root</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr>;</expr_stmt></block_content></block></if>
+           <if type="elseif">else if<condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>&gt;</operator> <name>target</name></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>root</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr>;</expr_stmt></block_content></block></if></if_stmt>             
+       </block_content>}</block></while>
+       
+       <return>return <expr><name>temp</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

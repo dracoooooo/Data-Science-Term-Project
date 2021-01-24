@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\778.Swim-in-Rising-Water.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>swimInWater</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>grid</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <decl_stmt><decl><type><name><name>priority_queue</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></expr></argument>, <argument><expr><name><name>greater</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>pq</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name><name>grid</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>,<expr><literal type="number">0</literal></expr>,<expr><literal type="number">0</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><call><name><name>grid</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>visited</name> <init>= <expr><call><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>N</name></expr></argument>,<argument><expr><call><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>N</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>visited</name><index>[<expr><literal type="number">0</literal></expr>]</index><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>t</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>dir</name> <init>= <expr><call><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><block>{<expr><block>{<expr><literal type="number">1</literal></expr>,<expr><literal type="number">0</literal></expr>}</block></expr>,<expr><block>{<expr><operator>-</operator><literal type="number">1</literal></expr>,<expr><literal type="number">0</literal></expr>}</block></expr>,<expr><block>{<expr><literal type="number">0</literal></expr>,<expr><literal type="number">1</literal></expr>}</block></expr>,<expr><block>{<expr><literal type="number">0</literal></expr>,<expr><operator>-</operator><literal type="number">1</literal></expr>}</block></expr>}</block></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>pq</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>h</name> <init>= <expr><call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">0</literal></expr>]</index></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>x</name> <init>= <expr><call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">1</literal></expr>]</index></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>y</name> <init>= <expr><call><name><name>pq</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call><index>[<expr><literal type="number">2</literal></expr>]</index></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            
+            <expr_stmt><expr><name>t</name> <operator>=</operator> <name>h</name></expr>;</expr_stmt>
+            
+            <if_stmt><if>if <condition>(<expr><name>x</name><operator>==</operator><name>N</name><operator>-</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>y</name><operator>==</operator><name>N</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><name>t</name></expr>;</return></block_content></block></if></if_stmt>
+            
+            <decl_stmt><decl><type><name><name>queue</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>q</name></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>x</name></expr>,<expr><name>y</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>.</operator><name>first</name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>.</operator><name>second</name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>k</name><operator>&lt;</operator><literal type="number">4</literal></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control>
+                <block>{<block_content>
+                    <decl_stmt><decl><type><name>int</name></type> <name>xx</name> <init>= <expr><name>i</name><operator>+</operator><name><name>dir</name><index>[<expr><name>k</name></expr>]</index></name><operator>.</operator><name>first</name></expr></init></decl>;</decl_stmt>
+                    <decl_stmt><decl><type><name>int</name></type> <name>yy</name> <init>= <expr><name>j</name><operator>+</operator><name><name>dir</name><index>[<expr><name>k</name></expr>]</index></name><operator>.</operator><name>second</name></expr></init></decl>;</decl_stmt>
+                    <if_stmt><if>if <condition>(<expr><name>xx</name><operator>&lt;</operator><literal type="number">0</literal><operator>||</operator><name>xx</name><operator>&gt;=</operator><name>N</name><operator>||</operator><name>yy</name><operator>&lt;</operator><literal type="number">0</literal><operator>||</operator><name>yy</name><operator>&gt;=</operator><name>N</name></expr>)</condition><block type="pseudo"><block_content>
+                        <continue>continue;</continue></block_content></block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><name><name>visited</name><index>[<expr><name>xx</name></expr>]</index><index>[<expr><name>yy</name></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                        <continue>continue;</continue></block_content></block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><name><name>grid</name><index>[<expr><name>xx</name></expr>]</index><index>[<expr><name>yy</name></expr>]</index></name> <operator>&gt;</operator> <name>t</name></expr>)</condition>
+                    <block>{<block_content>
+                        <expr_stmt><expr><call><name><name>pq</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name><name>grid</name><index>[<expr><name>xx</name></expr>]</index><index>[<expr><name>yy</name></expr>]</index></name></expr>,<expr><name>xx</name></expr>,<expr><name>yy</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name><name>visited</name><index>[<expr><name>xx</name></expr>]</index><index>[<expr><name>yy</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                    </block_content>}</block></if>
+                    <else>else   <comment type="line">// grid[xx][yy] &lt;= t</comment>
+                    <block>{<block_content>
+                        <if_stmt><if>if <condition>(<expr><name>xx</name><operator>==</operator><name>N</name><operator>-</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name>yy</name><operator>==</operator><name>N</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                            <return>return <expr><name>t</name></expr>;</return></block_content></block></if></if_stmt>
+                        <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>xx</name></expr>,<expr><name>yy</name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                        <expr_stmt><expr><name><name>visited</name><index>[<expr><name>xx</name></expr>]</index><index>[<expr><name>yy</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+                    </block_content>}</block></else></if_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></while>
+            
+        </block_content>}</block></while>
+        
+        <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+</unit>

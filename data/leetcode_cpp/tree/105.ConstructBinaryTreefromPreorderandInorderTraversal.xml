@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\105.ConstructBinaryTreefromPreorderandInorderTraversal.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Map</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>buildTree</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>preorder</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>inorder</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>preorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>NULL</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>inorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name><name>Map</name><index>[<expr><name><name>inorder</name><index>[<expr><name>i</name></expr>]</index></name></expr>]</index></name><operator>=</operator><name>i</name></expr>;</expr_stmt></block_content></block></for>
+        
+        <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name> <init>= <expr><call><name>DFS</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><call><name><name>preorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>inorder</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><call><name><name>inorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <return>return <expr><name>root</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>preorder</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>a</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>b</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>inorder</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>m</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>a</name><operator>&gt;</operator><name>b</name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><name>NULL</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><name><name>preorder</name><index>[<expr><name>a</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>pos</name> <init>= <expr><name><name>Map</name><index>[<expr><name><name>preorder</name><index>[<expr><name>a</name></expr>]</index></name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <call><name>DFS</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><name>a</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>a</name><operator>+</operator><name>pos</name><operator>-</operator><name>m</name></expr></argument>,<argument><expr><name>inorder</name></expr></argument>,<argument><expr><name>m</name></expr></argument>,<argument><expr><name>pos</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name> <operator>=</operator> <call><name>DFS</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><name>a</name><operator>+</operator><name>pos</name><operator>-</operator><name>m</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>b</name></expr></argument>,<argument><expr><name>inorder</name></expr></argument>,<argument><expr><name>pos</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>n</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>root</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

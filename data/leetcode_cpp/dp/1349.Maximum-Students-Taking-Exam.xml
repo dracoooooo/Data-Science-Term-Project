@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\1349.Maximum-Students-Taking-Exam.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>M</name></decl>,<decl><type ref="prev"/><name>N</name></decl>,<decl><type ref="prev"/><name>T</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>int</name></type> <name>maxStudents</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>seats</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><name>M</name> <operator>=</operator> <call><name><name>seats</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>N</name> <operator>=</operator> <name><name>seats</name><index>[<expr><literal type="number">0</literal></expr>]</index></name><operator>.</operator><call><name>size</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>T</name> <operator>=</operator> <operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>N</name><operator>)</operator></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>dp</name><argument_list>(<argument><expr><name>T</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></decl>;</decl_stmt> 
+        <comment type="line">// dp[i]: until the current row, how many students at most we can host </comment>
+        <comment type="line">// given the current row follows pattern "i"</comment>
+      
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>p</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name><operator>&lt;</operator><name>T</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name>selfOK</name><argument_list>(<argument><expr><name>p</name></expr></argument>, <argument><expr><name>seats</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>p</name></expr>]</index></name> <operator>=</operator> <call><name>count</name><argument_list>(<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+  
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>row</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>row</name> <operator>&lt;</operator> <name>M</name></expr>;</condition> <incr><expr><name>row</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>dp2</name> <init>= <expr><name>dp</name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>cur</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>cur</name> <operator>&lt;</operator> <name>T</name></expr>;</condition> <incr><expr><name>cur</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>cur</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>selfOK</name><argument_list>(<argument><expr><name>cur</name></expr></argument>, <argument><expr><name>seats</name></expr></argument>, <argument><expr><name>row</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+                <for>for <control>(<init><decl><type><name>int</name></type> <name>prev</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>prev</name> <operator>&lt;</operator> <name>T</name></expr>;</condition> <incr><expr><name>prev</name><operator>++</operator></expr></incr>)</control>
+                <block>{<block_content>
+                    <if_stmt><if>if <condition>(<expr><name>row</name><operator>==</operator><literal type="number">2</literal> <operator>&amp;&amp;</operator> <name>cur</name><operator>==</operator><literal type="number">18</literal> <operator>&amp;&amp;</operator> <name>prev</name><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>cout</name><operator>&lt;&lt;</operator><call><name>crossOK</name><argument_list>(<argument><expr><name>cur</name></expr></argument>,<argument><expr><name>prev</name></expr></argument>)</argument_list></call><operator>&lt;&lt;</operator><literal type="string">" "</literal><operator>&lt;&lt;</operator><name><name>dp2</name><index>[<expr><name>prev</name></expr>]</index></name><operator>&lt;&lt;</operator><name>endl</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>selfOK</name><argument_list>(<argument><expr><name>prev</name></expr></argument>, <argument><expr><name>seats</name></expr></argument>, <argument><expr><name>row</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+                    <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>crossOK</name><argument_list>(<argument><expr><name>cur</name></expr></argument>, <argument><expr><name>prev</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+                    <expr_stmt><expr><name><name>dp</name><index>[<expr><name>cur</name></expr>]</index></name> <operator>=</operator> <call><name>max</name><argument_list>(<argument><expr><name><name>dp</name><index>[<expr><name>cur</name></expr>]</index></name></expr></argument>, <argument><expr><call><name>count</name><argument_list>(<argument><expr><name>cur</name></expr></argument>)</argument_list></call> <operator>+</operator> <name><name>dp2</name><index>[<expr><name>prev</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></for>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>ret</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>p</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>p</name> <operator>&lt;</operator> <name>T</name></expr>;</condition> <incr><expr><name>p</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><operator>!</operator><call><name>selfOK</name><argument_list>(<argument><expr><name>p</name></expr></argument>, <argument><expr><name>seats</name></expr></argument>, <argument><expr><name>M</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>=</operator> <call><name>max</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><name><name>dp</name><index>[<expr><name>p</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>bool</name></type> <name>selfOK</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>p</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>char</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>seats</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>row</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>temp</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>temp</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>p</name><operator>%</operator><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>p</name><operator>/=</operator><literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>seats</name><index>[<expr><name>row</name></expr>]</index><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><literal type="char">'#'</literal> <operator>&amp;&amp;</operator> <name><name>temp</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name><operator>&gt;=</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name><name>temp</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name><name>temp</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>     
+    </block_content>}</block></function>
+    
+    <function><type><name>bool</name></type> <name>crossOK</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>cur</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>prev</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>p1</name></decl>, <decl><type ref="prev"/><name>p2</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>p1</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>cur</name><operator>%</operator><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>p2</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>prev</name><operator>%</operator><literal type="number">2</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>cur</name><operator>/=</operator><literal type="number">2</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>prev</name><operator>/=</operator><literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>p1</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name><operator>-</operator><literal type="number">1</literal><operator>&gt;=</operator><literal type="number">0</literal> <operator>&amp;&amp;</operator> <name><name>p2</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+            <if_stmt><if>if <condition>(<expr><name>i</name><operator>+</operator><literal type="number">1</literal><operator>&lt;</operator><name>N</name> <operator>&amp;&amp;</operator> <name><name>p2</name><index>[<expr><name>i</name><operator>+</operator><literal type="number">1</literal></expr>]</index></name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>  
+        </block_content>}</block></for>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>     
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>count</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>p</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>        
+        <decl_stmt><decl><type><name>int</name></type> <name>ret</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>p</name><operator>&gt;</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>ret</name><operator>+=</operator><operator>(</operator><name>p</name><operator>%</operator><literal type="number">2</literal><operator>)</operator></expr>;</expr_stmt>
+            <expr_stmt><expr><name>p</name><operator>=</operator><name>p</name><operator>/</operator><literal type="number">2</literal></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+    
+</public>}</block>;</class>
+
+</unit>

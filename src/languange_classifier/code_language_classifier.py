@@ -207,7 +207,7 @@ def handle_user_data(path):
     text = [open(path, encoding='UTF-8').read()]
     text[0] = add_blank(text[0])
     # read tokenizer
-    f1 = open('tokenizer.pkl', 'rb')
+    f1 = open(os.path.dirname(os.path.realpath(__file__)) + "\\\\" +'tokenizer.pkl', 'rb')
     tokenizer = pickle.load(f1)
     f1.close()
 
@@ -247,7 +247,7 @@ def one_hot(arr):
 
 
 def predict(path):
-    model = load_model('language_classifier.h5')
+    model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" +'language_classifier.h5')
     # model.summary()
     test = handle_user_data(path)
     prediction = model.predict(test)
@@ -264,6 +264,7 @@ def predict(path):
         lang = "c&cpp"
     print("predict language:", lang)
     print("prossibility: ", max(tmp))
+    return lang, max(tmp)
 
 
 if __name__ == "__main__":

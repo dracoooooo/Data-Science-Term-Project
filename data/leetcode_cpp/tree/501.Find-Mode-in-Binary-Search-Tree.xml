@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\501.Find-Mode-in-Binary-Search-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>maxFreq</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>currentFreq</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>prev</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>findMode</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>results</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name>maxFreq</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><name>maxFreq</name><operator>=</operator><literal type="number">1</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>currentFreq</name><operator>=</operator><literal type="number">1</literal></expr>;</expr_stmt>
+            <expr_stmt><expr><name>prev</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name><operator>==</operator><name>prev</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>prev</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>currentFreq</name><operator>++</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>currentFreq</name><operator>==</operator><name>maxFreq</name></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>                
+                </block_content>}</block></if>
+                <if type="elseif">else if <condition>(<expr><name>currentFreq</name><operator>&gt;</operator><name>maxFreq</name></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><name>results</name><operator>=</operator><block>{<expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr>}</block></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>maxFreq</name><operator>=</operator><name>currentFreq</name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>                    
+            </block_content>}</block></if>
+            <else>else
+            <block>{<block_content>
+                <expr_stmt><expr><name>prev</name><operator>=</operator><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>currentFreq</name><operator>=</operator><literal type="number">1</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>maxFreq</name><operator>==</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+            </block_content>}</block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+        
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

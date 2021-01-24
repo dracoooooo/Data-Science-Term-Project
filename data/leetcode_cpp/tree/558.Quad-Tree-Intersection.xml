@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\558.Quad-Tree-Intersection.cpp"><comment type="block">/*
+// Definition for a QuadTree node.
+class Node {
+public:
+    bool val;
+    bool isLeaf;
+    Node* topLeft;
+    Node* topRight;
+    Node* bottomLeft;
+    Node* bottomRight;
+
+    Node() {}
+
+    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = _topLeft;
+        topRight = _topRight;
+        bottomLeft = _bottomLeft;
+        bottomRight = _bottomRight;
+    }
+};
+*/</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>Node</name><modifier>*</modifier></type> <name>intersect</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>quadTree1</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>quadTree2</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>quadTree1</name><operator>-&gt;</operator><name>val</name></name> <operator>||</operator> <name><name>quadTree2</name><operator>-&gt;</operator><name>val</name></name></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <return>return <expr><name>node</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>quadTree1</name><operator>-&gt;</operator><name>val</name></name> <operator>||</operator> <name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>quadTree2</name><operator>-&gt;</operator><name>val</name></name></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">1</literal></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <return>return <expr><name>node</name></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>A</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>B</name></decl>;</decl_stmt>
+            
+        <expr_stmt><expr><name>A</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree1</name></expr> </then><else>: <expr><name><name>quadTree1</name><operator>-&gt;</operator><name>topLeft</name></name></expr></else></ternary></expr>;</expr_stmt>
+        <expr_stmt><expr><name>B</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree2</name></expr> </then><else>: <expr><name><name>quadTree2</name><operator>-&gt;</operator><name>topLeft</name></name></expr></else></ternary></expr>;</expr_stmt>            
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>topLeft</name> <init>= <expr><call><name>intersect</name><argument_list>(<argument><expr><name>A</name></expr></argument>,<argument><expr><name>B</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            
+        <expr_stmt><expr><name>A</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree1</name></expr> </then><else>: <expr><name><name>quadTree1</name><operator>-&gt;</operator><name>topRight</name></name></expr></else></ternary></expr>;</expr_stmt>
+        <expr_stmt><expr><name>B</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree2</name></expr> </then><else>: <expr><name><name>quadTree2</name><operator>-&gt;</operator><name>topRight</name></name></expr></else></ternary></expr>;</expr_stmt>            
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>topRight</name> <init>= <expr><call><name>intersect</name><argument_list>(<argument><expr><name>A</name></expr></argument>,<argument><expr><name>B</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            
+        <expr_stmt><expr><name>A</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree1</name></expr> </then><else>: <expr><name><name>quadTree1</name><operator>-&gt;</operator><name>bottomLeft</name></name></expr></else></ternary></expr>;</expr_stmt>
+        <expr_stmt><expr><name>B</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree2</name></expr> </then><else>: <expr><name><name>quadTree2</name><operator>-&gt;</operator><name>bottomLeft</name></name></expr></else></ternary></expr>;</expr_stmt>            
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>bottomLeft</name> <init>= <expr><call><name>intersect</name><argument_list>(<argument><expr><name>A</name></expr></argument>,<argument><expr><name>B</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            
+        <expr_stmt><expr><name>A</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree1</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree1</name></expr> </then><else>: <expr><name><name>quadTree1</name><operator>-&gt;</operator><name>bottomRight</name></name></expr></else></ternary></expr>;</expr_stmt>
+        <expr_stmt><expr><name>B</name> <operator>=</operator> <ternary><condition><expr><name><name>quadTree2</name><operator>-&gt;</operator><name>isLeaf</name></name></expr> ?</condition><then> <expr><name>quadTree2</name></expr> </then><else>: <expr><name><name>quadTree2</name><operator>-&gt;</operator><name>bottomRight</name></name></expr></else></ternary></expr>;</expr_stmt>            
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>bottomRight</name> <init>= <expr><call><name>intersect</name><argument_list>(<argument><expr><name>A</name></expr></argument>,<argument><expr><name>B</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            
+        <if_stmt><if>if <condition>(<expr><name><name>topLeft</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>topRight</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>bottomLeft</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>&amp;&amp;</operator> <name><name>bottomRight</name><operator>-&gt;</operator><name>isLeaf</name></name> <operator>\</operator>\
+            <operator>&amp;&amp;</operator> <name><name>topLeft</name><operator>-&gt;</operator><name>val</name></name><operator>==</operator><name><name>topRight</name><operator>-&gt;</operator><name>val</name></name> <operator>&amp;&amp;</operator> <name><name>topRight</name><operator>-&gt;</operator><name>val</name></name><operator>==</operator><name><name>bottomLeft</name><operator>-&gt;</operator><name>val</name></name> <operator>&amp;&amp;</operator> <name><name>bottomLeft</name><operator>-&gt;</operator><name>val</name></name><operator>==</operator><name><name>bottomRight</name><operator>-&gt;</operator><name>val</name></name></expr> )</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><name><name>topLeft</name><operator>-&gt;</operator><name>val</name></name></expr></argument>, <argument><expr><literal type="boolean">true</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <return>return <expr><name>node</name></expr>;</return>
+        </block_content>}</block></if>
+        <else>else
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name> <init>= <expr><operator>new</operator> <call><name>Node</name><argument_list>(<argument><expr><literal type="number">0</literal></expr></argument>, <argument><expr><literal type="boolean">false</literal></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>topLeft</name></name> <operator>=</operator> <name>topLeft</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>topRight</name></name> <operator>=</operator> <name>topRight</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>bottomLeft</name></name> <operator>=</operator> <name>bottomLeft</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>node</name><operator>-&gt;</operator><name>bottomRight</name></name> <operator>=</operator> <name>bottomRight</name></expr>;</expr_stmt>
+            <return>return <expr><name>node</name></expr>;</return>
+        </block_content>}</block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

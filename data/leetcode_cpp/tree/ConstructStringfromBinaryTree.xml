@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\ConstructStringfromBinaryTree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>string</name></type> <name>tree2str</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>t</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name>t</name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>t</name><operator>-&gt;</operator><name>left</name></name> <operator>&amp;&amp;</operator> <operator>!</operator><name><name>t</name><operator>-&gt;</operator><name>right</name></name></expr>)</condition><block type="pseudo"><block_content> 
+            <return>return <expr><call><name>to_string</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">""</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name><name>t</name><operator>-&gt;</operator><name>right</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><call><name>to_string</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">"("</literal> <operator>+</operator> <call><name>tree2str</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">")"</literal></expr>;</return></block_content></block></if></if_stmt>
+        <return>return <expr><call><name>to_string</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">"("</literal> <operator>+</operator> <call><name>tree2str</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">")("</literal> <operator>+</operator> <call><name>tree2str</name><argument_list>(<argument><expr><name><name>t</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call> <operator>+</operator> <literal type="string">")"</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class></unit>

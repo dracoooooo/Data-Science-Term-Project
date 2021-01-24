@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\124.Binary-Tree-Maximum-Path-Sum.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name>int</name></type> <name>ret</name> <init>= <expr><name>INT_MIN</name></expr></init></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>int</name></type> <name>maxPathSum</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>MaxDownPath</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>MaxDownPath</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>  <comment type="line">// starting from node downward only, the max-sum path</comment>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>leftSum</name> <init>= <expr><call><name>MaxDownPath</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>rightSum</name> <init>= <expr><call><name>MaxDownPath</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>maxTurnSum</name> <init>= <expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>leftSum</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>maxTurnSum</name> <operator>+=</operator> <name>leftSum</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>rightSum</name> <operator>&gt;=</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <expr_stmt><expr><name>maxTurnSum</name> <operator>+=</operator> <name>rightSum</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <expr_stmt><expr><name>ret</name> <operator>=</operator> <call><name>max</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><name>maxTurnSum</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name>leftSum</name> <operator>&lt;</operator> <literal type="number">0</literal> <operator>&amp;&amp;</operator> <name>rightSum</name> <operator>&lt;</operator> <literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><call><name>max</name><argument_list>(<argument><expr><name>leftSum</name></expr></argument>, <argument><expr><name>rightSum</name></expr></argument>)</argument_list></call> <operator>+</operator> <name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

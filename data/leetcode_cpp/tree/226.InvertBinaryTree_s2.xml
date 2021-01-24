@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\226.InvertBinaryTree_s2.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>invertTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>NULL</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name>swap</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <call><name>invertTree</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name> <operator>=</operator> <call><name>invertTree</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <return>return <expr><name>root</name></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\449.SerializeandDeserializeBST.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Codec</name> <block>{<private type="default">
+</private><public>public:
+
+    <comment type="line">// Encodes a tree to a single string.</comment>
+    <function><type><name>string</name></type> <name>serialize</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>string</name></type> <name>s</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name>cout</name><operator>&lt;&lt;</operator><name>s</name><operator>&lt;&lt;</operator><name>endl</name></expr>;</expr_stmt>
+        <return>return <expr><name>s</name></expr>;</return>
+    </block_content>}</block></function>
+
+    <comment type="line">// Decodes your encoded data to tree.</comment>
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>deserialize</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>data</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>data</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>NULL</name></expr>;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>preorder</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>i</name><operator>&lt;</operator><call><name><name>data</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>string</name></type> <name>s</name><init>=<expr><literal type="string">""</literal></expr></init></decl>;</decl_stmt>
+            <while>while <condition>(<expr><name><name>data</name><index>[<expr><name>i</name></expr>]</index></name><operator>!=</operator><literal type="char">','</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>s</name><operator>+=</operator><name><name>data</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><call><name><name>preorder</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><call><name>stoi</name><argument_list>(<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><name>i</name><operator>++</operator></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>preorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>cout</name><operator>&lt;&lt;</operator><name><name>preorder</name><index>[<expr><name>i</name></expr>]</index></name><operator>&lt;&lt;</operator><literal type="string">" "</literal></expr>;</expr_stmt></block_content></block></for>
+        <expr_stmt><expr><name>cout</name><operator>&lt;&lt;</operator><name>endl</name></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>TreeNode</name> <modifier>*</modifier></type><name>root</name> <init>= <expr><call><name>DFS2</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><name>INT_MIN</name></expr></argument>,<argument><expr><name>INT_MAX</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <return>return <expr><name>root</name></expr>;</return>
+    </block_content>}</block></function>
+    
+</public><private>private:
+    <function><type><name>void</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>string</name><modifier>&amp;</modifier></type> <name>s</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><name>s</name><operator>+=</operator><call><name>to_string</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call><operator>+</operator><literal type="char">','</literal></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>s</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>DFS2</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>preorder</name></decl></parameter>,<parameter><decl><type><name>int</name></type> <name>curIdx</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>MIN</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>MAX</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>curIdx</name><operator>&gt;=</operator><call><name><name>preorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>NULL</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name><name>preorder</name><index>[<expr><name>curIdx</name></expr>]</index></name><operator>&lt;</operator><name>MIN</name> <operator>||</operator> <name><name>preorder</name><index>[<expr><name>curIdx</name></expr>]</index></name><operator>&gt;</operator><name>MAX</name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><call><name>DFS2</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>, <argument><expr><name>curIdx</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><name>MIN</name></expr></argument>, <argument><expr><name>MAX</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name> <init>= <expr><operator>new</operator> <call><name>TreeNode</name><argument_list>(<argument><expr><name><name>preorder</name><index>[<expr><name>curIdx</name></expr>]</index></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name> <operator>=</operator> <call><name>DFS2</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><name>curIdx</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>MIN</name></expr></argument>,<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name> <operator>=</operator> <call><name>DFS2</name><argument_list>(<argument><expr><name>preorder</name></expr></argument>,<argument><expr><name>curIdx</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>,<argument><expr><name>MAX</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> 
+        
+        <return>return <expr><name>root</name></expr>;</return>
+    </block_content>}</block></function>
+</private>}</block>;</class>
+
+<comment type="line">// Your Codec object will be instantiated and called as such:</comment>
+<comment type="line">// Codec codec;</comment>
+<comment type="line">// codec.deserialize(codec.serialize(root));</comment>
+</unit>

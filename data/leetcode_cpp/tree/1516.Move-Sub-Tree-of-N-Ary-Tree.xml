@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\1516.Move-Sub-Tree-of-N-Ary-Tree.cpp"><comment type="block">/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector&lt;Node*&gt; children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector&lt;Node*&gt; _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/</comment>
+
+<class>class <name>Solution</name> <block>{<private type="default">
+    <function><type><name>bool</name></type> <name>isDirectChild</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>q</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>p</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name><name>q</name><operator>-&gt;</operator><name>children</name></name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>x</name><operator>==</operator><name>p</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><literal type="boolean">false</literal></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>Node</name><modifier>*</modifier></type> <name>findParent</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>p</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>:<expr><name><name>root</name><operator>-&gt;</operator><name>children</name></name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <if_stmt><if>if <condition>(<expr><name>x</name><operator>==</operator><name>p</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>root</name></expr>;</return></block_content></block></if></if_stmt></block_content></block></for>
+        
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>:<expr><name><name>root</name><operator>-&gt;</operator><name>children</name></name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>temp</name> <init>= <expr><call><name>findParent</name><argument_list>(<argument><expr><name>x</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><name>temp</name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>temp</name></expr>;</return></block_content></block></if></if_stmt>                
+        </block_content>}</block></for>            
+        <return>return <expr><name>NULL</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <comment type="line">// Find child under parent, and replace it with node</comment>
+    <function><type><name>void</name></type> <name>disconnectOrReplace</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>parent</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>child</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>parent</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>parent</name><operator>-&gt;</operator><name>children</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><name>child</name></expr>)</condition>
+            <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><call><name><name>parent</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><call><name><name>parent</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+                <else>else<block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>parent</name><operator>-&gt;</operator><name>children</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>node</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                <return>return;</return>
+            </block_content>}</block></if></if_stmt>                
+        </block_content>}</block></for>
+    </block_content>}</block></function>
+    
+</private><public>public:
+    <function><type><name>Node</name><modifier>*</modifier></type> <name>moveSubTree</name><parameter_list>(<parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>p</name></decl></parameter>, <parameter><decl><type><name>Node</name><modifier>*</modifier></type> <name>q</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name>isDirectChild</name><argument_list>(<argument><expr><name>q</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><name>root</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>parentOfp</name> <init>= <expr><call><name>findParent</name><argument_list>(<argument><expr><name>q</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>parentOfq</name> <init>= <expr><call><name>findParent</name><argument_list>(<argument><expr><name>p</name></expr></argument>,<argument><expr><name>q</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name>p</name><operator>==</operator><name>root</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>disconnectOrReplace</name><argument_list>(<argument><expr><name>parentOfq</name></expr></argument>, <argument><expr><name>q</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>q</name></expr>;</return>
+        </block_content>}</block></if>   
+        <if type="elseif">else if <condition>(<expr><name>parentOfp</name><operator>!=</operator><name>NULL</name></expr>)</condition>  <comment type="line">// p is in the subtree of q</comment>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>disconnectOrReplace</name><argument_list>(<argument><expr><name>parentOfp</name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>root</name></expr>;</return>
+        </block_content>}</block></if> 
+        <if type="elseif">else if <condition>(<expr><name>parentOfq</name><operator>!=</operator><name>NULL</name></expr>)</condition>    <comment type="line">// q is in the subtree of p</comment>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>disconnectOrReplace</name><argument_list>(<argument><expr><name>parentOfq</name></expr></argument>, <argument><expr><name>q</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>parentOfp</name> <init>= <expr><call><name>findParent</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>            
+            <expr_stmt><expr><call><name>disconnectOrReplace</name><argument_list>(<argument><expr><name>parentOfp</name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>q</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>root</name></expr>;</return>        
+        </block_content>}</block></if>        
+        <else>else  <comment type="line">// p and q are in different subtrees</comment>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>Node</name><modifier>*</modifier></type> <name>parentOfp</name> <init>= <expr><call><name>findParent</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name>disconnectOrReplace</name><argument_list>(<argument><expr><name>parentOfp</name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>-&gt;</operator><name>children</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name>p</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><name>root</name></expr>;</return>        
+        </block_content>}</block></else></if_stmt>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

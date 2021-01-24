@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\1419.Minimum-Number-of-Frogs-Croaking.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>minNumberOfFrogs</name><parameter_list>(<parameter><decl><type><name>string</name></type> <name>croakOfFrogs</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>c</name><init>=<expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>r</name><init>=<expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>o</name><init>=<expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>a</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>ret</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>ch</name><range>: <expr><name>croakOfFrogs</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>ch</name><operator>==</operator><literal type="char">'c'</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>c</name><operator>++</operator></expr>;</expr_stmt></block_content></block></if>
+            <if type="elseif">else if <condition>(<expr><name>ch</name><operator>==</operator><literal type="char">'r'</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>c</name><operator>--</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>r</name><operator>++</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>c</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+            </block_content>}</block></if>
+            <if type="elseif">else if <condition>(<expr><name>ch</name><operator>==</operator><literal type="char">'o'</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>r</name><operator>--</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>o</name><operator>++</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>r</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+            </block_content>}</block></if>
+            <if type="elseif">else if <condition>(<expr><name>ch</name><operator>==</operator><literal type="char">'a'</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>o</name><operator>--</operator></expr>;</expr_stmt>
+                <expr_stmt><expr><name>a</name><operator>++</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>o</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+            </block_content>}</block></if>
+            <if type="elseif">else if <condition>(<expr><name>ch</name><operator>==</operator><literal type="char">'k'</literal></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>a</name><operator>--</operator></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>a</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+            </block_content>}</block></if></if_stmt>
+            <expr_stmt><expr><name>ret</name> <operator>=</operator> <call><name>max</name><argument_list>(<argument><expr><name>ret</name></expr></argument>, <argument><expr><name>c</name><operator>+</operator><name>r</name><operator>+</operator><name>o</name><operator>+</operator><name>a</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <if_stmt><if>if <condition>(<expr><name>c</name><operator>+</operator><name>r</name><operator>+</operator><name>o</name><operator>+</operator><name>a</name><operator>&gt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+        
+        <return>return <expr><name>ret</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="line">// c-- r++</comment>
+</unit>

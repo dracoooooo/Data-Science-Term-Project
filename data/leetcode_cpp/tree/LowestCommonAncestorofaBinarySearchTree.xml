@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\LowestCommonAncestorofaBinarySearchTree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>lowestCommonAncestor</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>p</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>q</name></decl></parameter>)</parameter_list> <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name><name>p</name><operator>-&gt;</operator><name>val</name> <argument_list type="generic">&lt; <argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>&amp;&amp;</operator> <name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument> &gt;</argument_list></name> <name><name>q</name><operator>-&gt;</operator><name>val</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><call><name>lowestCommonAncestor</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>q</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if>
+        <if type="elseif">else if <condition>(<expr><name><name>p</name><operator>-&gt;</operator><name>val</name></name> <operator>&gt;</operator> <name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>&amp;&amp;</operator> <name><name>root</name><operator>-&gt;</operator><name>val</name></name> <operator>&lt;</operator> <name><name>q</name><operator>-&gt;</operator><name>val</name></name></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><call><name>lowestCommonAncestor</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>, <argument><expr><name>p</name></expr></argument>, <argument><expr><name>q</name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><name>root</name></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class></unit>

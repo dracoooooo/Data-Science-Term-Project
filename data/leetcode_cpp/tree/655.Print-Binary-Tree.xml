@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\655.Print-Binary-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type> <name>printTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>maxHeight</name> <init>= <expr><call><name>getHeight</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>maxWidth</name> <init>= <expr><call><name>pow</name><argument_list>(<argument><expr><literal type="number">2</literal></expr></argument>,<argument><expr><name>maxHeight</name></expr></argument>)</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>auto</name></type> <name>results</name><init>=<expr><call><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>maxHeight</name></expr></argument>,<argument><expr><call><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name><argument_list>(<argument><expr><name>maxWidth</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>                
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><name>maxWidth</name><operator>-</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>results</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>        
+        <return>return <expr><name>results</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>dep</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>start</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>end</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>results</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>pos</name><init>=<expr><operator>(</operator><name>start</name><operator>+</operator><name>end</name><operator>)</operator><operator>/</operator><literal type="number">2</literal></expr></init></decl>;</decl_stmt>        
+        <expr_stmt><expr><name><name>results</name><index>[<expr><name>dep</name></expr>]</index><index>[<expr><name>pos</name></expr>]</index></name><operator>=</operator><call><name>to_string</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>dep</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>start</name></expr></argument>,<argument><expr><name>pos</name><operator>-</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>results</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>dep</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>pos</name><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>end</name></expr></argument>,<argument><expr><name>results</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>getHeight</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content> <return>return <expr><call><name>max</name><argument_list>(<argument><expr><call><name>getHeight</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></argument>,<argument><expr><call><name>getHeight</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call><operator>+</operator><literal type="number">1</literal></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+    
+</public>}</block>;</class>
+</unit>

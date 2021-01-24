@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\1508.Range-Sum-of-Sorted-Subarray-Sums.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>nums</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>int</name></type> <name>totalSum</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>int</name></type> <name>rangeSum</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>n</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>left</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>right</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><name><name>this</name><operator>-&gt;</operator><name>nums</name></name> <operator>=</operator> <name>nums</name></expr>;</expr_stmt>
+        <expr_stmt><expr><name>totalSum</name> <operator>=</operator> <call><name>accumulate</name><argument_list>(<argument><expr><call><name><name>nums</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>nums</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>ret</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>M</name> <init>= <expr><literal type="number">1e9</literal><operator>+</operator><literal type="number">7</literal></expr></init></decl>;</decl_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>k</name> <init>= <expr><name>left</name></expr></init></decl>;</init> <condition><expr><name>k</name> <operator>&lt;=</operator> <name>right</name></expr>;</condition> <incr><expr><name>k</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>ret</name> <operator>=</operator> <operator>(</operator><name>ret</name> <operator>+</operator> <call><name>kthSum</name><argument_list>(<argument><expr><name>k</name></expr></argument>)</argument_list></call><operator>)</operator><operator>%</operator><name>M</name></expr>;</expr_stmt></block_content></block></for>
+        <return>return <expr><name>ret</name></expr>;</return>        
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>kthSum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><literal type="number">1</literal></expr></init></decl>, <decl><type ref="prev"/><name>right</name> <init>= <expr><name>totalSum</name></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>left</name><operator>&lt;</operator><name>right</name></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>mid</name> <init>= <expr><name>left</name><operator>+</operator><operator>(</operator><name>right</name><operator>-</operator><name>left</name><operator>)</operator><operator>/</operator><literal type="number">2</literal></expr></init></decl>;</decl_stmt>
+            <if_stmt><if>if <condition>(<expr><call><name>smallerOrEqual</name><argument_list>(<argument><expr><name>mid</name></expr></argument>)</argument_list></call> <operator>&lt;</operator> <name>k</name></expr>)</condition><block type="pseudo"><block_content>  <comment type="line">// how many ranges whose sum is smaller or equal to mid</comment>
+                <expr_stmt><expr><name>left</name> <operator>=</operator> <name>mid</name><operator>+</operator><literal type="number">1</literal></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><name>right</name> <operator>=</operator> <name>mid</name></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><name>left</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>smallerOrEqual</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>s</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>count</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name>  <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>            
+            <while>while <condition>(<expr><name>j</name><operator>&lt;</operator><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name>sum</name><operator>+</operator><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name><operator>&lt;=</operator><name>s</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>sum</name><operator>+=</operator><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+            </block_content>}</block></while>                
+            <expr_stmt><expr><name>count</name> <operator>+=</operator> <name>j</name><operator>-</operator><name>i</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name>sum</name> <operator>-=</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        <return>return <expr><name>count</name></expr>;</return>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

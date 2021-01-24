@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\295.Find-Median-from-Data-Stream.cpp"><class>class <name>MedianFinder</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>multiset</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Small</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name><name>multiset</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Large</name></decl>;</decl_stmt>
+    
+</private><public>public:
+    <comment type="block" format="doxygen">/** initialize your data structure here. */</comment>
+    <constructor><name>MedianFinder</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name><name>Small</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name><name>Large</name><operator>.</operator><name>clear</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+    </block_content>}</block></constructor>
+    
+    <function><type><name>void</name></type> <name>addNum</name><parameter_list>(<parameter><decl><type><name>int</name></type> <name>num</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>Large</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>==</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>Large</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <else>else
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>num</name><operator>&gt;=</operator><operator>*</operator><operator>(</operator><call><name><name>Large</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>)</operator></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>Large</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>Small</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+        </block_content>}</block></else></if_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><call><name><name>Large</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>&gt;=</operator><call><name><name>Small</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>+</operator><literal type="number">2</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Small</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><operator>*</operator><call><name><name>Large</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Large</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><call><name><name>Large</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <if type="elseif">else if <condition>(<expr><call><name><name>Small</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>&gt;</operator><call><name><name>Large</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Large</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><operator>*</operator><operator>(</operator><operator>--</operator><call><name><name>Small</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call><operator>)</operator></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Small</name><operator>.</operator><name>erase</name></name><argument_list>(<argument><expr><operator>--</operator><call><name><name>Small</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>double</name></type> <name>findMedian</name><parameter_list>()</parameter_list> 
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><call><name><name>Large</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>&gt;</operator><call><name><name>Small</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <return>return <expr><operator>*</operator><call><name><name>Large</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content>
+            <return>return <expr><operator>(</operator><operator>*</operator><call><name><name>Large</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><operator>*</operator><operator>(</operator><operator>--</operator><call><name><name>Small</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call><operator>)</operator><operator>)</operator><operator>*</operator><literal type="number">1.0</literal><operator>/</operator><literal type="number">2.0</literal></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+<comment type="block" format="doxygen">/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
+ */</comment>
+</unit>

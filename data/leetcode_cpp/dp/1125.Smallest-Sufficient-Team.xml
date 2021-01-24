@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\1125.Smallest-Sufficient-Team.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>smallestSufficientTeam</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>req_skills</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>people</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>string</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>skill2num</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator> <call><name><name>req_skills</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><name><name>skill2num</name><index>[<expr><name><name>req_skills</name><index>[<expr><name>i</name></expr>]</index></name></expr>]</index></name> <operator>=</operator> <name>i</name></expr>;</expr_stmt>            
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>p2s</name><argument_list>(<argument><expr><call><name><name>people</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>people</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>skillset</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>skill</name><range>: <expr><name><name>people</name><index>[<expr><name>i</name></expr>]</index></name></expr></range></decl></init>)</control>
+            <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><call><name><name>skill2num</name><operator>.</operator><name>find</name></name><argument_list>(<argument><expr><name>skill</name></expr></argument>)</argument_list></call><operator>==</operator><call><name><name>skill2num</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+                    <continue>continue;</continue></block_content></block></if></if_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>idx</name> <init>= <expr><name><name>skill2num</name><index>[<expr><name>skill</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <expr_stmt><expr><name>skillset</name> <operator>+=</operator> <operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>idx</name><operator>)</operator></expr>;</expr_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name><name>p2s</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>skillset</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name> <init>= <expr><call><name><name>req_skills</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>saves</name><argument_list>(<argument><expr><literal type="number">1</literal><operator>&lt;&lt;</operator><name>N</name></expr></argument>)</argument_list></decl>;</decl_stmt>  <comment type="line">// saves[skillset] : the member ids that fulfill skillset</comment>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>dp</name><argument_list>(<argument><expr><operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>N</name><operator>)</operator></expr></argument>, <argument><expr><name>INT_MAX</name><operator>/</operator><literal type="number">2</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        
+        <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>people</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>dp2</name> <init>= <expr><name>dp</name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>skillset</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>skillset</name> <operator>&lt;</operator> <operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>N</name><operator>)</operator></expr>;</condition> <incr><expr><name>skillset</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>new_skillset</name> <init>= <expr><name>skillset</name> <operator>|</operator> <name><name>p2s</name><index>[<expr><name>i</name></expr>]</index></name></expr></init></decl>;</decl_stmt>
+                <if_stmt><if>if <condition>(<expr><name><name>dp2</name><index>[<expr><name>new_skillset</name></expr>]</index></name> <operator>&gt;</operator> <name><name>dp</name><index>[<expr><name>skillset</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><name><name>dp2</name><index>[<expr><name>new_skillset</name></expr>]</index></name> <operator>=</operator> <name><name>dp</name><index>[<expr><name>skillset</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>saves</name><index>[<expr><name>new_skillset</name></expr>]</index></name> <operator>=</operator> <name><name>saves</name><index>[<expr><name>skillset</name></expr>]</index></name></expr>;</expr_stmt>
+                    <expr_stmt><expr><name><name>saves</name><index>[<expr><name>new_skillset</name></expr>]</index></name><operator>.</operator><call><name>push_back</name><argument_list>(<argument><expr><name>i</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name>dp</name> <operator>=</operator> <name>dp2</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <return>return <expr><name><name>saves</name><index>[<expr><operator>(</operator><literal type="number">1</literal><operator>&lt;&lt;</operator><name>N</name><operator>)</operator><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>;</return>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+</unit>

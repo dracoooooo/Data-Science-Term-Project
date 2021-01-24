@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\494.Target-Sum_DP_v3.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>findTargetSumWays</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>S</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>sum</name> <init>= <expr><call><name>accumulate</name><argument_list>(<argument><expr><call><name><name>nums</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>nums</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>S</name><operator>&gt;</operator><name>sum</name> <operator>||</operator> <name>S</name><operator>&lt;</operator><operator>-</operator><name>sum</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>offset</name> <init>= <expr><name>sum</name></expr></init></decl>;</decl_stmt>        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>dp</name><argument_list>(<argument><expr><literal type="number">2</literal><operator>*</operator><name>offset</name><operator>+</operator><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <expr_stmt><expr><name><name>dp</name><index>[<expr><literal type="number">0</literal><operator>+</operator><name>offset</name></expr>]</index></name> <operator>=</operator> <literal type="number">1</literal></expr>;</expr_stmt>
+        
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>nums</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>auto</name></type> <name>temp</name> <init>= <expr><name>dp</name></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><operator>-</operator><name>offset</name></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;=</operator><name>offset</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name><operator>+</operator><name>offset</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+                <if_stmt><if>if <condition>(<expr><name>i</name><operator>-</operator><name>x</name><operator>&gt;=</operator><operator>-</operator><name>offset</name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name><operator>+</operator><name>offset</name></expr>]</index></name> <operator>+=</operator> <name><name>temp</name><index>[<expr><name>i</name><operator>-</operator><name>x</name><operator>+</operator><name>offset</name></expr>]</index></name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                <if_stmt><if>if <condition>(<expr><name>i</name><operator>+</operator><name>x</name><operator>&lt;=</operator><name>offset</name></expr>)</condition><block type="pseudo"><block_content>
+                    <expr_stmt><expr><name><name>dp</name><index>[<expr><name>i</name><operator>+</operator><name>offset</name></expr>]</index></name> <operator>+=</operator> <name><name>temp</name><index>[<expr><name>i</name><operator>+</operator><name>x</name><operator>+</operator><name>offset</name></expr>]</index></name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+                <comment type="line">//cout&lt;&lt;x&lt;&lt;" "&lt;&lt;i&lt;&lt;" "&lt;&lt;dp[i+offset]&lt;&lt;endl;</comment>
+            </block_content>}</block></for>
+        </block_content>}</block></for>
+        
+        <return>return <expr><name><name>dp</name><index>[<expr><name>S</name><operator>+</operator><name>offset</name></expr>]</index></name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

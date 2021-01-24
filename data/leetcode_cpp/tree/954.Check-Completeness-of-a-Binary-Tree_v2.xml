@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\954.Check-Completeness-of-a-Binary-Tree_v2.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>bool</name></type> <name>isCompleteTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>queue</name><argument_list type="generic">&lt;<argument><expr><name>TreeNode</name><modifier>*</modifier></expr></argument>&gt;</argument_list></name></type><name>q</name></decl>;</decl_stmt>
+        <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <while>while <condition>(<expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>!=</operator><name>NULL</name></expr>)</condition>
+        <block>{<block_content>            
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>-&gt;</operator><name>left</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>            
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>-&gt;</operator><name>right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></while>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

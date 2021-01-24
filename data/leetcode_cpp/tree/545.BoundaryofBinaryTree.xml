@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\545.BoundaryofBinaryTree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>boundaryOfBinaryTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>results</name></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><name>results</name></expr>;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Left</name></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name><operator>!=</operator><name>NULL</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>GoLeft</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>Left</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Left</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Bottom</name></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name><operator>!=</operator><name>NULL</name> <operator>||</operator> <name><name>root</name><operator>-&gt;</operator><name>right</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>GoBottom</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><name>Bottom</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Right</name></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name><operator>!=</operator><name>NULL</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>GoRight</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>Right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name><name>Right</name><operator>.</operator><name>pop_back</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><call><name>reverse</name><argument_list>(<argument><expr><call><name><name>Right</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>,<argument><expr><call><name><name>Right</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>Left</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>Left</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>Bottom</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>Bottom</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>Right</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>results</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>Right</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>    
+        
+        <return>return <expr><name>results</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>GoLeft</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>Left</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name><name>Left</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>GoLeft</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>Left</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <if type="elseif">else if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>GoLeft</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>Left</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>GoRight</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>Right</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        
+        <expr_stmt><expr><call><name><name>Right</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>GoRight</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>Right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+        <if type="elseif">else if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name><operator>!=</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name>GoRight</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>Right</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if></if_stmt>
+    </block_content>}</block></function>    
+    
+    <function><type><name>void</name></type> <name>GoBottom</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>Bottom</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>root</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name><operator>==</operator><name>NULL</name> <operator>&amp;&amp;</operator> <name><name>root</name><operator>-&gt;</operator><name>right</name></name><operator>==</operator><name>NULL</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>Bottom</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></if>
+        <else>else
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>GoBottom</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>Bottom</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <expr_stmt><expr><call><name>GoBottom</name><argument_list>(<argument><expr><name><name>root</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>Bottom</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

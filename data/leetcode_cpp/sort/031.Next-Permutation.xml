@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\sort\031.Next-Permutation.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>void</name></type> <name>nextPermutation</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>i</name> <init>= <expr><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name>i</name><operator>&gt;=</operator><literal type="number">1</literal> <operator>&amp;&amp;</operator> <name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name><operator>&lt;=</operator><name><name>nums</name><index>[<expr><name>i</name><operator>-</operator><literal type="number">1</literal></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>i</name><operator>--</operator></expr>;</expr_stmt></block_content></block></while>
+        
+        <if_stmt><if>if <condition>(<expr><name>i</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>nums</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>nums</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <expr_stmt><expr><name>i</name><operator>--</operator></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>j</name> <init>= <expr><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call><operator>-</operator><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <while>while <condition>(<expr><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name><operator>&lt;=</operator><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name> <operator>&amp;&amp;</operator> <name>j</name><operator>&gt;</operator><name>i</name></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>j</name><operator>--</operator></expr>;</expr_stmt></block_content></block></while>
+        <expr_stmt><expr><call><name>swap</name><argument_list>(<argument><expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>, <argument><expr><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>sort</name><argument_list>(<argument><expr><call><name><name>nums</name><operator>.</operator><name>begin</name></name><argument_list>()</argument_list></call><operator>+</operator><name>i</name><operator>+</operator><literal type="number">1</literal></expr></argument>, <argument><expr><call><name><name>nums</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\863.All-Nodes-Distance-K-in-Binary-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>rets</name></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type> <name>distanceK</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>K</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <expr_stmt><expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>K</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>rets</name></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>target</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if></if_stmt>
+        
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>target</name></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name>fetch</name><argument_list>(<argument><expr><name>node</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return <expr><literal type="number">0</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+            
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>depth1</name> <init>= <expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>        
+        <if_stmt><if>if <condition>(<expr><name>depth1</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>depth1</name> <operator>==</operator> <name>k</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>                
+                <expr_stmt><expr><call><name>fetch</name><argument_list>( <argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>, <argument><expr><name>k</name> <operator>-</operator> <name>depth1</name> <operator>-</operator><literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+                
+            <return>return <expr><name>depth1</name><operator>+</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>depth2</name> <init>= <expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>, <argument><expr><name>target</name></expr></argument>, <argument><expr><name>k</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>depth2</name> <operator>!=</operator> <operator>-</operator><literal type="number">1</literal></expr>)</condition>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name>depth2</name> <operator>==</operator> <name>k</name><operator>-</operator><literal type="number">1</literal></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></if>
+            <else>else<block type="pseudo"><block_content>    
+                <expr_stmt><expr><call><name>fetch</name><argument_list>( <argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>, <argument><expr><name>k</name> <operator>-</operator> <name>depth2</name> <operator>-</operator><literal type="number">2</literal></expr></argument> )</argument_list></call></expr>;</expr_stmt></block_content></block></else></if_stmt>
+            <return>return <expr><name>depth2</name><operator>+</operator><literal type="number">1</literal></expr>;</return>
+        </block_content>}</block></if></if_stmt>
+        
+        <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>void</name></type> <name>fetch</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>k</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>k</name><operator>&lt;</operator><literal type="number">0</literal></expr>)</condition><block type="pseudo"><block_content> <return>return;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>k</name><operator>==</operator><literal type="number">0</literal></expr>)</condition>
+        <block>{<block_content>
+            <expr_stmt><expr><call><name><name>rets</name><operator>.</operator><name>push_back</name></name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>val</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            <return>return;</return>
+        </block_content>}</block></if></if_stmt>
+        <expr_stmt><expr><call><name>fetch</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>, <argument><expr><name>k</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <expr_stmt><expr><call><name>fetch</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>, <argument><expr><name>k</name><operator>-</operator><literal type="number">1</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+
+
+</unit>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\954.Check-Completeness-of-a-Binary-Tree.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>bool</name></type> <name>isCompleteTree</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>nodeNums</name> <init>= <expr><call><name>countNodes</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <return>return <expr><call><name>DFS</name><argument_list>(<argument><expr><name>root</name></expr></argument>,<argument><expr><literal type="number">0</literal></expr></argument>,<argument><expr><name>nodeNums</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>bool</name></type> <name>DFS</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>index</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>nodeNums</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name>node</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">true</literal></expr>;</return></block_content></block></if></if_stmt>
+        <if_stmt><if>if <condition>(<expr><name>index</name><operator>&gt;=</operator><name>nodeNums</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+        <return>return <expr><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>,<argument><expr><name>index</name><operator>*</operator><literal type="number">2</literal><operator>+</operator><literal type="number">1</literal></expr></argument>,<argument><expr><name>nodeNums</name></expr></argument>)</argument_list></call><operator>&amp;&amp;</operator><call><name>DFS</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>,<argument><expr><name>index</name><operator>*</operator><literal type="number">2</literal><operator>+</operator><literal type="number">2</literal></expr></argument>,<argument><expr><name>nodeNums</name></expr></argument>)</argument_list></call></expr>;</return>
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>countNodes</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><operator>!</operator><name>node</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content> <return>return <expr><literal type="number">1</literal><operator>+</operator><call><name>countNodes</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call><operator>+</operator><call><name>countNodes</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr>;</return></block_content></block></else></if_stmt>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

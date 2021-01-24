@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\dp\673.Number-of-Longest-Increasing-Subsequence.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>findNumberOfLIS</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>nums</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name>int</name></type> <name>N</name><init>=<expr><call><name><name>nums</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>len</name><argument_list>(<argument><expr><name>N</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>num</name><argument_list>(<argument><expr><name>N</name></expr></argument>,<argument><expr><literal type="number">1</literal></expr></argument>)</argument_list></decl>;</decl_stmt>
+        
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>maxLen</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>maxNum</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+            <for>for <control>(<init><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name><operator>&lt;</operator><name>i</name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control>
+            <block>{<block_content>
+                <if_stmt><if>if <condition>(<expr><name><name>nums</name><index>[<expr><name>i</name></expr>]</index></name><operator>&lt;=</operator><name><name>nums</name><index>[<expr><name>j</name></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content>
+                    <continue>continue;</continue></block_content></block></if></if_stmt>
+                    
+                <if_stmt><if>if <condition>(<expr><name><name>len</name><index>[<expr><name>j</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal><operator>&gt;</operator><name>maxLen</name></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><name>maxLen</name><operator>=</operator><name><name>len</name><index>[<expr><name>j</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal></expr>;</expr_stmt>
+                    <expr_stmt><expr><name>maxNum</name><operator>=</operator><name><name>num</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></if>
+                <if type="elseif">else if <condition>(<expr><name><name>len</name><index>[<expr><name>j</name></expr>]</index></name><operator>+</operator><literal type="number">1</literal><operator>==</operator><name>maxLen</name></expr>)</condition>
+                <block>{<block_content>
+                    <expr_stmt><expr><name>maxNum</name><operator>+=</operator><name><name>num</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+                </block_content>}</block></if></if_stmt>
+            </block_content>}</block></for>
+            <expr_stmt><expr><name><name>len</name><index>[<expr><name>i</name></expr>]</index></name><operator>=</operator><name>maxLen</name></expr>;</expr_stmt>
+            <expr_stmt><expr><name><name>num</name><index>[<expr><name>i</name></expr>]</index></name><operator>=</operator><name>maxNum</name></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>maxLen</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>maxNum</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>len</name><index>[<expr><name>i</name></expr>]</index></name><operator>&gt;</operator><name>maxLen</name></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>maxLen</name><operator>=</operator><name><name>len</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+                <expr_stmt><expr><name>maxNum</name><operator>=</operator><name><name>num</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+            </block_content>}</block></if>
+            <if type="elseif">else if <condition>(<expr><name><name>len</name><index>[<expr><name>i</name></expr>]</index></name><operator>==</operator><name>maxLen</name></expr>)</condition><block type="pseudo"><block_content>
+                <expr_stmt><expr><name>maxNum</name><operator>+=</operator><name><name>num</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        </block_content>}</block></for>
+        
+        <return>return <expr><name>maxNum</name></expr>;</return>
+    </block_content>}</block></function>
+    
+</public>}</block>;</class>
+</unit>

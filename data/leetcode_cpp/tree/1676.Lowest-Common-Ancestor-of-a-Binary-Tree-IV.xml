@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\1676.Lowest-Common-Ancestor-of-a-Binary-Tree-IV.cpp"><comment type="block" format="doxygen">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */</comment>
+<class>class <name>Solution</name> <block>{<private type="default">
+    <decl_stmt><decl><type><name><name>unordered_set</name><argument_list type="generic">&lt;<argument><expr><name>TreeNode</name><modifier>*</modifier></expr></argument>&gt;</argument_list></name></type><name>Set</name></decl>;</decl_stmt>
+    <decl_stmt><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>ret</name> <init>= <expr><name>NULL</name></expr></init></decl>;</decl_stmt>
+</private><public>public:
+    <function><type><name>TreeNode</name><modifier>*</modifier></type> <name>lowestCommonAncestor</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>root</name></decl></parameter>, <parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>TreeNode</name><modifier>*</modifier></expr></argument>&gt;</argument_list></name> <modifier>&amp;</modifier></type><name>nodes</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>x</name><range>: <expr><name>nodes</name></expr></range></decl></init>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><call><name><name>Set</name><operator>.</operator><name>insert</name></name><argument_list>(<argument><expr><name>x</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        
+        <expr_stmt><expr><call><name>dfs</name><argument_list>(<argument><expr><name>root</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        <return>return <expr><name>ret</name></expr>;</return>        
+    </block_content>}</block></function>
+    
+    <function><type><name>int</name></type> <name>dfs</name><parameter_list>(<parameter><decl><type><name>TreeNode</name><modifier>*</modifier></type> <name>node</name></decl></parameter>)</parameter_list>
+    <block>{<block_content>
+        <if_stmt><if>if <condition>(<expr><name>node</name><operator>==</operator><name>NULL</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="number">0</literal></expr>;</return></block_content></block></if></if_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>left</name> <init>= <expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>left</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>right</name> <init>= <expr><call><name>dfs</name><argument_list>(<argument><expr><name><name>node</name><operator>-&gt;</operator><name>right</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>cur</name> <init>= <expr><call><name><name>Set</name><operator>.</operator><name>find</name></name><argument_list>(<argument><expr><name>node</name></expr></argument>)</argument_list></call><operator>!=</operator><call><name><name>Set</name><operator>.</operator><name>end</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+        <if_stmt><if>if <condition>(<expr><name>ret</name><operator>==</operator><name>NULL</name> <operator>&amp;&amp;</operator> <name>left</name><operator>+</operator><name>right</name><operator>+</operator><name>cur</name><operator>==</operator><call><name><name>Set</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>)</condition><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>ret</name> <operator>=</operator> <name>node</name></expr>;</expr_stmt></block_content></block></if></if_stmt>
+        <return>return <expr><name>left</name><operator>+</operator><name>right</name><operator>+</operator><name>cur</name></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

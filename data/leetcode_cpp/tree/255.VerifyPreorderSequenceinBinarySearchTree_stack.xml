@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\255.VerifyPreorderSequenceinBinarySearchTree_stack.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>bool</name></type> <name>verifyPreorder</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>preorder</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>stack</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>Stack</name></decl>;</decl_stmt>
+        <decl_stmt><decl><type><name>int</name></type> <name>small</name><init>=<expr><name>INT_MIN</name></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>preorder</name><operator>.</operator><name>size</name></name><argument_list>()</argument_list></call></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+        <block>{<block_content>
+            <if_stmt><if>if <condition>(<expr><name><name>preorder</name><index>[<expr><name>i</name></expr>]</index></name><operator>&lt;</operator><name>small</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><literal type="boolean">false</literal></expr>;</return></block_content></block></if></if_stmt>
+            
+            <while>while <condition>(<expr><operator>!</operator><call><name><name>Stack</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call> <operator>&amp;&amp;</operator> <name><name>preorder</name><index>[<expr><name>i</name></expr>]</index></name><operator>&gt;</operator><call><name><name>Stack</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>)</condition>
+            <block>{<block_content>
+                <expr_stmt><expr><name>small</name><operator>=</operator><call><name><name>Stack</name><operator>.</operator><name>top</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>Stack</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></while>
+            <expr_stmt><expr><call><name><name>Stack</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><name><name>preorder</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>              
+        </block_content>}</block></for>
+        <return>return <expr><literal type="boolean">true</literal></expr>;</return>
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>

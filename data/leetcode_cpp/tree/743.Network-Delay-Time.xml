@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="1.0.0" language="C++" filename="C:\Users\86134\Desktop\Data-Science-Term-Project\data\leetcode_cpp\tree\743.Network-Delay-Time.cpp"><class>class <name>Solution</name> <block>{<private type="default">
+</private><public>public:
+    <function><type><name>int</name></type> <name>networkDelayTime</name><parameter_list>(<parameter><decl><type><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name><modifier>&amp;</modifier></type> <name>times</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>N</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>K</name></decl></parameter>)</parameter_list> 
+    <block>{<block_content>
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></type><name>EarliestTime</name></decl>;</decl_stmt> <comment type="line">// node-&gt;earliestTime;</comment>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;=</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name><name>EarliestTime</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name>INT_MAX</name></expr>;</expr_stmt></block_content></block></for>
+        <expr_stmt><expr><name><name>EarliestTime</name><index>[<expr><name>K</name></expr>]</index></name> <operator>=</operator> <literal type="number">0</literal></expr>;</expr_stmt>
+        
+        <decl_stmt><decl><type><name><name>unordered_map</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name><name>vector</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>next</name></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>auto</name></type> <name>time</name><range>: <expr><name>times</name></expr></range></decl></init>)</control>
+        <block>{<block_content>
+            <expr_stmt><expr><name><name>next</name><index>[<expr><name><name>time</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>]</index></name><operator>.</operator><call><name>push_back</name><argument_list>(<argument><expr><block>{<expr><name><name>time</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr>,<expr><name><name>time</name><index>[<expr><literal type="number">2</literal></expr>]</index></name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        </block_content>}</block></for>
+        
+        <decl_stmt><decl><type><name><name>queue</name><argument_list type="generic">&lt;<argument><expr><name><name>pair</name><argument_list type="generic">&lt;<argument><expr><name>int</name></expr></argument>,<argument><expr><name>int</name></expr></argument>&gt;</argument_list></name></expr></argument>&gt;</argument_list></name></type><name>q</name></decl>;</decl_stmt> <comment type="line">// {node,earliestTime}</comment>
+        <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>K</name></expr>,<expr><literal type="number">0</literal></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+        
+        <while>while <condition>(<expr><operator>!</operator><call><name><name>q</name><operator>.</operator><name>empty</name></name><argument_list>()</argument_list></call></expr>)</condition>
+        <block>{<block_content>
+            <decl_stmt><decl><type><name>int</name></type> <name>curNode</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>.</operator><name>first</name></expr></init></decl>;</decl_stmt>
+            <decl_stmt><decl><type><name>int</name></type> <name>curTime</name> <init>= <expr><call><name><name>q</name><operator>.</operator><name>front</name></name><argument_list>()</argument_list></call><operator>.</operator><name>second</name></expr></init></decl>;</decl_stmt>
+            <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>pop</name></name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+            
+            <if_stmt><if>if <condition>(<expr><name>curTime</name><operator>&gt;</operator><name><name>EarliestTime</name><index>[<expr><name>curNode</name></expr>]</index></name></expr>)</condition><block type="pseudo"><block_content> <continue>continue;</continue></block_content></block></if></if_stmt>
+            
+            <for>for <control>(<init><decl><type><name>auto</name></type> <name>t</name><range>: <expr><name><name>next</name><index>[<expr><name>curNode</name></expr>]</index></name></expr></range></decl></init>)</control>
+            <block>{<block_content>
+                <decl_stmt><decl><type><name>int</name></type> <name>nextNode</name> <init>= <expr><name><name>t</name><operator>.</operator><name>first</name></name></expr></init></decl>;</decl_stmt>
+                <decl_stmt><decl><type><name>int</name></type> <name>weight</name> <init>= <expr><name><name>t</name><operator>.</operator><name>second</name></name></expr></init></decl>;</decl_stmt>
+                
+                <if_stmt><if>if <condition>(<expr><name><name>EarliestTime</name><index>[<expr><name>nextNode</name></expr>]</index></name> <operator>&lt;=</operator> <name><name>EarliestTime</name><index>[<expr><name>curNode</name></expr>]</index></name><operator>+</operator><name>weight</name></expr>)</condition><block type="pseudo"><block_content>
+                    <continue>continue;</continue></block_content></block></if></if_stmt>
+                <expr_stmt><expr><name><name>EarliestTime</name><index>[<expr><name>nextNode</name></expr>]</index></name> <operator>=</operator> <name><name>EarliestTime</name><index>[<expr><name>curNode</name></expr>]</index></name><operator>+</operator><name>weight</name></expr>;</expr_stmt>
+                <expr_stmt><expr><call><name><name>q</name><operator>.</operator><name>push</name></name><argument_list>(<argument><expr><block>{<expr><name>nextNode</name></expr>,<expr><name><name>EarliestTime</name><index>[<expr><name>nextNode</name></expr>]</index></name></expr>}</block></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+            </block_content>}</block></for>
+        </block_content>}</block></while>
+        
+        <decl_stmt><decl><type><name>int</name></type> <name>result</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+        <for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">1</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;=</operator><name>N</name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block type="pseudo"><block_content>
+            <expr_stmt><expr><name>result</name> <operator>=</operator> <call><name>max</name><argument_list>(<argument><expr><name>result</name></expr></argument>, <argument><expr><name><name>EarliestTime</name><index>[<expr><name>i</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt></block_content></block></for>
+        <if_stmt><if>if <condition>(<expr><name>result</name><operator>==</operator><name>INT_MAX</name></expr>)</condition><block type="pseudo"><block_content> <return>return <expr><operator>-</operator><literal type="number">1</literal></expr>;</return></block_content></block></if>
+        <else>else<block type="pseudo"><block_content> <return>return <expr><name>result</name></expr>;</return></block_content></block></else></if_stmt>        
+    </block_content>}</block></function>
+</public>}</block>;</class>
+</unit>
