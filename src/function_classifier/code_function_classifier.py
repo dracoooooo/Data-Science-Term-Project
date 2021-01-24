@@ -1,6 +1,9 @@
 import os
 import pickle
 import random
+import re
+import sys
+
 import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -13,6 +16,7 @@ from tensorflow.keras.preprocessing.sequence import skipgrams
 from src.ast_based_similarities.ast_similarities import parse_tree, traverse_and_parse, prefix
 from src.ast_based_similarities.create_ast import create_ast
 from tensorflow.python.keras.models import load_model
+from src.function_classifier.keywords import key_words
 
 label = {
     # "array":    [1, 0, 0, 0, 0],
@@ -36,7 +40,9 @@ tree_path = "../../data/leetcode/tree"
 dp_path = "../../data/leetcode/dp"
 raw_path = "../../data/leetcode/raw"
 
-features = 1000
+features = 200
+new_features = features + key_words.__len__()
+weight = 200
 data_path = "../../data/leetcode"
 
 cpp_data_path = '../../data/leetcode_cpp'
@@ -111,7 +117,7 @@ def creat_ast_xml(language):
 # 提取特征————词袋模型
 # 单个文件
 def get_feature_bag_of_word(path):
-    f1 = open('tokenizer_bow.pkl', 'rb')
+    f1 = open(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'tokenizer_bow.pkl', 'rb')
     tokenizer = pickle.load(f1)
     f1.close()
     code = code2text(path)
@@ -120,7 +126,10 @@ def get_feature_bag_of_word(path):
     for i in range(seq.__len__()):
         if 0 < seq[i] < features:
             feature[seq[i]] += 1
-    return feature
+    another_feature = [0] * key_words.__len__()
+    for i in range(key_words.__len__()):
+        another_feature[i] = code.count(key_words[i]) * weight
+    return feature + another_feature
 
 
 # 多个文件
@@ -239,10 +248,8 @@ def prepare_data():
 
 def init_model():
     model = Sequential()
-    model.add(Dense(input_dim=features, units=1000, activation='relu'))
-    model.add(Dense(units=500, activation='relu'))
-    model.add(Dense(units=300, activation='relu'))
-    model.add(Dense(units=50, activation='relu'))
+    model.add(Dense(input_dim=new_features, units=1000, activation='relu'))
+    model.add(Dense(units=100, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
@@ -284,15 +291,15 @@ def self_training():
 def train_once():
     (x_train, y_train), (x_test, y_test), raw = prepare_data()
     model = init_model()
-    model.fit(x_train, y_train, batch_size=100, epochs=100,
+    model.fit(x_train, y_train, batch_size=100, epochs=90,
               validation_data=(x_test, y_test), verbose=2)
     model.save('function_classifier.h5')
 
 
 def predict(path):
     feature = get_feature_bag_of_word(path)
-    model = load_model('function_classifier.h5')
-    prediction = model.predict(feature)
+    model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'function_classifier.h5')
+    prediction = model.predict([feature])[0]
     tmp = clc.one_hot(prediction)
     clazz = ""
     if tmp == label["sort"]:
@@ -307,7 +314,8 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    count()
+    # count()
     # init_tokenizer()
-    self_training()
-    # train_once()
+    # self_training()
+    train_once()
+    predict("../../data/test/test.java")
