@@ -324,5 +324,5 @@ if __name__ == "__main__":
     # count()
     # init_tokenizer()
     # self_training()
-    train_once()
+    # train_once()
     predict("../../data/test/mergesort.java")

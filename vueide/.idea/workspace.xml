@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9ac5d8b2-36f1-43ec-9e9b-bc0a305339c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/361c3488fb260ce3fa95e844efb607cd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/8588c0c7a53eb3e54beb65374c69c59c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/10c1aa5c8d4add4077b9893c914af267.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3232641a05641b69468f05978a0e5bbb.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/3a40257056ee9a715a52a6a228082794.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/643c24c6141833fc07aeb44483badefd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/a6fa96dc8fc36a696ffa0faea9ef3079.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/b1e8e65eee3bbe7790d3be569114c2b0.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/c225987bd1113459fae522c9c2399146.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/c9327434ae419f4f20d854e540380828.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/c9eee865e75bcbf7e7be989bce07c45c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/AUTHORS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/CONTRIBUTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/comment/comment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/comment/continuecomment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/dialog/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/dialog/dialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/autorefresh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/fullscreen.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/fullscreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/panel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/placeholder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/display/rulers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/closebrackets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/closetag.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/continuelist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/matchbrackets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/matchtags.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/edit/trailingspace.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/brace-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/comment-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/foldcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/foldgutter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/foldgutter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/indent-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/markdown-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/fold/xml-fold.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/anyword-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/css-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/html-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/javascript-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/show-hint.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/show-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/sql-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/hint/xml-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/coffeescript-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/css-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/html-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/javascript-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/json-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/lint.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/lint/yaml-lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/merge/merge.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/merge/merge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/mode/loadmode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/mode/multiplex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/mode/multiplex_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/mode/overlay.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/mode/simple.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/runmode/colorize.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/runmode/runmode-standalone.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/runmode/runmode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/runmode/runmode.node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/scroll/annotatescrollbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/scroll/scrollpastend.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/scroll/simplescrollbars.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/scroll/simplescrollbars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/jump-to-line.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/match-highlighter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/matchesonscrollbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/matchesonscrollbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/search/searchcursor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/selection/active-line.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/selection/mark-selection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/selection/selection-pointer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/tern/tern.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/tern/tern.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/tern/worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/addon/wrap/hardwrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/bin/authors.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/bin/lint" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/bin/release" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/bin/source-highlight" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/bin/upload-release.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/activeline.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/anywordhint.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/bidi.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/btree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/buffers.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/changemode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/closebrackets.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/closetag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/emacs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/folding.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/fullscreen.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/hardwrap.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/html5complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/indentwrap.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/lint.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/loadmode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/marker.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/markselection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/matchhighlighter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/matchtags.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/merge.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/multiplex.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/mustache.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/panel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/placeholder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/preview.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/requirejs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/resize.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/rulers.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/runmode-standalone.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/runmode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/simplemode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/simplescrollbars.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/spanaffectswrapping_shim.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/sublime.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/tern.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/theme.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/trailingspace.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/variableheight.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/vim.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/visibletabs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/widget.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/demo/xmlcomplete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/activebookmark.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/docs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/internals.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/manual.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/realworld.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/releases.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/reporting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/upgrade_v2.2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/upgrade_v3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/upgrade_v4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/doc/yinyang.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/keymap/emacs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/keymap/sublime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/keymap/vim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/lib/codemirror.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/lib/codemirror.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/apl/apl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/apl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asciiarmor/asciiarmor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asciiarmor/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asn.1/asn.1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asn.1/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asterisk/asterisk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/asterisk/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/brainfuck/brainfuck.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/brainfuck/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clike/clike.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clike/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clike/scala.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clike/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clojure/clojure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clojure/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/clojure/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cmake/cmake.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cmake/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cobol/cobol.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cobol/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/coffeescript/coffeescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/coffeescript/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/commonlisp/commonlisp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/commonlisp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/crystal/crystal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/crystal/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/gss.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/gss_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/less.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/less_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/scss.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/scss_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/css/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cypher/cypher.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cypher/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/cypher/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/d/d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/d/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/d/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dart/dart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dart/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/diff/diff.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/diff/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/django/django.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/django/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dockerfile/dockerfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dockerfile/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dockerfile/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dtd/dtd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dtd/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dylan/dylan.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dylan/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/dylan/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ebnf/ebnf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ebnf/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ecl/ecl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ecl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/eiffel/eiffel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/eiffel/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/elm/elm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/elm/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/erlang/erlang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/erlang/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/factor/factor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/factor/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/fcl/fcl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/fcl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/forth/forth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/forth/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/fortran/fortran.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/fortran/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gas/gas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gas/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gfm/gfm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gfm/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gfm/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gherkin/gherkin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/gherkin/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/go/go.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/go/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/groovy/groovy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/groovy/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haml/haml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haml/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haml/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/handlebars/handlebars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/handlebars/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haskell-literate/haskell-literate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haskell-literate/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haskell/haskell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haskell/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haxe/haxe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/haxe/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/htmlembedded/htmlembedded.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/htmlembedded/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/htmlmixed/htmlmixed.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/htmlmixed/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/http/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/http/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/idl/idl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/idl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/javascript/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/javascript/javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/javascript/json-ld.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/javascript/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/javascript/typescript.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/jinja2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/jinja2/jinja2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/jsx/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/jsx/jsx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/jsx/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/julia/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/julia/julia.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/livescript/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/livescript/livescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/lua/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/lua/lua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/markdown/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/markdown/markdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/markdown/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mathematica/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mathematica/mathematica.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mbox/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mbox/mbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/meta.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mirc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mirc/mirc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mllike/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mllike/mllike.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/modelica/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/modelica/modelica.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mscgen/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mscgen/mscgen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mscgen/mscgen_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mscgen/msgenny_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mscgen/xu_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mumps/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/mumps/mumps.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/nginx/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/nginx/nginx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/nsis/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/nsis/nsis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ntriples/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ntriples/ntriples.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/octave/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/octave/octave.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/oz/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/oz/oz.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pascal/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pascal/pascal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pegjs/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pegjs/pegjs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/perl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/perl/perl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/php/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/php/php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/php/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pig/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pig/pig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/powershell/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/powershell/powershell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/powershell/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/properties/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/properties/properties.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/protobuf/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/protobuf/protobuf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pug/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/pug/pug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/puppet/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/puppet/puppet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/python/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/python/python.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/python/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/q/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/q/q.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/r/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/r/r.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rpm/changes/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rpm/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rpm/rpm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rst/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rst/rst.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ruby/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ruby/ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ruby/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rust/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rust/rust.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/rust/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sas/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sas/sas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sass/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sass/sass.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sass/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/scheme/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/scheme/scheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/shell/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/shell/shell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/shell/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sieve/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sieve/sieve.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/slim/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/slim/slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/slim/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/smalltalk/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/smalltalk/smalltalk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/smarty/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/smarty/smarty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/solr/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/solr/solr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/soy/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/soy/soy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/soy/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sparql/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sparql/sparql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/spreadsheet/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/spreadsheet/spreadsheet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sql/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/sql/sql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/stex/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/stex/stex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/stex/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/stylus/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/stylus/stylus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/swift/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/swift/swift.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/swift/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tcl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tcl/tcl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/textile/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/textile/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/textile/textile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiddlywiki/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiddlywiki/tiddlywiki.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiddlywiki/tiddlywiki.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiki/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiki/tiki.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tiki/tiki.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/toml/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/toml/toml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tornado/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/tornado/tornado.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/troff/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/troff/troff.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ttcn-cfg/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ttcn-cfg/ttcn-cfg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ttcn/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/ttcn/ttcn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/turtle/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/turtle/turtle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/twig/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/twig/twig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vb/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vb/vb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vbscript/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vbscript/vbscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/velocity/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/velocity/velocity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/verilog/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/verilog/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/verilog/verilog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vhdl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vhdl/vhdl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vue/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/vue/vue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/wast/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/wast/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/wast/wast.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/webidl/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/webidl/webidl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xml/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xml/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xml/xml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xquery/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xquery/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/xquery/xquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yacas/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yacas/yacas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yaml-frontmatter/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yaml-frontmatter/yaml-frontmatter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yaml/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/yaml/yaml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/z80/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/mode/z80/z80.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/rollup.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/addon/runmode/codemirror-standalone.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/addon/runmode/codemirror.node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/addon/runmode/runmode-standalone.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/addon/runmode/runmode.node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/codemirror.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/Display.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/focus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/gutters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/highlight_worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/line_numbers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/mode_state.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/operations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/scroll_events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/scrollbars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/scrolling.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/selection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/update_display.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/update_line.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/update_lines.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/display/view_tracking.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/CodeMirror.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/commands.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/deleteNearSelection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/drop_events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/fromTextArea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/global_events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/key_events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/legacy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/methods.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/mouse_events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/options.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/edit/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/ContentEditableInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/TextareaInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/indent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/input.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/keymap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/keynames.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/input/movement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/highlight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/line_data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/pos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/saw_special_spans.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/spans.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/line/utils_line.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/measurement/position_measurement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/measurement/widgets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/Doc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/change_measurement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/changes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/chunk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/document_data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/history.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/line_widget.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/mark_text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/selection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/model/selection_updates.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/modes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/StringStream.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/bidi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/dom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/event.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/feature_detection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/misc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/src/util/operation_group.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/annotatescrollbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/comment_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/contenteditable_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/doc_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/driver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/emacs_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/html-hint-test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/lint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/mode_test.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/mode_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/multi_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/run.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/scroll_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/search_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/sql-hint-test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/sublime_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/test/vim_test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/3024-day.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/3024-night.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/abcdef.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ambiance-mobile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ambiance.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ayu-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ayu-mirage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/base16-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/base16-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/bespin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/blackboard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/cobalt.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/colorforth.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/darcula.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/dracula.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/duotone-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/duotone-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/eclipse.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/elegant.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/erlang-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/gruvbox-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/hopscotch.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/icecoder.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/idea.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/isotope.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/lesser-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/liquibyte.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/lucario.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/material-darker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/material-ocean.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/material-palenight.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/material.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/mbo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/mdn-like.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/midnight.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/monokai.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/moxer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/neat.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/neo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/night.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/nord.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/oceanic-next.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/panda-syntax.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/paraiso-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/paraiso-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/pastel-on-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/railscasts.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/rubyblue.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/seti.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/shadowfox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/solarized.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ssms.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/the-matrix.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/tomorrow-night-bright.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/tomorrow-night-eighties.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/ttcn.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/twilight.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/vibrant-ink.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/xq-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/xq-light.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/yeti.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/yonce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/codemirror-5.59.2/theme/zenburn.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/jquery-3.5.1.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/26732bb1c6b537fe7a3dbccbba3a36fa.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/26732bb1c6b537fe7a3dbccbba3a36fa.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/babel-loader/83e6f24ad7db32fa11cdd713e301258f.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/83e6f24ad7db32fa11cdd713e301258f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/599ee56c0ee14c4a8408a5c9f70e7ad8.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/599ee56c0ee14c4a8408a5c9f70e7ad8.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/6c1576eb6c451c0c2dc4ba607b1170e9.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/6c1576eb6c451c0c2dc4ba607b1170e9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/6c81c9c0b661b9fcf4e08a2a1afd5555.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/6c81c9c0b661b9fcf4e08a2a1afd5555.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/768eb0d1458a929454624b3404d514f9.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/768eb0d1458a929454624b3404d514f9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/7a4a1d9a1176587a77d5b1e6dfb85550.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/7a4a1d9a1176587a77d5b1e6dfb85550.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/ad94e5bdd4db1c115d5a0881739ca95a.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/ad94e5bdd4db1c115d5a0881739ca95a.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/bb5dfc0d4ac72e1108497459c924fd4f.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/bb5dfc0d4ac72e1108497459c924fd4f.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d52960d8d6bc5f1b4f4a4df3c02d28b3.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d52960d8d6bc5f1b4f4a4df3c02d28b3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d7641e0afc1cf8a4dc43d26131a7c8bf.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/d7641e0afc1cf8a4dc43d26131a7c8bf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/vue-loader/fb3857f82bcdd9749cbca907137e8953.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/vue-loader/fb3857f82bcdd9749cbca907137e8953.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/test.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1nVNAhigg9h0hmNLG8eF5m4tCxg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Data-Science-Term-Project-master/Data-Science-Term-Project-master" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DRACO\PycharmProjects\Data-Science-Term-Project-1\vueide\src\assets" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.serve" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ac5d8b2-36f1-43ec-9e9b-bc0a305339c3" name="Default Changelist" comment="" />
+      <created>1611471157120</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611471157120</updated>
+      <workItem from="1611471158291" duration="7581000" />
+      <workItem from="1611484444356" duration="12116000" />
+      <workItem from="1611511540173" duration="2424000" />
+      <workItem from="1611515683090" duration="1632000" />
+      <workItem from="1611539534788" duration="4734000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
