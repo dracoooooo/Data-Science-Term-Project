@@ -76,19 +76,10 @@ def get_lang(text):
 
 # 相似度权重 0.75 质量权重 0.25
 def get_top_three(text_sim_list):
-    new_list = []
-    for l in text_sim_list:
-        tmp_list = []
-        tmp_list.append(l[0])
-        tmp_list.append(l[1])
-        avg = l[2] * 100 * 0.75 + l[3] *0.25
-        tmp_list.append(avg)
-        new_list.append(tmp_list)
-    new_list = sorted(new_list, key=lambda d: d[2], reverse=True)
     top_three = []
-    for i in range(len(new_list)):
+    for i in range(len(text_sim_list)):
         if i <  recommend_threshold:
-            top_three.append(new_list[i])
+            top_three.append(text_sim_list[i])
         else:
             break
     return top_three
@@ -161,5 +152,6 @@ def creat_file(file_path, source_text):
 if __name__ == "__main__":
     data_path = '../../data/leetcode/raw'
     ret = clc.load_data(data_path, "java")
-    ret = recommend_code(ret[47])
+    print(ret[54])
+    ret = recommend_code("")
     print(ret)
