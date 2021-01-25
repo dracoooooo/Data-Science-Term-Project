@@ -52,16 +52,16 @@ def recommend_code(source_text):
         func_path = get_func_path(func, lang)
         text_sim_list = get_recommend_list_token(func_path, new_file, lang)
         top_three = get_top_three(text_sim_list)
-        top_three_ast = get_top_three_ast_sim(top_three, xml_file)
-        tmp_top = []
-        for i in range(len(top_three)):
-            tmp_tmp = []
-            tmp_tmp.append(top_three[i][1]) #文件名
-            tmp_tmp.append(top_three[i][2]) #源代码
-            tmp_tmp.append(top_three[i][3]) #均分
-            tmp_tmp.append(top_three_ast[i])
-            tmp_top.append(tmp_tmp)
-        top_three = tmp_top
+        # top_three_ast = get_top_three_ast_sim(top_three, xml_file)
+        # tmp_top = []
+        # for i in range(len(top_three)):
+        #     tmp_tmp = []
+        #     tmp_tmp.append(top_three[i][1]) #文件名
+        #     tmp_tmp.append(top_three[i][2]) #源代码
+        #     tmp_tmp.append(top_three[i][3]) #均分
+        #     tmp_tmp.append(top_three_ast[i])
+        #     tmp_top.append(tmp_tmp)
+        # top_three = tmp_top
         return top_three
     else:
         return "Sorry, we can't recommend code for you"
