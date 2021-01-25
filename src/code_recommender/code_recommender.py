@@ -81,18 +81,16 @@ def get_top_three(text_sim_list):
         tmp_list = []
         tmp_list.append(l[0])
         tmp_list.append(l[1])
-        tmp_list.append(l[2])
-        avg = l[3] * 100 * 0.75 + l[4] *0.25
+        avg = l[2] * 100 * 0.75 + l[3] *0.25
         tmp_list.append(avg)
         new_list.append(tmp_list)
-    new_list = sorted(new_list, key=lambda d: d[3], reverse=True)
+    new_list = sorted(new_list, key=lambda d: d[2], reverse=True)
     top_three = []
     for i in range(len(new_list)):
         if i <  recommend_threshold:
             top_three.append(new_list[i])
         else:
             break
-
     return top_three
 def get_func(text):
     tmp_path = os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), "input_code_file"), 'input_file')
@@ -129,7 +127,6 @@ def get_recommend_list_token(func_path, file, language_label):
         code_path = path[0:path.rfind('\\')]
         file_name = path[path.rfind('\\')+1:]
         score = quality_evaluator.average_score(code_path, file_name)
-        tmp_list.append(path)
         tmp_list.append(file_name)
         tmp_list.append(token.code2text(path))
         tmp_list.append(tuple[1]) #相似度
