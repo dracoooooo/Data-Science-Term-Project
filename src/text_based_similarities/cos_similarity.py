@@ -13,6 +13,10 @@ def cos_similarity(path1, path2):
     return cos_similarity_text(text_1,text_2)
 
 def cos_similarity_text(text_1, text_2):
+    if text_1 == None or len(text_1) == 0:
+        return 0
+    if text_2 == None or len(text_2) == 0:
+        return 0
     A = set(text_1)
     B = set(text_2)
     union = A.union(B)

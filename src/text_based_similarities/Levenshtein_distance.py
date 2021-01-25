@@ -6,6 +6,8 @@ import src.text_based_similarities.text_preprocessor as processor
 
 
 def Levenshtein_distance(text_1, text_2):
+    if text_1 == None or text_2 ==None:
+        return 0
     dp = np.empty([len(text_1)+1, len(text_2)+1], dtype= int)
     len_1 = len(text_1)
     len_2 = len(text_2)
@@ -20,8 +22,6 @@ def Levenshtein_distance(text_1, text_2):
             else:
                 dp[i, j] = max(dp[i-1, j], dp[i, j-1])
     return dp[len_1, len_2]
-
-
 def Levenshtein_similarity(path1, path2):
     text_1 = load(path1)
     text_2 = load(path2)

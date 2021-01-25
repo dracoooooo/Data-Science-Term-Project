@@ -25,7 +25,7 @@ token_sim = {"java": token,
              "c&cpp" : token_cpp
              }
 
-recommend_threshold = 5
+recommend_threshold = 3
 
 # text_threshold = 0.50
 
@@ -51,8 +51,17 @@ def recommend_code(source_text):
 
         func_path = get_func_path(func, lang)
         text_sim_list = get_recommend_list_token(func_path, new_file, lang)
-        # top_three_ast = get_top_three_ast_sim(text_sim_list, xml_file)
         top_three = get_top_three(text_sim_list)
+        top_three_ast = get_top_three_ast_sim(top_three, xml_file)
+        tmp_top = []
+        for i in range(len(top_three)):
+            tmp_tmp = []
+            tmp_tmp.append(top_three[i][1]) #文件名
+            tmp_tmp.append(top_three[i][2]) #源代码
+            tmp_tmp.append(top_three[i][3]) #均分
+            tmp_tmp.append(top_three_ast[i])
+            tmp_top.append(tmp_tmp)
+        top_three = tmp_top
         return top_three
     else:
         return "Sorry, we can't recommend code for you"
@@ -64,6 +73,7 @@ def get_lang(text):
     lang, lan_prob = clc.predict(tmp_path + '.txt')
     os.remove(tmp_path + '.txt')
     return lang, lan_prob
+
 # 相似度权重 0.75 质量权重 0.25
 def get_top_three(text_sim_list):
     new_list = []
@@ -72,14 +82,13 @@ def get_top_three(text_sim_list):
         tmp_list.append(l[0])
         tmp_list.append(l[1])
         tmp_list.append(l[2])
-        tmp_list.append(l[3])
-        avg = l[2] * 100 * 0.75 + l[3] *0.25
+        avg = l[3] * 100 * 0.75 + l[4] *0.25
         tmp_list.append(avg)
         new_list.append(tmp_list)
-    new_list = sorted(new_list, key=lambda d: d[2], reverse=True)
+    new_list = sorted(new_list, key=lambda d: d[3], reverse=True)
     top_three = []
     for i in range(len(new_list)):
-        if i < 3:
+        if i <  recommend_threshold:
             top_three.append(new_list[i])
         else:
             break
@@ -113,7 +122,6 @@ def get_recommend_list_token(func_path, file, language_label):
         ans = token_sim[language_label].token_lcs(path, file)
         sim_dict[path] = ans
     sim_dict = sorted(sim_dict.items(), key=lambda d: d[1], reverse=True)
-
     recommend_list = list()
     for tuple in sim_dict:
         tmp_list = list()
@@ -121,6 +129,7 @@ def get_recommend_list_token(func_path, file, language_label):
         code_path = path[0:path.rfind('\\')]
         file_name = path[path.rfind('\\')+1:]
         score = quality_evaluator.average_score(code_path, file_name)
+        tmp_list.append(path)
         tmp_list.append(file_name)
         tmp_list.append(token.code2text(path))
         tmp_list.append(tuple[1]) #相似度
@@ -133,13 +142,10 @@ def get_top_three_ast_sim(sim_list, xml_file):
     list = []
     for i in range(len(sim_list)):
         path = sim_list[i][0]
-        if i < 3 :
-            xml_path = cfc.code_path2xml_path(path)
-            ans = ast_evaluator.tree_distance_similarities(xml_path, xml_file)
-            list.append(ans)
-            print(ans)
-        else:
-            break
+        xml_path = cfc.code_path2xml_path(path)
+        ans = ast_evaluator.tree_distance_similarities(xml_path, xml_file)
+        list.append(ans)
+        print(ans)
     return list
 
 
@@ -158,5 +164,5 @@ def creat_file(file_path, source_text):
 if __name__ == "__main__":
     data_path = '../../data/leetcode/raw'
     ret = clc.load_data(data_path, "java")
-    ret = recommend_code("sdjklalasdjfsdf")
+    ret = recommend_code(ret[47])
     print(ret)
