@@ -9,6 +9,9 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 import matplotlib.pyplot as plt
 from tensorflow.python.keras.models import load_model
+from keras.utils import plot_model
+
+
 # 使用神经网络进行代码语言分类
 
 # 代码文件数量：
@@ -73,8 +76,8 @@ def add_blank(text):
     text = re.sub(";", " ; ", text)
     text = re.sub("#", " # ", text)
     text = re.sub("//", " // ", text)
-    text = re.sub("{", " { ", text)
-    text = re.sub("}", " } ", text)
+    # text = re.sub("{", " { ", text)
+    # text = re.sub("}", " } ", text)
     return text
 
 
@@ -159,16 +162,13 @@ def prepare_data():
 def init_model():
     # define network structure
     model = Sequential()
-
     model.add(Dense(input_dim=features, units=1000, activation='relu'))
     model.add(Dense(units=200, activation='relu'))
     model.add(Dense(units=4, activation='softmax'))
-
     # set configurations
     model.compile(loss='categorical_crossentropy',
-                  optimizer='adam',
+                  optimizer='adagrad',
                   metrics=['accuracy'])
-
     return model
 
 
@@ -197,7 +197,7 @@ def plot_graphs(history, string):
 def tokenize(data):
     # init tokenizer
     tokenizer = Tokenizer(num_words=1000,
-                          filters='!"$%&()*+,-./:<=>?@[\\]^_`{|}~\t\n')  # 去掉了可能能够分别语言的符号
+                          filters='!"$%&()*+,-./:<=>?@[\\]^_`|{}~\t\n')  # 去掉了可能能够分别语言的符号
     tokenizer.fit_on_texts(data)
     return tokenizer
 
@@ -227,7 +227,8 @@ def handle_user_data(path):
 def train():
     (x_train, y_train), (x_test, y_test) = prepare_data()
     model = init_model()
-    history = model.fit(x_train, y_train, batch_size=100, epochs=40,
+    model.summary()
+    history = model.fit(x_train, y_train, batch_size=50, epochs=60,
               validation_data=(x_test, y_test), verbose=2)
     plot_graphs(history, "accuracy")
     plot_graphs(history, "loss")
@@ -249,6 +250,7 @@ def one_hot(arr):
 def predict(path):
     model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" +'language_classifier.h5')
     # model.summary()
+    # plot_model(model, to_file='model.png')
     test = handle_user_data(path)
     prediction = model.predict(test)
     tmp = prediction[0]
@@ -268,7 +270,7 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    # train()
+    train()
     # count()
     predict('./code_language_classifier.py')
     predict('../../data/test/java_file1.js')

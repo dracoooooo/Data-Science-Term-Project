@@ -105,10 +105,11 @@ def get_feature_bag_of_word(path):
     feature = [0] * features
     for i in range(seq.__len__()):
         if 0 < seq[i] < features:
-            feature[seq[i]] += 1
+            feature[seq[i]] = 1
     another_feature = [0] * key_words.__len__()
     for i in range(key_words.__len__()):
-        another_feature[i] = code.count(key_words[i]) * weight
+        # another_feature[i] = code.count(key_words[i]) * weight
+        another_feature[i] = 1
     return feature + another_feature
 
 
@@ -221,7 +222,7 @@ def init_model():
     model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
-                  optimizer='adam',
+                  optimizer='adagrad',
                   metrics=['accuracy'])
     return model
 
@@ -231,7 +232,7 @@ def init_model():
 # def self_training():
 #     (x_train, y_train), (x_test, y_test) , raw = prepare_data()
 #     model = init_model()
-    一次确定多少个
+#     一次确定多少个
     # n = 10
     # l = raw.__len__()
     # while raw and l is not raw.__len__():
@@ -258,7 +259,7 @@ def init_model():
 def train_once():
     (x_train, y_train), (x_test, y_test), raw = prepare_data()
     model = init_model()
-    model.fit(x_train, y_train, batch_size=100, epochs=40,
+    model.fit(x_train, y_train, batch_size=100, epochs=1000,
               validation_data=(x_test, y_test), verbose=2)
     model.save('function_classifier_cpp.h5')
 

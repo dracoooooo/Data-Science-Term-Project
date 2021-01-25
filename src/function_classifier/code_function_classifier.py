@@ -3,7 +3,6 @@ import pickle
 import random
 import re
 import sys
-
 import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -40,12 +39,12 @@ tree_path = "../../data/leetcode/tree"
 dp_path = "../../data/leetcode/dp"
 raw_path = "../../data/leetcode/raw"
 
-features = 200
+features = 1000
 new_features = features + key_words.__len__()
-weight = 200
+weight = 100
 data_path = "../../data/leetcode"
-
 cpp_data_path = '../../data/leetcode_cpp'
+
 
 def file_paths(data_path, language):
     ret = []
@@ -126,11 +125,14 @@ def get_feature_bag_of_word(path):
     feature = [0] * features
     for i in range(seq.__len__()):
         if 0 < seq[i] < features:
-            feature[seq[i]] += 1
+            # feature[seq[i]] += 1
+            feature[seq[i]] = 1
     another_feature = [0] * key_words.__len__()
     for i in range(key_words.__len__()):
-        another_feature[i] = code.count(key_words[i]) * weight
-    return feature + another_feature
+        # 这里可以选择是否开启权重 和 修改回语言分类模型的特征
+        # another_feature[i] = code.count(key_words[i]) * weight
+        another_feature[i] = 1
+    return feature
 
 
 # 多个文件
@@ -149,21 +151,21 @@ def ast_node_embedding(path_list):
 
 
 # 提取特征————word embedding(未完成）
-def get_feature_word_embedding(path):
-    # 使用bow的tokenizer
-    f1 = open('tokenizer_bow.pkl', 'rb')
-    tokenizer = pickle.load(f1)
-    f1.close()
-    code = code2text(path)
-    seq = tokenizer.texts_to_sequences([code])[0]
-    vocab_size = len(tokenizer.word_index)
-    window_size = 2
-    positive_skip_grams, _ = skipgrams(
-        seq,
-        vocabulary_size=vocab_size,
-        window_size=window_size,
-        negative_samples=0)
-    return
+# def get_feature_word_embedding(path):
+#     # 使用bow的tokenizer
+#     f1 = open('tokenizer_bow.pkl', 'rb')
+#     tokenizer = pickle.load(f1)
+#     f1.close()
+#     code = code2text(path)
+#     seq = tokenizer.texts_to_sequences([code])[0]
+#     vocab_size = len(tokenizer.word_index)
+#     window_size = 2
+#     positive_skip_grams, _ = skipgrams(
+#         seq,
+#         vocabulary_size=vocab_size,
+#         window_size=window_size,
+#         negative_samples=0)
+#     return
 
 
 def code_path2xml_path(code_path):
@@ -205,6 +207,10 @@ def get_feature_ast_node_embedding(path):
 
 train_size = 50
 dp_train_size = 80
+# prepare data用到的特征提取函数
+func_for_matrix = bag_of_word
+# predict用到的特征提取函数
+func_for_one = get_feature_bag_of_word
 
 
 def prepare_data():
@@ -217,9 +223,9 @@ def prepare_data():
     dp = file_paths(dp_path, "java")
     raw = file_paths(raw_path, "java")
 
-    X_train = bag_of_word(sort[0: train_size] + tree[0: train_size] + dp[0: dp_train_size])
-    Y_train =  [label["sort"]] * train_size + [label["tree"]] * train_size + [label["dp"]] * dp_train_size
-    X_test = bag_of_word(sort[train_size:] + tree[train_size:] + dp[dp_train_size: ])
+    X_train = func_for_matrix(sort[0: train_size] + tree[0: train_size] + dp[0: dp_train_size])
+    Y_train = [label["sort"]] * train_size + [label["tree"]] * train_size + [label["dp"]] * dp_train_size
+    X_test = func_for_matrix(sort[train_size:] + tree[train_size:] + dp[dp_train_size:])
     Y_test = [label["sort"]] * (sort.__len__() - train_size) + \
              [label["tree"]] * (tree.__len__() - train_size) + \
              [label["dp"]] * (dp.__len__() - dp_train_size)
@@ -228,7 +234,7 @@ def prepare_data():
     x_test = np.array(X_test)
     y_train = np.array(Y_train)
     y_test = np.array(Y_test)
-    raw_ = bag_of_word(raw)
+    raw_ = func_for_matrix(raw)
 
     train_index = [i for i in range(x_train.__len__())]
     test_index = [i for i in range(x_test.__len__())]
@@ -244,35 +250,36 @@ def prepare_data():
 
 def init_model():
     model = Sequential()
-    model.add(Dense(input_dim=new_features, units=1000, activation='relu'))
-    model.add(Dense(units=100, activation='relu'))
+    model.add(Dense(input_dim=features, units=1000, activation='relu'))
+    model.add(Dense(units=200, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
     # set configurations
     model.compile(loss='categorical_crossentropy',
-                  optimizer='adam',
+                  optimizer='adagrad',
                   metrics=['accuracy'])
     return model
 
 
-# 每次把结果最好的5个raw data扔进训练集再次训练
+# 每次把结果最好的n个raw data扔进训练集再次训练
 # 最好指的是这个raw data在上一次的模型的预测结果能做到类似于[0.8, 0.1, 0.1, 0]
 # 即这个raw data是class 1的概率远大于在其他class的概率，而不是类似于[0.3, 0.2, 0.25, 0.25]
 def self_training():
     (x_train, y_train), (x_test, y_test) , raw = prepare_data()
     model = init_model()
     # 一次确定多少个
-    n = 10
+    n = 100
     l = raw.__len__()
+    history = []
     while raw and l is not raw.__len__():
         l = raw.__len__()
-        model.fit(x_train, y_train, batch_size=80, epochs=90,
-            validation_data=(x_test, y_test), verbose=2)
+        history.append(model.fit(x_train, y_train, batch_size=80, epochs=100,
+            validation_data=(x_test, y_test), verbose=2))
         prediction = model.predict(raw)
         max_prediction = []
         for i in range(prediction.__len__()):
             max_prediction.append(max(prediction[i]))
         for i in range(n):
-            if raw and max(max_prediction) > 0.95:
+            if raw and max(max_prediction) > 0.98:
                 index = max_prediction.index(max(max_prediction))
                 data = np.array(raw[index])
                 label = np.array(one_hot(prediction[index]))
@@ -284,16 +291,20 @@ def self_training():
     return model
 
 
+# 只在小样本上训练一次
 def train_once():
     (x_train, y_train), (x_test, y_test), raw = prepare_data()
     model = init_model()
-    model.fit(x_train, y_train, batch_size=100, epochs=40,
+    history = model.fit(x_train, y_train, batch_size=100, epochs=1000,
               validation_data=(x_test, y_test), verbose=2)
+
+    plot_graphs(history, "accuracy")
+    plot_graphs(history, "loss")
     model.save('function_classifier.h5')
 
 
 def predict(path):
-    feature = get_feature_bag_of_word(path)
+    feature = func_for_one(path)
     model = load_model(os.path.dirname(os.path.realpath(__file__)) + "\\\\" + 'function_classifier.h5')
     prediction = model.predict([feature])[0]
     tmp = clc.one_hot(prediction)
@@ -310,8 +321,8 @@ def predict(path):
 
 
 if __name__ == "__main__":
-    count()
+    # count()
     # init_tokenizer()
     # self_training()
     train_once()
-    predict("../../data/test/test.java")
+    predict("../../data/test/mergesort.java")
