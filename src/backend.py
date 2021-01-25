@@ -66,9 +66,9 @@ def get3code():
             recommend["code"] = ret[i][1],
             recommend["similarity"] = ret[i][2],
             recommend["quality"] = ret[i][3]
-            recommends['r' + str(i)] = recommend
+            recommends['r' + str(i)] = recommend.copy()
         print(recommends)
-        return jsonify(recommends)
+        return recommends
 
 
 if __name__ == "__main__":
