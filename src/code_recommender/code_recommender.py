@@ -64,7 +64,7 @@ def recommend_code(source_text):
         # top_three = tmp_top
         return top_three
     else:
-        return "Sorry, we can't recommend code for you"
+        return 0
 
 
 def get_lang(text):
@@ -78,7 +78,7 @@ def get_lang(text):
 def get_top_three(text_sim_list):
     top_three = []
     for i in range(len(text_sim_list)):
-        if i <  recommend_threshold:
+        if i < recommend_threshold:
             top_three.append(text_sim_list[i])
         else:
             break
@@ -90,17 +90,16 @@ def get_func(text):
     # 消除文本文件
     os.remove(tmp_path + '.txt')
 
-    if lang == 'python':
-        return None, None
-
     new_file = tmp_path + '.' + lang
     # 特判c&cpp
     if new_file.endswith(".c&cpp"):
         new_file = new_file[0: new_file.rfind('.')] + '.cpp'
 
     creat_file(new_file, text)
-    func, func_prob = predict_function(new_file, lang)
-    return func, func_prob
+    if lang in func_model.keys():
+        func, func_prob = predict_function(new_file, lang)
+        return func, func_prob
+    return None, None
 
 
 def get_recommend_list_token(func_path, file, language_label):
@@ -142,7 +141,7 @@ def get_func_path(func, language):
     return os.path.join(data_path_dict[language], func)
 
 def predict_function(path, language):
-    return  func_model[language].predict(path)
+    return func_model[language].predict(path)
 
 def creat_file(file_path, source_text):
     f = open(file_path, 'w+',encoding='UTF-8')

@@ -7,10 +7,19 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
       <link rel="stylesheet" type="text/css" href="src/assets/codemirror-5.59.2/lib/codemirror.css">
+      <style type="text/css" media="screen">
+          #editor {
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+          }
+      </style>
   </head>
   <body>
 
-    <noscript>
+  <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>

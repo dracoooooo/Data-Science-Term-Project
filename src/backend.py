@@ -59,16 +59,17 @@ def get3code():
         print(ret)
         recommends = {}
         recommend = {}
-        print(ret.__len__())
-
-        for i in range(ret.__len__()):
-            recommend["name"] = ret[i][0],
-            recommend["code"] = ret[i][1],
-            recommend["similarity"] = ret[i][2],
-            recommend["quality"] = ret[i][3]
-            recommends['r' + str(i)] = recommend.copy()
-        print(recommends)
-        return recommends
+        if ret == 0:
+            return "not support this language"
+        else:
+            for i in range(ret.__len__()):
+                recommend["name"] = ret[i][0],
+                recommend["code"] = ret[i][1],
+                recommend["similarity"] = ret[i][2],
+                recommend["quality"] = ret[i][3]
+                recommends['r' + str(i)] = recommend.copy()
+            print(recommends)
+            return recommends
 
 
 if __name__ == "__main__":
